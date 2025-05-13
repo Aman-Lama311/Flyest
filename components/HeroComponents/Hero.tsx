@@ -1,12 +1,11 @@
-'use client'
-import React, { useState, useEffect, useRef } from 'react';
-import { bgImage } from './bgimagedata';
-import CustomCursor from './CustomCursor';
-import * as THREE from 'three';
-import { gsap } from 'gsap';
-import HeroContents from './HeroContents';
-import HeroContentsProps from './HeroContents';
-
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { bgImage } from "./bgimagedata";
+import CustomCursor from "./CustomCursor";
+import * as THREE from "three";
+import { gsap } from "gsap";
+import HeroContents from "./HeroContents";
+import HeroContentsProps from "./HeroContents";
 
 class WebGLTransition {
   container: HTMLElement; // Add container property
@@ -27,7 +26,12 @@ class WebGLTransition {
   material: THREE.ShaderMaterial | null = null; // Add material property with default value
   mesh: THREE.Mesh | null = null; // Add mesh property with default value
 
-  constructor(options: { container: HTMLElement; images: string[]; duration?: number; easing?: string }) {
+  constructor(options: {
+    container: HTMLElement;
+    images: string[];
+    duration?: number;
+    easing?: string;
+  }) {
     this.container = options.container;
     this.currentIndex = 0; // Initialize currentIndex
     this.container = options.container;
@@ -45,22 +49,22 @@ class WebGLTransition {
     );
     this.camera.position.z = 1;
 
-    this.renderer = new THREE.WebGLRenderer({ 
+    this.renderer = new THREE.WebGLRenderer({
       antialias: true,
-      alpha: true 
+      alpha: true,
     });
-    
+
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.container.appendChild(this.renderer.domElement);
 
     this.time = 0;
-    this.easing = options.easing || 'easeOut'; // Initialize easing property
-    this.easing = options.easing || 'easeOut';
+    this.easing = options.easing || "easeOut"; // Initialize easing property
+    this.easing = options.easing || "easeOut";
     this.progress = 0;
     this.isAnimating = false;
     this.currentTransitionType = 0; // Keep track of current transition
-    
+
     // Uniforms for all transitions
     this.uniforms = {
       time: { value: 0 },
@@ -72,22 +76,22 @@ class WebGLTransition {
       width: { value: 0.5 },
       scaleX: { value: 40 },
       scaleY: { value: 40 },
-      intensity: { value: 0.3 }
+      intensity: { value: 0.3 },
     };
 
     this.loadTextures();
     this.createDisplacementTexture();
     this.createMesh();
     this.resize();
-    
+
     // Add both resize event listeners for better mobile support
-    window.addEventListener('resize', this.resize.bind(this));
-    window.addEventListener('orientationchange', this.resize.bind(this));
+    window.addEventListener("resize", this.resize.bind(this));
+    window.addEventListener("orientationchange", this.resize.bind(this));
   }
 
   loadTextures() {
     const loader = new THREE.TextureLoader();
-    this.textures = this.images.map(image => {
+    this.textures = this.images.map((image) => {
       const texture = loader.load(image);
       texture.minFilter = THREE.LinearFilter;
       texture.magFilter = THREE.LinearFilter;
@@ -103,7 +107,7 @@ class WebGLTransition {
     // Create a noise texture for displacement
     const size = 64;
     const data = new Uint8Array(size * size * 4);
-    
+
     for (let i = 0; i < size * size; i++) {
       const stride = i * 4;
       const val = Math.random() * 255;
@@ -112,14 +116,14 @@ class WebGLTransition {
       data[stride + 2] = val;
       data[stride + 3] = 255;
     }
-    
+
     const displacementTexture = new THREE.DataTexture(
       data,
       size,
       size,
       THREE.RGBAFormat
     );
-    
+
     displacementTexture.needsUpdate = true;
     this.uniforms.displacement.value = displacementTexture;
   }
@@ -150,7 +154,7 @@ class WebGLTransition {
           gl_FragColor = f;
         }
       `,
-      
+
       // Transition 2: Noise wipe
       `
         uniform float time;
@@ -180,7 +184,7 @@ class WebGLTransition {
           gl_FragColor = mix(t1, t2, intpl);
         }
       `,
-      
+
       // Transition 3: Displacement slide
       `
         uniform float time;
@@ -207,7 +211,7 @@ class WebGLTransition {
           gl_FragColor = mix(t1, t2, progress);
         }
       `,
-      
+
       // Transition 4: Planetary rotation
       `
         uniform float time;
@@ -244,9 +248,9 @@ class WebGLTransition {
 
           gl_FragColor = mix(t1, t2, progress);
         }
-      `
+      `,
     ];
-    
+
     return fragmentShaders[type];
   }
 
@@ -269,7 +273,7 @@ class WebGLTransition {
       uniforms: this.uniforms,
       vertexShader,
       fragmentShader,
-      transparent: true
+      transparent: true,
     });
 
     const geometry = new THREE.PlaneGeometry(2, 2);
@@ -281,19 +285,19 @@ class WebGLTransition {
   updateShader(transitionType: number) {
     this.currentTransitionType = transitionType;
     const fragmentShader = this.getFragmentShader(transitionType);
-    
+
     // Create new material with the selected shader
     const newMaterial = new THREE.ShaderMaterial({
       uniforms: this.uniforms,
-      vertexShader: this.material ? this.material.vertexShader : '',
+      vertexShader: this.material ? this.material.vertexShader : "",
       fragmentShader: fragmentShader,
-      transparent: true
+      transparent: true,
     });
-    
+
     // Replace material
     if (this.mesh && this.mesh.material) {
       if (Array.isArray(this.mesh.material)) {
-        this.mesh.material.forEach(material => material.dispose());
+        this.mesh.material.forEach((material) => material.dispose());
       } else {
         this.mesh.material.dispose();
       }
@@ -304,23 +308,23 @@ class WebGLTransition {
   resize() {
     const width = window.innerWidth;
     const height = window.innerHeight;
-    
+
     this.renderer.setSize(width, height);
-    
+
     // Update resolution uniform
     const imageAspect = height / width;
     let a1, a2;
-    
+
     if (height / width > imageAspect) {
       a1 = (width / height) * imageAspect;
       a2 = 1;
     } else {
       a1 = 1;
-      a2 = (height / width) / imageAspect;
+      a2 = height / width / imageAspect;
     }
-    
+
     this.uniforms.resolution.value.set(width, height, a1, a2);
-    
+
     // Adjust intensity for mobile
     if (width <= 768) {
       // Lower intensity for smaller screens to avoid harsh effects
@@ -341,15 +345,15 @@ class WebGLTransition {
 
   goTo(index: number, transitionType: number | null = null) {
     if (this.isAnimating || this.currentIndex === index) return;
-    
+
     this.isAnimating = true;
     this.nextIndex = index;
-    
+
     // If transition type is provided, update the shader
     if (transitionType !== null) {
       this.updateShader(transitionType);
     }
-    
+
     // Adjust intensity based on screen size and transition type
     const width = window.innerWidth;
     if (width <= 768) {
@@ -371,23 +375,25 @@ class WebGLTransition {
         this.uniforms.intensity.value = 0.3;
       }
     }
-    
+
     this.uniforms.texture1.value = this.textures[this.currentIndex];
     this.uniforms.texture2.value = this.textures[this.nextIndex];
-    
+
     // Adjust transition duration based on device
-    const transitionDuration = width <= 768 ? this.duration * 0.8 : this.duration;
-    
-    gsap.fromTo(this.uniforms.progress, 
+    const transitionDuration =
+      width <= 768 ? this.duration * 0.8 : this.duration;
+
+    gsap.fromTo(
+      this.uniforms.progress,
       { value: 0 },
-      { 
-        value: 1, 
-        duration: transitionDuration, 
+      {
+        value: 1,
+        duration: transitionDuration,
         ease: this.easing,
         onComplete: () => {
           this.currentIndex = this.nextIndex;
           this.isAnimating = false;
-        }
+        },
       }
     );
   }
@@ -405,15 +411,15 @@ class WebGLTransition {
         this.mesh.geometry.dispose();
       }
       if (Array.isArray(this.mesh.material)) {
-        this.mesh.material.forEach(material => material.dispose());
+        this.mesh.material.forEach((material) => material.dispose());
       } else if (this.mesh.material) {
         this.mesh.material.dispose();
       }
     }
     this.renderer.dispose();
-    window.removeEventListener('resize', this.resize.bind(this));
-    window.removeEventListener('orientationchange', this.resize.bind(this));
-    
+    window.removeEventListener("resize", this.resize.bind(this));
+    window.removeEventListener("orientationchange", this.resize.bind(this));
+
     if (this.container && this.renderer.domElement) {
       this.container.removeChild(this.renderer.domElement);
     }
@@ -425,44 +431,44 @@ const Hero = () => {
   const [isHolding, setIsHolding] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef(null);
   const webglRef = useRef<WebGLTransition | null>(null);
   const rafRef = useRef<number | null>(null);
-  
+
   // Check if device is mobile
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    window.addEventListener('orientationchange', checkIsMobile);
-    
+    window.addEventListener("resize", checkIsMobile);
+    window.addEventListener("orientationchange", checkIsMobile);
+
     return () => {
-      window.removeEventListener('resize', checkIsMobile);
-      window.removeEventListener('orientationchange', checkIsMobile);
+      window.removeEventListener("resize", checkIsMobile);
+      window.removeEventListener("orientationchange", checkIsMobile);
     };
   }, []);
-  
+
   // Initialize WebGL transition
   useEffect(() => {
     if (!containerRef.current) return;
-    
+
     // Extract image URLs for WebGL
-    const imageUrls = bgImage.map(item => item.img_url.src);
-    
+    const imageUrls = bgImage.map((item) => item.img_url.src);
+
     // Create WebGL transition
     webglRef.current = new WebGLTransition({
       container: containerRef.current,
       images: imageUrls,
       duration: isMobile ? 1.2 : 1.5, // Shorter duration on mobile
-      easing: 'easeOut'
+      easing: "easeOut",
     });
-    
+
     // Animation loop
     const animate = () => {
       if (webglRef.current) {
@@ -470,9 +476,9 @@ const Hero = () => {
       }
       rafRef.current = requestAnimationFrame(animate);
     };
-    
+
     rafRef.current = requestAnimationFrame(animate);
-    
+
     return () => {
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
@@ -482,42 +488,47 @@ const Hero = () => {
       }
     };
   }, []);
-  
+
   const getRandomTransition = () => {
     // For mobile, use simpler transitions more often
     if (isMobile) {
       // 70% chance to use simpler transitions (0 and 1)
-      return Math.random() < 0.7 ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 4);
+      return Math.random() < 0.7
+        ? Math.floor(Math.random() * 2)
+        : Math.floor(Math.random() * 4);
     }
     // Desktop - full range of transitions
     return Math.floor(Math.random() * 4);
   };
-  
+
   const triggerTransition = () => {
     if (!webglRef.current) return;
-    
+
     const nextIndex = (currentImageIndex + 1) % bgImage.length;
     const transitionType = getRandomTransition();
-    
+
     webglRef.current.goTo(nextIndex, transitionType);
     setCurrentImageIndex(nextIndex);
   };
-  
+
   // Handle touch events for mobile
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     e.preventDefault(); // Prevent default behavior
     setIsHolding(true);
     setIsPaused(true);
-    
+
     timeoutRef.current = setTimeout(() => {
       triggerTransition();
-      intervalRef.current = setInterval(() => {
-        triggerTransition();
-      }, isMobile ? 1200 : 1500);
+      intervalRef.current = setInterval(
+        () => {
+          triggerTransition();
+        },
+        isMobile ? 1200 : 1500
+      );
     }, 300);
   };
-  
-  const handleTouchEnd = (e) => {
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
     e.preventDefault(); // Prevent default behavior
     setIsHolding(false);
     if (timeoutRef.current !== null) {
@@ -526,17 +537,17 @@ const Hero = () => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
     }
-    
+
     setTimeout(() => {
       setIsPaused(false);
     }, 2000);
   };
-  
+
   const handleMouseDown = () => {
     if (isMobile) return; // Skip for mobile devices
     setIsHolding(true);
     setIsPaused(true);
-    
+
     timeoutRef.current = setTimeout(() => {
       triggerTransition();
       intervalRef.current = setInterval(() => {
@@ -544,7 +555,7 @@ const Hero = () => {
       }, 1500);
     }, 300);
   };
-  
+
   const handleMouseUp = () => {
     if (isMobile) return; // Skip for mobile devices
     setIsHolding(false);
@@ -554,12 +565,12 @@ const Hero = () => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
     }
-    
+
     setTimeout(() => {
       setIsPaused(false);
     }, 2000);
   };
-  
+
   const handleClick = () => {
     if (!isHolding) {
       triggerTransition();
@@ -567,7 +578,7 @@ const Hero = () => {
       setTimeout(() => setIsPaused(false), 2000);
     }
   };
-  
+
   // Auto transition with random effects
   useEffect(() => {
     if (!isPaused) {
@@ -576,37 +587,34 @@ const Hero = () => {
       return () => clearInterval(interval);
     }
   }, [isPaused, currentImageIndex, isMobile]);
-  
+
   useEffect(() => {
     return () => {
       clearTimeout(timeoutRef.current as unknown as number);
       clearInterval(intervalRef.current as unknown as number);
     };
   }, []);
-  
+
   return (
     <>
       {!isMobile && <CustomCursor />}
       <section
         className="w-full h-screen relative overflow-hidden"
-        style={{ cursor: isMobile ? 'auto' : 'none' }}
+        style={{ cursor: isMobile ? "auto" : "none" }}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onClick={handleClick}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        <div 
-          ref={containerRef}
-          className="absolute inset-0"
-        />
-        
+        <div ref={containerRef} className="absolute inset-0" />
+
         <div
           className="absolute inset-0 pointer-events-none bg-gray-950"
           style={{
             backgroundImage:
-              'url("data:image/svg+xml,%3Csvg width=\'100%25\' height=\'100%25\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3Cfilter id=\'wavy\' x=\'0\' y=\'0\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.01\' numOctaves=\'5\' stitchTiles=\'stitch\'/%3E%3CfeDisplacementMap in=\'SourceGraphic\' scale=\'30\'/%3E%3C/filter%3E%3C/defs%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23wavy)\' opacity=\'0.3\'/%3E%3C/svg%3E")',
-            mixBlendMode: 'soft-light',
+              "url(\"data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='wavy' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='30'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' filter='url(%23wavy)' opacity='0.3'/%3E%3C/svg%3E\")",
+            mixBlendMode: "soft-light",
           }}
         />
         <div className="absolute inset-0 bg-white pointer-events-none opacity-10" />
