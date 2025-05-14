@@ -504,7 +504,7 @@ const Hero = () => {
   };
   
   // Handle touch events for mobile
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault(); // Prevent default behavior
     setIsHolding(true);
     setIsPaused(true);
@@ -517,7 +517,7 @@ const Hero = () => {
     }, 300);
   };
   
-  const handleTouchEnd = (e) => {
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault(); // Prevent default behavior
     setIsHolding(false);
     if (timeoutRef.current !== null) {
