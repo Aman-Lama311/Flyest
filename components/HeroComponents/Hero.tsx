@@ -588,7 +588,7 @@ const Hero = () => {
     <>
       {!isMobile && <CustomCursor />}
       <section
-        className="w-full h-screen relative overflow-hidden"
+        className="w-full h-[90vh] relative overflow-hidden"
         style={{ cursor: isMobile ? 'auto' : 'none' }}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -609,7 +609,7 @@ const Hero = () => {
             mixBlendMode: 'soft-light',
           }}
         />
-        <div className="absolute inset-0 bg-white pointer-events-none opacity-10" />
+        <div className="absolute inset-0 bg-black pointer-events-none opacity-10" />
         {/* hero contents */}
         <HeroContents currentImageIndex={currentImageIndex} />
       </section>

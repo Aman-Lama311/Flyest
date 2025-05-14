@@ -14,10 +14,17 @@ export const trek = [
         location: "nepal"
     },
     {
-        id:2, 
+        id:3, 
         title: "Annapurna Trek",
         imgSrc: "https://www.nepaltrekkinginhimalaya.com/images/package/gallery/4OBnv-view-during-annapuran-base-camp-trek.jpg",
         desc: "Enhance your pace and precision, spark meaningful conversations for team alignment, and identify crucial decision points as you gear up for your next trek.",
         location: "nepal"
+    },
+    {
+        id:4, 
+        title: "Final Trek",
+        imgSrc: "https://www.nepaltrekkinginhimalaya.com/images/package/gallery/4OBnv-view-during-annapuran-base-camp-trek.jpg",
+        desc: "Enhance your pace and precision, spark meaningful conversations for team alignment, and identify crucial decision points as you gear up for your next trek.",
+        location: "dolpa"
     }
 ]
