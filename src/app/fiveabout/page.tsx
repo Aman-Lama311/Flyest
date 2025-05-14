@@ -1,0 +1,251 @@
+import {
+  Mountain,
+  Award,
+  Clock,
+  Heart,
+  ShieldCheck,
+  Medal,
+} from "lucide-react";
+
+const coreTeam = [
+  {
+    name: "Alice Williams",
+    imgSrc: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f",
+  },
+  {
+    name: "David Lee",
+    imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19",
+  },
+  {
+    name: "Maria Gonzalez",
+    imgSrc: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+  },
+];
+
+// Reusing coreTeam images for demonstration
+const mountainGuides = [
+  {
+    name: "Tenzing Sherpa",
+    imgSrc: coreTeam[0].imgSrc,
+  },
+  {
+    name: "Lakpa Tamang",
+    imgSrc: coreTeam[1].imgSrc,
+  },
+  {
+    name: "Sonam Bhote",
+    imgSrc: coreTeam[2].imgSrc,
+  },
+];
+
+const trekkingGuides = [
+  {
+    name: "Nima Gurung",
+    imgSrc: coreTeam[0].imgSrc,
+  },
+  {
+    name: "Pemba Lama",
+    imgSrc: coreTeam[1].imgSrc,
+  },
+  {
+    name: "Karma Tamang",
+    imgSrc: coreTeam[2].imgSrc,
+  },
+];
+
+const cooks = [
+  {
+    name: "Pema Lama",
+    imgSrc: coreTeam[0].imgSrc,
+  },
+  {
+    name: "Dorje Sherpa",
+    imgSrc: coreTeam[1].imgSrc,
+  },
+];
+
+const porters = [
+  {
+    name: "Dawa Sherpa",
+    imgSrc: coreTeam[2].imgSrc,
+  },
+  {
+    name: "Tashi Gurung",
+    imgSrc: coreTeam[1].imgSrc,
+  },
+  {
+    name: "Pasang Tamang",
+    imgSrc: coreTeam[0].imgSrc,
+  },
+];
+
+const TeamSection = ({ title, members }: { title: string; members: any[] }) => (
+  <div className="mt-16">
+    <h3 className="text-3xl font-semibold mb-6 text-gray-800">{title}</h3>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {members.map((member, index) => (
+        <div key={index}>
+          <div className="mb-4">
+            <img
+              src={member.imgSrc}
+              alt={member.name}
+              className="w-full h-72 object-cover rounded-md"
+            />
+          </div>
+          <div className="flex justify-between items-center">
+            <h4 className="text-xl text-start font-semibold text-gray-900">
+              {member.name}
+            </h4>
+            <p className="text-gray-800 italic">Team Leader</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const AboutUsPage = () => {
+  return (
+    <div>
+      <div className="py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-white">
+        <div className="container mx-auto px-6 w-full text-center">
+          {" "}
+          {/* Increased width */}
+          <h2 className="text-6xl font-bold mb-12 text-gray-800">About Us</h2>
+          <p className="text-lg text-gray-600 mb-16 max-w-2xl mx-auto">
+            "For over two decades, Mountain Adventures has been guiding
+            passionate explorers to the world's most breathtaking peaks and
+            hidden natural wonders."
+          </p>
+          <div className="relative mb-16">
+            <div className="absolute inset-0 flex items-center">
+              <div className="h-1 w-full bg-gray-200"></div>
+            </div>
+            <div className="relative flex justify-center">
+              <div className="bg-blue-600 text-white px-4 py-2 rounded-full">
+                <Mountain className="w-6 h-6" />
+              </div>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12 mt-16">
+            <div className="text-left">
+              <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+                Our Story
+              </h3>
+              <div className="prose text-gray-700 max-w-none">
+                <p className="mb-4">
+                  Mountain Adventures began in 2003 when a small group of
+                  passionate mountaineers decided to share their love for alpine
+                  landscapes with others...
+                </p>
+                <p className="mb-4">
+                  Our founders, each with over 30 years of climbing experience,
+                  built this company on the principles of respect for nature,
+                  safety, and transformative experiences...
+                </p>
+                <p>
+                  With a team of 50+ certified guides who speak 15 languages
+                  collectively...
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-8 rounded-lg shadow-sm">
+              <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+                Our Values
+              </h3>
+
+              <div className="flex flex-col gap-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-100 p-3 rounded-full mt-1">
+                    <Award className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-medium text-gray-800 mb-1">Excellence</p>
+                    <p className="text-gray-600">
+                      We never compromise on quality, expertise, or safety...
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-100 p-3 rounded-full mt-1">
+                    <Heart className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-medium text-gray-800 mb-1">
+                      Sustainability
+                    </p>
+                    <p className="text-gray-600">
+                      We practice and promote responsible tourism...
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-100 p-3 rounded-full mt-1">
+                    <Clock className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-medium text-gray-800 mb-1">
+                      Mindfulness
+                    </p>
+                    <p className="text-gray-600">
+                      We believe in being present and fully experiencing each
+                      moment in the mountains...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Team Section */}
+          <TeamSection title="Core Team" members={coreTeam} />
+          <TeamSection title="Mountain Guides" members={mountainGuides} />
+          <TeamSection title="Trekking Guides" members={trekkingGuides} />
+          <TeamSection title="Cooks" members={cooks} />
+          <TeamSection title="Porters" members={porters} />
+          {/* Certifications */}
+          <div className="mt-24">
+            <h3 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
+              Certifications
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white shadow-lg rounded-lg p-8 text-center">
+                <ShieldCheck className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+                <h4 className="text-xl font-semibold mb-4">Safety Certified</h4>
+                <p className="text-gray-600">
+                  Our guides and staff are certified in high-altitude safety
+                  training and first aid...
+                </p>
+              </div>
+
+              <div className="bg-white shadow-lg rounded-lg p-8 text-center">
+                <Medal className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+                <h4 className="text-xl font-semibold mb-4">Awarded Guides</h4>
+                <p className="text-gray-600">
+                  Our guides are award-winning professionals recognized for
+                  excellence in mountain leadership...
+                </p>
+              </div>
+
+              <div className="bg-white shadow-lg rounded-lg p-8 text-center">
+                <Clock className="w-8 h-8 text-blue-600 mx-auto mb-4" />
+                <h4 className="text-xl font-semibold mb-4">
+                  Time-Tested Expertise
+                </h4>
+                <p className="text-gray-600">
+                  With decades of experience, our team has earned a reputation
+                  for successful expeditions...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutUsPage;
