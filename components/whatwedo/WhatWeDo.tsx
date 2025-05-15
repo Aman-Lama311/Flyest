@@ -1,22 +1,80 @@
-import React from 'react'
+import React from 'react';
+import { Users, MapPin, Globe, Star } from 'lucide-react';
 
-const WhatWeDo = () => {
+const StatisticsAndPartners = () => {
   return (
-    <div className='h-screen w-full bg-[#faf3f3] flex items-center font-["poppins"] object-cover' style={{ backgroundImage: "url('/bg3.png')" }}>
-      <div className='h-full w-[50%] py-14 px-32'>
-        <img src="./what.svg" alt="" className='bg-cover h-full' />
+    <div className="w-full flex flex-col">
+      {/* Statistics Section */}
+      <div className="w-full bg-white py-12 px-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Total Users */}
+          <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">
+            <div className="bg-gray-200 p-4 rounded-full">
+              <Users className="h-6 w-6 text-gray-500" />
+            </div>
+            <h2 className="text-4xl font-bold mt-4">28k</h2>
+            <p className="text-gray-500 mt-2">Total Users</p>
+          </div>
+
+          {/* Total Trekking */}
+          <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">
+            <div className="bg-gray-200 p-4 rounded-full">
+              <MapPin className="h-6 w-6 text-gray-500" />
+            </div>
+            <h2 className="text-4xl font-bold mt-4">24k</h2>
+            <p className="text-gray-500 mt-2">Total Trekking</p>
+          </div>
+
+          {/* Social Likes */}
+          <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">
+            <div className="bg-gray-200 p-4 rounded-full">
+              <Globe className="h-6 w-6 text-gray-500" />
+            </div>
+            <h2 className="text-4xl font-bold mt-4">64k</h2>
+            <p className="text-gray-500 mt-2">Social Likes</p>
+          </div>
+
+          {/* 5 Star Ratings */}
+          <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">
+            <div className="bg-gray-200 p-4 rounded-full">
+              <Star className="h-6 w-6 text-gray-500" />
+            </div>
+            <h2 className="text-4xl font-bold mt-4">16k</h2>
+            <p className="text-gray-500 mt-2">5 Star Ratings</p>
+          </div>
+        </div>
       </div>
-      <div className='h-full w-[50%] py-72 px-32'>
-        <h1 className='text-black text-6xl'>Discover our all <span className='text-[#FF4E58]'>services</span></h1>
-            <button className="relative overflow-hidden h-14 w-52 border-2 border-gray-500 hover:border-none rounded-full mt-16 text-black group">
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                    What we do
-                </span>
-                <span className="absolute inset-0 bg-black translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-in-out z-0"></span>
-        </button>
+
+      {/* Partners Section */}
+      <div className="w-full bg-white border-t border-gray-100 py-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="font-bold text-xl">Associated With</div>
+            <div className="flex flex-wrap justify-center gap-8">
+              <div className="grayscale opacity-70 h-8">
+                <img src="" alt="WYSE Travel" className="h-full" />
+              </div>
+              <div className="grayscale opacity-70 h-8">
+                <img src="" alt="ASTA" className="h-full" />
+              </div>
+              <div className="grayscale opacity-70 h-8">
+                <img src="" alt="TICO" className="h-full" />
+              </div>
+              <div className="grayscale opacity-70 h-8">
+                <img src="" alt="USTOA" className="h-full" />
+              </div>
+              <div className="grayscale opacity-70 h-8">
+                <img src="" alt="CLIA" className="h-full" />
+              </div>
+              <div className="grayscale opacity-70 h-8">
+                <img src="" alt="Adventure Travel Trade Association" className="h-full" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WhatWeDo
+export default StatisticsAndPartners;

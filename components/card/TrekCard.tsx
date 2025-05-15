@@ -1,136 +1,203 @@
-import React, { useState, useRef } from 'react';
-import { ArrowLeft, ArrowRight, ArrowDown } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ArrowLeft, ArrowRight, Star, MapPin, Clock } from 'lucide-react';
 import { trek } from './TrekCardData';
+
+// Main color theme
+const THEME_COLOR = "#FF4E58";
 
 const TrekCard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hoverStates, setHoverStates] = useState({
-    moreButton: false,
-    bookButtons: Array(trek.length).fill(false)
-  });
-  
-  const visibleTreks = trek.slice(currentIndex, currentIndex + 3);
-  
+  const [isAnimating, setIsAnimating] = useState(false);
+  const cardsRef = useRef(null);
+
+  // Number of cards to show based on viewport width
+  const getCardsToShow = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+    }
+    return 3; // Default for SSR
+  };
+
+  const [cardsToShow, setCardsToShow] = useState(getCardsToShow());
+
+  // Update cards to show on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setCardsToShow(getCardsToShow());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const visibleTreks = trek.slice(currentIndex, currentIndex + cardsToShow);
+
   const handlePrevClick = () => {
-    if (currentIndex > 0) {
+    if (currentIndex > 0 && !isAnimating) {
+      setIsAnimating(true);
       setCurrentIndex(currentIndex - 1);
+      setTimeout(() => setIsAnimating(false), 300);
     }
   };
-  
+
   const handleNextClick = () => {
-    if (currentIndex < trek.length - 3) {
+    if (currentIndex < trek.length - cardsToShow && !isAnimating) {
+      setIsAnimating(true);
       setCurrentIndex(currentIndex + 1);
+      setTimeout(() => setIsAnimating(false), 300);
     }
   };
 
-  const handleMoreButtonEnter = () => {
-    setHoverStates(prev => ({...prev, moreButton: true}));
+  // Format the price with locale
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+    }).format(price);
   };
 
-  const handleMoreButtonLeave = () => {
-    setHoverStates(prev => ({...prev, moreButton: false}));
-  };
-
-  const handleBookButtonEnter = (index) => {
-    setHoverStates(prev => {
-      const newBookButtons = [...prev.bookButtons];
-      newBookButtons[index] = true;
-      return {...prev, bookButtons: newBookButtons};
-    });
-  };
-
-  const handleBookButtonLeave = (index) => {
-    setHoverStates(prev => {
-      const newBookButtons = [...prev.bookButtons];
-      newBookButtons[index] = false;
-      return {...prev, bookButtons: newBookButtons};
-    });
+  // Calculate discount percentage
+  const calculateDiscount = (oldPrice: number, newPrice: number): number => {
+    return Math.round(((oldPrice - newPrice) / oldPrice) * 100);
   };
 
   return (
-    <div className="w-full bg-gray-50 py-12">
-      {/* Header section */}
-      <div className="py-16 px-16 md:px-24">
-        <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-          <span className="text-red-600">Upcoming</span>
-          <br />
-          <span className="text-gray-700">Trekking</span>
-        </h1>
-        
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mt-8">
-          <p className="text-xl md:text-2xl text-gray-500 leading-relaxed">
-            Enhance your pace and precision, spark meaningful<br />
-            conversations for team alignment, and identify<br />
-            crucial decision points as you gear up<br />
-            for your next trek.
+    <div className="w-full bg-gray-50 py-16 px-4 md:px-8 lg:px-16">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
+        <div className="max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            Traveler's Favorite Treks
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Discover handpicked adventures loved by our community. Embark on unforgettable journeys through breathtaking landscapes and immersive cultural experiences.
           </p>
-          
-                      <div className="flex items-center gap-4 mt-8 md:mt-0">
-            <button 
-              onClick={handlePrevClick}
-              disabled={currentIndex === 0}
-              className={`h-12 w-12 md:h-16 md:w-16 rounded-lg flex items-center justify-center transition-colors ${currentIndex === 0 ? 'bg-red-300' : 'bg-red-600 hover:bg-red-700'}`}
-            >
-              <ArrowLeft size={24} className="text-white" />
-            </button>
-            
-            <button 
-              onClick={handleNextClick}
-              disabled={currentIndex >= trek.length - 3}
-              className={`h-12 w-12 md:h-16 md:w-16 rounded-lg flex items-center justify-center transition-colors ${currentIndex >= trek.length - 3 ? 'bg-red-300' : 'bg-red-600 hover:bg-red-700'}`}
-            >
-              <ArrowRight size={24} className="text-white" />
-            </button>
-            
-            <div 
-              className="h-12 md:h-16 w-32 md:w-40 bg-red-600 hover:bg-red-700 transition-colors rounded-lg flex items-center justify-center gap-4 cursor-pointer relative overflow-hidden"
-              onMouseEnter={handleMoreButtonEnter}
-              onMouseLeave={handleMoreButtonLeave}
-            >
-              <span className="text-lg md:text-xl font-bold text-white transition-transform duration-300" style={{ transform: hoverStates.moreButton ? 'translateY(-2px)' : 'translateY(0)' }}>
-                {hoverStates.moreButton ? "More" : "More"}
-              </span>
-              <div className="h-8 md:h-12 w-8 md:w-12 bg-white rounded-lg flex items-center justify-center">
-                {hoverStates.moreButton ? (
-                  <ArrowDown size={24} className="text-red-600 transition-transform duration-300" style={{ transform: 'rotate(270deg)' }} />
-                ) : (
-                  <ArrowRight size={24} className="text-red-600 transition-transform duration-300" />
-                )}
+        </div>
+        <div className="flex items-center gap-3 mt-6 md:mt-0">
+          <button
+            onClick={handlePrevClick}
+            disabled={currentIndex === 0 || isAnimating}
+            aria-label="Previous trek"
+            style={{ borderColor: THEME_COLOR }}
+            className={`h-12 w-12 rounded-full flex items-center justify-center border transition duration-200 ${
+              currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-red-50 active:bg-red-100'
+            }`}
+          >
+            <ArrowLeft size={20} style={{ color: THEME_COLOR }} />
+          </button>
+          <button
+            onClick={handleNextClick}
+            disabled={currentIndex >= trek.length - cardsToShow || isAnimating}
+            aria-label="Next trek"
+            style={{ borderColor: THEME_COLOR }}
+            className={`h-12 w-12 rounded-full flex items-center justify-center border transition duration-200 ${
+              currentIndex >= trek.length - cardsToShow ? 'opacity-40 cursor-not-allowed' : 'hover:bg-red-50 active:bg-red-100'
+            }`}
+          >
+            <ArrowRight size={20} style={{ color: THEME_COLOR }} />
+          </button>
+        </div>
+      </div>
+
+      {/* Trek Cards */}
+      <div 
+        ref={cardsRef}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300 ${isAnimating ? 'opacity-80' : 'opacity-100'}`}
+      >
+        {visibleTreks.map((item, index) => (
+          <div 
+            key={`${item.id}-${index}`} 
+            className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full"
+          >
+            <div className="relative w-full h-64 bg-gray-200 overflow-hidden group">
+              <img 
+                src={item.imgSrc} 
+                alt={`${item.title} landscape`} 
+                className="w-full h-full object-cover transition duration-700 group-hover:scale-110" 
+              />
+              {item.oldPrice > item.newPrice && (
+                <div style={{ backgroundColor: THEME_COLOR }} className="absolute top-4 left-4 text-white text-sm font-bold px-2 py-1 rounded">
+                  {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
+                </div>
+              )}
+              {/* {item.featured && (
+                <div className="absolute top-4 right-4 bg-gray-800 text-white text-sm font-bold px-2 py-1 rounded">
+                  Featured
+                </div>
+              )} */}
+            </div>
+            <div className="p-6 flex flex-col flex-grow">
+              <div className="flex justify-between items-start mb-3">
+                <h3 style={{ color: "#333" }} className="font-bold text-xl mb-1">{item.title}</h3>
+                <div style={{ backgroundColor: `${THEME_COLOR}15` }} className="flex items-center px-2 py-1 rounded text-sm font-medium">
+                  <Star size={14} style={{ color: THEME_COLOR }} className="fill-current mr-1" />
+                  <span style={{ color: THEME_COLOR }}>{item.rating || 4.8}</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center text-sm text-gray-500 mb-3">
+                <MapPin size={16} style={{ color: THEME_COLOR }} className="mr-1" />
+                <span>{item.location || "Various locations"}</span>
+              </div>
+              
+              <div className="flex items-center text-sm text-gray-500 mb-4">
+                <Clock size={16} style={{ color: THEME_COLOR }} className="mr-1" />
+                <span>{item.duration || "7-10 days"}</span>
+              </div>
+              
+              <p className="text-gray-600 text-sm mb-4 flex-grow">
+                {item.description || "Experience the beauty of nature with our expertly guided trek through stunning landscapes and cultural wonders."}
+              </p>
+              
+              <div className="mt-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <p className="text-sm text-gray-500">Starting from</p>
+                    <div className="flex items-center">
+                      {item.oldPrice > item.newPrice && (
+                        <span className="line-through text-gray-400 mr-2">{formatPrice(item.oldPrice)}</span>
+                      )}
+                      <span style={{ color: THEME_COLOR }} className="text-xl font-bold">{formatPrice(item.newPrice)}</span>
+                    </div>
+                  </div>
+                  <div className="text-right text-sm text-gray-500">
+                    <span className="block">{item.reviews || 256} reviews</span>
+                  </div>
+                </div>
+                <button 
+                  style={{ backgroundColor: THEME_COLOR }}
+                  className="w-full font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center"
+                  aria-label={`View itinerary for ${item.title}`}
+                >
+                  View itinerary
+                </button>
               </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
-      
-      {/* Trek cards section */}
-      <div className="px-6 md:px-24 py-8">
-        <div className="flex flex-col md:flex-row items-center gap-6 overflow-hidden">
-          {visibleTreks.map((item, index) => (
-            <div key={index} className="w-full md:w-1/3 bg-white rounded-2xl shadow-lg overflow-hidden transition-all transform hover:scale-105 flex flex-col">
-              <div className="w-full h-64 bg-gray-200 overflow-hidden">
-                <img 
-                  src={item.imgSrc} 
-                  alt={item.title} 
-                  className="object-cover w-full h-full transition-transform hover:scale-110"
-                />
-              </div>
-              
-              <div className="px-6 py-8 flex-grow">
-                <h2 className="text-3xl md:text-4xl font-bold text-red-600">{item.title}</h2>
-                <p className="text-base md:text-lg text-gray-500 mt-4">{item.desc}</p>
-                
-                <div className="mt-8">
-                  <button className="w-full h-16 bg-red-600 hover:bg-red-700 transition-colors rounded-lg flex items-center justify-between px-4">
-                    <h3 className="text-lg md:text-xl font-bold text-white">Book Now</h3>
-                    <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center">
-                      <ArrowRight size={20} className="text-red-600" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+
+      {/* Pagination Indicator */}
+      <div className="flex justify-center mt-8">
+        {Array.from({ length: Math.ceil(trek.length / cardsToShow) }).map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              if (!isAnimating) {
+                setIsAnimating(true);
+                setCurrentIndex(idx * cardsToShow);
+                setTimeout(() => setIsAnimating(false), 300);
+              }
+            }}
+            aria-label={`Go to page ${idx + 1}`}
+            aria-current={Math.floor(currentIndex / cardsToShow) === idx ? 'page' : undefined}
+            style={{ backgroundColor: Math.floor(currentIndex / cardsToShow) === idx ? THEME_COLOR : '#E5E7EB' }}
+            className={`h-2 w-8 mx-1 rounded-full transition-all ${
+              Math.floor(currentIndex / cardsToShow) === idx ? '' : 'hover:bg-gray-400'
+            }`}
+          />
+        ))}
       </div>
     </div>
   );

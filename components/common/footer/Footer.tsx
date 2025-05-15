@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='relative h-screen w-full bg-[#FF4E58] object-cover' style={{ backgroundImage: "url('/footer.png')" }}>
+    <div className='relative h-screen w-full bg-[#FF4E58] text-white object-cover' style={{ backgroundImage: "url('/footer.png')" }}>
       <div className='flex items-center justify-center py-10'>
 
         {/* first box */}
@@ -12,8 +12,8 @@ const Footer = () => {
 
         {/* second box */}
         <div className='h-[70vh] w-1/5 text-2xl font-medium py-16 px-14'>
-        <h2 className='font-bold'>GENERAL</h2>
-        <div className='mt-4 font-bold'>
+        <h2 className=''>GENERAL</h2>
+        <div className='mt-4'>
         <p>Home</p>
         <p>About</p>
         <p>Insights</p>
@@ -23,8 +23,8 @@ const Footer = () => {
         
          {/* third box */}
          <div className='h-[70vh] w-1/4 text-2xl font-medium py-16 px-14'>
-        <h2 className='font-bold'>SOLUTIONS</h2>
-        <div className='mt-4 font-mono'>
+        <h2 className=''>SOLUTIONS</h2>
+        <div className='mt-4'>
         <p>Trekking</p>
         <p>Hiking</p>
         <p>Insights</p>
@@ -35,8 +35,8 @@ const Footer = () => {
 
         {/* forth box */}
         <div className='h-[70vh] w-1/5 text-2xl font-medium py-16 px-14'>
-        <h2 className='font-bold'>General</h2>
-        <div className='mt-4 font-bold'>
+        <h2 className=''>General</h2>
+        <div className='mt-4 '>
         <p>Home</p>
         <p>About</p>
         <p>Insights</p>

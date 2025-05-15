@@ -6,6 +6,8 @@ import Cards from '../cards/Cards'
 import WhatWeDo from '../whatwedo/WhatWeDo'
 import Blog from '../blog/Blog'
 import TrekCard from '../card/TrekCard'
+import Testmonials from '../testmonials/Testmonials'
+import CallToAction from '../calltoaction/CallToAction'
 
 const Home = () => {
   return (
@@ -13,9 +15,11 @@ const Home = () => {
        <Hero /> 
        <About />
        <TrekCard />
+       <Testmonials />
+       <CallToAction />
        <WhatWeDo />
-       <Blog />
-       <Cards />
+       {/* <Blog /> */}
+       {/* <Cards /> */}
     </div>
   )
 }
