@@ -77,14 +77,14 @@ const TrekCard = () => {
   };
 
   return (
-    <div className="w-full bg-gray-50 py-16 px-4 md:px-8 lg:px-16">
+    <div className="w-full bg-black py-16 px-4 md:px-8 lg:px-16">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
         <div className="max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
              Popular Expeditions
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-white text-lg">
            Popular expeditions often take adventurers to some of the most challenging and awe-inspiring places on Earth. These include climbing Mount Everest, trekking to Machu Picchu, exploring Antarctica, or journeying through the Amazon rainforest.
           </p>
         </div>
@@ -174,13 +174,22 @@ const TrekCard = () => {
                     <span className="block">{item.reviews || 256} reviews</span>
                   </div>
                 </div>
-                <button 
-                  style={{ backgroundColor: THEME_COLOR }}
-                  className="w-full font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center"
-                  aria-label={`View itinerary for ${item.title}`}
-                >
-                  View itinerary
-                </button>
+                  <div className="flex gap-3">
+                  <button
+                    style={{ backgroundColor: THEME_COLOR }}
+                    className="w-1/2 font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200"
+                    aria-label={`View itinerary for ${item.title}`}
+                  >
+                    View itinerary
+                  </button>
+                  <button
+                    style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
+                    className="w-1/2 font-medium border hover:bg-red-50 active:bg-red-100 py-3 px-4 rounded-lg transition duration-200"
+                    aria-label={`Book now for ${item.title}`}
+                  >
+                    Book Now
+                  </button>
+                </div>
               </div>
             </div>
           </div>

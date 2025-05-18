@@ -2,15 +2,15 @@ import React from 'react';
 
 const CallToAction = () => {
   return (
-    <div className="w-full py-24 bg-[#FAF3F3]">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-24 items-center px-4">
+    <div className="w-full py-24 bg-black text-white">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-24 items-center px-4 text-white">
         
         {/* Left Content Section */}
         <div className="w-full md:w-1/2">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
             Why Choose Flyeast Nepal For Your Next Adventures?
           </h2>
-          <p className="text-gray-700 text-lg mb-8 leading-relaxed">
+          <p className="text-white text-lg mb-8 leading-relaxed">
             An enhanced safety record provides peace of mind while you explore the breathtaking heights of the Himalayas. Experience unparalleled service with our team of seasoned professionals dedicated to making your journey memorable.
           </p>
 
@@ -22,7 +22,7 @@ const CallToAction = () => {
               'Life Insurance',
             ].map((feature, index) => (
               <div className="flex items-center" key={index}>
-                <div className="w-7 h-7 rounded-full bg-[#FF4E58] flex items-center justify-center mr-4">
+                <div className="w-7 h-7 rounded-full bg-[#FF4E58] text-white flex items-center justify-center mr-4">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
@@ -31,7 +31,7 @@ const CallToAction = () => {
                     />
                   </svg>
                 </div>
-                <span className="text-gray-800 text-base md:text-lg">{feature}</span>
+                <span className="text-white text-base md:text-lg">{feature}</span>
               </div>
             ))}
           </div>

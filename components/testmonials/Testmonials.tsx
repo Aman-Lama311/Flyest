@@ -66,154 +66,162 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#FAF3F3] flex flex-col md:flex-row overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-40 h-40 bg-red-500 opacity-10 rounded-full -translate-x-20 -translate-y-20"></div>
-      {/* <div className="absolute bottom-0 right-0 w-64 h-64 bg-red-500 opacity-10 rounded-full translate-x-20 translate-y-20"></div> */}
+    <>
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          overflow-y: hidden;
+        }
+      `}</style>
 
-      {/* Left Section */}
-      <div className="w-full md:w-1/2 bg-[#FAF3F3] p-8 md:p-16 flex flex-col justify-center relative z-10">
-        <span className="text-red-500 font-bold text-sm uppercase tracking-widest mb-4">
-          Testimonials
-        </span>
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
-          What our happy clients say
-        </h2>
-        <div className="w-20 h-1 bg-red-500 mb-6"></div>
-        <p className="text-gray-600 mb-10 flex items-center">
-          <Star size={16} className="text-yellow-400 mr-2" fill="#FACC15" />
-          <span className="font-semibold">4.9</span>
-          <span className="mx-2">•</span>
-          <span>Trip Advisor</span>
-        </p>
+      <div className="min-h-screen w-full bg-black text-white flex flex-col md:flex-row overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-40 h-40 bg-red-500 opacity-10 rounded-full -translate-x-20 -translate-y-20"></div>
 
-        <div className="flex space-x-2 mb-10">
-          {testimonials.map((_, index) => (
-            <div
-              key={index}
-              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                index === currentIndex
-                  ? "w-12 bg-red-500"
-                  : "w-3 bg-gray-200 hover:bg-gray-300"
-              }`}
-              onClick={() => setCurrentIndex(index)}
-            ></div>
-          ))}
-        </div>
+        {/* Left Section */}
+        <div className="w-full md:w-1/2 bg-black p-8 md:p-16 flex flex-col justify-center relative z-10 mt-[-150px]">
+          <span className="text-red-500 font-bold text-sm uppercase tracking-widest mb-4">
+            Testimonials
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            What our happy clients say
+          </h2>
+          <div className="w-20 h-1 bg-red-500 mb-6"></div>
+          <p className="text-gray-300 mb-10 flex items-center">
+            <Star size={16} className="text-yellow-400 mr-2" fill="#FACC15" />
+            <span className="font-semibold">4.9</span>
+            <span className="mx-2">•</span>
+            <span>Trip Advisor</span>
+          </p>
 
-        <button className="group bg-red-500 hover:bg-red-600 text-white py-3 px-8 rounded-md w-fit transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-red-200 flex items-center">
-          <span>View More Reviews</span>
-          <ChevronRight
-            size={18}
-            className="ml-2 transition-transform group-hover:translate-x-1"
-          />
-        </button>
-      </div>
-
-      {/* Right Section */}
-      <div className="w-full md:w-1/2 bg-[#FAF3F3] p-8 md:p-16 flex flex-col justify-center relative">
-        <div className="absolute top-14 right-14">
-          <Quote size={64} className="text-red-500 opacity-20" />
-        </div>
-
-        <div
-          className={`bg-white rounded-xl p-8 shadow-xl mb-8 z-10 border-l-4 border-red-500 transition-opacity duration-300 ${
-            isAnimating ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          {/* Rating Stars */}
-          <div className="flex mb-4">
-            {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-              <Star
-                key={i}
-                size={18}
-                className="text-yellow-400 mr-1"
-                fill="#FACC15"
-              />
-            ))}
-            {[...Array(5 - testimonials[currentIndex].rating)].map((_, i) => (
-              <Star
-                key={i + testimonials[currentIndex].rating}
-                size={18}
-                className="text-gray-200 mr-1"
-              />
+          <div className="flex space-x-2 mb-10">
+            {testimonials.map((_, index) => (
+              <div
+                key={index}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  index === currentIndex
+                    ? "w-12 bg-red-500"
+                    : "w-3 bg-gray-700 hover:bg-gray-600"
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              ></div>
             ))}
           </div>
 
-          <p className="text-gray-700 text-lg mb-8 leading-relaxed">
-            "{testimonials[currentIndex].text}"
-          </p>
-          <div className="flex items-center">
-            <img
-              src={testimonials[currentIndex].image}
-              alt={testimonials[currentIndex].name}
-              className="w-14 h-14 rounded-full mr-4 object-cover border border-red-100 shadow"
+          <button className="group bg-red-500 hover:bg-red-600 text-white py-3 px-8 rounded-md w-fit transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-red-200 flex items-center">
+            <span>View More Reviews</span>
+            <ChevronRight
+              size={18}
+              className="ml-2 transition-transform group-hover:translate-x-1"
             />
-            <div>
-              <h4 className="font-bold text-gray-800 text-lg">
-                {testimonials[currentIndex].name}
-              </h4>
-              <p className="text-gray-500">
-                {testimonials[currentIndex].position}
-              </p>
+          </button>
+        </div>
+
+        {/* Right Section */}
+        <div className="w-full md:w-1/2 bg-black p-8 md:p-16 flex flex-col justify-center relative">
+          <div className="absolute top-14 right-14">
+            <Quote size={64} className="text-red-500 opacity-20" />
+          </div>
+
+          <div
+            className={`bg-white text-black rounded-xl p-8 shadow-xl mb-8 z-10 border-l-4 border-red-500 transition-opacity duration-300 ${
+              isAnimating ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            {/* Rating Stars */}
+            <div className="flex mb-4">
+              {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                <Star
+                  key={i}
+                  size={18}
+                  className="text-yellow-400 mr-1"
+                  fill="#FACC15"
+                />
+              ))}
+              {[...Array(5 - testimonials[currentIndex].rating)].map((_, i) => (
+                <Star
+                  key={i + testimonials[currentIndex].rating}
+                  size={18}
+                  className="text-gray-300 mr-1"
+                />
+              ))}
+            </div>
+
+            <p className="text-gray-700 text-lg mb-8 leading-relaxed">
+              "{testimonials[currentIndex].text}"
+            </p>
+            <div className="flex items-center">
+              <img
+                src={testimonials[currentIndex].image}
+                alt={testimonials[currentIndex].name}
+                className="w-14 h-14 rounded-full mr-4 object-cover border border-red-100 shadow"
+              />
+              <div>
+                <h4 className="font-bold text-gray-900 text-lg">
+                  {testimonials[currentIndex].name}
+                </h4>
+                <p className="text-gray-600">
+                  {testimonials[currentIndex].position}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-between items-center mt-4">
-          <p className="text-gray-500 font-medium">
-            <span className="text-red-500">{currentIndex + 1}</span>/
-            {testimonials.length}
-          </p>
+          <div className="flex justify-between items-center mt-4">
+            <p className="text-gray-400 font-medium">
+              <span className="text-red-500">{currentIndex + 1}</span>/
+              {testimonials.length}
+            </p>
 
-          <div className="flex space-x-3">
-            <button
-              onClick={prevTestimonial}
-              className="p-3 rounded-full bg-white shadow-md hover:shadow-lg border border-gray-100 hover:border-red-200 hover:text-red-500 transition-all duration-300"
-              disabled={isAnimating}
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={nextTestimonial}
-              className="p-3 rounded-full bg-red-500 text-white shadow-md hover:shadow-lg hover:bg-red-600 transition-all duration-300"
-              disabled={isAnimating}
-            >
-              <ChevronRight size={20} />
-            </button>
+            <div className="flex space-x-3">
+              <button
+                onClick={prevTestimonial}
+                className="p-3 rounded-full bg-white text-black shadow-md hover:shadow-lg border border-gray-100 hover:border-red-200 hover:text-red-500 transition-all duration-300"
+                disabled={isAnimating}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="p-3 rounded-full bg-red-500 text-white shadow-md hover:shadow-lg hover:bg-red-600 transition-all duration-300"
+                disabled={isAnimating}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Preview Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className={`p-4 rounded-lg transition-all duration-300 cursor-pointer ${
-                index === currentIndex
-                  ? "bg-white border-l-4 border-red-500 shadow-lg"
-                  : "bg-white border border-gray-100 hover:border-red-200 hover:shadow-md"
-              }`}
-              onClick={() => setCurrentIndex(index)}
-            >
-              <div className="flex items-center">
+          {/* Preview Cards */}
+          <div
+            className="flex space-x-4 overflow-x-auto mt-10 scrollbar-hide"
+            style={{ maxWidth: "100%" }}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className={`min-w-[200px] max-w-[200px] p-4 rounded-lg transition-all duration-300 cursor-pointer flex flex-col items-center text-center ${
+                  index === currentIndex
+                    ? "bg-white text-black border-l-4 border-red-500 shadow-lg"
+                    : "bg-white text-black border border-gray-100 hover:border-red-200 hover:shadow-md"
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              >
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
-                  className="w-10 h-10 rounded-full mr-3 object-cover border"
+                  className="w-14 h-14 rounded-full mb-3 object-cover border"
                 />
-                <div>
-                  <h5 className="font-semibold text-sm">{testimonial.name}</h5>
-                  <p className="text-gray-500 text-xs">
-                    {testimonial.position}
-                  </p>
-                </div>
+                <h5 className="font-semibold text-sm">{testimonial.name}</h5>
+                <p className="text-gray-600 text-xs">{testimonial.position}</p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -5,7 +5,7 @@ const StatisticsAndPartners = () => {
   return (
     <div className="w-full flex flex-col">
       {/* Statistics Section */}
-      <div className="w-full bg-white py-12 px-8">
+      <div className="w-full bg-black py-12 px-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Total Users */}
           <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">

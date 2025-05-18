@@ -10,17 +10,16 @@ const TrekCard = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const cardsRef = useRef(null);
 
-  // Number of cards to show based on viewport width
+  // Responsive card count
   const getCardsToShow = () => {
     if (typeof window !== 'undefined') {
       return window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
     }
-    return 3; // Default for SSR
+    return 3;
   };
 
   const [cardsToShow, setCardsToShow] = useState(getCardsToShow());
 
-  // Update cards to show on window resize
   useEffect(() => {
     const handleResize = () => {
       setCardsToShow(getCardsToShow());
@@ -29,7 +28,7 @@ const TrekCard = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Auto-slide every 5 seconds
+  // Auto-slide
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isAnimating) {
@@ -37,12 +36,11 @@ const TrekCard = () => {
         if (currentIndex < trek.length - cardsToShow) {
           setCurrentIndex((prevIndex) => prevIndex + 1);
         } else {
-          setCurrentIndex(0); // Restart
+          setCurrentIndex(0);
         }
         setTimeout(() => setIsAnimating(false), 300);
       }
     }, 5000);
-
     return () => clearInterval(interval);
   }, [currentIndex, cardsToShow, isAnimating]);
 
@@ -77,14 +75,14 @@ const TrekCard = () => {
   };
 
   return (
-    <div className="w-full bg-gray-50 py-16 px-4 md:px-8 lg:px-16">
+    <div className="w-full bg-black text-white py-16 px-4 md:px-8 lg:px-16">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
         <div className="max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
             Traveler's Favorite Treks
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-white text-lg">
             Discover handpicked adventures loved by our community. Embark on unforgettable journeys through breathtaking landscapes and immersive cultural experiences.
           </p>
         </div>
@@ -174,20 +172,31 @@ const TrekCard = () => {
                     <span className="block">{item.reviews || 256} reviews</span>
                   </div>
                 </div>
-                <button 
-                  style={{ backgroundColor: THEME_COLOR }}
-                  className="w-full font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center"
-                  aria-label={`View itinerary for ${item.title}`}
-                >
-                  View itinerary
-                </button>
+
+                {/* View Itinerary & Book Now Buttons */}
+                <div className="flex gap-3">
+                  <button
+                    style={{ backgroundColor: THEME_COLOR }}
+                    className="w-1/2 font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200"
+                    aria-label={`View itinerary for ${item.title}`}
+                  >
+                    View itinerary
+                  </button>
+                  <button
+                    style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
+                    className="w-1/2 font-medium border hover:bg-red-50 active:bg-red-100 py-3 px-4 rounded-lg transition duration-200"
+                    aria-label={`Book now for ${item.title}`}
+                  >
+                    Book Now
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Pagination Indicator */}
+      {/* Pagination */}
       <div className="flex justify-center mt-8">
         {Array.from({ length: Math.ceil(trek.length / cardsToShow) }).map((_, idx) => (
           <button
