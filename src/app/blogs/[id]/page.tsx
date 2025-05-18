@@ -12,6 +12,7 @@ const BlogPage: React.FC = () => {
   const id = typeof params?.id === "string" ? parseInt(params.id) : null;
   const blog = blogData.find((b) => b.id === id);
 
+
   if (!blog) {
     return (
       <div className="py-20 text-center">
