@@ -1,96 +1,133 @@
-import React from 'react';
-import { useState } from 'react';
-import { Shield, Award, Users, Clock, Check } from 'lucide-react';
+'use client';
 
-const About = () => {
-  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
-  
-  const features = [
+import React from 'react';
+import { Shield, Award, Users, Clock } from 'lucide-react';
+
+interface Feature {
+  id: number;
+  iconColor: string;
+  title: string;
+  titleColor: string;
+  textColor: string;
+  borderColor: string;
+  description: string;
+}
+
+const About: React.FC = () => {
+  const features: Feature[] = [
     {
       id: 1,
-      icon: <Award />,
+      iconColor: 'text-[#00FFA3]',
       title: 'Best Price Guaranteed',
-      description: 'We ensure you get the most competitive prices for our rescue services.'
+      titleColor: 'text-[#00FFA3]',
+      textColor: 'text-[#00FFCC]',
+      borderColor: 'border-[#00FFCC]',
+      description:
+        'We promise unbeatable pricing on all services, ensuring you get the best value without compromising quality.',
     },
     {
       id: 2,
-      icon: <Shield />,
+      iconColor: 'text-[#FF6B6B]',
       title: 'Certified & Trusted Service',
-      description: 'Our team is fully certified and trusted by thousands of satisfied clients.'
+      titleColor: 'text-[#FF6B6B]',
+      textColor: 'text-[#FF8787]',
+      borderColor: 'border-[#FF8787]',
+      description:
+        'Our certified team provides reliable and safe services prioritizing your confidence and peace of mind.',
     },
     {
       id: 3,
-      icon: <Users />,
+      iconColor: 'text-[#3B82F6]',
       title: 'Professional Rescue Team',
-      description: 'Our highly trained professionals are ready to handle any situation.'
+      titleColor: 'text-[#3B82F6]',
+      textColor: 'text-[#60A5FA]',
+      borderColor: 'border-[#60A5FA]',
+      description:
+        'Our experienced rescue team is available 24/7, trained to handle emergencies efficiently.',
     },
     {
       id: 4,
-      icon: <Clock />,
+      iconColor: 'text-[#FBBF24]',
       title: '24/7 Customer Service',
-      description: 'Were always available to assist you whenever you need help.'
-    }
+      titleColor: 'text-[#FBBF24]',
+      textColor: 'text-[#FCD34D]',
+      borderColor: 'border-[#FCD34D]',
+      description:
+        'Round-the-clock support team to assist, guide, and resolve any issues during your journey.',
+    },
   ];
 
-  return (
-    <section className="relative w-full py-16 overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-      {/* Background Pattern */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-        <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-[#D62A4E]"></div>
-        <div className="absolute top-40 right-20 w-64 h-64 rounded-full bg-blue-400"></div>
-        <div className="absolute bottom-10 left-1/4 w-32 h-32 rounded-full bg-[#D62A4E]"></div>
-      </div>
-      
-      <div className="container px-4 mx-auto">
-        {/* Section Title */}
-        <div className="mb-12 text-center">
-          <h2 className="mb-2 text-3xl font-bold text-[#D62A4E]">Why Choose Us</h2>
-          <div className="mx-auto w-20 h-1 mb-4 bg-[#D62A4E]"></div>
-          <p className="max-w-2xl mx-auto text-gray-600">
-            We're dedicated to providing exceptional service with our team of professionals
-          </p>
-        </div>
+  const icons = [Award, Shield, Users, Clock];
 
-        {/* Feature Items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature) => (
-            <div
-              key={feature.id}
-              className="relative p-6 transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-lg hover:transform hover:scale-105"
-              onMouseEnter={() => setHoveredFeature(feature.id)}
-              onMouseLeave={() => setHoveredFeature(null)}
-            >
-              <div className="flex flex-col items-center">
-                <div className="p-3 mb-4 text-white bg-[#D62A4E] rounded-full">
-                  {React.cloneElement(feature.icon, { 
-                    size: 24, 
-                    className: "transition-transform duration-300" + (hoveredFeature === feature.id ? " transform rotate-12" : "") 
-                  })}
+  return (
+    <div className="relative w-full">
+      {/* Corner Border Lines */}
+      <div className="absolute top-[-10px] left-0 h-[calc(100%+20px)] border-l-1 border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-[-10px] right-0 h-[calc(100%+20px)] border-r-1 border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-[30px] border-t-1 border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[30px] border-b-1 border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[30px] border-t-1 border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-[30px] border-b-1 border-[#00ffd0] pointer-events-none"></div>
+
+      <section className="relative w-full py-20 bg-black text-white rounded-lg">
+        <div className="container mx-auto px-4">
+          {/* Section Title */}
+          <div className="mb-16 text-center">
+            <h2 className="text-4xl font-bold">Why Choose Us</h2>
+            <p className="mt-4 text-gray-300 max-w-xl mx-auto">
+              We’re dedicated to providing exceptional service with our team of professionals.
+            </p>
+          </div>
+
+          {/* Feature Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {features.map((feature, index) => {
+              const Icon = icons[index];
+
+              return (
+                <div
+                  key={feature.id}
+                  className="relative min-h-[320px] p-6 rounded-xl text-white"
+                >
+                  {/* Border Corners & Lines for each card */}
+                  <div className={`absolute top-0 left-0 h-full border-l-2 ${feature.borderColor}`} />
+                  <div className={`absolute top-0 right-0 h-full border-r-2 ${feature.borderColor}`} />
+                  <div className={`absolute top-0 left-0 w-[30px] border-t-2 ${feature.borderColor}`} />
+                  <div className={`absolute bottom-0 left-0 w-[30px] border-b-2 ${feature.borderColor}`} />
+                  <div className={`absolute top-0 right-0 w-[30px] border-t-2 ${feature.borderColor}`} />
+                  <div className={`absolute bottom-0 right-0 w-[30px] border-b-2 ${feature.borderColor}`} />
+
+                  {/* Content */}
+                  <div className="flex items-center justify-between h-full">
+                    {/* Icon */}
+                    <div className="flex-shrink-0">
+                      <div
+                        className={`flex items-center justify-center rounded-full border-2 border-white/20 p-6 shadow-lg ${feature.iconColor}`}
+                      >
+                        <Icon size={60} />
+                      </div>
+                    </div>
+
+                    {/* Text */}
+                    <div className="ml-6 text-left">
+                      <h3 className={`text-4xl font-bold ${feature.titleColor}`}>{feature.title}</h3>
+                      <p className={`mt-2 text-base ${feature.textColor}`}>{feature.description}</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="mb-3 text-xl font-semibold text-[#D62A4E]">{feature.title}</h3>
-                <p className="text-center text-gray-600">{feature.description}</p>
-              </div>
-              
-              {/* Animated checkmark appears on hover */}
-              <div 
-                className={`absolute -top-2 -right-2 p-1 bg-red-500 rounded-full transition-opacity duration-300 ${
-                  hoveredFeature === feature.id ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                <Check size={16} className="text-white" />
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
+
+          {/* CTA Button */}
+          <div className="mt-16 text-center">
+            <button className="px-6 py-3 font-semibold text-white transition bg-[#D62A4E] rounded-full hover:bg-red-700">
+              Learn More About Our Services
+            </button>
+          </div>
         </div>
-        
-        {/* Call to Action */}
-        <div className="mt-12 text-center">
-          <button className="px-6 py-3 font-semibold text-white transition-colors bg-red-600 rounded-full hover:bg-red-700">
-            Learn More About Our Services
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

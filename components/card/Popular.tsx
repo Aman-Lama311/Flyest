@@ -82,10 +82,10 @@ const TrekCard = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
         <div className="max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-            Traveler's Favorite Treks
+             Popular Expeditions
           </h2>
           <p className="text-gray-600 text-lg">
-            Discover handpicked adventures loved by our community. Embark on unforgettable journeys through breathtaking landscapes and immersive cultural experiences.
+           Popular expeditions often take adventurers to some of the most challenging and awe-inspiring places on Earth. These include climbing Mount Everest, trekking to Machu Picchu, exploring Antarctica, or journeying through the Amazon rainforest.
           </p>
         </div>
         <div className="flex items-center gap-3 mt-6 md:mt-0">
@@ -119,7 +119,7 @@ const TrekCard = () => {
         ref={cardsRef}
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300 ${isAnimating ? 'opacity-80' : 'opacity-100'}`}
       >
-        {visibleTreks.map((item, index) => (
+       {[...visibleTreks].reverse().map((item, index) => (
           <div 
             key={`${item.id}-${index}`} 
             className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full"

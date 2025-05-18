@@ -6,7 +6,10 @@ import Cards from '../cards/Cards'
 import WhatWeDo from '../whatwedo/WhatWeDo'
 import Blog from '../blog/Blog'
 import TrekCard from '../card/TrekCard'
+import Popular from '../card/Popular'
 import Testmonials from '../testmonials/Testmonials'
+import Book from '../layout/Book'
+import Tips from '../layout/Tips'
 import CallToAction from '../calltoaction/CallToAction'
 
 const Home = () => {
@@ -15,8 +18,12 @@ const Home = () => {
        <Hero /> 
        <About />
        <TrekCard />
+       <Popular/>
+        <CallToAction />
        <Testmonials />
-       <CallToAction />
+       <Book/>
+       <Tips/>
+    
        <WhatWeDo />
        {/* <Blog /> */}
        {/* <Cards /> */}
