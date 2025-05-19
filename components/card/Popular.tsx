@@ -80,38 +80,14 @@ const TrekCard = () => {
     <div className="w-full bg-black text-white py-16 px-4 md:px-8 lg:px-16">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+        <div className="max-w-3xl mx-auto text-center px-4">
+          <h2 className="text-3xl md:text-6xl font-bold font-sans text-white mb-3">
              Popular Expeditions
           </h2>
           <p className="text-white text-lg">
            Popular expeditions often take adventurers to some of the most challenging and awe-inspiring places on Earth. These include climbing Mount Everest, trekking to Machu Picchu, exploring Antarctica, or journeying through the Amazon rainforest.
           </p>
-        </div>
-        <div className="flex items-center gap-3 mt-6 md:mt-0">
-          <button
-            onClick={handlePrevClick}
-            disabled={currentIndex === 0 || isAnimating}
-            aria-label="Previous trek"
-            style={{ borderColor: THEME_COLOR }}
-            className={`h-12 w-12 rounded-full flex items-center justify-center border transition duration-200 ${
-              currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-red-50 active:bg-red-100'
-            }`}
-          >
-            <ArrowLeft size={20} style={{ color: THEME_COLOR }} />
-          </button>
-          <button
-            onClick={handleNextClick}
-            disabled={currentIndex >= trek.length - cardsToShow || isAnimating}
-            aria-label="Next trek"
-            style={{ borderColor: THEME_COLOR }}
-            className={`h-12 w-12 rounded-full flex items-center justify-center border transition duration-200 ${
-              currentIndex >= trek.length - cardsToShow ? 'opacity-40 cursor-not-allowed' : 'hover:bg-red-50 active:bg-red-100'
-            }`}
-          >
-            <ArrowRight size={20} style={{ color: THEME_COLOR }} />
-          </button>
-        </div>
+        </div> 
       </div>
 
       {/* Trek Cards */}
@@ -148,12 +124,14 @@ const TrekCard = () => {
               <div className="flex items-center text-sm text-white mb-3">
                 <MapPin size={16} style={{ color: THEME_COLOR }} className="mr-1" />
                 <span>{item.location || "Various locations"}</span>
-              </div>
-              
-              <div className="flex items-center text-sm text-white mb-4">
-                <Clock size={16} style={{ color: THEME_COLOR }} className="mr-1" />
+                <Clock size={16} style={{ color: THEME_COLOR }} className="mr-1 ml-4" />
                 <span>{item.duration || "7-10 days"}</span>
               </div>
+              
+              {/* <div className="flex items-center text-sm text-white mb-4">
+                <Clock size={16} style={{ color: THEME_COLOR }} className="mr-1" />
+                <span>{item.duration || "7-10 days"}</span>
+              </div> */}
               
               <p className="text-white text-sm mb-4 flex-grow">
                 {item.description || "Experience the beauty of nature with our expertly guided trek through stunning landscapes and cultural wonders."}
@@ -195,29 +173,56 @@ const TrekCard = () => {
           </div>
         ))}
       </div>
-
-      {/* Pagination Indicator */}
-      <div className="flex justify-center mt-8">
-        {Array.from({ length: Math.ceil(trek.length / cardsToShow) }).map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => {
-              if (!isAnimating) {
-                setIsAnimating(true);
-                setCurrentIndex(idx * cardsToShow);
-                setTimeout(() => setIsAnimating(false), 300);
-              }
-            }}
-            aria-label={`Go to page ${idx + 1}`}
-            aria-current={Math.floor(currentIndex / cardsToShow) === idx ? 'page' : undefined}
-            style={{ backgroundColor: Math.floor(currentIndex / cardsToShow) === idx ? THEME_COLOR : '#E5E7EB' }}
-            className={`h-2 w-8 mx-1 rounded-full transition-all ${
-              Math.floor(currentIndex / cardsToShow) === idx ? '' : 'hover:bg-gray-400'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
+      
+  {/* Pagination */}
+            <div className="flex flex-col items-center mt-8 space-y-4">
+              {/* Dots */}
+               <div className="flex items-center gap-3">
+                <button
+                  onClick={handlePrevClick}
+                  disabled={currentIndex === 0 || isAnimating}
+                  aria-label="Previous trek"
+                  style={{ borderColor: THEME_COLOR }}
+                  className={`h-12 w-12 rounded-full flex items-center justify-center border transition duration-200 ${
+                    currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-red-50 active:bg-red-100'
+                  }`}
+                >
+                  <ArrowLeft size={20} style={{ color: THEME_COLOR}} />
+                </button>
+              <div className="flex justify-center">
+                {Array.from({ length: Math.ceil(trek.length / cardsToShow) }).map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      if (!isAnimating) {
+                        setIsAnimating(true);
+                        setCurrentIndex(idx * cardsToShow);
+                        setTimeout(() => setIsAnimating(false), 300);
+                      }
+                    }}
+                    aria-label={`Go to page ${idx + 1}`}
+                    aria-current={Math.floor(currentIndex / cardsToShow) === idx ? 'page' : undefined}
+                    style={{ backgroundColor: Math.floor(currentIndex / cardsToShow) === idx ? THEME_COLOR : '#E5E7EB' }}
+                    className={`h-2 w-8 mx-1 rounded-full transition-all ${
+                      Math.floor(currentIndex / cardsToShow) === idx ? '' : 'hover:bg-gray-400'
+                    }`}
+                  />
+                ))}
+              </div>
+                <button
+                  onClick={handleNextClick}
+                  disabled={currentIndex >= trek.length - cardsToShow || isAnimating}
+                  aria-label="Next trek"
+                  style={{ borderColor: THEME_COLOR }}
+                  className={`h-12 w-12 rounded-full flex items-center justify-center border transition duration-200 ${
+                    currentIndex >= trek.length - cardsToShow ? 'opacity-40 cursor-not-allowed' : 'hover:bg-red-50 active:bg-red-100'
+                  }`}
+                >
+                  <ArrowRight size={20} style={{color: THEME_COLOR }} />
+                </button>
+              </div>
+            </div>
+   </div>
   );
 };
 

@@ -9,6 +9,7 @@ import TrekCard from '../card/TrekCard'
 import Popular from '../card/Popular'
 import Testmonials from '../testmonials/Testmonials'
 import Book from '../layout/Book'
+import ActivityCarousel from '../layout/Activity'
 import Tips from '../layout/Tips'
 import CallToAction from '../calltoaction/CallToAction'
 
@@ -21,6 +22,7 @@ const Home = () => {
        <Popular/>
         <CallToAction />
        <Testmonials />
+       <ActivityCarousel />
        <Book/>
        <WhatWeDo />
        {/* <Blog /> */}

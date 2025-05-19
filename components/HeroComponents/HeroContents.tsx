@@ -28,43 +28,42 @@ const HeroContents: React.FC<HeroContentsProps> = ({ currentImageIndex }) => {
           <p>{currentImage.description}</p>
         </div>
 
-        <button
-          className="h-14 mt-10 px-4 bg-[#D62A4E] text-white flex items-center justify-center gap-4 rounded-xl transition-all
-           duration-300 hover:bg-[#d62a4e]"
-          onMouseEnter={(e) => {
-            const arrowElement = e.currentTarget.querySelector(".talk-button-arrow");
-            setButtonText("Let's Talk");
-            gsap.to(arrowElement, {
-              rotation: 270,
-              y: -2,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          }}
-          onMouseLeave={(e) => {
-            const arrowElement = e.currentTarget.querySelector(".talk-button-arrow");
-            setButtonText("Explore More");
-            gsap.to(arrowElement, {
-              rotation: 0,
-              y: 0,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          }}
-        >
-          <a
-            className="font-medium tracking-wide text-[1.1rem] transition-colors duration-300 talk-button-text"
-            href="/contact"
-          >
-            {buttonText}
-          </a>
-          <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-            <IoMdArrowDown
-              size={25}
-              className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
-            />
-          </div>
-        </button>
+       <button
+  className="h-14 mt-10 px-4 bg-[#D62A4E] text-white flex items-center justify-center gap-4 rounded-xl transition-all
+    duration-300 hover:bg-[#d62a4e]"
+  onMouseEnter={(e) => {
+    const arrowElement = e.currentTarget.querySelector(".talk-button-arrow");
+    gsap.to(arrowElement, {
+      rotation: 270,
+      y: -2,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  }}
+  onMouseLeave={(e) => {
+    const arrowElement = e.currentTarget.querySelector(".talk-button-arrow");
+    gsap.to(arrowElement, {
+      rotation: 0,
+      y: 0,
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  }}
+>
+  <a
+    className="font-medium tracking-wide text-[1.1rem] transition-colors duration-300 talk-button-text"
+    href="/contact"
+  >
+    Explore More
+  </a>
+  <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+    <IoMdArrowDown
+      size={25}
+      className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
+    />
+  </div>
+</button>
+
       </div>
 
       {/* Pagination */}
