@@ -79,10 +79,10 @@ const TrekCard = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
         <div className="max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold font-sans text-white mb-3">
             Traveler's Favorite Treks
           </h2>
-          <p className="text-white text-lg">
+          <p className="text-white text-lg font-sans">  
             Discover handpicked adventures loved by our community. Embark on unforgettable journeys through breathtaking landscapes and immersive cultural experiences.
           </p>
         </div>
@@ -120,55 +120,55 @@ const TrekCard = () => {
         {visibleTreks.map((item, index) => (
           <div 
             key={`${item.id}-${index}`} 
-            className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full"
+            className="bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full"
           >
-            <div className="relative w-full h-64 bg-gray-200 overflow-hidden group">
+            <div className="relative w-full h-80 bg-black text-white overflow-hidden group">
               <img 
                 src={item.imgSrc} 
                 alt={`${item.title} landscape`} 
                 className="w-full h-full object-cover transition duration-700 group-hover:scale-110" 
               />
               {item.oldPrice > item.newPrice && (
-                <div style={{ backgroundColor: THEME_COLOR }} className="absolute top-4 left-4 text-white text-sm font-bold px-2 py-1 rounded">
+                <div style={{ backgroundColor: THEME_COLOR }} className="absolute top-4 left-4 text-white font-sans text-sm font-bold px-2 py-1 rounded">
                   {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
                 </div>
               )}
             </div>
             <div className="p-6 flex flex-col flex-grow">
               <div className="flex justify-between items-start mb-3">
-                <h3 style={{ color: "#333" }} className="font-bold text-xl mb-1">{item.title}</h3>
+                <h3 style={{ color: "white" }} className="font-bold text-xl mb-1">{item.title}</h3>
                 <div style={{ backgroundColor: `${THEME_COLOR}15` }} className="flex items-center px-2 py-1 rounded text-sm font-medium">
                   <Star size={14} style={{ color: THEME_COLOR }} className="fill-current mr-1" />
                   <span style={{ color: THEME_COLOR }}>{item.rating || 4.8}</span>
                 </div>
               </div>
               
-              <div className="flex items-center text-sm text-gray-500 mb-3">
+              <div className="flex items-center text-sm text-white mb-3">
                 <MapPin size={16} style={{ color: THEME_COLOR }} className="mr-1" />
                 <span>{item.location || "Various locations"}</span>
               </div>
               
-              <div className="flex items-center text-sm text-gray-500 mb-4">
+              <div className="flex items-center text-sm text-white mb-4">
                 <Clock size={16} style={{ color: THEME_COLOR }} className="mr-1" />
                 <span>{item.duration || "7-10 days"}</span>
               </div>
               
-              <p className="text-gray-600 text-sm mb-4 flex-grow">
+              <p className="text-white text-sm mb-4 flex-grow font-sans">
                 {item.description || "Experience the beauty of nature with our expertly guided trek through stunning landscapes and cultural wonders."}
               </p>
               
               <div className="mt-auto">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <p className="text-sm text-gray-500">Starting from</p>
+                    <p className="text-sm text-white">Starting from</p>
                     <div className="flex items-center">
                       {item.oldPrice > item.newPrice && (
-                        <span className="line-through text-gray-400 mr-2">{formatPrice(item.oldPrice)}</span>
+                        <span className="line-through text-white mr-2">{formatPrice(item.oldPrice)}</span>
                       )}
-                      <span style={{ color: THEME_COLOR }} className="text-xl font-bold">{formatPrice(item.newPrice)}</span>
+                      <span style={{ color: "white" }} className="text-xl text-white font-bold">{formatPrice(item.newPrice)}</span>
                     </div>
                   </div>
-                  <div className="text-right text-sm text-gray-500">
+                  <div className="text-right text-sm text-white">
                     <span className="block">{item.reviews || 256} reviews</span>
                   </div>
                 </div>

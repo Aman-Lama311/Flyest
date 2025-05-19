@@ -69,12 +69,12 @@ const About: React.FC = () => {
       <div className="absolute top-0 right-0 w-[30px] border-t-1 border-[#00ffd0] pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-[30px] border-b-1 border-[#00ffd0] pointer-events-none"></div>
 
-      <section className="relative w-full py-20 bg-black text-white rounded-lg">
+      <section className="relative w-full py-20 bg-black text-white rounded-lg font-sans">
         <div className="container mx-auto px-4">
           {/* Section Title */}
           <div className="mb-16 text-center">
-            <h2 className="text-4xl font-bold">Why Choose Us</h2>
-            <p className="mt-4 text-gray-300 max-w-xl mx-auto">
+            <h2 className="text-6xl font-bold font-sans">Why Choose Us</h2>
+            <p className="mt-4 text-gray-300 max-w-xl mx-auto text-2xl">
               We’re dedicated to providing exceptional service with our team of professionals.
             </p>
           </div>

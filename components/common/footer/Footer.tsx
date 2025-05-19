@@ -3,7 +3,10 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='relative h-screen w-full bg-[#FF4E58] text-white object-cover' style={{ backgroundImage: "url('/footer.png')" }}>
+    <div className='relative h-screen w-full bg-black text-white object-cover'
+     style={{ backgroundImage: "url('/footer')"
+      
+      }}>
       <div className='flex items-center justify-center py-10'>
 
         {/* first box */}

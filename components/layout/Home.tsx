@@ -22,8 +22,6 @@ const Home = () => {
         <CallToAction />
        <Testmonials />
        <Book/>
-      
-    
        <WhatWeDo />
        {/* <Blog /> */}
        {/* <Cards /> */}

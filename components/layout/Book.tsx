@@ -34,12 +34,14 @@ const TrekBookingSection: React.FC = () => {
       <div className="w-full max-w-4xl aspect-video rounded-lg overflow-hidden cursor-pointer">
         <video
           ref={videoRef}
-          src="/Vedio/vedio.mp4"  // <-- your video path here
+          src="/Vedio/vedio.mp4" 
           className="w-full h-full object-cover"
           onClick={handleVideoClick}
           controls={false}
           preload="metadata"
           loop
+          muted
+          autoPlay
         />
       </div>
     </section>
