@@ -6,6 +6,7 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    number: "",
     message: "",
   });
 
@@ -18,9 +19,26 @@ const ContactPage = () => {
     });
   };
 
+  const validateEmail = (email: string) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const handleSubmit = () => {
+    const { name, email, number, message } = formData;
+
+    if (!name || !email || !number || !message) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     alert("Thank you for your message! We will get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+    setFormData({ name: "", email: "", number: "", message: "" });
   };
 
   return (
@@ -40,7 +58,7 @@ const ContactPage = () => {
             <div className="h-1 w-full bg-gray-200 opacity-40"></div>
           </div>
           <div className="relative flex justify-center">
-            <div className="bg-zinc-800 text-white px-4 py-2 rounded-full">
+            <div className="bg-[#EA3359] text-white px-4 py-2 rounded-full">
               <Mail className="w-6 h-6" />
             </div>
           </div>
@@ -57,7 +75,7 @@ const ContactPage = () => {
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
+                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -66,15 +84,24 @@ const ContactPage = () => {
                 type="email"
                 name="email"
                 placeholder="Your Email"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
+                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
                 value={formData.email}
+                onChange={handleChange}
+              />
+
+              <input
+                type="number"
+                name="number"
+                placeholder="Your Phone Number"
+                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
+                value={formData.number}
                 onChange={handleChange}
               />
 
               <textarea
                 name="message"
                 placeholder="Your Message"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
+                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
                 rows={5}
                 value={formData.message}
                 onChange={handleChange}
@@ -82,7 +109,7 @@ const ContactPage = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full bg-zinc-800 text-white py-3 rounded-full hover:bg-zinc-700 transition duration-300"
+                className=" bg-[#EA3359] w-full text-white py-4 rounded border hover:border-white transition duration-300"
               >
                 Send Message
               </button>
@@ -97,8 +124,8 @@ const ContactPage = () => {
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <MapPin className="w-6 h-6 text-blue-600" />
+                <div className="bg-zinc-800 p-3 rounded-full">
+                  <MapPin className="w-6 h-6 text-[#EA3359]" />
                 </div>
                 <div>
                   <p className="font-medium">Address</p>
@@ -107,8 +134,8 @@ const ContactPage = () => {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-blue-600" />
+                <div className="bg-zinc-800 p-3 rounded-full">
+                  <Phone className="w-6 h-6 text-[#EA3359]" />
                 </div>
                 <div>
                   <p className="font-medium">Phone</p>
@@ -117,46 +144,15 @@ const ContactPage = () => {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Mail className="w-6 h-6 text-blue-600" />
+                <div className="bg-zinc-800 p-3 rounded-full">
+                  <Mail className="w-6 h-6 text-[#EA3359]" />
                 </div>
                 <div>
                   <p className="font-medium">Email</p>
-                  <p>info@highfivetrekking.com</p>
+                  <p>info@Flyeast.com</p>
                 </div>
               </div>
             </div>
-
-            <div className="mt-8 p-4 rounded-lg border border-blue-100">
-              <p>
-                <span className="font-medium">Office Hours:</span> Monday to
-                Friday, 9am - 5pm
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer Info */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-10 mt-12 text-sm sm:text-base">
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-            </div>
-            <span>24/7 Emergency Support</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-            </div>
-            <span>48hr Response Time</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-            </div>
-            <span>Many Locations</span>
           </div>
         </div>
       </div>
