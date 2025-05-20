@@ -16,6 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format, addDays, isSameDay, isWithinInterval } from "date-fns";
 import { addonOptions } from "@/static-data/addOnOptions";
 import countries from "world-countries";
+import BookingSummary from "./BookingSummary";
 
 // Static available dates
 const AVAILABLE_DATES = [
@@ -570,6 +571,7 @@ const DatesAndPrices = () => {
           </div>
         </div>
       )}
+      <div className="md:hidden"><BookingSummary /></div>
     </div>
   );
 };

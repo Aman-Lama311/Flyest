@@ -278,7 +278,7 @@ const Navbar = () => {
           </div>
 
           <nav className="text-white">
-            <ul className="space-y-6">
+            <ul className="space-y-0">
               <li>
                 <Link href="/" onClick={toggleNav}>
                   <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
@@ -288,25 +288,31 @@ const Navbar = () => {
               </li>
 
               {/* Mobile Mountaineering Dropdown */}
-              <li>
-                <div
-                  className="flex justify-between items-center"
-                  onClick={() => toggleMobileDropdown("mountaineering")}
+              <li className="border-b border-gray-800">
+                <Link 
+                  href="/allPeak" 
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("mountaineering");
+                  }}
                 >
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
-                    Mountaineering
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      mobileDropdowns.mountaineering ? "rotate-180" : ""
-                    }`}
-                  />
-                </div>
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Mountaineering
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.mountaineering ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
                 {mobileDropdowns.mountaineering && (
                   <div className="mt-4 ml-4 space-y-3">
                     {Object.keys(mountaineeringData).map((category) => (
                       <Link
-                        href={`/mountaineering/${category}`}
+                        href={`/allPeak`}
                         key={category}
                         onClick={toggleNav}
                       >
@@ -328,25 +334,31 @@ const Navbar = () => {
 
               
               {/* Mobile heli Dropdown */}
-              <li>
-                <div
-                  className="flex justify-between items-center"
-                  onClick={() => toggleMobileDropdown("heliService")}
+              <li className="border-b border-gray-800">
+                <Link 
+                  href="/helitour" 
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("heliService");
+                  }}
                 >
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
-                    Heli Service
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      mobileDropdowns.heliService ? "rotate-180" : ""
-                    }`}
-                  />
-                </div>
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Heli Service
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.heliService ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
                 {mobileDropdowns.heliService && (
                   <div className="mt-4 ml-4 space-y-3">
                     {Object.keys(heliServiceData).map((category) => (
                       <Link
-                        href={`/heliservice/${category}`}
+                        href={`/helitour`}
                         key={category}
                         onClick={toggleNav}
                       >
@@ -367,27 +379,31 @@ const Navbar = () => {
               </li>
 
               {/* Mobile Trekking Dropdown */}
-              <li>
-                <div
-                  className="flex justify-between items-center"
-                  onClick={() => toggleMobileDropdown("trekking")}
+              <li className="border-b border-gray-800">
+                <Link 
+                  href="/allTrekking" 
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("trekking");
+                  }}
                 >
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
-                    Trekking
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      mobileDropdowns.trekking ? "rotate-180" : ""
-                    }`}
-                  />
-                </div>
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Trekking
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.trekking ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
                 {mobileDropdowns.trekking && (
                   <div className="mt-4 ml-4 space-y-3">
                     {Object.keys(trekkingData).map((region) => (
                       <Link
-                        href={`/trekking/${region
-                          .toLowerCase()
-                          .replace(" ", "-")}`}
+                        href={`/allTrekking`}
                         key={region}
                         onClick={toggleNav}
                       >
@@ -402,19 +418,21 @@ const Navbar = () => {
               </li>
 
               {/* Mobile About Dropdown */}
-              <li>
-                <div
-                  className="flex justify-between items-center"
+              <li className="border-b border-gray-800">
+                <div 
+                  className="block w-full cursor-pointer"
                   onClick={() => toggleMobileDropdown("about")}
                 >
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
-                    Company
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      mobileDropdowns.about ? "rotate-180" : ""
-                    }`}
-                  />
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Company
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.about ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
                 </div>
                 {mobileDropdowns.about && (
                   <div className="mt-4 ml-4 space-y-3">
@@ -440,16 +458,24 @@ const Navbar = () => {
                 )}
               </li>
 
-              <li>
-                <Link href="/blogs" onClick={toggleNav}>
+              <li className="border-b border-gray-800">
+                <Link 
+                  href="/blogs" 
+                  onClick={toggleNav}
+                  className="block w-full py-4"
+                >
                   <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
                     Blogs
                   </span>
                 </Link>
               </li>
 
-              <li>
-                <Link href="/contact" onClick={toggleNav}>
+              <li className="border-b border-gray-800">
+                <Link 
+                  href="/contact_us" 
+                  onClick={toggleNav}
+                  className="block w-full py-4"
+                >
                   <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
                     Contact Us
                   </span>

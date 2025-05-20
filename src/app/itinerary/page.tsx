@@ -51,7 +51,7 @@ const Page = () => {
         <LeftBar />
         <div
           id="overview"
-          className="w-3/5 shadow-sm rounded-xl mx-5 px-4 py-4"
+          className="md:w-3/5 w-full shadow-sm rounded-xl mx-5 px-4 py-4"
         >
           {/* Main and Side Images */}
           <div className="flex gap-4">
