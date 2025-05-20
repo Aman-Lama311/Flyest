@@ -1,13 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import { useBookingStore } from "@/store/BookingStore";
-import { IoMdClose, IoMdCalendar, IoMdPerson, IoMdPeople, IoMdMail, IoMdCall, IoMdGlobe } from "react-icons/io";
+import {
+  IoMdClose,
+  IoMdCalendar,
+  IoMdPerson,
+  IoMdPeople,
+  IoMdMail,
+  IoMdCall,
+  IoMdGlobe,
+} from "react-icons/io";
 import { FiCheckCircle } from "react-icons/fi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format, addDays, isSameDay, isWithinInterval } from "date-fns";
 import { addonOptions } from "@/static-data/addOnOptions";
-import countries from 'world-countries';
+import countries from "world-countries";
 
 // Static available dates
 const AVAILABLE_DATES = [
@@ -18,7 +26,7 @@ const AVAILABLE_DATES = [
   new Date("2023-12-13"),
   new Date("2023-12-20"),
   new Date("2023-12-27"),
-  new Date("2024-01-03")
+  new Date("2024-01-03"),
 ];
 
 // Custom CSS to be injected for calendar styling
@@ -129,13 +137,26 @@ const DatesAndPrices = () => {
   const [departureDate, setDepartureDate] = useState<Date | null>(null);
   const [arrivalDate, setArrivalDate] = useState<Date | null>(null);
 
-  const handleDateSelect = (date: Date) => {
-    setDepartureDate(date);
-    const endDate = addDays(date, 12);
+  const [dateRange, setDateRange] = useState<{
+    start: Date | null;
+    end: Date | null;
+  }>({ start: null, end: null });
+
+  const handleDateSelect = (dates: [Date | null, Date | null] | null) => {
+    if (!dates || !dates[0]) return;
+    
+    const [start] = dates;
+    if (!start) return;
+    
+    const endDate = addDays(start, 12);
+    setDepartureDate(start);
     setArrivalDate(endDate);
-    setBookingData({ 
-      selectedDate: date,
-      endDate: endDate 
+    setDateRange({ start, end: endDate });
+
+    setBookingData({
+      ...bookingData,
+      selectedDate: start,
+      endDate: endDate
     });
   };
 
@@ -143,25 +164,39 @@ const DatesAndPrices = () => {
   const dayClassName = (date: Date) => {
     if (!departureDate || !arrivalDate) return '';
     
-    if (isSameDay(date, departureDate)) {
+    const currentDate = new Date(date);
+    currentDate.setHours(0, 0, 0, 0);
+    
+    const start = new Date(departureDate);
+    start.setHours(0, 0, 0, 0);
+    
+    const end = new Date(arrivalDate);
+    end.setHours(0, 0, 0, 0);
+    
+    if (isSameDay(currentDate, start)) {
       return 'bg-[#EA3359] text-white rounded-l-full start-date';
     }
-    
-    if (isSameDay(date, arrivalDate)) {
+    if (isSameDay(currentDate, end)) {
       return 'bg-[#EA3359] text-white rounded-r-full end-date';
     }
-    
-    if (isWithinInterval(date, { start: departureDate, end: arrivalDate })) {
+    if (isWithinInterval(currentDate, { start, end })) {
       return 'bg-pink-100 text-[#EA3359] in-range';
     }
-    
     return '';
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const target = e.target as
+      | HTMLInputElement
+      | HTMLSelectElement
+      | HTMLTextAreaElement;
     const { name, value } = target;
-    const newValue = target.type === 'checkbox' ? (target as HTMLInputElement).checked : value;
+    const newValue =
+      target.type === "checkbox" ? (target as HTMLInputElement).checked : value;
     setBookingData({
       [name]: newValue,
     });
@@ -171,7 +206,7 @@ const DatesAndPrices = () => {
     setBookingData({
       addons: isChecked
         ? [...bookingData.addons, addonId]
-        : bookingData.addons.filter(id => id !== addonId)
+        : bookingData.addons.filter((id) => id !== addonId),
     });
   };
 
@@ -181,89 +216,96 @@ const DatesAndPrices = () => {
     resetBooking();
   };
 
+    // Only allow selection of available dates
+    const filterAvailableDates = (date: Date) => {
+      return AVAILABLE_DATES.some(availableDate => 
+        isSameDay(availableDate, date)
+      );
+    };
+  
   // Function to determine if a date should be highlighted in the calendar
   const highlightDates = () => {
     if (!departureDate || !arrivalDate) return [];
-    
+
     const dates = [];
     let currentDate = new Date(departureDate);
-    
+
     // Create an array of all dates in the range
     while (currentDate <= arrivalDate) {
       dates.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    
+
     return dates;
   };
 
   return (
     <div id="date-&-prices" className="mt-10">
       <style>{calendarStyles}</style>
-      <h2 className="text-3xl font-bold text-gray-900 mb-2">📅 Dates & Prices</h2>
+      <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        📅Customize Your Trip
+      </h2>
       <p className="text-gray-600 mt-1 text-base max-w-3xl">
-        Select your preferred travel dates from our available options and customize your trip.
+        Select your preferred travel dates from our available options and
+        customize your trip.
       </p>
 
-      {/* Date Selection Section */}
-      <div className="bg-white rounded-xl w-full p-6 mt-6 shadow-sm border border-gray-100">
+     {/* Date Selection Section */}
+     <div className="bg-white rounded-xl w-full p-6 mt-6 shadow-sm border border-gray-100">
         <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-          <IoMdCalendar className="text-[#EA3359]" /> Select Departure Date
+          <IoMdCalendar className="text-[#EA3359]" /> Select Your Travel Dates
         </h3>
 
-        {/* Date Dropdown Selector */}
+        {/* Interactive Calendar */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Available Dates
-          </label>
-          <select
-            onChange={(e) => {
-              const selectedDate = new Date(e.target.value);
-              handleDateSelect(selectedDate);
+          <DatePicker
+            selected={departureDate}
+            onChange={(date) => {
+              if (date) {
+                handleDateSelect(date);
+              }
             }}
-            className="w-full md:w-1/2 border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
-            value={departureDate?.toISOString() || ""}
-          >
-            <option value="">Select a date</option>
-            {AVAILABLE_DATES.map((date) => (
-              <option 
-                key={date.toString()} 
-                value={date.toISOString()}
-              >
-                {format(date, 'EEEE, MMMM d, yyyy')}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Enhanced Calendar View */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Your Trip Dates
-          </label>
-          <div className="border border-gray-200 rounded-lg p-4 bg-white">
-            <DatePicker
-              selected={departureDate}
-              onChange={() => {}}
-              minDate={new Date()}
-              inline
-              monthsShown={2}
-              dayClassName={dayClassName}
-              selectsRange
-              startDate={departureDate}
-              endDate={arrivalDate}
-              highlightDates={[
-                {
-                  "react-datepicker__day--highlighted-custom-1": highlightDates()
-                }
-              ]}
-              disabled
-              calendarClassName="!border-0 !shadow-none calendar-container"
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-            />
-          </div>
+            minDate={new Date()}
+            inline
+            monthsShown={2}
+            dayClassName={dayClassName}
+        
+            selectsRange
+            startDate={departureDate}
+            endDate={arrivalDate}
+            calendarClassName="border-0"
+            renderCustomHeader={({
+              date,
+              decreaseMonth,
+              increaseMonth,
+              prevMonthButtonDisabled,
+              nextMonthButtonDisabled,
+            }) => (
+              <div className="flex items-center justify-between px-2 py-2">
+                <button
+                  onClick={decreaseMonth}
+                  disabled={prevMonthButtonDisabled}
+                  className="p-1 rounded-lg hover:bg-gray-100 disabled:opacity-30"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <span className="text-lg font-semibold text-gray-700">
+                  {format(date, 'MMMM yyyy')}
+                </span>
+                <button
+                  onClick={increaseMonth}
+                  disabled={nextMonthButtonDisabled}
+                  className="p-1 rounded-lg hover:bg-gray-100 disabled:opacity-30"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          />
         </div>
 
         {/* Selected Dates Summary */}
@@ -291,9 +333,7 @@ const DatesAndPrices = () => {
                 <div className="hidden sm:block text-gray-400">•</div>
                 <div className="flex items-center gap-2">
                   <span className="text-gray-600">Duration:</span>
-                  <span className="font-medium text-[#EA3359]">
-                    13 days
-                  </span>
+                  <span className="font-medium text-[#EA3359]">13 days</span>
                 </div>
               </div>
             </div>
@@ -317,7 +357,7 @@ const DatesAndPrices = () => {
               <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                 <IoMdPerson className="text-[#EA3359]" /> Traveler Information
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
@@ -332,7 +372,7 @@ const DatesAndPrices = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <IoMdMail className="text-gray-400" /> Email Address
@@ -369,7 +409,9 @@ const DatesAndPrices = () => {
                     </select>
                   </div>
                   <div className="flex-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number
+                    </label>
                     <input
                       type="tel"
                       name="phone"
@@ -380,7 +422,7 @@ const DatesAndPrices = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <IoMdGlobe className="text-gray-400" /> Country
@@ -388,7 +430,9 @@ const DatesAndPrices = () => {
                   <select
                     name="country"
                     value={bookingData.country}
-                    onChange={(e) => setBookingData({ country: e.target.value })}
+                    onChange={(e) =>
+                      setBookingData({ country: e.target.value })
+                    }
                     className="w-full border border-gray-200 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
                   >
                     <option value="">Select your country</option>
@@ -416,7 +460,7 @@ const DatesAndPrices = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <IoMdPeople className="text-gray-400" /> Children
@@ -433,7 +477,9 @@ const DatesAndPrices = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Additional Notes
+                </label>
                 <textarea
                   name="notes"
                   value={bookingData.notes}
@@ -447,14 +493,18 @@ const DatesAndPrices = () => {
 
             {/* Add-On Services */}
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-800">✨ Add-On Services</h3>
+              <h3 className="text-xl font-semibold text-gray-800">
+                ✨ Add-On Services
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {addonOptions.map((addon) => (
-                  <div 
-                    key={addon.id} 
-                    className={`p-4 border rounded-lg transition-all ${bookingData.addons.includes(addon.id) 
-                      ? 'border-[#EA3359] bg-pink-50' 
-                      : 'border-gray-200 hover:border-[#EA3359]'}`}
+                  <div
+                    key={addon.id}
+                    className={`p-4 border rounded-lg transition-all ${
+                      bookingData.addons.includes(addon.id)
+                        ? "border-[#EA3359] bg-pink-50"
+                        : "border-gray-200 hover:border-[#EA3359]"
+                    }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-3">
@@ -462,17 +512,23 @@ const DatesAndPrices = () => {
                           type="checkbox"
                           id={addon.id}
                           checked={bookingData.addons.includes(addon.id)}
-                          onChange={(e) => handleAddonChange(addon.id, e.target.checked)}
+                          onChange={(e) =>
+                            handleAddonChange(addon.id, e.target.checked)
+                          }
                           className="mt-1 h-4 w-4 text-[#EA3359] focus:ring-[#EA3359] border-gray-300 rounded"
                         />
                         <div>
-                          <label htmlFor={addon.id} className="font-medium text-gray-800">
+                          <label
+                            htmlFor={addon.id}
+                            className="font-medium text-gray-800"
+                          >
                             {addon.name}
                           </label>
-                          {/* <p className="text-sm text-gray-500 mt-1">{addon.description}</p> */}
                         </div>
                       </div>
-                      <span className="font-medium text-[#EA3359] whitespace-nowrap">+${addon.price}</span>
+                      <span className="font-medium text-[#EA3359] whitespace-nowrap">
+                        +${addon.price}
+                      </span>
                     </div>
                   </div>
                 ))}

@@ -3,6 +3,7 @@ import { create } from 'zustand';
 
 interface BookingData {
   selectedDate: Date | null;
+  endDate: Date | null;
   name: string;
   email: string;
   phone: string;
@@ -12,7 +13,7 @@ interface BookingData {
   children: number;
   notes: string;
   code: string;
-  addons: string[]; // or change to a different type if addons are objects
+  addons: string[];
 }
 
 interface BookingStore {
@@ -23,6 +24,7 @@ interface BookingStore {
 
 const defaultBookingData: BookingData = {
   selectedDate: null,
+  endDate: null,
   name: '',
   email: '',
   phone: '',
