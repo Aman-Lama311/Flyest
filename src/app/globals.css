@@ -4,3 +4,7 @@
 body {
   font-family: 'Sen', sans-serif;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

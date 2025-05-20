@@ -1,11 +1,11 @@
-import React from 'react';
-import { Users, MapPin, Globe, Star } from 'lucide-react';
+import React from "react";
+import { Users, MapPin, Globe, Star } from "lucide-react";
 
 const StatisticsAndPartners = () => {
   return (
     <div className="w-full flex flex-col">
       {/* Statistics Section */}
-      <div className="w-full bg-black py-12 px-8">
+      <div className="w-full bg-[url('/navbg.svg')] py-12 px-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Total Users */}
           <div className="bg-white p-8 rounded-lg shadow-sm flex flex-col items-center justify-center">
@@ -52,22 +52,46 @@ const StatisticsAndPartners = () => {
             <div className="font-bold text-xl">Associated With</div>
             <div className="flex flex-wrap justify-center gap-8">
               <div className="grayscale opacity-70 h-8">
-                <img src="" alt="WYSE Travel" className="h-full" />
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/WYSE_Travel_Confederation_logo.svg/512px-WYSE_Travel_Confederation_logo.svg.png"
+                  alt="WYSE Travel"
+                  className="h-full"
+                />
               </div>
               <div className="grayscale opacity-70 h-8">
-                <img src="" alt="ASTA" className="h-full" />
+                <img
+                  src="https://www.asta.org/images/default-source/logos/asta-logo.svg"
+                  alt="ASTA"
+                  className="h-full"
+                />
               </div>
               <div className="grayscale opacity-70 h-8">
-                <img src="" alt="TICO" className="h-full" />
+                <img
+                  src="https://tico.ca/assets/img/logo.png"
+                  alt="TICO"
+                  className="h-full"
+                />
               </div>
               <div className="grayscale opacity-70 h-8">
-                <img src="" alt="USTOA" className="h-full" />
+                <img
+                  src="https://ustoa.com/images/logos/ustoa-logo.svg"
+                  alt="USTOA"
+                  className="h-full"
+                />
               </div>
               <div className="grayscale opacity-70 h-8">
-                <img src="" alt="CLIA" className="h-full" />
+                <img
+                  src="https://cruising.org/images/default-source/default-album/clia-logo.png"
+                  alt="CLIA"
+                  className="h-full"
+                />
               </div>
               <div className="grayscale opacity-70 h-8">
-                <img src="" alt="Adventure Travel Trade Association" className="h-full" />
+                <img
+                  src="https://adventuretravel.biz/wp-content/uploads/2020/09/ATTA-logo.png"
+                  alt="Adventure Travel Trade Association"
+                  className="h-full"
+                />
               </div>
             </div>
           </div>

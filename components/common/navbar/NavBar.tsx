@@ -88,7 +88,7 @@ const Navbar = () => {
   return (
     <div id="" className="relative">
       {/* Main Navbar */}
-      <div className="relative h-24 px-6 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1.1rem] text-white bg-[url('/navbg.svg')] bg-cover">
+      <div className="relative py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white bg-[url('/navbg.svg')] bg-cover">
         {/* Logo */}
         <div>
           <Link href="/">
