@@ -24,21 +24,21 @@ const TripGlance = () => {
             <MapPin size={28} className="text-red-500" />
             <div>
               <h1 className="font-medium">Destination</h1>
-              <span className="text-sm text-gray-600">Everest Region, Nepal</span>
+              <span className="text-sm text-gray-300">Everest Region, Nepal</span>
             </div>
           </div>
           <div className="flex items-center gap-3 rounded-md px-4 py-3 h-full">
             <Clock size={28} className="text-blue-500" />
             <div>
               <h1 className="font-medium">Duration</h1>
-              <span className="text-sm text-gray-600">1 Day (Approx. 4–5 hours)</span>
+              <span className="text-sm text-gray-300">1 Day (Approx. 4–5 hours)</span>
             </div>
           </div>
           <div className="flex items-center gap-3 rounded-md px-4 py-3 h-full">
             <TrendingUp size={28} className="text-purple-600" />
             <div>
               <h1 className="font-medium">Experience Level</h1>
-              <span className="text-sm text-gray-600">Suitable for All</span>
+              <span className="text-sm text-gray-300">Suitable for All</span>
             </div>
           </div>
         </div>
@@ -49,21 +49,21 @@ const TripGlance = () => {
             <Activity size={28} className="text-pink-500" />
             <div>
               <h1 className="font-medium">Activities</h1>
-              <span className="text-sm text-gray-600">Scenic Flight, Photography, Sightseeing</span>
+              <span className="text-sm text-gray-300">Scenic Flight, Photography, Sightseeing</span>
             </div>
           </div>
           <div className="flex items-center gap-3 rounded-md px-4 py-3 h-full">
             <Mountain size={28} className="text-green-600" />
             <div>
               <h1 className="font-medium">Landing Point</h1>
-              <span className="text-sm text-gray-600">Kalapatthar (5,545m) or EBC (weather permitting)</span>
+              <span className="text-sm text-gray-300">Kalapatthar (5,545m) or EBC (weather permitting)</span>
             </div>
           </div>
           <div className="flex items-center gap-3 rounded-md px-4 py-3 h-full">
             <Users size={28} className="text-yellow-600" />
             <div>
               <h1 className="font-medium">Group Size</h1>
-              <span className="text-sm text-gray-600">Max 5 per helicopter</span>
+              <span className="text-sm text-gray-300">Max 5 per helicopter</span>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@ const TripGlance = () => {
             <Bus size={28} className="text-indigo-500" />
             <div>
               <h1 className="font-medium">Vehicle</h1>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-300">
                 Private Car (Hotel Transfer) & Helicopter
               </span>
             </div>
@@ -83,7 +83,7 @@ const TripGlance = () => {
             <Hotel size={28} className="text-teal-600" />
             <div>
               <h1 className="font-medium">Accommodation</h1>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-300">
                 Not required (Day Tour)
               </span>
             </div>
@@ -92,7 +92,7 @@ const TripGlance = () => {
             <Utensils size={28} className="text-orange-500" />
             <div>
               <h1 className="font-medium">Meals</h1>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-300">
                 Breakfast at Everest View Hotel (optional)
               </span>
             </div>

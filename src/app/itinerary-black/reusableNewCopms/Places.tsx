@@ -153,7 +153,7 @@ const Places = () => {
               onClick={closeModal}
               className="p-2 absolute bg-white rounded-full top-2 right-2 text-black shadow-md hover:bg-gray-200 transition cursor-pointer"
             >
-              <X className="h-5 w-5 text-gray-700" />
+              <X className="h-5 w-5 text-gray-300" />
             </button>
           </div>
         </div>

@@ -41,7 +41,7 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-[url('/navbg.svg')]">
+    <div className="bg-[url('/navbg.svg')] text-gray-300">
       <Title />
       <div
         className={`w-full relative h-auto flex justify-between pb-10 px-16 mt-8 ${

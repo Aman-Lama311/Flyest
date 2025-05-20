@@ -42,7 +42,7 @@ const MajorHighlight = () => {
             </div>
             <div>
               <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.description}</p>
+              <p className="text-sm text-gray-300">{item.description}</p>
             </div>
           </div>
         ))}

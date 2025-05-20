@@ -37,7 +37,7 @@ const ItineraryDay = ({
           <div className="bg-[#FDECEF] text-[#EA3359] rounded-lg px-3 py-2 text-sm font-medium">
             Day {day.toString().padStart(2, "0")}
           </div>
-          <h3 className="font-medium text-gray-800">{title}</h3>
+          <h3 className="font-medium text-gray-300">{title}</h3>
         </div>
         <div
           className={`text-[#EA3359] transition-transform ${
@@ -50,10 +50,10 @@ const ItineraryDay = ({
 
       {expanded && description && (
         <div className="px-4 pb-4 pt-0 ml-14">
-          <p className="text-gray-600 text-sm mb-3">{description}</p>
+          <p className="text-gray-300 text-sm mb-3">{description}</p>
 
           {details && (
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mt-2 text-sm text-gray-500">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mt-2 text-sm text-3ray-500">
               {details.altitude && (
                 <div>
                   <span className="font-semibold">Maximum Altitude:</span>{" "}

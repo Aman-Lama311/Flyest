@@ -15,7 +15,7 @@ const Title = () => {
             <h1 className="text-4xl font-bold">
               Everest Base Camp Helicopter Tour
             </h1>
-            <span className="text-4xl font-semibold text-gray-500">
+            <span className="text-4xl font-semibold text-gray-300">
               (1 Day)
             </span>
           </div>
