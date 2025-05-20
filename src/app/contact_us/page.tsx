@@ -1,44 +1,36 @@
 "use client";
 import { useState } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
+   const [formData, setFormData] = useState({
     name: "",
+    company: "",
+    source: "",
+    goal: "",
     email: "",
     number: "",
+    budget: "",
     message: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Form submitted successfully!");
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+      name: "",
+      company: "",
+      source: "",
+      goal: "",
+      email: "",
+      number: "",
+      budget: "",
+      message: "",
     });
-  };
-
-  const validateEmail = (email: string) => {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
-  };
-
-  const handleSubmit = () => {
-    const { name, email, number, message } = formData;
-
-    if (!name || !email || !number || !message) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    alert("Thank you for your message! We will get back to you soon.");
-    setFormData({ name: "", email: "", number: "", message: "" });
   };
 
   return (
@@ -64,99 +56,162 @@ const ContactPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-          {/* Message Form */}
-          <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md">
-            <h3 className="text-xl sm:text-2xl font-semibold mb-6">
-              Send Us a Message
-            </h3>
-            <div className="space-y-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
-                value={formData.name}
-                onChange={handleChange}
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
-                value={formData.email}
-                onChange={handleChange}
-              />
-
-              <input
-                type="number"
-                name="number"
-                placeholder="Your Phone Number"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
-                value={formData.number}
-                onChange={handleChange}
-              />
-
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-white bg-transparent"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-              ></textarea>
-
-              <button
-                onClick={handleSubmit}
-                className=" bg-[#EA3359] w-full text-white py-4 rounded border hover:border-white transition duration-300"
-              >
-                Send Message
-              </button>
-            </div>
-          </div>
-
+      
           {/* Contact Details */}
-          <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md">
-            <h3 className="text-xl sm:text-2xl font-semibold mb-6">
-              Our Details
-            </h3>
+         <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md flex flex-wrap justify-between gap-6">
+      {/* Address */}
+      <div className="flex items-start gap-4 min-w-[200px]">
+        <div className="bg-zinc-800 p-3 rounded-full">
+          <MapPin className="w-6 h-6 text-[#EA3359]" />
+        </div>
+        <div>
+          <p className="font-medium">Address</p>
+          <p>Kathmandu, Nepal</p>
+        </div>
+      </div>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-zinc-800 p-3 rounded-full">
-                  <MapPin className="w-6 h-6 text-[#EA3359]" />
-                </div>
-                <div>
-                  <p className="font-medium">Address</p>
-                  <p>Kathmandu, Nepal</p>
-                </div>
-              </div>
+      {/* Phone */}
+      <div className="flex items-start gap-4 min-w-[200px]">
+        <div className="bg-zinc-800 p-3 rounded-full">
+          <Phone className="w-6 h-6 text-[#EA3359]" />
+        </div>
+        <div>
+          <p className="font-medium">Phone</p>
+          <p>+977 123-4567</p>
+        </div>
+      </div>
 
-              <div className="flex items-start gap-4">
-                <div className="bg-zinc-800 p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-[#EA3359]" />
-                </div>
-                <div>
-                  <p className="font-medium">Phone</p>
-                  <p>+977 123-4567</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="bg-zinc-800 p-3 rounded-full">
-                  <Mail className="w-6 h-6 text-[#EA3359]" />
-                </div>
-                <div>
-                  <p className="font-medium">Email</p>
-                  <p>info@Flyeast.com</p>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* Email */}
+      <div className="flex items-start gap-4 min-w-[200px]">
+        <div className="bg-zinc-800 p-3 rounded-full">
+          <Mail className="w-6 h-6 text-[#EA3359]" />
+        </div>
+        <div>
+          <p className="font-medium">Email</p>
+          <p>info@Flyeast.com</p>
         </div>
       </div>
     </div>
+      </div>
+      {/* last message form */}
+       <div className="min-h-screen text-white flex items-center justify-center px-4 mt-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-4xl space-y-6">
+        <h1 className="text-4xl font-bold">
+          Do you want to experience <span className="bg-clip-text text-[#EA3359]">beautiful moments.</span>
+        </h1>
+
+        <div className="flex flex-col md:flex-row md:items-center md:gap-4">
+          <label className="text-xl font-semibold">Hi! My name is</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name*"
+            value={formData.name}
+            onChange={handleChange}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+          <span className="text-xl font-semibold ml-0 md:ml-4">and I'm</span>
+          <input
+            type="text"
+            name="company"
+            placeholder="Profession*"
+            value={formData.company}
+            onChange={handleChange}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-xl font-semibold">I heard about you from</label>
+          <input
+            type="text"
+            name="source"
+            placeholder="Source*"
+            value={formData.source}
+            onChange={handleChange}
+            className="bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-center md:gap-4">
+          <label className="text-xl font-semibold">and I'm looking for a peaceful break can you help me with</label>
+          <input
+            type="text"
+            name="goal"
+            placeholder="Your goal*"
+            value={formData.goal}
+            onChange={handleChange}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:justify-between md:gap-4">
+          <div className="flex-1">
+            <label className="text-xl font-semibold">You can reach me at</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email*"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-gray-500 outline-none py-1"
+              required
+            />
+          </div>
+          <div className="flex-1">
+            <label className="text-xl font-semibold">My contact number is</label>
+            <input
+              type="text"
+              name="contact"
+              placeholder="Contact Number*"
+              value={formData.contact}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-gray-500 outline-none py-1"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-xl font-semibold">My budget is</label>
+          <input
+            type="text"
+            name="budget"
+            placeholder="Budget (e.g., $500 – $1000)*"
+            value={formData.budget}
+            onChange={handleChange}
+            className="bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-start md:gap-4">
+          <label className="text-xl font-semibold">Additionally, I'm sharing more here:</label>
+          <textarea
+            name="message"
+            placeholder="Message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+          ></textarea>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition"
+          >
+            Send →
+          </button>
+        </div>
+      </form>
+    </div>
+      </div>
   );
 };
 
