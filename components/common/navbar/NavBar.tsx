@@ -637,15 +637,15 @@ const Navbar = () => {
                   ))}
                 </ul>
                 <Link href="allHeli"
-                // {`/heliService/${activeCategory.heliService}`}
+               
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-6 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
                       View All{" "}
                       {
                         heliServiceData[
-                          activeCategory.mountaineering as keyof typeof heliServiceData
-                        ].title
+                          activeCategory.heliService as keyof typeof heliServiceData
+                        ]?.title
                       }{" "}
                       Heli
                     </p>
