@@ -111,7 +111,7 @@ const Navbar = () => {
 
           {/* Trekking Button */}
           <div className="relative">
-            <Link href={"/itinerary"}>
+            <Link href={"/allTrekking"}>
               <button
                 onClick={() => handleDropdown("trekking")}
                 onMouseEnter={() => setActiveDropdown("trekking")}
@@ -127,7 +127,7 @@ const Navbar = () => {
 
           {/* Mountaineering Button */}
           <div className="relative">
-            <Link href="/itinerary">
+            <Link href="/allPeak">
               <button
                 onClick={() => handleDropdown("mountaineering")}
                 onMouseEnter={() => setActiveDropdown("mountaineering")}
@@ -578,7 +578,7 @@ const Navbar = () => {
             {/* Left Categories Column */}
             <div className="w-1/4 border-r px-8 py-8">
               <h3 className="text-xl font-sora mb-6 text-white">
-                Heli Service
+                Heli Service Mount Everest
               </h3>
               <ul className="space-y-4">
                 {Object.keys(heliServiceData).map((category) => (
@@ -619,12 +619,9 @@ const Navbar = () => {
                 </h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {heliServiceData[
-                    activeCategory.heliService as keyof typeof heliServiceData
-                  ]?.items.map((item, index) => (
+                   "HeliService"]?.items.map((item, index) => (
                     <Link
-                      href={`/heliService/${
-                        activeCategory.heliService
-                      }/${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+                      href={`/helitour`}
                       key={index}
                     >
                       <li>

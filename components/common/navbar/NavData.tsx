@@ -44,11 +44,11 @@ export const heliServiceData = {
 
   // Services around 6500m elevation
   "HeliService": {
-    title: "HeliService",
+    title: "Helicopter Service ",
     items: [
       {
-        name: "HeliService",
-        description: "HeliService",
+        name: "Helicopter Service Mount Everest",
+        description: "Helicopter Service Mount Everest",
         image: "https://images.pexels.com/photos/163216/high-speed-glacier-alpinists-rope-up-163216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         tag: "Popular",
       },

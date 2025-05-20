@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Star, MapPin, Clock } from 'lucide-react';
+import Link from 'next/link';
 
 export const trek = [
   {
@@ -214,6 +215,7 @@ const PackageCard = () => {
                     <span className="block">{item.reviews || 256} reviews</span>
                   </div>
                 </div>
+                <Link href={`/itinerary`} className='cursor-pointer'>
                   <div className="flex gap-3">
                   <button
                     style={{ backgroundColor: THEME_COLOR }}
@@ -230,6 +232,7 @@ const PackageCard = () => {
                     Book Now
                   </button>
                 </div>
+                </Link>
               </div>
             </div>
           </div>
