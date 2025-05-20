@@ -1,186 +1,275 @@
 "use client";
-
 import React, { useState } from "react";
-import { ChevronDown, ChevronRight, Calendar } from "lucide-react";
+import { useBookingStore } from "@/store/BookingStore";
+import { IoMdClose } from "react-icons/io"; // or any other icon
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format, addDays, isSameDay } from "date-fns";
+import { addonOptions } from "@/static-data/addOnOptions";
+import BookingSummary from "./BookingSummary";
+import countries from 'world-countries';
+
+
+
+
 
 const DatesAndPrices = () => {
-  const [selectedDate, setSelectedDate] = useState("01/05/2025");
+  const formattedPhoneCountries = countries.map((country) => ({
+    label: country.name.common,
+    value: country.cca2, // 2-letter code
+    dialCode: country.idd.root + (country.idd.suffixes?.[0] || ""),
+  }));
 
-  const tripDates = [
-    {
-      month: "May 2025",
-      dates: [
-        {
-          departure: { day: "Sunday", date: "01 May, 2025" },
-          arrival: { day: "Monday", date: "09 May, 2025" },
-          availability: 0,
-          availabilityText: "0 spot left",
-          price: "US $1,499.00",
-          status: "sold",
-        },
-        {
-          departure: { day: "Sunday", date: "01 May, 2025" },
-          arrival: { day: "Monday", date: "09 May, 2025" },
-          availability: 0,
-          availabilityText: "0 spot left",
-          price: "US $1,499.00",
-          status: "sold",
-        },
-        {
-          departure: { day: "Sunday", date: "01 May, 2025" },
-          arrival: { day: "Monday", date: "09 May, 2025" },
-          availability: 2,
-          availabilityText: "2 spots left",
-          price: "US $1,499.00",
-          status: "available",
-        },
-      ],
-    },
-    {
-      month: "June 2025",
-      dates: [
-        {
-          departure: { day: "Sunday", date: "01 June, 2025" },
-          arrival: { day: "Monday", date: "09 June, 2025" },
-          availability: 17,
-          availabilityText: "17 spots left",
-          price: "US $1,499.00",
-          status: "available",
-        },
-      ],
-    },
-  ];
+  const formattedCountries = countries.map((country) => ({
+    label: country.name.common,
+    value: country.cca2, // 2-letter code
+    dialCode: country.idd.root + (country.idd.suffixes?.[0] || ""),
+  }));
+  
+  const price = 1000;
+  const [departureDate, setDepartureDate] = useState(null);
+  const [arrivalDate, setArrivalDate] = useState(null);
+  const { bookingData, setBookingData, resetBooking } = useBookingStore();
+  
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setBookingData({
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleAddonChange = (addonId, isChecked) => {
+    setBookingData({
+      addons: isChecked
+        ? [...bookingData.addons, addonId]
+        : bookingData.addons.filter(id => id !== addonId)
+    });
+  };
+
+  const dayClassName = (date) => {
+    if (!departureDate || !arrivalDate) return '';
+    
+    if (isSameDay(date, departureDate) || isSameDay(date, arrivalDate)) {
+      return 'bg-[#EA3359] text-white rounded-full';
+    }
+    
+    if (date > departureDate && date < arrivalDate) {
+      return 'bg-pink-100 text-[#EA3359]';
+    } 
+    return '';
+  };
+
+  const handleClearForm = () => {
+    setDepartureDate(null);
+    setArrivalDate(null);
+    resetBooking();
+  };
 
   return (
     <div id="date-&-prices" className="mt-10">
       <h2 className="text-3xl font-semibold text-gray-900">Dates & Prices</h2>
 
       <p className="text-gray-700 mt-3 text-base leading-relaxed max-w-3xl">
-        An enim nullam tempor gravida donec enim, congue magna at pretium purus
-        pretium ligula rutrum luctus risusd diam eget risus varius blandit sit
-        amet non magna.
+        Select your preferred travel dates and customize your trip with optional add-ons.
       </p>
 
-      <div className="mt-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-          <div className="w-full sm:w-auto">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              SELECT DATE
-            </label>
-            <div className="relative">
-              <select
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="appearance-none border border-gray-300 rounded-lg w-full sm:w-48 py-2.5 px-3 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359] cursor-pointer"
-              >
-                <option value="01/05/2025">01/05/2025</option>
-                <option value="01/06/2025">01/06/2025</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                <ChevronDown size={18} />
+      {/* Calendar Section */}
+      <div className="bg-white rounded-xl w-full p-6 mt-6">
+        <div className="mb-4 custom-datepicker w-full justify-center items-center flex">
+          <DatePicker
+            selected={departureDate}
+            onChange={(date) => {
+              setDepartureDate(date);
+              setArrivalDate(addDays(date, 12));
+              setBookingData({ selectedDate: date });
+            }}
+            minDate={new Date()}
+            inline
+            monthsShown={2}
+            dayClassName={dayClassName}
+            selectsRange
+            startDate={departureDate}
+            endDate={arrivalDate}
+          />
+        </div>
+
+        {departureDate && arrivalDate && (
+          <div className="bg-gray-50 p-4 rounded-lg flex justify-between items-center w-full gap-16">
+            <div className="flex flex-col w-full">
+              <div className="flex justify-between mb-2">
+                <span className="text-gray-600">Departure:</span>
+                <span className="font-medium ml-2">
+                  {format(departureDate, 'EEEE, MMMM d, yyyy')}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Arrival:</span>
+                <span className="font-medium ml-2">
+                  {format(arrivalDate, 'EEEE, MMMM d, yyyy')}
+                </span>
               </div>
             </div>
+            <button
+              onClick={handleClearForm}
+              className="text-[#EA3359] hover:text-[#d92f50] font-medium px-2 py-1 bg-red-200 border-red-200 rounded-md flex items-center justify-center items-center"
+            >
+             <span>Clear</span>  <IoMdClose className="text-xl " />
+            </button>
           </div>
+        )}
+      </div>
 
-          <div className="flex items-center text-sm text-gray-600">
-            <Calendar size={16} className="mr-2 text-[#EA3359]" />
-            <span>15 people recently enquired</span>
-          </div>
-        </div>
-
-        <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="bg-[#EA3359] grid grid-cols-3 text-sm font-medium text-white p-4">
+      {/* Booking Form - Only shown when dates are selected */}
+      {departureDate && arrivalDate && (
+        <div className="bg-white rounded-xl w-full p-6 mt-6">
+          <div className="grid grid-cols-1 gap-6">
             <div>
-              <h3>TRIP DATES</h3>
-              <p className="text-xs text-pink-100 mt-1">Arrival - Departure</p>
-            </div>
-            <div className="text-center">
-              <h3>AVAILABILITY</h3>
-              <p className="text-xs text-pink-100 mt-1">Spots remaining</p>
-            </div>
-            <div className="text-right">
-              <h3>PRICE</h3>
-              <p className="text-xs text-pink-100 mt-1">Per Person</p>
-            </div>
-          </div>
-
-          <div className="divide-y divide-gray-100">
-            {tripDates.map((month, monthIndex) => (
-              <React.Fragment key={monthIndex}>
-                <div className="bg-gray-50 p-4 font-medium text-gray-900">
-                  {month.month}
+              <h4 className="font-medium mb-4">Traveler Information</h4>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={bookingData.name}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+                    required
+                  />
                 </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={bookingData.email}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+                    required
+                  />
+                </div>
+                
+                <div className="flex flex-row gap-2 jus">
+                  
+                  <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Code</label>
+                  <select
+  id="code"
+  name="code"
+  value={bookingData.code}
+  onChange={(e) => setBookingData({ code: e.target.value })}
+  className="w-20 border border-gray-300 rounded-lg py-2.5 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+>
+  <option value="">+977</option>
+  {formattedCountries.map((country) => (
+    <option key={country.value} value={country.dialCode}>
+      {country.dialCode}
+    </option>
+  ))}
+</select>
 
-                {month.dates.map((trip, tripIndex) => (
-                  <div
-                    key={tripIndex}
-                    className="grid grid-cols-3 items-center p-4 bg-white hover:bg-gray-50 transition-colors"
-                  >
+                </div>
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={bookingData.phone}
+                    onChange={handleInputChange}
+                    className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+                    required
+                  />
+                    </div>
+                 
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                  <select
+  id="country"
+  name="country"
+  value={bookingData.country}
+  onChange={(e) => setBookingData({ country: e.target.value })}
+  className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+>
+  <option value="">Select a country</option>
+  {formattedCountries.map((country) => (
+    <option key={country.value} value={country.label}>
+      {country.label}
+    </option>
+  ))}
+</select>
+
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Adults</label>
+                    <input
+                      type="number"
+                      name="adults"
+                      min="1"
+                      value={bookingData.adults}
+                      onChange={handleInputChange}
+                      className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Children</label>
+                    <input
+                      type="number"
+                      name="children"
+                      min="0"
+                      value={bookingData.children}
+                      onChange={handleInputChange}
+                      className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                  <textarea
+                    name="notes"
+                    value={bookingData.notes}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#EA3359] focus:border-[#EA3359]"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-medium mb-4">Add-On Services</h4>
+              <div className="space-y-3 mb-6">
+                {addonOptions.map((addon) => (
+                  <div key={addon.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
                     <div className="flex items-center">
-                      <div className="flex items-center">
-                        <div>
-                          <p className="font-medium text-gray-900">
-                            {trip.departure.day}
-                          </p>
-                          <p className="text-sm text-gray-700">
-                            {trip.departure.date}
-                          </p>
-                        </div>
-                        <ChevronRight
-                          size={18}
-                          className="mx-3 text-gray-400"
-                        />
-                        <div>
-                          <p className="font-medium text-gray-900">
-                            {trip.arrival.day}
-                          </p>
-                          <p className="text-sm text-gray-700">
-                            {trip.arrival.date}
-                          </p>
-                        </div>
-                      </div>
+                      <input
+                        type="checkbox"
+                        id={addon.id}
+                        checked={bookingData.addons.includes(addon.id)}
+                        onChange={(e) => handleAddonChange(addon.id, e.target.checked)}
+                        className="h-4 w-4 text-[#EA3359] focus:ring-[#EA3359] border-gray-300 rounded"
+                      />
+                      <label htmlFor={addon.id} className="ml-3 text-sm font-medium text-gray-700">
+                        {addon.name}
+                      </label>
                     </div>
-
-                    <div className="text-center">
-                      <span
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                          trip.availability > 5
-                            ? "bg-pink-100 text-[#EA3359]"
-                            : trip.availability > 0
-                            ? "bg-amber-100 text-amber-800"
-                            : "bg-gray-100 text-gray-800"
-                        }`}
-                      >
-                        {trip.availability > 0
-                          ? trip.availabilityText
-                          : "Sold out"}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-end space-x-3">
-                      <div className="text-right">
-                        <p className="font-semibold text-gray-900">
-                          {trip.price}
-                        </p>
-                      </div>
-                      <button
-                        className={`py-2 px-4 rounded-lg font-medium text-sm transition-all ${
-                          trip.status === "available"
-                            ? "bg-[#EA3359] hover:bg-[#d92f50] text-white shadow-sm hover:shadow-md"
-                            : "bg-gray-200 text-gray-600 cursor-not-allowed"
-                        }`}
-                        disabled={trip.status !== "available"}
-                      >
-                        {trip.status === "available" ? "Book now" : "Sold Out"}
-                      </button>
-                    </div>
+                    <span className="text-sm font-medium">+US ${addon.price}</span>
                   </div>
                 ))}
-              </React.Fragment>
-            ))}
+              </div>
+           
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
