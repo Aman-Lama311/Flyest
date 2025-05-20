@@ -116,7 +116,7 @@ const AboutUsPage = () => {
               </div>
             </div>
 
-            <div className="bg-gray-800 p-8 rounded-lg shadow-sm">
+            <div className="bg-zinc-800 p-8 rounded-lg shadow-sm">
               <h3 className="text-2xl font-semibold mb-6 text-[#FFFFFF]">
                 Our Values
               </h3>
