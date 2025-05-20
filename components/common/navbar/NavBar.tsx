@@ -669,7 +669,7 @@ const Navbar = () => {
                           exceptional mountaineering and trekking experiences
                           for adventure enthusiasts from around the world.
                         </p>
-                        <Link href="/about">
+                        <Link href="/fiveabout">
                           <button className="px-6 py-2 bg-[#FF4E58] text-white rounded-lg hover:bg-[#d62a4e] transition-colors duration-300 flex items-center gap-2">
                             <span>Learn More</span>
                             <ArrowUpRight size={16} />
