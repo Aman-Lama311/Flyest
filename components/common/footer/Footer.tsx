@@ -1,64 +1,75 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 
 const Footer = () => {
   return (
-    <div className='relative h-screen w-full bg-black text-white object-cover'
-     style={{ backgroundImage: "url('/footer')"
-      
-      }}>
-      <div className='flex items-center justify-center py-10'>
-
+    <div className="relative w-full bg-[url('/navbg.svg')] text-white object-cover px-4 md:px-18">
+      <div className="flex flex-wrap items-start justify-center py-10 max-w-7xl mx-auto gap-y-10">
         {/* first box */}
-        <div className='h-[70vh] w-1/3 px-12 py-14'>
-        <h1 className='text-7xl leading-20'>Exploring paths unknown, one step at a time.</h1></div>
+        <div className="w-full md:w-1/3 min-h-[auto] md:min-h-[70vh]">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl leading-snug md:leading-[5rem] font-semibold">
+            Exploring paths unknown, one step at a time.
+          </h1>
+        </div>
 
         {/* second box */}
-        <div className='h-[70vh] w-1/5 text-2xl font-medium py-16 px-14'>
-        <h2 className=''>GENERAL</h2>
-        <div className='mt-4'>
-        <p>Home</p>
-        <p>About</p>
-        <p>Insights</p>
-        <p>News</p>
-        </div>
-        </div>
-        
-         {/* third box */}
-         <div className='h-[70vh] w-1/4 text-2xl font-medium py-16 px-14'>
-        <h2 className=''>SOLUTIONS</h2>
-        <div className='mt-4'>
-        <p>Trekking</p>
-        <p>Hiking</p>
-        <p>Insights</p>
-        <p>Blogs</p>
-        </div>
+        <div className="w-1/2 sm:w-1/3 md:w-1/5 text-xl sm:text-2xl font-medium py-4 md:py-16 px-4 md:px-14">
+          <h2 className="uppercase mb-4">GENERAL</h2>
+          <div className="space-y-2">
+            <p className="cursor-pointer hover:text-red-500 transition">Home</p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              About
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              Insights
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">News</p>
+          </div>
         </div>
 
+        {/* third box */}
+        <div className="w-1/2 sm:w-1/3 md:w-1/4 text-xl sm:text-2xl font-medium py-4 md:py-16 px-4 md:px-14">
+          <h2 className="uppercase mb-4">SOLUTIONS</h2>
+          <div className="space-y-2">
+            <p className="cursor-pointer hover:text-red-500 transition">
+              Trekking
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              Hiking
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              Insights
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              Blogs
+            </p>
+          </div>
+        </div>
 
         {/* forth box */}
-        <div className='h-[70vh] w-1/5 text-2xl font-medium py-16 px-14'>
-        <h2 className=''>General</h2>
-        <div className='mt-4 '>
-        <p>Home</p>
-        <p>About</p>
-        <p>Insights</p>
-        <p>News</p>
+        <div className="w-1/2 sm:w-1/3 md:w-1/5 text-xl sm:text-2xl font-medium py-4 md:py-16 px-4 md:px-14">
+          <h2 className="uppercase mb-4">GENERAL</h2>
+          <div className="space-y-2">
+            <p className="cursor-pointer hover:text-red-500 transition">Home</p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              About
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">
+              Insights
+            </p>
+            <p className="cursor-pointer hover:text-red-500 transition">News</p>
+          </div>
         </div>
-        </div>
-
-        
-
       </div>
-      <div className='h-24 w-full flex items-center justify-between px-16'>
-         <img src="/logo1.png" alt="" className='h-14' />
-         <p className='text-[1rem] font-medium'>© 2025 Flyeast Experience Nepal. All Rights Reserved.
-         Website by webX.</p>
-         
+
+      <div className="border-t border-gray-700 mt-6 py-6 max-w-7xl mx-auto px-4 md:px-16 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+        <img src="/logo1.png" alt="Logo" className="h-12 sm:h-14" />
+        <p className="text-center sm:text-left text-sm sm:text-base font-medium">
+          © 2025 Flyeast Experience Nepal. All Rights Reserved. Website by webX.
+        </p>
       </div>
-      
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -21,7 +21,7 @@ const Home = () => {
        <TrekCard />
        <Popular/>
         <CallToAction />
-       <Testmonials />
+       {/* <Testmonials /> */}
        <ActivityCarousel />
        <Book/>
        <WhatWeDo />

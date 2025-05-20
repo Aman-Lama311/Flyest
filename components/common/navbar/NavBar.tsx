@@ -91,7 +91,7 @@ const Navbar = () => {
   return (
     <div id="" className="relative">
       {/* Main Navbar */}
-      <div className="relative h-24 px-6 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1.1rem] text-white bg-[url('/navbg.svg')] bg-cover">
+      <div className="relative py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white bg-[url('/navbg.svg')] bg-cover">
         {/* Logo */}
         <div>
           <Link href="/">
@@ -183,19 +183,20 @@ const Navbar = () => {
           </Link>
 
           {/* Contact Us Button */}
-          <Link href="/contact">
-            <div className="relative">
+         <div className="relative">
+              <Link href= "/contact_us">
               <button className="relative group flex items-center gap-1">
                 <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                   Contact Us
                 </span>
               </button>
+              </Link>
             </div>
-          </Link>
-        </div>
+           </div>
 
         {/* Let's Talk Button */}
         <div className="hidden md:block">
+          <Link href= "/contact_us">
           <button
             className="h-14 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-xl transition-all duration-300 hover:bg-[#d62a4e]"
             onMouseEnter={(e) => {
@@ -245,6 +246,7 @@ const Navbar = () => {
               />
             </div>
           </button>
+           </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -816,7 +818,7 @@ const Navbar = () => {
                           exceptional mountaineering and trekking experiences
                           for adventure enthusiasts from around the world.
                         </p>
-                        <Link href="/about">
+                        <Link href="/fiveabout">
                           <button className="px-6 py-2 bg-[#FF4E58] text-white rounded-lg hover:bg-[#d62a4e] transition-colors duration-300 flex items-center gap-2">
                             <span>Learn More</span>
                             <ArrowUpRight size={16} />
@@ -846,8 +848,7 @@ const Navbar = () => {
                         <div className="text-[#FF4E58] flex items-center gap-2 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                           <p>View All Team Members</p>
                           <ChevronRight strokeWidth={3} size={15} />
-                        </div>
-                      </Link>
+                        </div>                      </Link>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       {teamData.slice(0, 3).map((member) => (
