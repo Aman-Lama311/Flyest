@@ -6,13 +6,13 @@ import { blogData } from "../../../components/blogData/blogData";
 
 const Blogs = () => {
   return (
-    <div className="py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-white">
+    <div className="py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-[url('/navbg.svg')]">
       <div className="container mx-auto px-6 w-full text-center">
-        <h2 className="text-5xl md:text-6xl font-bold mb-10 text-black">
+        <h2 className="text-5xl md:text-6xl font-bold mb-10 text-white">
           Our Blogs
         </h2>
 
-        <p className="text-lg text-gray-600 mb-16 max-w-2xl mx-auto">
+        <p className="text-lg text-white mb-16 max-w-2xl mx-auto">
           Dive into expert tips, inspiring travel stories, and must-know guides
           to make the most of your mountain adventures around the world.
         </p>
