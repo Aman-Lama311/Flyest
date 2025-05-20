@@ -528,9 +528,7 @@ const Navbar = () => {
                     activeCategory.mountaineering as keyof typeof mountaineeringData
                   ].items.map((item, index) => (
                     <Link
-                      href={`/mountaineering/${
-                        activeCategory.mountaineering
-                      }/${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+                      href={`/itinerary`}
                       key={index}
                     >
                       <li>
@@ -543,7 +541,7 @@ const Navbar = () => {
                   ))}
                 </ul>
                 <Link href="allPeak"
-                // {`/mountaineering/${activeCategory.mountaineering}`}
+              
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-6 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
@@ -707,11 +705,7 @@ const Navbar = () => {
                     activeCategory.trekking as keyof typeof trekkingData
                   ].items.map((item, index) => (
                     <Link
-                      href={`/trekking/${activeCategory.trekking
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}/${item.name
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
+                      href={`/itinerary`}
                       key={index}
                     >
                       <li>
