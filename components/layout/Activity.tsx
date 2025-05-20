@@ -49,11 +49,11 @@ const activities: Activity[] = [
     image: 'https://www.bizkhabar.com/wp-content/uploads/2015/12/Paragrading-in-Nepal-scaled.jpg'
   },
   {
-    title: 'Paragliding',
-    description: 'Soar above the Himalayas with a paragliding experience that blends adrenaline and awe.',
-    date: '2025-08-01',
-    location: 'Pokhara',
-    image: 'https://www.bizkhabar.com/wp-content/uploads/2015/12/Paragrading-in-Nepal-scaled.jpg'
+    title: 'Cycling',
+    description: 'Take avdenture of cycling in the amazing environment of nepal with your friends.',
+    date: '2025-09-05',
+    location: 'Mustang Valley',
+    image: 'https://media.istockphoto.com/id/168252486/photo/scenic-marsyangdi-biking-nepal.jpg?s=612x612&w=0&k=20&c=NM2IvRcrIseH28iUA5zqaTWQqaAEglLp8jfCG2Ycqcs='
   },
 ];
 
@@ -74,18 +74,18 @@ const ActivityCarousel: React.FC = () => {
 
   return (
     <div className="relative w-full bg-black py-12 px-10">
-      <h2 className="text-4xl font-bold text-center text-white mb-4">Choose Your Next Activities</h2>
-      <p className="text-center text-gray-300 mb-10 max-w-3xl mx-auto">
-        Discover a variety of thrilling activities loved by adventurers — from scenic hikes to adrenaline-pumping adventures.
+      <h2 className="text-6xl font-bold text-center text-white mb-4">Choose Your Next Activities</h2>
+      <p className="text-center text-white text-xl mb-10 max-w-3xl mx-auto">
+        Discover a variety of thrilling activities loved by adventurers from scenic hikes to adrenaline-pumping adventures.
       </p>
 
-      <div className="relative w-full max-w-7xl mx-auto">
+      <div className="relative w-full  mx-auto">
         {/* Cards */}
         <div className="flex justify-center gap-10 transition-all duration-300">
         {visibleCards.map((activity, index) => (
   <div
     key={index}
-    className="w-[990px] h-[480px] bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden">
+    className="w-[990px] h-[480px] bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col Foverflow-hidden">
     <div className="relative w-full h-70 bg-black overflow-hidden group">
       <img
         src={activity.image}

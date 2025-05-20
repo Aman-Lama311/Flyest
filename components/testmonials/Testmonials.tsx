@@ -78,8 +78,8 @@ const Testimonials = () => {
         }
       `}</style>
 
-      <div className="min-h-screen w-full bg-black text-white flex flex-col md:flex-row overflow-hidden relative">
-        <div className="absolute top-0 left-0 w-40 h-40 bg-red-500 opacity-10 rounded-full -translate-x-20 -translate-y-20"></div>
+      <div className="h-screen w-full bg-black text-white flex flex-col md:flex-row overflow-hidden relative ">
+        <div className="absolute top-0 left-0 w-40 h-20 bg-red-500 opacity-10 rounded-full -translate-x-20 -translate-y-20"></div>
 
         {/* Left Section */}
         <div className="w-full md:w-1/2 bg-black p-8 md:p-16 flex flex-col justify-center relative z-10 mt-[-150px]">
@@ -121,7 +121,7 @@ const Testimonials = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-full md:w-1/2 bg-black p-8 md:p-16 flex flex-col justify-center relative">
+        <div className="w-full md:w-1/2 bg-black p-5 md:p-10 flex flex-col justify-center relative">
           <div className="absolute top-14 right-14">
             <Quote size={64} className="text-red-500 opacity-20" />
           </div>
@@ -132,7 +132,7 @@ const Testimonials = () => {
             }`}
           >
             {/* Rating Stars */}
-            <div className="flex mb-4">
+            <div className="flex">
               {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                 <Star
                   key={i}
@@ -150,10 +150,10 @@ const Testimonials = () => {
               ))}
             </div>
 
-            <p className="text-gray-700 text-lg mb-8 leading-relaxed">
+            <p className="text-gray-700 text-lg mb-2 leading-relaxed">
               "{testimonials[currentIndex].text}"
             </p>
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               <img
                 src={testimonials[currentIndex].image}
                 alt={testimonials[currentIndex].name}
@@ -193,34 +193,35 @@ const Testimonials = () => {
               </button>
             </div>
           </div>
-
-          {/* Preview Cards */}
-          <div
-            className="flex space-x-4 overflow-x-auto mt-10 scrollbar-hide"
-            style={{ maxWidth: "100%" }}
-          >
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className={`min-w-[200px] max-w-[200px] p-4 rounded-lg transition-all duration-300 cursor-pointer flex flex-col items-center text-center ${
-                  index === currentIndex
-                    ? "bg-white text-black border-l-4 border-red-500 shadow-lg"
-                    : "bg-white text-black border border-gray-100 hover:border-red-200 hover:shadow-md"
-                }`}
-                onClick={() => setCurrentIndex(index)}
-              >
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-14 h-14 rounded-full mb-3 object-cover border"
-                />
-                <h5 className="font-semibold text-sm">{testimonial.name}</h5>
-                <p className="text-gray-600 text-xs">{testimonial.position}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+{/* Preview Cards */}
+<div className="w-full overflow-x-auto scrollbar-hide mt-6 pl-4 pr-8 ">
+  <div className="flex space-x-4 items-center w-max">
+    {testimonials.map((testimonial, index) => (
+      <div
+        key={index}
+        className={`min-w-[200px] max-w-[200px] p-4 rounded-lg transition-all duration-300 cursor-pointer flex flex-col items-center text-center ${
+          index === currentIndex
+            ? "bg-white text-black border-l-4 border-red-500 shadow-lg"
+            : "bg-white text-black border border-gray-100 hover:border-red-200 hover:shadow-md"
+        }`}
+        onClick={() => setCurrentIndex(index)}
+      >
+        <img
+          src={testimonial.image}
+          alt={testimonial.name}
+          className="w-14 h-14 rounded-full mb-3 object-cover border"
+        />
+        <h5 className="font-semibold text-sm">{testimonial.name}</h5>
+        <p className="text-gray-600 text-xs">{testimonial.position}</p>
       </div>
+    ))}
+  </div>
+</div>
+
+
+</div>
+      </div>
+   
     </>
   );
 };
