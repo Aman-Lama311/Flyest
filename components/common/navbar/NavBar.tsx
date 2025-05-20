@@ -143,7 +143,7 @@ const Navbar = () => {
 
           {/* Heli Button */}
            <div className="relative">
-            <Link href="/heliService">
+            <Link href="/helitour">
               <button
                 onClick={() => handleDropdown("heliService")}
                 onMouseEnter={() => setActiveDropdown("heliService")}
