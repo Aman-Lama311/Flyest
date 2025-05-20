@@ -9,7 +9,7 @@ export const blogData = [
     author: "Admin",
     comments: 8,
     image:
-      "https://images.unsplash.com/photo-1649298821446-21602d36be18?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "https://media.worldnomads.com/travel-wiser/altitude-sikkim-hero.jpg",
     content: `
 ### Introduction
 
@@ -52,7 +52,7 @@ Surviving high altitudes is about respecting the mountains and listening to your
     author: "Sarah",
     comments: 5,
     image:
-      "https://images.unsplash.com/photo-1690140788599-e219500ef344?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "https://alpineecotrek.com/wp-content/uploads/2023/02/gear-list-nepal-trip.webp",
     content: `
 ### Introduction
 
@@ -92,7 +92,7 @@ Pack light, but don’t skip essentials. Every item in your backpack should serv
     author: "Elena",
     comments: 12,
     image:
-      "https://images.unsplash.com/photo-1687892616272-e685a7000b2b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "https://www.acethehimalaya.com/wp-content/uploads/2024/10/trekkers-return-to-dingboche-after-hiking-to-nangkartsang-peak.jpg.webp",
     content: `
 ### Nepal Beyond the Mainstream
 
@@ -141,7 +141,7 @@ These trails reward curiosity and respect. Step off the beaten path and find you
     author: "James",
     comments: 4,
     image:
-      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "https://lh4.googleusercontent.com/cePjwNW9vq9jhn_-avYNESH4-f-wx7pskon6qGT-f7T2AO-XkqpYeYBinGBUeJdWKtuD8ZDprTnlkC49jUGFAw5wtjlF2v3Rlet9aIk2q_4Ski5qs--y2clO0PUtpeLLIAOgZY9a",
     content: `
 ### Introduction
 
@@ -184,7 +184,7 @@ The wild is beautiful, but it doesn't play fair. Plan ahead, stay aware, and alw
     author: "Maya",
     comments: 7,
     image:
-      "https://images.unsplash.com/photo-1578926375605-eaf7559b1458?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "https://himtemp.s3.ap-south-1.amazonaws.com/safety_tips_for_trekking_1.png",
     content: `
 ### Why Nutrition Matters
 
@@ -222,7 +222,7 @@ Your body is your engine. Feed it well, and it will carry you through the most r
     author: "Alex",
     comments: 10,
     image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0",
+      "https://d1nymbkeomeoqg.cloudfront.net/photos/26/6/382128_20894_XL.jpg",
     content: `
 ### Introduction
 
