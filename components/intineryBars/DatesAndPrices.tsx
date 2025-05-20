@@ -28,18 +28,20 @@ const DatesAndPrices = () => {
   }));
   
   const price = 1000;
-  const [departureDate, setDepartureDate] = useState(null);
-  const [arrivalDate, setArrivalDate] = useState(null);
+  const [departureDate, setDepartureDate] = useState<Date | null>(null);
+  const [arrivalDate, setArrivalDate] = useState<Date | null>(null);
   const { bookingData, setBookingData, resetBooking } = useBookingStore();
   
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    const { name, value } = target;
+    const newValue = target.type === 'checkbox' ? (target as HTMLInputElement).checked : value;
     setBookingData({
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: newValue,
     });
   };
 
-  const handleAddonChange = (addonId, isChecked) => {
+  const handleAddonChange = (addonId: string, isChecked: boolean) => {
     setBookingData({
       addons: isChecked
         ? [...bookingData.addons, addonId]
@@ -47,7 +49,7 @@ const DatesAndPrices = () => {
     });
   };
 
-  const dayClassName = (date) => {
+  const dayClassName = (date: Date) => {
     if (!departureDate || !arrivalDate) return '';
     
     if (isSameDay(date, departureDate) || isSameDay(date, arrivalDate)) {
@@ -79,10 +81,15 @@ const DatesAndPrices = () => {
         <div className="mb-4 custom-datepicker w-full justify-center items-center flex">
           <DatePicker
             selected={departureDate}
-            onChange={(date) => {
-              setDepartureDate(date);
-              setArrivalDate(addDays(date, 12));
-              setBookingData({ selectedDate: date });
+            onChange={(dates: [Date | null, Date | null] | null) => {
+              if (dates) {
+                const [start, end] = dates;
+                setDepartureDate(start);
+                setArrivalDate(end);
+                if (start) {
+                  setBookingData({ selectedDate: start });
+                }
+              }
             }}
             minDate={new Date()}
             inline
