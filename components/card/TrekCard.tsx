@@ -36,23 +36,14 @@ const TrekCard = () => {
     const interval = setInterval(() => {
       if (!isAnimating) {
         setIsAnimating(true);
-        setCurrentIndex((prev) => {
-          if (prev < trek.length - cardsToShow) return prev + 1;
-          else return 0;
-        });
-        setTimeout(() => setIsAnimating(false), 300);
+        setCurrentIndex((prev) =>
+          prev < trek.length - cardsToShow ? prev + 1 : 0
+        );
+        setTimeout(() => setIsAnimating(false), 700);
       }
     }, 5000);
     return () => clearInterval(interval);
   }, [currentIndex, cardsToShow, isAnimating]);
-
-  const visibleTreks =
-    currentIndex + cardsToShow <= trek.length
-      ? trek.slice(currentIndex, currentIndex + cardsToShow)
-      : [
-          ...trek.slice(currentIndex),
-          ...trek.slice(0, currentIndex + cardsToShow - trek.length),
-        ];
 
   const handlePrevClick = () => {
     if (!isAnimating) {
@@ -60,7 +51,7 @@ const TrekCard = () => {
       setCurrentIndex((prev) =>
         prev === 0 ? trek.length - cardsToShow : prev - 1
       );
-      setTimeout(() => setIsAnimating(false), 300);
+      setTimeout(() => setIsAnimating(false), 700);
     }
   };
 
@@ -70,7 +61,7 @@ const TrekCard = () => {
       setCurrentIndex((prev) =>
         prev >= trek.length - cardsToShow ? 0 : prev + 1
       );
-      setTimeout(() => setIsAnimating(false), 300);
+      setTimeout(() => setIsAnimating(false), 700);
     }
   };
 
@@ -87,7 +78,7 @@ const TrekCard = () => {
   return (
     <div className="w-full bg-[url('/navbg.svg')] text-white py-12 px-4 md:px-8 lg:px-16">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-center items-center mb-10 max-w-7xl mx-auto text-center md:text-left">
+      <div className="flex flex-col md:flex-row justify-center items-center mb-10 max-w-xl mx-auto text-center md:text-left">
         <div className="text-center">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-sans mb-3">
             Traveler's Favorite Treks
@@ -101,112 +92,124 @@ const TrekCard = () => {
       </div>
 
       {/* Trek Cards */}
-      <div
-        ref={cardsRef}
-        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-opacity duration-300 ${
-          isAnimating ? "opacity-80" : "opacity-100"
-        }`}
-      >
-        {visibleTreks.map((item, index) => (
-          <article
-            key={`${item.id}-${index}`}
-            className="bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full"
-          >
-            <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden group">
-              <img
-                src={item.imgSrc}
-                alt={item.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              {item.oldPrice > item.newPrice && (
-                <div
-                  style={{ backgroundColor: THEME_COLOR }}
-                  className="absolute top-4 left-4 text-white font-sans text-xs sm:text-sm font-bold px-2 py-1 rounded select-none"
-                >
-                  {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
-                </div>
-              )}
-            </div>
-            <div className="p-5 flex flex-col flex-grow">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="font-bold text-lg sm:text-xl mb-0">
-                  {item.title}
-                </h3>
-                <div
-                  style={{ backgroundColor: `${THEME_COLOR}15` }}
-                  className="flex items-center px-2 py-1 rounded text-xs sm:text-sm font-medium"
-                >
-                  <Star
-                    size={14}
-                    style={{ color: THEME_COLOR }}
-                    className="mr-1"
-                  />
-                  <span style={{ color: THEME_COLOR }}>
-                    {item.rating || 4.8}
-                  </span>
-                </div>
+      <div className="overflow-hidden">
+        <div
+          ref={cardsRef}
+          className="flex gap-6 transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform max-w-7xl h-[75vh]"
+          style={{
+            width: `${(trek.length / cardsToShow) * 100}%`,
+            transform: `translate3d(-${
+              (currentIndex / trek.length) * 100
+            }%, 0, 0)`,
+          }}
+        >
+          {trek.map((item) => (
+            <article
+              key={item.id}
+              className="bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full"
+              style={{
+                flex: `0 0 calc(100% / ${cardsToShow})`,
+                maxWidth: `calc(100% / ${cardsToShow})`,
+              }}
+            >
+              <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden group">
+                <img
+                  src={item.imgSrc}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                {item.oldPrice > item.newPrice && (
+                  <div
+                    style={{ backgroundColor: THEME_COLOR }}
+                    className="absolute top-4 left-4 text-white font-sans text-xs sm:text-sm font-bold px-2 py-1 rounded select-none"
+                  >
+                    {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
+                  </div>
+                )}
               </div>
-              <div className="flex items-center text-xs sm:text-sm mb-3 space-x-4">
-                <div className="flex items-center">
-                  <MapPin
-                    size={16}
-                    style={{ color: THEME_COLOR }}
-                    className="mr-1"
-                  />
-                  <span>{item.location}</span>
+              <div className="p-5 flex flex-col flex-grow">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="font-bold text-lg sm:text-xl mb-0">
+                    {item.title}
+                  </h3>
+                  <div
+                    style={{ backgroundColor: `${THEME_COLOR}15` }}
+                    className="flex items-center px-2 py-1 rounded text-xs sm:text-sm font-medium"
+                  >
+                    <Star
+                      size={14}
+                      style={{ color: THEME_COLOR }}
+                      className="mr-1"
+                    />
+                    <span style={{ color: THEME_COLOR }}>
+                      {item.rating || 4.8}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <Clock
-                    size={16}
-                    style={{ color: THEME_COLOR }}
-                    className="mr-1"
-                  />
-                  <span>{item.duration}</span>
+                <div className="flex items-center text-xs sm:text-sm mb-3 space-x-4">
+                  <div className="flex items-center">
+                    <MapPin
+                      size={16}
+                      style={{ color: THEME_COLOR }}
+                      className="mr-1"
+                    />
+                    <span>{item.location}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock
+                      size={16}
+                      style={{ color: THEME_COLOR }}
+                      className="mr-1"
+                    />
+                    <span>{item.duration}</span>
+                  </div>
                 </div>
-              </div>
-              <p className="text-xs sm:text-sm mb-4 flex-grow font-sans">
-                {item.description}
-              </p>
-              <div className="mt-auto">
-                <div className="flex items-center justify-between mb-4 text-xs sm:text-sm">
-                  <div>
-                    <p>Starting from</p>
-                    <div className="flex items-center space-x-2">
-                      {item.oldPrice > item.newPrice && (
-                        <span className="line-through opacity-70">
-                          {formatPrice(item.oldPrice)}
+                <p className="text-xs sm:text-sm mb-4 flex-grow font-sans">
+                  {item.description}
+                </p>
+                <div className="mt-auto">
+                  <div className="flex items-center justify-between mb-4 text-xs sm:text-sm">
+                    <div>
+                      <p>Starting from</p>
+                      <div className="flex items-center space-x-2">
+                        {item.oldPrice > item.newPrice && (
+                          <span className="line-through opacity-70">
+                            {formatPrice(item.oldPrice)}
+                          </span>
+                        )}
+                        <span className="text-lg sm:text-xl font-bold">
+                          {formatPrice(item.newPrice)}
                         </span>
-                      )}
-                      <span className="text-lg sm:text-xl font-bold">
-                        {formatPrice(item.newPrice)}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <span className="block">
+                        {item.reviews || 256} reviews
                       </span>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <span className="block">{item.reviews || 256} reviews</span>
+                  <div className="flex gap-3">
+                    <button
+                      style={{ backgroundColor: THEME_COLOR }}
+                      className="flex-1 font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200"
+                      aria-label={`View itinerary for ${item.title}`}
+                    >
+                      View itinerary
+                    </button>
+                    <button
+                      style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
+                      className="flex-1 font-medium border hover:bg-red-50 active:bg-red-100 py-3 px-4 rounded-lg transition duration-200"
+                      aria-label={`Book now for ${item.title}`}
+                    >
+                      Book Now
+                    </button>
                   </div>
                 </div>
-                <div className="flex gap-3">
-                  <button
-                    style={{ backgroundColor: THEME_COLOR }}
-                    className="flex-1 font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200"
-                    aria-label={`View itinerary for ${item.title}`}
-                  >
-                    View itinerary
-                  </button>
-                  <button
-                    style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
-                    className="flex-1 font-medium border hover:bg-red-50 active:bg-red-100 py-3 px-4 rounded-lg transition duration-200"
-                    aria-label={`Book now for ${item.title}`}
-                  >
-                    Book Now
-                  </button>
-                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
 
       {/* Pagination */}
@@ -214,7 +217,6 @@ const TrekCard = () => {
         className="flex flex-col items-center mt-8 space-y-4 select-none"
         aria-label="Trek pagination"
       >
-        {/* Navigation Buttons */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={handlePrevClick}
@@ -231,7 +233,6 @@ const TrekCard = () => {
             <ArrowLeft size={16} style={{ color: THEME_COLOR }} />
           </button>
 
-          {/* Pagination Dots */}
           <div className="flex justify-center">
             {Array.from({ length: Math.ceil(trek.length / cardsToShow) }).map(
               (_, idx) => {
@@ -243,7 +244,7 @@ const TrekCard = () => {
                       if (!isAnimating) {
                         setIsAnimating(true);
                         setCurrentIndex(idx * cardsToShow);
-                        setTimeout(() => setIsAnimating(false), 300);
+                        setTimeout(() => setIsAnimating(false), 700);
                       }
                     }}
                     aria-label={`Go to page ${idx + 1}`}

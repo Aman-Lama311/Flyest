@@ -88,7 +88,7 @@ const Navbar = () => {
   return (
     <div id="" className="relative">
       {/* Main Navbar */}
-      <div className="relative py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white bg-[url('/navbg.svg')] bg-cover">
+      <div className="absolute top-0 z-50 py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white bg-transparent hover:bg-[url('/navbg.svg')] bg-cover">
         {/* Logo */}
         <div>
           <Link href="/">
@@ -173,70 +173,70 @@ const Navbar = () => {
           </Link>
 
           {/* Contact Us Button */}
-         <div className="relative">
-              <Link href= "/contact_us">
+          <div className="relative">
+            <Link href="/contact_us">
               <button className="relative group flex items-center gap-1">
                 <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                   Contact Us
                 </span>
               </button>
-              </Link>
-            </div>
-           </div>
+            </Link>
+          </div>
+        </div>
 
         {/* Let's Talk Button */}
         <div className="hidden md:block">
-          <Link href= "/contact_us">
-          <button
-            className="h-14 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-xl transition-all duration-300 hover:bg-[#d62a4e]"
-            onMouseEnter={(e) => {
-              const arrowElement =
-                e.currentTarget.querySelector(".talk-button-arrow");
-              const textElement =
-                e.currentTarget.querySelector(".talk-button-text");
+          <Link href="/contact_us">
+            <button
+              className="h-14 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-xl transition-all duration-300 hover:bg-[#d62a4e]"
+              onMouseEnter={(e) => {
+                const arrowElement =
+                  e.currentTarget.querySelector(".talk-button-arrow");
+                const textElement =
+                  e.currentTarget.querySelector(".talk-button-text");
 
-              gsap.to(arrowElement, {
-                rotation: 270,
-                y: -2,
-                duration: 0.3,
-                ease: "power2.out",
-              });
+                gsap.to(arrowElement, {
+                  rotation: 270,
+                  y: -2,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
 
-              gsap.to(textElement, {
-                text: {
-                  value: "Let's Talk",
-                  delimiter: "",
-                },
-                duration: 0.2,
-                ease: "none",
-              });
-            }}
-            onMouseLeave={(e) => {
-              const arrowElement =
-                e.currentTarget.querySelector(".talk-button-arrow");
+                gsap.to(textElement, {
+                  text: {
+                    value: "Let's Talk",
+                    delimiter: "",
+                  },
+                  duration: 0.2,
+                  ease: "none",
+                });
+              }}
+              onMouseLeave={(e) => {
+                const arrowElement =
+                  e.currentTarget.querySelector(".talk-button-arrow");
 
-              gsap.to(arrowElement, {
-                rotation: 0,
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            }}
-          >
-            <a
-              className="font-medium tracking-wide text-[1.1rem] transition-colors duration-300"
-              href="/contact"
+                gsap.to(arrowElement, {
+                  rotation: 0,
+                  y: 0,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+              }}
             >
-              Let's Talk
-            </a>
-            <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-              <IoMdArrowDown
-                size={25}
-                className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
-              />
-            </div>
-          </button>
-           </Link>
+              <a
+                className="font-medium tracking-wide text-[1.1rem] transition-colors duration-300"
+                href="/contact"
+              >
+                Let's Talk
+              </a>
+              <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                <IoMdArrowDown
+                  size={25}
+                  className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
+                />
+              </div>
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -422,7 +422,7 @@ const Navbar = () => {
 
       {/* Mountaineering Dropdown */}
       <div
-        className={`absolute left-0 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "mountaineering"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -515,7 +515,7 @@ const Navbar = () => {
       {/* Trekking Dropdown */}
 
       <div
-        className={`absolute left-0 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "trekking"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -606,7 +606,7 @@ const Navbar = () => {
 
       {/* Company Dropdown */}
       <div
-        className={`absolute left-0 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "about"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -701,7 +701,8 @@ const Navbar = () => {
                         <div className="text-[#FF4E58] flex items-center gap-2 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                           <p>View All Team Members</p>
                           <ChevronRight strokeWidth={3} size={15} />
-                        </div>                      </Link>
+                        </div>{" "}
+                      </Link>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       {teamData.slice(0, 3).map((member) => (

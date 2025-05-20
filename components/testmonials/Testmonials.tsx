@@ -1,42 +1,69 @@
-import React, { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 
-interface Testimonial {
-  name: string;
-  role: string;
-  message: string;
-}
+const Testimonials = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-const testimonials: Testimonial[] = [
-  {
-    name: 'Isabelle',
-    role: 'SA at Robin',
-    message:
-      'An enim nullam tempor gravida donec enim congue magna at pretium purus pretium ligula rutrum luctus risus eros egestas risus varius blandit sit amet non magna.',
-  },
-  {
-    name: 'Marco Hilpert',
-    role: 'Web Designer',
-    message:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget risus porta, tincidunt turpis at, interdum tortor.',
-  },
-  {
-    name: 'Marco Hilpert',
-    role: 'Web Designer',
-    message:
-      'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-  },
-  {
-    name: 'Marco Hilpert',
-    role: 'Web Designer',
-    message:
-      'Suspendisse potenti. Phasellus euismod libero in neque molestie et elementum nulla commodo.',
-  },
-];
+  const testimonials = [
+    {
+      name: "Isabelle",
+      position: "BA at Robin",
+      text: "An enim nullam tempor gravida donec enim congue magna at pretium purus pretium ligula rutrum luctus risus diam eget risus varius blandit sit amet non magna.",
+      rating: 5,
+      image: "https://randomuser.me/api/portraits/women/65.jpg",
+    },
+    {
+      name: "Mara Hilpert",
+      position: "Web Designer",
+      text: "Exceptional service from start to finish! The attention to detail and personalized experience made our trip unforgettable. Would highly recommend to anyone looking for a stress-free travel experience.",
+      rating: 5,
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    {
+      name: "Thomas Greene",
+      position: "Marketing Director",
+      text: "Our family vacation was perfectly planned down to the smallest detail. The accommodations were superb and the recommended activities were exactly what we were looking for.",
+      rating: 4,
+      image: "https://randomuser.me/api/portraits/men/34.jpg",
+    },
+    {
+      name: "Sophia Chen",
+      position: "CEO at Luminex",
+      text: "As a business traveler, I appreciate efficiency and reliability. This service consistently exceeds my expectations with their professionalism and responsiveness.",
+      rating: 5,
+      image: "https://randomuser.me/api/portraits/women/21.jpg",
+    },
+  ];
 
-export default function TestimonialSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextTestimonial();
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextTestimonial = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+      );
+      setIsAnimating(false);
+    }, 300);
+  };
+
+  const prevTestimonial = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+      );
+      setIsAnimating(false);
+    }, 300);
+  };
 
   return (
     <>
@@ -70,9 +97,9 @@ export default function TestimonialSection() {
             <span>Trip Advisor</span>
           </p>
 
-          <div className="flex items-center gap-4 mt-10 overflow-auto mt-4">
-            {testimonials.map((testimonial, index) => (
-              <button
+          <div className="flex space-x-2 mb-10">
+            {testimonials.map((_, index) => (
+              <div
                 key={index}
                 className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   index === currentIndex
@@ -197,4 +224,6 @@ export default function TestimonialSection() {
       </div>
     </>
   );
-}
+};
+
+export default Testimonials;

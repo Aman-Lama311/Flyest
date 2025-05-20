@@ -62,73 +62,73 @@ const About: React.FC = () => {
   return (
     <div className="relative w-full">
       {/* Corner Border Lines */}
-      <div className="absolute top-[-10px] left-0 h-[calc(100%+20px)] border-l-1 border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute top-[-10px] right-0 h-[calc(100%+20px)] border-r-1 border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute top-0 left-0 w-[30px] border-t-1 border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[30px] border-b-1 border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute top-0 right-0 w-[30px] border-t-1 border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-[30px] border-b-1 border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-[-10px] left-0 h-[calc(100%+20px)] border-l border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-[-10px] right-0 h-[calc(100%+20px)] border-r border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-[30px] border-t border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[30px] border-b border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[30px] border-t border-[#00ffd0] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-[30px] border-b border-[#00ffd0] pointer-events-none"></div>
 
-      <section className="relative w-full py-16 md:py-20 bg-[url('/navbg.svg')] text-white rounded-lg font-sans">
-        <div className="container mx-auto px-4 md:px-8">
+      <section className="relative w-full py-14 md:py-18 bg-[url('/navbg.svg')] text-white rounded-lg font-sans">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
           {/* Section Title */}
-          <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold font-sans leading-tight">
+          <div className="mb-10 md:mb-14 text-center max-w-3xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold leading-tight">
               Why Choose Us
             </h2>
-            <p className="mt-4 text-gray-300 max-w-xl mx-auto text-lg sm:text-xl md:text-2xl">
+            <p className="mt-3 text-gray-300 text-base sm:text-lg md:text-xl">
               We’re dedicated to providing exceptional service with our team of
               professionals.
             </p>
           </div>
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {features.map((feature, index) => {
               const Icon = icons[index];
 
               return (
                 <div
                   key={feature.id}
-                  className="relative min-h-[auto] md:min-h-[320px] p-5 sm:p-6 md:p-8 rounded-xl text-white flex flex-col md:flex-row items-start md:items-center"
+                  className="relative p-5 sm:p-6 md:p-6 rounded-xl flex flex-col md:flex-row items-start md:items-center"
                 >
                   {/* Border Corners & Lines for each card */}
                   <div
-                    className={`absolute top-0 left-0 h-full border-l-2 ${feature.borderColor}`}
+                    className={`absolute top-0 left-0 h-full border-l ${feature.borderColor}`}
                   />
                   <div
-                    className={`absolute top-0 right-0 h-full border-r-2 ${feature.borderColor}`}
+                    className={`absolute top-0 right-0 h-full border-r ${feature.borderColor}`}
                   />
                   <div
-                    className={`absolute top-0 left-0 w-[30px] border-t-2 ${feature.borderColor}`}
+                    className={`absolute top-0 left-0 w-[30px] border-t ${feature.borderColor}`}
                   />
                   <div
-                    className={`absolute bottom-0 left-0 w-[30px] border-b-2 ${feature.borderColor}`}
+                    className={`absolute bottom-0 left-0 w-[30px] border-b ${feature.borderColor}`}
                   />
                   <div
-                    className={`absolute top-0 right-0 w-[30px] border-t-2 ${feature.borderColor}`}
+                    className={`absolute top-0 right-0 w-[30px] border-t ${feature.borderColor}`}
                   />
                   <div
-                    className={`absolute bottom-0 right-0 w-[30px] border-b-2 ${feature.borderColor}`}
+                    className={`absolute bottom-0 right-0 w-[30px] border-b ${feature.borderColor}`}
                   />
 
                   {/* Icon */}
                   <div
-                    className={`flex items-center justify-center rounded-full border-2 border-white/20 p-5 sm:p-6 md:p-6 shadow-lg ${feature.iconColor} flex-shrink-0`}
-                    style={{ minWidth: 72, minHeight: 72 }}
+                    className={`flex items-center justify-center rounded-full border border-white/20 p-4 ${feature.iconColor} flex-shrink-0`}
+                    style={{ minWidth: 60, minHeight: 60 }}
                   >
-                    <Icon size={48} />
+                    <Icon size={32} />
                   </div>
 
                   {/* Text */}
-                  <div className="mt-4 md:mt-0 md:ml-6 text-left flex-1">
+                  <div className="mt-3 md:mt-0 md:ml-5 text-left flex-1">
                     <h3
-                      className={`text-2xl sm:text-3xl md:text-4xl font-bold ${feature.titleColor}`}
+                      className={`text-xl sm:text-2xl font-bold ${feature.titleColor}`}
                     >
                       {feature.title}
                     </h3>
                     <p
-                      className={`mt-2 text-sm sm:text-base md:text-lg ${feature.textColor}`}
+                      className={`mt-1 text-sm sm:text-base ${feature.textColor}`}
                     >
                       {feature.description}
                     </p>
@@ -139,8 +139,8 @@ const About: React.FC = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="mt-12 md:mt-16 text-center">
-            <button className="px-6 py-3 font-semibold text-white transition bg-[#D62A4E] rounded-lg hover:bg-red-700">
+          <div className="mt-10 md:mt-14 text-center">
+            <button className="px-5 py-2.5 font-semibold text-white transition bg-[#D62A4E] rounded-lg hover:bg-red-700 text-sm sm:text-base">
               Learn More About Our Services
             </button>
           </div>
