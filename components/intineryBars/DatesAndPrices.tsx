@@ -50,6 +50,39 @@ const calendarStyles = `
     padding: 8px;
   }
   
+  /* Selected date range background */
+  .react-datepicker__day--in-range {
+    background-color: #fbcfe8;
+    color: #9d174d;
+  }
+  
+  /* Hover state for dates in range */
+  .react-datepicker__day--in-range:hover {
+    background-color: #f472b6;
+    color: white;
+  }
+  
+  /* Selected start and end dates */
+  .react-datepicker__day--selected,
+  .react-datepicker__day--range-start,
+  .react-datepicker__day--range-end {
+    background-color: #EA3359 !important;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+  }
+  
+  /* Hover state for selected dates */
+  .react-datepicker__day--selected:hover,
+  .react-datepicker__day--range-start:hover,
+  .react-datepicker__day--range-end:hover {
+    background-color: #d92f50 !important;
+    color: white !important;
+    transform: scale(1.15);
+  }
+  
   .react-datepicker__day-name {
     color: #6b7280;
     font-weight: 500;
