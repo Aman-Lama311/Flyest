@@ -12,6 +12,7 @@ const ContactPage = () => {
     number: "",
     budget: "",
     message: "",
+    contact: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -30,6 +31,7 @@ const ContactPage = () => {
       number: "",
       budget: "",
       message: "",
+      contact: "",
     });
   };
 
@@ -168,7 +170,7 @@ const ContactPage = () => {
               type="text"
               name="contact"
               placeholder="Contact Number*"
-              value={formData.contact}
+              value={formData?.contact}
               onChange={handleChange}
               className="w-full bg-transparent border-b border-gray-500 outline-none py-1"
               required
