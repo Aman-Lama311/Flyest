@@ -12,7 +12,6 @@ const BlogPage: React.FC = () => {
   const id = typeof params?.id === "string" ? parseInt(params.id) : null;
   const blog = blogData.find((b) => b.id === id);
 
-
   if (!blog) {
     return (
       <div className="py-20 text-center">
@@ -50,31 +49,26 @@ const BlogPage: React.FC = () => {
             {blog.comments} comments
           </span>
         </div>
-{/* Wrapper for image + content */}
-<div className="w-full flex flex-col items-center">
+        {/* Wrapper for image + content */}
+        <div className="w-full flex flex-col items-center">
+          {/* Container with fixed max width */}
+          <div className="w-full max-w-[900px]">
+            {/* Image */}
+            <div className="rounded-2xl overflow-hidden border border-gray-200 mb-6">
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="w-full h-auto block"
+              />
+            </div>
 
-  {/* Container with fixed max width */}
-  <div className="w-full max-w-[900px]">
-
-    {/* Image */}
-    <div className="rounded-2xl overflow-hidden border border-gray-200 mb-6">
-      <img
-        src={blog.image}
-        alt={blog.title}
-        className="w-full h-auto block"
-      />
-    </div>
-
-    {/* Content */}
-    <article className="prose prose-lg prose-blue space-y-6 text-lg leading-relaxed text-white text-left">
-      <ReactMarkdown>{blog.content}</ReactMarkdown>
-    </article>
-
-  </div>
-  
-</div> 
-</div>
-
+            {/* Content */}
+            <article className="prose prose-lg prose-blue space-y-6 text-lg leading-relaxed text-white text-left">
+              <ReactMarkdown>{blog.content}</ReactMarkdown>
+            </article>
+          </div>
+        </div>
+      </div>
     </main>
   );
 };

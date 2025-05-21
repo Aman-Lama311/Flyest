@@ -30,7 +30,7 @@ const Navbar = () => {
   // Categories state for each dropdown
   const [activeCategory, setActiveCategory] = useState({
     mountaineering: "8000m",
-    heliService : "helicopter",
+    heliService: "helicopter",
     trekking: "Everest Region",
     about: "company",
   });
@@ -91,7 +91,7 @@ const Navbar = () => {
   return (
     <div id="" className="relative">
       {/* Main Navbar */}
-      <div className="absolute top-0 z-50 py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white bg-transparent hover:bg-[url('/navbg.svg')] bg-cover">
+      <div className="py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white  bg-[url('/navbg.svg')] bg-cover">
         {/* Logo */}
         <div>
           <Link href="/">
@@ -142,7 +142,7 @@ const Navbar = () => {
           </div>
 
           {/* Heli Button */}
-           <div className="relative">
+          <div className="relative">
             <Link href="/heliService">
               <button
                 onClick={() => handleDropdown("heliService")}
@@ -326,7 +326,6 @@ const Navbar = () => {
                 )}
               </li>
 
-              
               {/* Mobile heli Dropdown */}
               <li>
                 <div
@@ -479,7 +478,7 @@ const Navbar = () => {
         }`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-8 px-18">
           <div className="flex h-80">
             {/* Left Categories Column */}
             <div className="w-1/4 border-r px-8 py-8">
@@ -542,8 +541,9 @@ const Navbar = () => {
                     </Link>
                   ))}
                 </ul>
-                <Link href="allPeak"
-                // {`/mountaineering/${activeCategory.mountaineering}`}
+                <Link
+                  href="allPeak"
+                  // {`/mountaineering/${activeCategory.mountaineering}`}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-6 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
@@ -573,7 +573,10 @@ const Navbar = () => {
         }`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
-        <div className="container mx-auto py-8">
+        <div
+          className="container mx-auto py-8 px-18
+        "
+        >
           <div className="flex h-80">
             {/* Left Categories Column */}
             <div className="w-1/4 border-r px-8 py-8">
@@ -594,9 +597,8 @@ const Navbar = () => {
                     }
                   >
                     {
-                     heliServiceData[
-                        category as keyof typeof heliServiceData
-                      ].title
+                      heliServiceData[category as keyof typeof heliServiceData]
+                        .title
                     }
                   </li>
                 ))}
@@ -636,8 +638,9 @@ const Navbar = () => {
                     </Link>
                   ))}
                 </ul>
-                <Link href="allHeli"
-                // {`/heliService/${activeCategory.heliService}`}
+                <Link
+                  href="allHeli"
+                  // {`/heliService/${activeCategory.heliService}`}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-6 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
@@ -668,7 +671,7 @@ const Navbar = () => {
         }`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-8 px-18">
           <div className="flex h-80">
             {/* Left Categories Column */}
             <div className="w-1/4 border-r px-8 py-8">
@@ -760,7 +763,7 @@ const Navbar = () => {
         }`}
         onMouseLeave={() => setActiveDropdown(null)}
       >
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-8 px-18">
           <div className="flex h-80">
             {/* Left Categories Column */}
             <div className="w-1/4 border-r px-8 py-8">
