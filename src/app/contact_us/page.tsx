@@ -94,12 +94,12 @@ const ContactPage = () => {
     </div>
       </div>
       {/* last message form */}
-       <div className="min-h-screen text-white flex items-center justify-center px-4 mt-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-4xl space-y-6">
-        <h1 className="text-4xl font-bold">
-          Do you want to experience <span className="bg-clip-text text-[#EA3359]">beautiful moments.</span>
-        </h1>
-
+    <div className="bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white py-16 px-4 sm:px-6 lg:px-20">
+  <div className="max-w-screen-xl mx-auto">
+    <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto space-y-6">
+      <h1 className="text-4xl font-bold">
+        Do you want to experience <span className="bg-clip-text text-[#EA3359]">beautiful moments.</span>
+      </h1>
         <div className="flex flex-col md:flex-row md:items-center md:gap-4">
           <label className="text-xl font-semibold">Hi! My name is</label>
           <input
@@ -201,16 +201,17 @@ const ContactPage = () => {
           ></textarea>
         </div>
 
-        <div>
-          <button
-            type="submit"
-            className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition"
-          >
-            Send →
-          </button>
-        </div>
-      </form>
-    </div>
+         <div>
+        <button
+          type="submit"
+          className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition"
+        >
+          Send →
+        </button>
+      </div>
+    </form>
+  </div>
+      </div>
       </div>
   );
 };
