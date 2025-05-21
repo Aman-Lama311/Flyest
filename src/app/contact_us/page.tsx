@@ -93,7 +93,7 @@ const ContactPage = () => {
       </div>
     </div>
       </div>
-      {/* last message form */}
+      {/* last message form section */}
     <div className="bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white py-16 px-4 sm:px-6 lg:px-20">
   <div className="max-w-screen-xl mx-auto">
     <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto space-y-6">
@@ -204,8 +204,7 @@ const ContactPage = () => {
          <div>
         <button
           type="submit"
-          className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition"
-        >
+          className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition">
           Send →
         </button>
       </div>
