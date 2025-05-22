@@ -1,26 +1,38 @@
 "use client";
 import { useState } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
+   const [formData, setFormData] = useState({
     name: "",
+    company: "",
+    source: "",
+    goal: "",
     email: "",
+    number: "",
+    budget: "",
     message: "",
+    contact: "",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    alert("Thank you for your message! We will get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Form submitted successfully!");
+    setFormData({
+      name: "",
+      company: "",
+      source: "",
+      goal: "",
+      email: "",
+      number: "",
+      budget: "",
+      message: "",
+      contact: "",
+    });
   };
 
   return (
@@ -40,127 +52,168 @@ const ContactPage = () => {
             <div className="h-1 w-full bg-gray-200 opacity-40"></div>
           </div>
           <div className="relative flex justify-center">
-            <div className="bg-zinc-800 text-white px-4 py-2 rounded-full">
+            <div className="bg-[#EA3359] text-white px-4 py-2 rounded-full">
               <Mail className="w-6 h-6" />
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-          {/* Message Form */}
-          <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md">
-            <h3 className="text-xl sm:text-2xl font-semibold mb-6">
-              Send Us a Message
-            </h3>
-            <div className="space-y-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
-                value={formData.name}
-                onChange={handleChange}
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
-                value={formData.email}
-                onChange={handleChange}
-              />
-
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-              ></textarea>
-
-              <button
-                onClick={handleSubmit}
-                className="w-full bg-zinc-800 text-white py-3 rounded-full hover:bg-zinc-700 transition duration-300"
-              >
-                Send Message
-              </button>
-            </div>
-          </div>
-
+      
           {/* Contact Details */}
-          <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md">
-            <h3 className="text-xl sm:text-2xl font-semibold mb-6">
-              Our Details
-            </h3>
-
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <MapPin className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <p className="font-medium">Address</p>
-                  <p>Kathmandu, Nepal</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <p className="font-medium">Phone</p>
-                  <p>+977 123-4567</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Mail className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <p className="font-medium">Email</p>
-                  <p>info@highfivetrekking.com</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 p-4 rounded-lg border border-blue-100">
-              <p>
-                <span className="font-medium">Office Hours:</span> Monday to
-                Friday, 9am - 5pm
-              </p>
-            </div>
-          </div>
+         <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md flex flex-wrap justify-between gap-6">
+      {/* Address */}
+      <div className="flex items-start gap-4 min-w-[200px]">
+        <div className="bg-zinc-800 p-3 rounded-full">
+          <MapPin className="w-6 h-6 text-[#EA3359]" />
         </div>
+        <div>
+          <p className="font-medium">Address</p>
+          <p>Kathmandu, Nepal</p>
+        </div>
+      </div>
 
-        {/* Footer Info */}
-        <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-10 mt-12 text-sm sm:text-base">
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-            </div>
-            <span>24/7 Emergency Support</span>
-          </div>
+      {/* Phone */}
+      <div className="flex items-start gap-4 min-w-[200px]">
+        <div className="bg-zinc-800 p-3 rounded-full">
+          <Phone className="w-6 h-6 text-[#EA3359]" />
+        </div>
+        <div>
+          <p className="font-medium">Phone</p>
+          <p>+977 123-4567</p>
+        </div>
+      </div>
 
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-            </div>
-            <span>48hr Response Time</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-            </div>
-            <span>Many Locations</span>
-          </div>
+      {/* Email */}
+      <div className="flex items-start gap-4 min-w-[200px]">
+        <div className="bg-zinc-800 p-3 rounded-full">
+          <Mail className="w-6 h-6 text-[#EA3359]" />
+        </div>
+        <div>
+          <p className="font-medium">Email</p>
+          <p>info@Flyeast.com</p>
         </div>
       </div>
     </div>
+      </div>
+      {/* last message form section */}
+    <div className="bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white py-16 px-4 sm:px-6 lg:px-20">
+  <div className="max-w-screen-xl mx-auto">
+    <form onSubmit={handleSubmit} className="w-full max-w-4xl mx-auto space-y-6">
+      <h1 className="text-4xl font-bold">
+        Do you want to experience <span className="bg-clip-text text-[#EA3359]">beautiful moments.</span>
+      </h1>
+        <div className="flex flex-col md:flex-row md:items-center md:gap-4">
+          <label className="text-xl font-semibold">Hi! My name is</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name*"
+            value={formData.name}
+            onChange={handleChange}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+          <span className="text-xl font-semibold ml-0 md:ml-4">and I'm</span>
+          <input
+            type="text"
+            name="company"
+            placeholder="Profession*"
+            value={formData.company}
+            onChange={handleChange}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-xl font-semibold">I heard about you from</label>
+          <input
+            type="text"
+            name="source"
+            placeholder="Source*"
+            value={formData.source}
+            onChange={handleChange}
+            className="bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-center md:gap-4">
+          <label className="text-xl font-semibold">and I'm looking for a peaceful break can you help me with</label>
+          <input
+            type="text"
+            name="goal"
+            placeholder="Your goal*"
+            value={formData.goal}
+            onChange={handleChange}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:justify-between md:gap-4">
+          <div className="flex-1">
+            <label className="text-xl font-semibold">You can reach me at</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email*"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-gray-500 outline-none py-1"
+              required
+            />
+          </div>
+          <div className="flex-1">
+            <label className="text-xl font-semibold">My contact number is</label>
+            <input
+              type="text"
+              name="contact"
+              placeholder="Contact Number*"
+              value={formData?.contact}
+              onChange={handleChange}
+              className="w-full bg-transparent border-b border-gray-500 outline-none py-1"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label className="text-xl font-semibold">My budget is</label>
+          <input
+            type="text"
+            name="budget"
+            placeholder="Budget (e.g., $500 – $1000)*"
+            value={formData.budget}
+            onChange={handleChange}
+            className="bg-transparent border-b border-gray-500 outline-none py-1"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-start md:gap-4">
+          <label className="text-xl font-semibold">Additionally, I'm sharing more here:</label>
+          <textarea
+            name="message"
+            placeholder="Message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+            className="flex-1 bg-transparent border-b border-gray-500 outline-none py-1"
+          ></textarea>
+        </div>
+
+         <div>
+        <button
+          type="submit"
+          className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition">
+          Send →
+        </button>
+      </div>
+    </form>
+  </div>
+      </div>
+      </div>
   );
 };
 
