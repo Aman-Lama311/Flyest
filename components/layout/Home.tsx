@@ -1,13 +1,10 @@
 "use client";
 import React from "react";
 import Hero from "../HeroComponents/Hero";
-import About from "../about/About";
-import Cards from "../cards/Cards";
+import About from "../about/page";
 import WhatWeDo from "../whatwedo/WhatWeDo";
-import Blog from "../blog/Blog";
 import TrekCard from "../card/TrekCard";
 import Popular from "../card/Popular";
-import Testmonials from "../testmonials/Testmonials";
 import Book from "../layout/Book";
 import ActivityCarousel from "../layout/Activity";
 import CallToAction from "../calltoaction/CallToAction";

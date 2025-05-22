@@ -8,6 +8,7 @@ interface TrekkingRegion {
   id: string;
   name: string;
 }
+
 const item = {
   slug: "everest-base-camp-trek",
   banner: "/heroimages/everest.webp",
@@ -56,10 +57,10 @@ const Page = () => {
   };
 
   return (
-    <main className="grid w-11/12 mx-auto h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 md:mx-8 lg:py-10 py-20 pb-96">
+    <main className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:py-30 py-20 px-4 md:px-8 bg-[url('/navbg.svg')]">
       {/* Sidebar */}
-      <div className="mx-auto md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-[4rem] md:top-[6rem] left-0 flex justify-start font-medium">
-        <div className="grid grid-cols-3 md:grid-cols-1 mx-auto w-full">
+      <div className="md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-[4rem] md:top-[6rem] left-0 flex justify-start font-medium">
+        <div className="grid grid-cols-3 md:grid-cols-1 w-full">
           {trekkingRegions.map((region) => (
             <button
               key={region.id}
@@ -77,7 +78,7 @@ const Page = () => {
       </div>
 
       {/* Main Content */}
-      <div className="col-span-9 md:mt-0 mx-2 mt-4">
+      <div className="col-span-9 md:mt-0 mt-4">
         {trekkingRegions.map((region) => (
           <Element
             key={region.id}
@@ -88,9 +89,7 @@ const Page = () => {
             <h2 className="title font-extrabold uppercase text-2xl mb-4">
               {region.name}
             </h2>
-            {/* <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-6"> */}
-             <PackageCard item={item} />
-            {/* </div> */}
+            <PackageCard />
           </Element>
         ))}
       </div>

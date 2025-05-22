@@ -1,7 +1,6 @@
 "use client";
 import image1 from "../../public/heroimages/everest.webp";
 import image2 from "../../public/heroimages/annapurna.webp";
-import image3 from "../../public/heroimages/annapurnatrek.webp";
 import image4 from "../../public/heroimages/lantang.webp";
 import image5 from "../../public/heroimages/manaslutrek.webp";
 
@@ -26,15 +25,6 @@ export const bgImage = [
   },
   {
     id: 3,
-    name: "Image3",
-    img_url: image3,
-    title: "Annapurna Circuit Trek",
-    description:
-      "Circle the majestic Annapurna massif through diverse landscapes, ancient villages, and one of the world’s most scenic trekking routes.",
-    slogan: ["Circle", "the Legends,", "Cross the Skies"],
-  },
-  {
-    id: 4,
     name: "Image4",
     img_url: image4,
     title: "Langtang Valley Trek",
@@ -43,7 +33,7 @@ export const bgImage = [
     slogan: ["Where Nature", "Whispers and", "Mountains Echo"],
   },
   {
-    id: 5,
+    id: 4,
     name: "Image5",
     img_url: image5,
     title: "Manaslu Circuit Trek",

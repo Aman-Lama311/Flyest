@@ -9,6 +9,7 @@ interface HeightCategory {
   name: string;
   minHeight: number;
 }
+
 const item = {
   slug: "everest-base-camp-trek",
   banner: "/heroimages/everest.webp",
@@ -51,17 +52,16 @@ const Page = () => {
     const el = document.getElementById(id);
     if (el) {
       window.scrollTo({
-        top: el.offsetTop - 80, // Adjust for header
+        top: el.offsetTop - 80,
         behavior: "smooth",
       });
     }
   };
 
   return (
-    <main className="grid w-11/12 mx-auto h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 md:mx-8 lg:py-10 py-20">
+    <main className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:py-30 py-20 bg-[url('/navbg.svg')] px-4 md:px-8">
       {/* Sidebar */}
-     <div className="md:bg-transparent mx-auto md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-0 md:top-[6rem] left-0 flex justify-start font-medium">
-
+      <div className="md:bg-transparent md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-0 md:top-[6rem] left-0 flex justify-start font-medium">
         <div className="grid grid-cols-5 md:grid-cols-1 mx-auto w-full">
           {heightCategories.map((category) => (
             <button
@@ -80,7 +80,7 @@ const Page = () => {
       </div>
 
       {/* Main Content */}
-      <div className="col-span-9 md:mt-0 mx-2 mt-6">
+      <div className="col-span-9 md:mt-0 mt-6">
         {heightCategories.map((category) => (
           <Element
             key={category.id}
@@ -91,12 +91,8 @@ const Page = () => {
             <h2 className="title font-extrabold uppercase text-2xl mb-4">
               {category.name}
             </h2>
-            {/* <div className="grid w-full xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 mt-6"> */}
-              <PackageCard />
-              {/* <PackageCard />
-              <PackageCard />
-              <PackageCard /> */}
-            {/* </div> */}
+            {/* Cards */}
+            <PackageCard />
           </Element>
         ))}
       </div>
@@ -105,6 +101,3 @@ const Page = () => {
 };
 
 export default Page;
-
-
-

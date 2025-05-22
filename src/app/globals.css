@@ -8,3 +8,7 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.text-shadow {
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}

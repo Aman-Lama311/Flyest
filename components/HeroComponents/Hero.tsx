@@ -5,7 +5,6 @@ import CustomCursor from "./CustomCursor";
 import * as THREE from "three";
 import { gsap } from "gsap";
 import HeroContents from "./HeroContents";
-import HeroContentsProps from "./HeroContents";
 
 class WebGLTransition {
   container: HTMLElement; // Add container property
@@ -611,19 +610,19 @@ const Hero = () => {
 
         {/* Background wavy effect */}
         <div
-          className="absolute inset-0 pointer-events-none bg-gray-500 bg-cover"
+          className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage:
               "url(\"data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='wavy' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='5' stitchTiles='stitch'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='30'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' filter='url(%23wavy)' opacity='0.3'/%3E%3C/svg%3E\")",
             mixBlendMode: "soft-light",
+            backgroundSize: "cover", // makes the background look natural
+            backgroundRepeat: "no-repeat", // avoids repeat
+            backgroundPosition: "center", // centers the image
           }}
         />
 
         {/* Dark overlay */}
-        <div className="absolute top-0 left-0 w-full h-screen bg-black/40 pointer-events-none font-sans" />
-
-        {/* Gradient overlay from bottom to top */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#D62A4E] to-black opacity-30 pointer-events-none z-10" />
+        <div className="absolute top-0 left-0 w-full h-screen bg-black/10 pointer-events-none font-sans" />
 
         {/* Hero contents */}
         <HeroContents currentImageIndex={currentImageIndex} />

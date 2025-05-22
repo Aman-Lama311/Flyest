@@ -62,14 +62,14 @@ const LeftBar = () => {
   }, []);
 
   return (
-    <div className="w-1/4 hidden lg:block px-4 pb-4 sticky top-[150px] h-2/6">
-      <div className="flex items-center gap-2 mb-4">
+    <div className="w-1/4 hidden lg:block px-4 pb-4 sticky top-[110px] h-2/6">
+      <div className="flex items-center mb-2">
         <Map className="w-6 h-6 text-[#EA3359]" />
-        <h1 className="text-2xl font-semibold">Trip Sections</h1>
+        <h1 className="text-xl font-semibold">Trip Sections</h1>
       </div>
-      <hr className="text-gray-400" />
-      <div className="mt-4">
-        <ul className="flex flex-col gap-2">
+      <hr className="text-gray-200" />
+      <div className="mt-3">
+        <ul className="flex flex-col">
           {tripSections.map(({ label, icon: Icon, color }, index) => {
             const sectionId = label.toLowerCase().replace(/\s+/g, "-");
             const isActive = sectionId === activeSection;
@@ -78,7 +78,7 @@ const LeftBar = () => {
               <li
                 key={index}
                 onClick={() => handleScroll(label)}
-                className={`flex items-center gap-3 px-2 py-2 rounded-md cursor-pointer transition-all duration-300 ${
+                className={`flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer transition-all duration-300 text-base ${
                   isActive
                     ? "bg-[#FDECEF] text-[#EA3359] font-medium"
                     : "hover:translate-x-1"

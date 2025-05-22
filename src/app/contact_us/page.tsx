@@ -24,15 +24,15 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-20 bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white">
+    <div className="py-16 lg:py-24 px-4 sm:px-6 lg:px-20 bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white">
       <div className="max-w-screen-xl mx-auto">
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">
           Contact Us
         </h2>
 
         <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
-          Ready to begin your mountain adventure? Reach out to us and let's
-          plan your next unforgettable journey together.
+          Ready to begin your mountain adventure? Reach out to us and let's plan
+          your next unforgettable journey together.
         </p>
 
         <div className="relative mb-12">

@@ -18,20 +18,20 @@ const HeroContents: React.FC<HeroContentsProps> = ({ currentImageIndex }) => {
       <div className=" p-6 sm:p-8 md:p-10 lg:p-12 text-center w-full sm:w-[90%] md:w-[70%] lg:w-[60%]">
         {/* Titles */}
         <div className="w-full">
-          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold leading-snug">
+          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold leading-snug text-shadow">
             {currentImage.slogan[0]} {currentImage.slogan[1]}
           </h1>
-          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-[#D62A4E] font-bold leading-snug">
+          <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-[#D62A4E] font-bold leading-snug text-shadow">
             {currentImage.slogan[2]}
           </h1>
         </div>
 
         {/* Description */}
         <div className="mt-2 sm:mt-3 text-sm sm:text-base md:text-lg text-white w-full">
-          <p className="font-semibold text-base sm:text-lg mb-1">
+          <p className="font-semibold text-base sm:text-lg mb-1 text-shadow">
             {currentImage.title}
           </p>
-          <p className="line-clamp-1">{currentImage.description}</p>
+          <p className="line-clamp-1 text-shadow">{currentImage.description}</p>
         </div>
 
         {/* NEW: Translucent Tag Box */}
@@ -56,7 +56,7 @@ const HeroContents: React.FC<HeroContentsProps> = ({ currentImageIndex }) => {
 
         {/* Button */}
         <button
-          className="h-11 mt-5 mx-auto px-4 bg-[#D62A4E] text-white flex items-center justify-center gap-3 rounded-lg transition-all duration-300 hover:bg-[#c22748]"
+          className="py-2 mt-5 mx-auto px-4 bg-[#D62A4E] text-white flex items-center justify-center gap-3 rounded-lg transition-all duration-300 hover:bg-[#c22748] cursor-pointer"
           onMouseEnter={(e) => {
             const arrowElement =
               e.currentTarget.querySelector(".talk-button-arrow");

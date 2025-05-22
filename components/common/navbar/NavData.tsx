@@ -40,92 +40,19 @@ export const mountaineeringData = {
 // Heli Service Data categorized by altitude levels
 
 export const heliServiceData = {
-  // Services available around 8000m elevation
-  "8000m": {
-    title: "8000m",
-    items: [
-      {
-        name: "Annapurna Circuit", // Name of the heli-accessible trek
-        description: "A diverse trek around the Annapurna massif.", // Short overview
-        tag: "Popular", // Custom label for highlighting
-      },
-      {
-        name: "Langtang Valley",
-        description: "A trek through beautiful valleys and forests.",
-        tag: "Popular",
-      },
-      {
-        name: "Manaslu Circuit",
-        description: "A remote trek around the eighth highest mountain.",
-        tag: "Popular",
-      },
-      {
-        name: "Upper Mustang",
-        description: "A unique cultural experience in a desert-like region.",
-        tag: "Popular",
-      },
-    ],
-  },
 
-  // Services available around 7000m elevation
-  "7000m": {
-    title: "7000m",
-    items: [
-      {
-        name: "Easy Walks (1-5 days)",
-        description: "Suitable for beginners and families.",
-        image: "https://images.pexels.com/photos/804696/pexels-photo-804696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
-      {
-        name: "Moderate Treks (5-10 days)",
-        description: "For those with some trekking experience.",
-        image: "https://images.pexels.com/photos/22270037/pexels-photo-22270037/free-photo-of-silhouette-of-hiker-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
-      {
-        name: "Challenging Treks (10-15 days)",
-        description: "For experienced trekkers seeking adventure.",
-        image: "https://images.pexels.com/photos/163216/high-speed-glacier-alpinists-rope-up-163216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
-      {
-        name: "Difficult Expeditions (15+ days)",
-        description: "For seasoned trekkers and climbers.",
-        image: "https://images.pexels.com/photos/163216/high-speed-glacier-alpinists-rope-up-163216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
-    ],
-  },
 
   // Services around 6500m elevation
-  "6500m": {
-    title: "6500m",
+  "HeliService": {
+    title: "Helicopter Service ",
     items: [
       {
-        name: "Family-Friendly Treks",
-        description: "Trekking routes suitable for families with children.",
+        name: "Helicopter Service Mount Everest",
+        description: "Helicopter Service Mount Everest",
         image: "https://images.pexels.com/photos/163216/high-speed-glacier-alpinists-rope-up-163216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         tag: "Popular",
       },
-      {
-        name: "Luxury Treks",
-        description: "Trekking with comfort and luxury in mind.",
-        image: "https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
-      {
-        name: "Off-the-beaten-path Treks",
-        description: "Explore less-traveled routes.",
-        image: "https://images.pexels.com/photos/914128/pexels-photo-914128.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
-      {
-        name: "Cultural Immersion Treks",
-        description: "Experience local cultures and traditions.",
-        image: "https://images.pexels.com/photos/840667/pexels-photo-840667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        tag: "Popular",
-      },
+   
     ],
   },
 };
