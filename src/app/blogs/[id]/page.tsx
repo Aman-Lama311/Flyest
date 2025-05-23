@@ -21,7 +21,7 @@ const BlogPage: React.FC = () => {
   }
 
   return (
-    <main className="bg-[url('/navbg.svg')] text-gray-800 py-16 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+    <main className="bg-[url('/navbg.svg')] text-gray-800 py-16 lg:py-40 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       <div className="max-w-6xl mx-auto relative">
         {/* Back Button */}
         <button

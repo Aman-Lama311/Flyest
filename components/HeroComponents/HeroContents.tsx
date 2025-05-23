@@ -3,6 +3,7 @@ import { IoMdArrowDropdown, IoMdArrowDown } from "react-icons/io";
 import { bgImage } from "./bgimagedata";
 import gsap from "gsap";
 import { FaStar } from "react-icons/fa";
+import Link from "next/link";
 
 interface HeroContentsProps {
   currentImageIndex: number;
@@ -55,42 +56,14 @@ const HeroContents: React.FC<HeroContentsProps> = ({ currentImageIndex }) => {
         </div>
 
         {/* Button */}
-        <button
-          className="py-2 mt-5 mx-auto px-4 bg-[#D62A4E] text-white flex items-center justify-center gap-3 rounded-lg transition-all duration-300 hover:bg-[#c22748] cursor-pointer"
-          onMouseEnter={(e) => {
-            const arrowElement =
-              e.currentTarget.querySelector(".talk-button-arrow");
-            gsap.to(arrowElement, {
-              rotation: 270,
-              y: -2,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          }}
-          onMouseLeave={(e) => {
-            const arrowElement =
-              e.currentTarget.querySelector(".talk-button-arrow");
-            gsap.to(arrowElement, {
-              rotation: 0,
-              y: 0,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          }}
-        >
-          <a
-            className="font-medium tracking-wide text-base sm:text-lg"
-            href="/contact"
+        <Link href="/itinerary">
+          <button
+            className="mt-4 sm:mt-6 text-sm sm:text-base md:text-lg py-2.5 px-4 sm:px-6 md:px-8 bg-[#D62A4E]
+          hover:bg-[#d62a33] text-white rounded-full cursor-pointer"
           >
             {buttonText}
-          </a>
-          <div className="h-9 w-9 bg-white rounded-md flex items-center justify-center overflow-hidden">
-            <IoMdArrowDown
-              size={20}
-              className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
-            />
-          </div>
-        </button>
+          </button>
+        </Link>
       </div>
 
       {/* Scroll Down */}

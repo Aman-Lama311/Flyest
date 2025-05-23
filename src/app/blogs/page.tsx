@@ -6,7 +6,7 @@ import { blogData } from "../../../components/blogData/blogData";
 
 const Blogs = () => {
   return (
-    <div className="py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-[url('/navbg.svg')]">
+    <div className="py-16 lg:py-32 px-4 sm:px-8 md:px-12 lg:px-16 bg-[url('/navbg.svg')]">
       <div className="container mx-auto px-6 w-full text-center">
         <h2 className="text-5xl md:text-6xl font-bold mb-10 text-white">
           Our Blogs

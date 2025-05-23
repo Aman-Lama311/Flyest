@@ -1,68 +1,31 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ArrowLeft, ArrowRight, Star, MapPin, Clock } from "lucide-react";
+import React, { useRef } from "react";
+import { Star, MapPin, Clock } from "lucide-react";
 import { trek } from "./TrekCardData";
 
 const THEME_COLOR = "#FF4E58";
 
 const TrekCard = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef<boolean>(false);
+  const startX = useRef<number>(0);
+  const scrollLeft = useRef(0);
 
-  const getCardsToShow = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 640) return 1;
-      if (window.innerWidth < 1024) return 2;
-      return 3;
-    }
-    return 3;
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
   };
 
-  const [cardsToShow, setCardsToShow] = useState(getCardsToShow());
-
-  useEffect(() => {
-    const handleResize = () => {
-      setCardsToShow(getCardsToShow());
-      setCurrentIndex((prev) => {
-        const maxIndex = trek.length - getCardsToShow();
-        return prev > maxIndex ? maxIndex : prev;
-      });
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isAnimating) {
-        setIsAnimating(true);
-        setCurrentIndex((prev) =>
-          prev < trek.length - cardsToShow ? prev + 1 : 0
-        );
-        setTimeout(() => setIsAnimating(false), 700);
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentIndex, cardsToShow, isAnimating]);
-
-  const handlePrevClick = () => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setCurrentIndex((prev) =>
-        prev === 0 ? trek.length - cardsToShow : prev - 1
-      );
-      setTimeout(() => setIsAnimating(false), 700);
-    }
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5; // scroll speed
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
-  const handleNextClick = () => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      setCurrentIndex((prev) =>
-        prev >= trek.length - cardsToShow ? 0 : prev + 1
-      );
-      setTimeout(() => setIsAnimating(false), 700);
-    }
+  const handleMouseUp = () => {
+    isDragging.current = false;
   };
 
   const formatPrice = (price: number) =>
@@ -77,206 +40,126 @@ const TrekCard = () => {
 
   return (
     <div className="w-full bg-[url('/navbg.svg')] text-white py-12 px-4 md:px-8 lg:px-16">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row justify-center items-center mb-10 max-w-xl mx-auto text-center md:text-left">
-        <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-sans mb-3">
-            Traveler's Favorite Treks
-          </h2>
-          <p className="text-white text-base sm:text-lg max-w-xl">
-            Discover handpicked adventures loved by our community. Embark on
-            unforgettable journeys through breathtaking landscapes and immersive
-            cultural experiences.
-          </p>
-        </div>
+      <div className="text-center mb-10 max-w-xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-sans mb-3">
+          Traveler's Favorite Treks
+        </h2>
+        <p className="text-white text-base sm:text-lg">
+          Discover handpicked adventures loved by our community.
+        </p>
       </div>
 
-      {/* Trek Cards */}
-      <div className="overflow-hidden">
-        <div
-          ref={cardsRef}
-          className="flex gap-6 transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform max-w-7xl h-[75vh]"
-          style={{
-            width: `${(trek.length / cardsToShow) * 100}%`,
-            transform: `translate3d(-${
-              (currentIndex / trek.length) * 100
-            }%, 0, 0)`,
-          }}
-        >
-          {trek.map((item) => (
-            <article
-              key={item.id}
-              className="bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col h-full"
-              style={{
-                flex: `0 0 calc(100% / ${cardsToShow})`,
-                maxWidth: `calc(100% / ${cardsToShow})`,
-              }}
-            >
-              <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden group">
-                <img
-                  src={item.imgSrc}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-                {item.oldPrice > item.newPrice && (
-                  <div
-                    style={{ backgroundColor: THEME_COLOR }}
-                    className="absolute top-4 left-4 text-white font-sans text-xs sm:text-sm font-bold px-2 py-1 rounded select-none"
-                  >
-                    {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
-                  </div>
-                )}
+      {/* Horizontal dragable scroll area */}
+      <div
+        ref={scrollRef}
+        className="flex gap-6 overflow-hidden cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseUp}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+      >
+        {trek.map((item) => (
+          <article
+            key={item.id}
+            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col relative group"
+          >
+            <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden">
+              <img
+                src={item.imgSrc}
+                alt={item.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+              />
+              {item.oldPrice > item.newPrice && (
+                <div
+                  style={{ backgroundColor: THEME_COLOR }}
+                  className="absolute top-4 left-4 text-white text-xs sm:text-sm font-bold px-2 py-1 rounded"
+                >
+                  {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
+                </div>
+              )}
+              {/* DRAG overlay on hover */}
+              <div className="absolute top-2 right-2 bg-white text-black text-xs font-bold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Drag
               </div>
-              <div className="p-5 flex flex-col flex-grow">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-bold text-lg sm:text-xl mb-0">
-                    {item.title}
-                  </h3>
-                  <div
-                    style={{ backgroundColor: `${THEME_COLOR}15` }}
-                    className="flex items-center px-2 py-1 rounded text-xs sm:text-sm font-medium"
-                  >
-                    <Star
-                      size={14}
-                      style={{ color: THEME_COLOR }}
-                      className="mr-1"
-                    />
-                    <span style={{ color: THEME_COLOR }}>
-                      {item.rating || 4.8}
-                    </span>
-                  </div>
+            </div>
+
+            <div className="p-5 flex flex-col flex-grow">
+              <div className="flex justify-between items-center mb-3">
+                <h3 className="font-bold text-lg sm:text-xl">{item.title}</h3>
+                <div
+                  style={{ backgroundColor: `${THEME_COLOR}15` }}
+                  className="flex items-center px-2 py-1 rounded text-xs sm:text-sm font-medium"
+                >
+                  <Star
+                    size={14}
+                    style={{ color: THEME_COLOR }}
+                    className="mr-1"
+                  />
+                  <span style={{ color: THEME_COLOR }}>
+                    {item.rating || 4.8}
+                  </span>
                 </div>
-                <div className="flex items-center text-xs sm:text-sm mb-3 space-x-4">
-                  <div className="flex items-center">
-                    <MapPin
-                      size={16}
-                      style={{ color: THEME_COLOR }}
-                      className="mr-1"
-                    />
-                    <span>{item.location}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock
-                      size={16}
-                      style={{ color: THEME_COLOR }}
-                      className="mr-1"
-                    />
-                    <span>{item.duration}</span>
-                  </div>
+              </div>
+              <div className="flex items-center text-xs sm:text-sm mb-3 space-x-4">
+                <div className="flex items-center">
+                  <MapPin
+                    size={16}
+                    style={{ color: THEME_COLOR }}
+                    className="mr-1"
+                  />
+                  <span>{item.location}</span>
                 </div>
-                <p className="text-xs sm:text-sm mb-4 flex-grow font-sans">
-                  {item.description}
-                </p>
-                <div className="mt-auto">
-                  <div className="flex items-center justify-between mb-4 text-xs sm:text-sm">
-                    <div>
-                      <p>Starting from</p>
-                      <div className="flex items-center space-x-2">
-                        {item.oldPrice > item.newPrice && (
-                          <span className="line-through opacity-70">
-                            {formatPrice(item.oldPrice)}
-                          </span>
-                        )}
-                        <span className="text-lg sm:text-xl font-bold">
-                          {formatPrice(item.newPrice)}
+                <div className="flex items-center">
+                  <Clock
+                    size={16}
+                    style={{ color: THEME_COLOR }}
+                    className="mr-1"
+                  />
+                  <span>{item.duration}</span>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm mb-4 flex-grow">
+                {item.description}
+              </p>
+              <div className="mt-auto">
+                <div className="flex items-center justify-between mb-4 text-xs sm:text-sm">
+                  <div>
+                    <p>Starting from</p>
+                    <div className="flex items-center space-x-2">
+                      {item.oldPrice > item.newPrice && (
+                        <span className="line-through opacity-70">
+                          {formatPrice(item.oldPrice)}
                         </span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="block">
-                        {item.reviews || 256} reviews
+                      )}
+                      <span className="text-lg sm:text-xl font-bold">
+                        {formatPrice(item.newPrice)}
                       </span>
                     </div>
                   </div>
-                  <div className="flex gap-3">
-                    <button
-                      style={{ backgroundColor: THEME_COLOR }}
-                      className="flex-1 font-medium hover:bg-red-600 active:bg-red-700 text-white py-3 px-4 rounded-lg transition duration-200"
-                      aria-label={`View itinerary for ${item.title}`}
-                    >
-                      View itinerary
-                    </button>
-                    <button
-                      style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
-                      className="flex-1 font-medium border hover:bg-red-50 active:bg-red-100 py-3 px-4 rounded-lg transition duration-200"
-                      aria-label={`Book now for ${item.title}`}
-                    >
-                      Book Now
-                    </button>
+                  <div className="text-right">
+                    <span>{item.reviews || 256} reviews</span>
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      {/* Pagination */}
-      <nav
-        className="flex flex-col items-center mt-8 space-y-4 select-none"
-        aria-label="Trek pagination"
-      >
-        <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            onClick={handlePrevClick}
-            disabled={isAnimating}
-            aria-disabled={isAnimating}
-            aria-label="Previous trek"
-            style={{ borderColor: THEME_COLOR }}
-            className={`h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center border transition duration-200 ${
-              isAnimating
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-red-50 active:bg-red-100"
-            }`}
-          >
-            <ArrowLeft size={16} style={{ color: THEME_COLOR }} />
-          </button>
-
-          <div className="flex justify-center">
-            {Array.from({ length: Math.ceil(trek.length / cardsToShow) }).map(
-              (_, idx) => {
-                const isActive = Math.floor(currentIndex / cardsToShow) === idx;
-                return (
+                <div className="flex gap-3">
                   <button
-                    key={idx}
-                    onClick={() => {
-                      if (!isAnimating) {
-                        setIsAnimating(true);
-                        setCurrentIndex(idx * cardsToShow);
-                        setTimeout(() => setIsAnimating(false), 700);
-                      }
-                    }}
-                    aria-label={`Go to page ${idx + 1}`}
-                    aria-current={isActive ? "page" : undefined}
-                    style={{
-                      backgroundColor: isActive ? THEME_COLOR : "#E5E7EB",
-                    }}
-                    className={`h-2 w-8 mx-1 rounded-full transition-all ${
-                      isActive ? "" : "hover:bg-gray-400"
-                    }`}
-                  />
-                );
-              }
-            )}
-          </div>
-
-          <button
-            onClick={handleNextClick}
-            disabled={isAnimating}
-            aria-disabled={isAnimating}
-            aria-label="Next trek"
-            style={{ borderColor: THEME_COLOR }}
-            className={`h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center border transition duration-200 ${
-              isAnimating
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-red-50 active:bg-red-100"
-            }`}
-          >
-            <ArrowRight size={16} style={{ color: THEME_COLOR }} />
-          </button>
-        </div>
-      </nav>
+                    style={{ backgroundColor: THEME_COLOR }}
+                    className="flex-1 font-medium hover:bg-red-600 text-white py-3 px-4 rounded-lg"
+                  >
+                    View itinerary
+                  </button>
+                  <button
+                    style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
+                    className="flex-1 font-medium border hover:bg-red-50 py-3 px-4 rounded-lg"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   );
 };
