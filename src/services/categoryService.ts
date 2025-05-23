@@ -1,7 +1,7 @@
 import api from "./api";
 import { CategoryType } from "../../Types/CategoryTypes";
 
-interface CategoryRespone {
+interface CategoryResponse {
     data: CategoryType[];
     status:string;
 }
@@ -9,7 +9,7 @@ interface CategoryRespone {
 export const getCategories = async () => {
     try {
         const response = await api.get("/category");
-        return response.data as CategoryRespone;
+        return response.data as CategoryResponse;
     } catch (error) {
         console.error("Error fetching categories:", error);
         throw error;

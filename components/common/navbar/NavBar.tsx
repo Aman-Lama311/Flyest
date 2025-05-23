@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import {
+  AlignJustify,
+  CircleX,
   ChevronDown,
   MapPin,
   Phone,
@@ -15,17 +17,55 @@ import {
   teamData,
   heliServiceData,
 } from "./NavData";
-
 import Link from "next/link";
 import gsap from "gsap";
 import { IoMdArrowDown } from "react-icons/io";
 import { MdOutlineArrowRight } from "react-icons/md";
+import { CategoryType } from "../../../Types/CategoryTypes";
+import { getCategories } from "@/services/categoryService";
+import { SubCategoryType } from "../../../Types/SubCategoryTypes";
+import { getPackagebySubCategoryId } from "@/services/packageService";
+import { PackageType } from "../../../Types/PackageType";
 
 const Navbar = () => {
   // Main dropdown state
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const  [category,setCategory] = useState<string | null>(null);
+  const[category,setCategory]=useState<CategoryType[]>([])
+  const [subCategory,setSubCategory]=useState<SubCategoryType[]>([])
+  const [activeBackendCategory,setActiveBackendCategory]=useState<CategoryType|null>(null)
+  const [activeSubCategory,setActiveSubCategory]=useState<SubCategoryType|null>(null)
+  const [packageData,setPackageData]=useState<PackageType[]>([])
 
+  const fetchPackage=async()=>{
+    const res=await getPackagebySubCategoryId(activeSubCategory?._id as string )
+    const data= res.data
+    setPackageData(data)
+  }
+
+useEffect(()=>{
+    fetchPackage()
+},[activeSubCategory])
+
+
+
+useEffect(()=>{
+  if( activeBackendCategory && !activeSubCategory){
+   setActiveSubCategory(activeBackendCategory.subCategories[0])
+  }
+
+},[activeBackendCategory])
+
+const fetchCategory=async()=>{
+    const res=await getCategories()
+    const data= res.data
+    setCategory(data)
+}
+
+useEffect(()=>{
+    fetchCategory()
+},[])
+
+  // Categories state for each dropdown
   const [activeCategory, setActiveCategory] = useState({
     mountaineering: "8000m",
     heliService: "helicopter",
@@ -33,6 +73,29 @@ const Navbar = () => {
     about: "company",
   });
 
+  // Mobile navigation state
+  const [navOpen, setNavOpen] = useState(false);
+
+  // Mobile dropdown states
+  const [mobileDropdowns, setMobileDropdowns] = useState({
+    mountaineering: false,
+    trekking: false,
+    heliService: false,
+    about: false,
+  });
+
+  // Toggle mobile navigation
+  const toggleNav = () => {
+    setNavOpen(!navOpen);
+  };
+
+  // Toggle mobile dropdowns
+  const toggleMobileDropdown = (dropdown: string) => {
+    setMobileDropdowns({
+      ...mobileDropdowns,
+      [dropdown]: !mobileDropdowns[dropdown as keyof typeof mobileDropdowns],
+    });
+  };
 
   // Handle desktop dropdown hover and clicks
   const handleDropdown = (dropdown: string) => {
@@ -95,53 +158,105 @@ const Navbar = () => {
             </button>
           </Link>
 
-          {/* Trekking Button */}
-          <div className="relative">
-            <Link href={"/allTrekking"}>
-              <button
-                onClick={() => handleDropdown("trekking")}
-                onMouseEnter={() => setActiveDropdown("trekking")}
-                className="relative group flex items-center gap-1"
-              >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
-                  Trekking
-                </span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
+          {/* Category Button */}
+          {category.map((category) => (
+  <div key={category._id} className="relative">
+    <Link href={`/allTrekking`}>
+      <button
+        onClick={() => handleDropdown(category.slug)}
+        onMouseEnter={() => {setActiveDropdown(category.slug); setActiveBackendCategory(category);setSubCategory(category.subCategories)}}
+        className="relative group flex items-center gap-1"
+      >
+        <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+          {category.name}
+        </span>
+        <ChevronDown className="w-4 h-4" />
+      </button>
+    </Link>
+  </div>
+))}
 
-          {/* Mountaineering Button */}
-          <div className="relative">
-            <Link href="/allPeak">
-              <button
-                onClick={() => handleDropdown("mountaineering")}
-                onMouseEnter={() => setActiveDropdown("mountaineering")}
-                className="relative group flex items-center gap-1"
-              >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
-                  Mountaineering
-                </span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
 
-          {/* Heli Button */}
-          <div className="relative">
-            {/* <Link href="/heliService"> */}
-            <button
-              onClick={() => handleDropdown("heliService")}
-              onMouseEnter={() => setActiveDropdown("heliService")}
-              className="relative group flex items-center gap-1"
-            >
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
-                Heli Service
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            {/* </Link> */}
+
+<div
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+          activeBackendCategory
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+        onMouseLeave={() => {setActiveBackendCategory(null);setActiveSubCategory(null)}}
+
+      >
+        <div className="container mx-auto py-8 px-18">
+          <div className="flex h-80">
+            {/* Left Categories Column */}
+            <div className="w-1/4 border-r-2 border-r-zinc-800 px-8 py-8">
+              <h3 className="text-xl font-sora mb-6 text-white">
+              {activeBackendCategory?.name}
+              </h3>
+              <ul className="space-y-4">
+                {subCategory.map((category) => (
+                  <li
+                    key={category._id}
+                    className={`cursor-pointer transition-all duration-300 ${
+                      activeBackendCategory === category
+                        ? "text-[#FF4E58] font-semibold translate-x-2"
+                        : "text-white hover:text-[#FF4E58]"
+                    }`}
+                    onClick={() =>
+                     setActiveSubCategory(category)
+                    }
+                  >
+                    {
+                      category.name
+                    }
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Middle Content Column */}
+            <div className="w-3/4 px-8 animate-fade-in overflow-hidden">
+              <div
+                className="h-full opacity-100 animate-fade-in"
+                key={activeSubCategory?._id}
+              >
+                <h2 className="text-2xl font-sora mb-6 text-white font-medium">
+                  {
+                   activeSubCategory?.name
+                  }
+                </h2>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {packageData.map((item, index) => (
+                    <Link href={`/itinerary`} key={index}>
+                      <li>
+                        <div className="flex items-center gap-4 hover:text-[#FF4E58]">
+                          <MdOutlineArrowRight className="h-6 w-6" />
+                          <h1>{item.name}</h1>
+                        </div>
+                      </li>
+                    </Link>
+                  ))}
+                </ul>
+                <Link
+                  href="allPeak"
+                >
+                  <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
+                    <p>
+                      View All{" "}
+                      {
+                       activeBackendCategory?.name
+                      }
+                      
+                    </p>
+                    <ChevronRight strokeWidth={3} size={15} />
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
 
           {/* Company Button */}
           <div className="relative">
@@ -232,10 +347,251 @@ const Navbar = () => {
           </Link>
         </div>
 
-    
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden flex items-center">
+          <button
+            onClick={toggleNav}
+            className="p-2 hover:bg-gray-800 rounded-md transition-colors duration-300"
+          >
+            {navOpen ? <CircleX size={24} /> : <AlignJustify size={24} />}
+          </button>
+        </div>
       </div>
 
-     
+      {/* Mobile Navigation Menu */}
+      <div
+        className={`lg:hidden fixed inset-0 bg-black bg-opacity-95 z-50 transition-all duration-300 transform ${
+          navOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex justify-between items-center mb-8">
+            <img src="./logo1.png" alt="HighFive Adventures" className="h-8" />
+            <button
+              onClick={toggleNav}
+              className="text-white hover:text-[#FF4E58]"
+            >
+              <CircleX size={28} />
+            </button>
+          </div>
+
+          <nav className="text-white">
+            <ul className="space-y-0">
+              <li>
+                <Link href="/" onClick={toggleNav}>
+                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    Home
+                  </span>
+                </Link>
+              </li>
+
+              {/* Mobile Mountaineering Dropdown */}
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/allPeak"
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("mountaineering");
+                  }}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Mountaineering
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.mountaineering ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
+                {mobileDropdowns.mountaineering && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {Object.keys(mountaineeringData).map((category) => (
+                      <Link
+                        href={`/allPeak`}
+                        key={category}
+                        onClick={toggleNav}
+                      >
+                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                          <ChevronRight className="w-4 h-4 mr-2" />
+                          <span>
+                            {
+                              mountaineeringData[
+                                category as keyof typeof mountaineeringData
+                              ].title
+                            }
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Mobile heli Dropdown */}
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/helitour"
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("heliService");
+                  }}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Heli Service
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.heliService ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
+                {mobileDropdowns.heliService && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {Object.keys(heliServiceData).map((category) => (
+                      <Link
+                        href={`/helitour`}
+                        key={category}
+                        onClick={toggleNav}
+                      >
+                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                          <ChevronRight className="w-4 h-4 mr-2" />
+                          <span>
+                            {
+                              heliServiceData[
+                                category as keyof typeof heliServiceData
+                              ].title
+                            }
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Mobile Trekking Dropdown */}
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/allTrekking"
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("trekking");
+                  }}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Trekking
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.trekking ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
+                {mobileDropdowns.trekking && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {Object.keys(trekkingData).map((region) => (
+                      <Link
+                        href={`/allTrekking`}
+                        key={region}
+                        onClick={toggleNav}
+                      >
+                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                          <ChevronRight className="w-4 h-4 mr-2" />
+                          <span>{region}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Mobile About Dropdown */}
+              <li className="border-b border-gray-800">
+                <div
+                  className="block w-full cursor-pointer"
+                  onClick={() => toggleMobileDropdown("about")}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Company
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.about ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </div>
+                {mobileDropdowns.about && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    <Link href="/about" onClick={toggleNav}>
+                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <ChevronRight className="w-4 h-4 mr-2" />
+                        <span>About Us</span>
+                      </div>
+                    </Link>
+                    <Link href="/team" onClick={toggleNav}>
+                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <ChevronRight className="w-4 h-4 mr-2" />
+                        <span>Our Team</span>
+                      </div>
+                    </Link>
+                    <Link href="/values" onClick={toggleNav}>
+                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <ChevronRight className="w-4 h-4 mr-2" />
+                        <span>Core Values</span>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </li>
+
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/blogs"
+                  onClick={toggleNav}
+                  className="block w-full py-4"
+                >
+                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    Blogs
+                  </span>
+                </Link>
+              </li>
+
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/contact_us"
+                  onClick={toggleNav}
+                  className="block w-full py-4"
+                >
+                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    Contact Us
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Mobile Let's Talk Button */}
+          <div className="mt-8">
+            <Link href="/contact" onClick={toggleNav}>
+              <button className="w-full py-4 bg-[#EA3359] text-white rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 hover:bg-[#d62a4e]">
+                <span>Let's Talk</span>
+                <ArrowUpRight size={20} />
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Mountaineering Dropdown */}
       <div
@@ -396,6 +752,7 @@ const Navbar = () => {
                 </ul>
                 <Link
                   href="allHeli"
+                  // {`/heliService/${activeCategory.heliService}`}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
