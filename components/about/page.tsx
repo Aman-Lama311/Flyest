@@ -70,9 +70,9 @@ const About: React.FC = () => {
       <div className="absolute bottom-0 right-0 w-[30px] border-b border-[#00ffd0] pointer-events-none"></div>
 
       <section className="relative w-full py-14 md:py-18 bg-[url('/navbg.svg')] text-white rounded-lg font-sans">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Section Title */}
-          <div className="mb-10 md:mb-14 text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold leading-tight">
               Why Choose Us
             </h2>
@@ -82,8 +82,15 @@ const About: React.FC = () => {
             </p>
           </div>
 
+          {/* CTA Button */}
+          <div className="mt-10  text-center">
+            <button className="px-5 py-2.5 font-semibold text-white transition bg-[#D62A4E] rounded-lg hover:bg-red-700 text-sm sm:text-base">
+              Learn More About Our Services
+            </button>
+          </div>
+
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-10">
             {features.map((feature, index) => {
               const Icon = icons[index];
 
@@ -136,13 +143,6 @@ const About: React.FC = () => {
                 </div>
               );
             })}
-          </div>
-
-          {/* CTA Button */}
-          <div className="mt-10 md:mt-14 text-center">
-            <button className="px-5 py-2.5 font-semibold text-white transition bg-[#D62A4E] rounded-lg hover:bg-red-700 text-sm sm:text-base">
-              Learn More About Our Services
-            </button>
           </div>
         </div>
       </section>

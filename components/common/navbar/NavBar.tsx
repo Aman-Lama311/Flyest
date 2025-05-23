@@ -298,51 +298,8 @@ useEffect(()=>{
         {/* Let's Talk Button */}
         <div className="hidden md:block">
           <Link href="https://wa.me/+9779801086542" target="_blank">
-            <button
-              className="py-2 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-xl transition-all duration-300 hover:bg-[#d62a4e]"
-              onMouseEnter={(e) => {
-                const arrowElement =
-                  e.currentTarget.querySelector(".talk-button-arrow");
-                const textElement =
-                  e.currentTarget.querySelector(".talk-button-text");
-
-                gsap.to(arrowElement, {
-                  rotation: 270,
-                  y: -2,
-                  duration: 0.3,
-                  ease: "power2.out",
-                });
-
-                gsap.to(textElement, {
-                  text: {
-                    value: "Let's Talk",
-                    delimiter: "",
-                  },
-                  duration: 0.2,
-                  ease: "none",
-                });
-              }}
-              onMouseLeave={(e) => {
-                const arrowElement =
-                  e.currentTarget.querySelector(".talk-button-arrow");
-
-                gsap.to(arrowElement, {
-                  rotation: 0,
-                  y: 0,
-                  duration: 0.3,
-                  ease: "power2.out",
-                });
-              }}
-            >
-              <span className="font-medium tracking-wide text-[1.1rem] transition-colors duration-300">
-                Let's Talk
-              </span>
-              <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-                <IoMdArrowDown
-                  size={25}
-                  className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
-                />
-              </div>
+            <button className="py-2 px-8 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-full transition-all duration-300 hover:bg-[#d62a33] cursor-pointer">
+              Let's Talk
             </button>
           </Link>
         </div>
@@ -595,7 +552,7 @@ useEffect(()=>{
 
       {/* Mountaineering Dropdown */}
       <div
-        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "mountaineering"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -685,7 +642,7 @@ useEffect(()=>{
 
       {/*heli service Dropdown */}
       <div
-        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "heliService"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -776,7 +733,7 @@ useEffect(()=>{
       {/* Trekking Dropdown */}
 
       <div
-        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "trekking"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -861,7 +818,7 @@ useEffect(()=>{
 
       {/* Company Dropdown */}
       <div
-        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
+        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "about"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -871,7 +828,7 @@ useEffect(()=>{
         <div className="container mx-auto py-8 px-18">
           <div className="flex h-80">
             {/* Left Categories Column */}
-            <div className="w-1/4 border-r px-8 py-8">
+            <div className="w-1/4 border-r border-r-zinc-800 px-8 py-8">
               <h3 className="text-xl font-sora mb-6 text-white">Company</h3>
               <ul className="space-y-4">
                 <li
@@ -926,62 +883,11 @@ useEffect(()=>{
                           exceptional mountaineering and trekking experiences
                           for adventure enthusiasts from around the world.
                         </p>
-                        <Link href="/fiveabout">
-                          <button
-                            className="py-2 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-lg transition-all duration-300 hover:bg-[#d62a4e]"
-                            onMouseEnter={(e) => {
-                              const arrowElement =
-                                e.currentTarget.querySelector(
-                                  ".talk-button-arrow"
-                                );
-                              const textElement =
-                                e.currentTarget.querySelector(
-                                  ".talk-button-text"
-                                );
-
-                              gsap.to(arrowElement, {
-                                rotation: 270,
-                                y: -2,
-                                duration: 0.3,
-                                ease: "power2.out",
-                              });
-
-                              gsap.to(textElement, {
-                                text: {
-                                  value: "Let's Talk",
-                                  delimiter: "",
-                                },
-                                duration: 0.2,
-                                ease: "none",
-                              });
-                            }}
-                            onMouseLeave={(e) => {
-                              const arrowElement =
-                                e.currentTarget.querySelector(
-                                  ".talk-button-arrow"
-                                );
-
-                              gsap.to(arrowElement, {
-                                rotation: 0,
-                                y: 0,
-                                duration: 0.3,
-                                ease: "power2.out",
-                              });
-                            }}
-                          >
-                            <a
-                              className="font-medium tracking-wide text-[1rem] transition-colors duration-300"
-                              href="/contact"
-                            >
-                              Learn More
-                            </a>
-                            <div className="h-8 w-8 bg-white rounded-lg flex items-center justify-center overflow-hidden">
-                              <IoMdArrowDown
-                                size={20}
-                                className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
-                              />
-                            </div>
-                          </button>
+                        <Link
+                          href="/fiveabout"
+                          className="text-[#ff4e69] hover:text-[#ff4e4e]"
+                        >
+                          Learn More
                         </Link>
                       </div>
                       <div className="flex-1">
@@ -1047,21 +953,21 @@ useEffect(()=>{
                       {aboutUsData.values.items.map((value, index) => (
                         <div
                           key={index}
-                          className="border rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
+                          className="border border-zinc-800 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
                         >
                           <div className="flex items-start gap-4">
-                            <div className="h-12 w-12 bg-[#FF4E58] rounded-full flex items-center justify-center text-white">
+                            <div className="h-12 w-12 bg-[#FF4E58] rounded-full items-center justify-center text-white hidden">
                               {index === 0 && <MapPin />}
                               {index === 1 && <Mail />}
                               {index === 2 && <Phone />}
                               {index === 3 && <ChevronRight />}
                             </div>
                             <div>
-                              <h3 className="text-lg font-semibold mb-1">
+                              <h3 className="text-lg font-semibold mb-1 text-[#FF4E58]">
                                 {value.name}
                               </h3>
                               <p className="text-white">{value.description}</p>
-                              <span className="inline-block mt-2 text-xs px-2 py-1 bg-[#FF4E58] rounded-md text-white">
+                              <span className="inline-block mt-2 text-xs px-2 py-1 bg-white rounded-md text-black">
                                 {value.tag}
                               </span>
                             </div>
