@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import {
+  AlignJustify,
+  CircleX,
   ChevronDown,
   MapPin,
   Phone,
@@ -15,17 +17,17 @@ import {
   teamData,
   heliServiceData,
 } from "./NavData";
-
 import Link from "next/link";
 import gsap from "gsap";
 import { IoMdArrowDown } from "react-icons/io";
 import { MdOutlineArrowRight } from "react-icons/md";
+import { bgImage } from "../../HeroComponents/bgimagedata";
 
 const Navbar = () => {
   // Main dropdown state
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const  [category,setCategory] = useState<string | null>(null);
 
+  // Categories state for each dropdown
   const [activeCategory, setActiveCategory] = useState({
     mountaineering: "8000m",
     heliService: "helicopter",
@@ -33,6 +35,29 @@ const Navbar = () => {
     about: "company",
   });
 
+  // Mobile navigation state
+  const [navOpen, setNavOpen] = useState(false);
+
+  // Mobile dropdown states
+  const [mobileDropdowns, setMobileDropdowns] = useState({
+    mountaineering: false,
+    trekking: false,
+    heliService: false,
+    about: false,
+  });
+
+  // Toggle mobile navigation
+  const toggleNav = () => {
+    setNavOpen(!navOpen);
+  };
+
+  // Toggle mobile dropdowns
+  const toggleMobileDropdown = (dropdown: string) => {
+    setMobileDropdowns({
+      ...mobileDropdowns,
+      [dropdown]: !mobileDropdowns[dropdown as keyof typeof mobileDropdowns],
+    });
+  };
 
   // Handle desktop dropdown hover and clicks
   const handleDropdown = (dropdown: string) => {
@@ -232,10 +257,251 @@ const Navbar = () => {
           </Link>
         </div>
 
-    
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden flex items-center">
+          <button
+            onClick={toggleNav}
+            className="p-2 hover:bg-gray-800 rounded-md transition-colors duration-300"
+          >
+            {navOpen ? <CircleX size={24} /> : <AlignJustify size={24} />}
+          </button>
+        </div>
       </div>
 
-     
+      {/* Mobile Navigation Menu */}
+      <div
+        className={`lg:hidden fixed inset-0 bg-black bg-opacity-95 z-50 transition-all duration-300 transform ${
+          navOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex justify-between items-center mb-8">
+            <img src="./logo1.png" alt="HighFive Adventures" className="h-8" />
+            <button
+              onClick={toggleNav}
+              className="text-white hover:text-[#FF4E58]"
+            >
+              <CircleX size={28} />
+            </button>
+          </div>
+
+          <nav className="text-white">
+            <ul className="space-y-0">
+              <li>
+                <Link href="/" onClick={toggleNav}>
+                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    Home
+                  </span>
+                </Link>
+              </li>
+
+              {/* Mobile Mountaineering Dropdown */}
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/allPeak"
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("mountaineering");
+                  }}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Mountaineering
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.mountaineering ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
+                {mobileDropdowns.mountaineering && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {Object.keys(mountaineeringData).map((category) => (
+                      <Link
+                        href={`/allPeak`}
+                        key={category}
+                        onClick={toggleNav}
+                      >
+                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                          <ChevronRight className="w-4 h-4 mr-2" />
+                          <span>
+                            {
+                              mountaineeringData[
+                                category as keyof typeof mountaineeringData
+                              ].title
+                            }
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Mobile heli Dropdown */}
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/helitour"
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("heliService");
+                  }}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Heli Service
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.heliService ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
+                {mobileDropdowns.heliService && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {Object.keys(heliServiceData).map((category) => (
+                      <Link
+                        href={`/helitour`}
+                        key={category}
+                        onClick={toggleNav}
+                      >
+                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                          <ChevronRight className="w-4 h-4 mr-2" />
+                          <span>
+                            {
+                              heliServiceData[
+                                category as keyof typeof heliServiceData
+                              ].title
+                            }
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Mobile Trekking Dropdown */}
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/allTrekking"
+                  className="block w-full"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleMobileDropdown("trekking");
+                  }}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Trekking
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.trekking ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </Link>
+                {mobileDropdowns.trekking && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    {Object.keys(trekkingData).map((region) => (
+                      <Link
+                        href={`/allTrekking`}
+                        key={region}
+                        onClick={toggleNav}
+                      >
+                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                          <ChevronRight className="w-4 h-4 mr-2" />
+                          <span>{region}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Mobile About Dropdown */}
+              <li className="border-b border-gray-800">
+                <div
+                  className="block w-full cursor-pointer"
+                  onClick={() => toggleMobileDropdown("about")}
+                >
+                  <div className="flex justify-between items-center py-4">
+                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                      Company
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform duration-300 ${
+                        mobileDropdowns.about ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                </div>
+                {mobileDropdowns.about && (
+                  <div className="mt-4 ml-4 space-y-3">
+                    <Link href="/about" onClick={toggleNav}>
+                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <ChevronRight className="w-4 h-4 mr-2" />
+                        <span>About Us</span>
+                      </div>
+                    </Link>
+                    <Link href="/team" onClick={toggleNav}>
+                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <ChevronRight className="w-4 h-4 mr-2" />
+                        <span>Our Team</span>
+                      </div>
+                    </Link>
+                    <Link href="/values" onClick={toggleNav}>
+                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <ChevronRight className="w-4 h-4 mr-2" />
+                        <span>Core Values</span>
+                      </div>
+                    </Link>
+                  </div>
+                )}
+              </li>
+
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/blogs"
+                  onClick={toggleNav}
+                  className="block w-full py-4"
+                >
+                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    Blogs
+                  </span>
+                </Link>
+              </li>
+
+              <li className="border-b border-gray-800">
+                <Link
+                  href="/contact_us"
+                  onClick={toggleNav}
+                  className="block w-full py-4"
+                >
+                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    Contact Us
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Mobile Let's Talk Button */}
+          <div className="mt-8">
+            <Link href="/contact" onClick={toggleNav}>
+              <button className="w-full py-4 bg-[#EA3359] text-white rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 hover:bg-[#d62a4e]">
+                <span>Let's Talk</span>
+                <ArrowUpRight size={20} />
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
 
       {/* Mountaineering Dropdown */}
       <div
@@ -396,6 +662,7 @@ const Navbar = () => {
                 </ul>
                 <Link
                   href="allHeli"
+                  // {`/heliService/${activeCategory.heliService}`}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
