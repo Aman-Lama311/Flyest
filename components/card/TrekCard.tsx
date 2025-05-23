@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Star, MapPin, Clock } from "lucide-react";
 import { trek } from "./TrekCardData";
 
@@ -6,22 +6,53 @@ const THEME_COLOR = "#FF4E58";
 
 const TrekCard = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef<boolean>(false);
-  const startX = useRef<number>(0);
-  const scrollLeft = useRef(0);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollStart = useRef(0);
+  const [cardWidth, setCardWidth] = useState(0);
 
+  useEffect(() => {
+    const updateCardWidth = () => {
+      if (cardRef.current) {
+        setCardWidth(cardRef.current.offsetWidth + 24); // +gap-6
+      }
+    };
+    updateCardWidth();
+    window.addEventListener("resize", updateCardWidth);
+    return () => window.removeEventListener("resize", updateCardWidth);
+  }, []);
+
+  // Auto-slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!scrollRef.current || isDragging.current || cardWidth === 0) return;
+      const container = scrollRef.current;
+      if (
+        container.scrollLeft + container.offsetWidth >=
+        container.scrollWidth
+      ) {
+        container.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        container.scrollBy({ left: cardWidth, behavior: "smooth" });
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [cardWidth]);
+
+  // Drag functionality
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
-    startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
-    scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+    startX.current = e.pageX;
+    scrollStart.current = scrollRef.current?.scrollLeft || 0;
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging.current || !scrollRef.current) return;
     e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5; // scroll speed
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+    const dx = e.pageX - startX.current;
+    scrollRef.current.scrollLeft = scrollStart.current - dx;
   };
 
   const handleMouseUp = () => {
@@ -39,7 +70,7 @@ const TrekCard = () => {
     Math.round(((oldPrice - newPrice) / oldPrice) * 100);
 
   return (
-    <div className="w-full bg-[url('/navbg.svg')] text-white py-12 px-4 md:px-8 lg:px-16">
+    <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 md:pl-8 lg:pl-16">
       <div className="text-center mb-10 max-w-xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-sans mb-3">
           Traveler's Favorite Treks
@@ -49,19 +80,19 @@ const TrekCard = () => {
         </p>
       </div>
 
-      {/* Horizontal dragable scroll area */}
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-hidden cursor-grab active:cursor-grabbing"
+        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing"
         onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseUp}
-        onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
-        {trek.map((item) => (
+        {trek.concat(trek).map((item, i) => (
           <article
-            key={item.id}
-            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col relative group"
+            ref={i === 0 ? cardRef : null}
+            key={i + "-" + item.id}
+            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] snap-start bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col relative group"
           >
             <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden">
               <img
@@ -78,10 +109,6 @@ const TrekCard = () => {
                   {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
                 </div>
               )}
-              {/* DRAG overlay on hover */}
-              <div className="absolute top-2 right-2 bg-white text-black text-xs font-bold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                Drag
-              </div>
             </div>
 
             <div className="p-5 flex flex-col flex-grow">
