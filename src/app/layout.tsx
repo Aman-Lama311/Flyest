@@ -3,8 +3,7 @@ import "./globals.css";
 import NavBar from "../../components/common/navbar/NavBar";
 import Footer from "../../components/common/footer/Footer";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "Flyeast",

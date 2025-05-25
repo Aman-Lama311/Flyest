@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { useBookingStore } from "@/store/BookingStore";
 import { addonOptions } from "@/static-data/addOnOptions";

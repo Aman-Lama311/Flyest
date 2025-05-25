@@ -105,7 +105,7 @@ const Navbar = () => {
       >
         {/* Logo */}
         <div>
-          <Link href="/">
+          <Link href="/" className="cursor-pointer">
             <img src="/logo1.png" alt="Flyeast Adventures" className="h-10" />
           </Link>
         </div>
@@ -114,7 +114,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center justify-center gap-8">
           <Link href="/">
             <button className="relative group">
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
                 Home
               </span>
             </button>
@@ -128,7 +128,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("trekking")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
                   Trekking
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -144,7 +144,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("mountaineering")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
                   Mountaineering
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -153,14 +153,14 @@ const Navbar = () => {
           </div>
 
           {/* Heli Button */}
-          <div className="relative">
+          <div className="relative ">
             {/* <Link href="/heliService"> */}
             <button
               onClick={() => handleDropdown("heliService")}
               onMouseEnter={() => setActiveDropdown("heliService")}
               className="relative group flex items-center gap-1"
             >
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
                 Heli Service
               </span>
               <ChevronDown className="w-4 h-4" />
@@ -175,7 +175,10 @@ const Navbar = () => {
               onMouseEnter={() => setActiveDropdown("about")}
               className="relative group flex items-center gap-1"
             >
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+              <span
+                className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer
+              "
+              >
                 Company
               </span>
               <ChevronDown className="w-4 h-4" />
@@ -186,7 +189,7 @@ const Navbar = () => {
           <Link href="/blogs">
             <div className="relative">
               <button className="relative group flex items-center gap-1">
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
                   Blogs
                 </span>
               </button>
@@ -197,7 +200,7 @@ const Navbar = () => {
           <div className="relative">
             <Link href="/contact_us">
               <button className="relative group flex items-center gap-1">
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
                   Contact Us
                 </span>
               </button>
@@ -795,9 +798,15 @@ const Navbar = () => {
                         </p>
                         <Link
                           href="/fiveabout"
-                          className="text-[#ff4e69] hover:text-[#ff4e4e]"
+                          className="text-[#ff4e69d3] hover:text-[#ff4e4e]"
                         >
-                          Learn More
+                          <div className="flex items-center gap-2">
+                            {" "}
+                            <p>Learn More </p>
+                            <span>
+                              <ChevronRight strokeWidth={3} size={15} />
+                            </span>
+                          </div>
                         </Link>
                       </div>
                       <div className="flex-1">
@@ -819,7 +828,7 @@ const Navbar = () => {
                       <h2 className="text-2xl font-sora text-white">
                         Our Team
                       </h2>
-                      <Link href="/team">
+                      <Link href="/fiveabout">
                         <div className="text-[#FF4E58] flex items-center gap-2 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                           <p>View All Team Members</p>
                           <ChevronRight strokeWidth={3} size={15} />

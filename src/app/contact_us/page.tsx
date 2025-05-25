@@ -97,10 +97,7 @@ const ContactPage = () => {
         {/* last message form section */}
         <div className="bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white py-16 px-4 sm:px-6 lg:px-20">
           <div className="w-full mx-auto">
-            <form
-              onSubmit={handleSubmit}
-              className="w-full w-full mx-auto space-y-6"
-            >
+            <form onSubmit={handleSubmit} className="w-full mx-auto space-y-6">
               <h1 className="text-4xl font-bold">
                 Do you want to experience{" "}
                 <span className="bg-clip-text text-[#EA3359]">
