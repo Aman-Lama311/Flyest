@@ -21,50 +21,11 @@ import Link from "next/link";
 import gsap from "gsap";
 import { IoMdArrowDown } from "react-icons/io";
 import { MdOutlineArrowRight } from "react-icons/md";
-import { CategoryType } from "../../../Types/CategoryTypes";
-import { getCategories } from "@/services/categoryService";
-import { SubCategoryType } from "../../../Types/SubCategoryTypes";
-import { getPackagebySubCategoryId } from "@/services/packageService";
-import { PackageType } from "../../../Types/PackageType";
+import { bgImage } from "../../HeroComponents/bgimagedata";
 
 const Navbar = () => {
   // Main dropdown state
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [category, setCategory] = useState<CategoryType[]>([]);
-  const [subCategory, setSubCategory] = useState<SubCategoryType[]>([]);
-  const [activeBackendCategory, setActiveBackendCategory] =
-    useState<CategoryType | null>(null);
-  const [activeSubCategory, setActiveSubCategory] =
-    useState<SubCategoryType | null>(null);
-  const [packageData, setPackageData] = useState<PackageType[]>([]);
-
-  const fetchPackage = async () => {
-    const res = await getPackagebySubCategoryId(
-      activeSubCategory?._id as string
-    );
-    const data = res.data;
-    setPackageData(data);
-  };
-
-  useEffect(() => {
-    fetchPackage();
-  }, [activeSubCategory]);
-
-  useEffect(() => {
-    if (activeBackendCategory && !activeSubCategory) {
-      setActiveSubCategory(activeBackendCategory.subCategories[0]);
-    }
-  }, [activeBackendCategory]);
-
-  const fetchCategory = async () => {
-    const res = await getCategories();
-    const data = res.data;
-    setCategory(data);
-  };
-
-  useEffect(() => {
-    fetchCategory();
-  }, []);
 
   // Categories state for each dropdown
   const [activeCategory, setActiveCategory] = useState({
@@ -144,7 +105,7 @@ const Navbar = () => {
       >
         {/* Logo */}
         <div>
-          <Link href="/" className="cursor-pointer">
+          <Link href="/">
             <img src="/logo1.png" alt="Flyeast Adventures" className="h-10" />
           </Link>
         </div>
@@ -153,7 +114,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center justify-center gap-8">
           <Link href="/">
             <button className="relative group">
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                 Home
               </span>
             </button>
@@ -167,7 +128,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("trekking")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                   Trekking
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -183,7 +144,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("mountaineering")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                   Mountaineering
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -192,108 +153,19 @@ const Navbar = () => {
           </div>
 
           {/* Heli Button */}
-          <div className="relative ">
+          <div className="relative">
             {/* <Link href="/heliService"> */}
             <button
               onClick={() => handleDropdown("heliService")}
               onMouseEnter={() => setActiveDropdown("heliService")}
               className="relative group flex items-center gap-1"
             >
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                 Heli Service
               </span>
               <ChevronDown className="w-4 h-4" />
             </button>
             {/* </Link> */}
-          </div>
-          {/* Category Button */}
-          {category.map((category) => (
-            <div key={category._id} className="relative">
-              <Link href={`/allTrekking`}>
-                <button
-                  onClick={() => handleDropdown(category.slug)}
-                  onMouseEnter={() => {
-                    setActiveDropdown(category.slug);
-                    setActiveBackendCategory(category);
-                    setSubCategory(category.subCategories);
-                  }}
-                  className="relative group flex items-center gap-1"
-                >
-                  <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
-                    {category.name}
-                  </span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-              </Link>
-            </div>
-          ))}
-
-          <div
-            className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
-              activeBackendCategory
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-4 pointer-events-none"
-            }`}
-            onMouseLeave={() => {
-              setActiveBackendCategory(null);
-              setActiveSubCategory(null);
-            }}
-          >
-            <div className="container mx-auto py-8 px-18">
-              <div className="flex h-80">
-                {/* Left Categories Column */}
-                <div className="w-1/4 border-r-2 border-r-zinc-800 px-8 py-8">
-                  <h3 className="text-xl font-sora mb-6 text-white">
-                    {activeBackendCategory?.name}
-                  </h3>
-                  <ul className="space-y-4">
-                    {subCategory.map((category) => (
-                      <li
-                        key={category._id}
-                        className={`cursor-pointer transition-all duration-300 ${
-                          activeBackendCategory === category
-                            ? "text-[#FF4E58] font-semibold translate-x-2"
-                            : "text-white hover:text-[#FF4E58]"
-                        }`}
-                        onClick={() => setActiveSubCategory(category)}
-                      >
-                        {category.name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Middle Content Column */}
-                <div className="w-3/4 px-8 animate-fade-in overflow-hidden">
-                  <div
-                    className="h-full opacity-100 animate-fade-in"
-                    key={activeSubCategory?._id}
-                  >
-                    <h2 className="text-2xl font-sora mb-6 text-white font-medium">
-                      {activeSubCategory?.name}
-                    </h2>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      {packageData.map((item, index) => (
-                        <Link href={`/itinerary`} key={index}>
-                          <li>
-                            <div className="flex items-center gap-4 hover:text-[#FF4E58]">
-                              <MdOutlineArrowRight className="h-6 w-6" />
-                              <h1>{item.name}</h1>
-                            </div>
-                          </li>
-                        </Link>
-                      ))}
-                    </ul>
-                    <Link href="allPeak">
-                      <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
-                        <p>View All {activeBackendCategory?.name}</p>
-                        <ChevronRight strokeWidth={3} size={15} />
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Company Button */}
@@ -303,10 +175,7 @@ const Navbar = () => {
               onMouseEnter={() => setActiveDropdown("about")}
               className="relative group flex items-center gap-1"
             >
-              <span
-                className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer
-              "
-              >
+              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                 Company
               </span>
               <ChevronDown className="w-4 h-4" />
@@ -317,7 +186,7 @@ const Navbar = () => {
           <Link href="/blogs">
             <div className="relative">
               <button className="relative group flex items-center gap-1">
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                   Blogs
                 </span>
               </button>
@@ -328,7 +197,7 @@ const Navbar = () => {
           <div className="relative">
             <Link href="/contact_us">
               <button className="relative group flex items-center gap-1">
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
                   Contact Us
                 </span>
               </button>
@@ -339,8 +208,51 @@ const Navbar = () => {
         {/* Let's Talk Button */}
         <div className="hidden md:block">
           <Link href="https://wa.me/+9779801086542" target="_blank">
-            <button className="py-2 px-8 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-full transition-all duration-300 hover:bg-[#d62a33] cursor-pointer">
-              Let's Talk
+            <button
+              className="py-2 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-xl transition-all duration-300 hover:bg-[#d62a4e]"
+              onMouseEnter={(e) => {
+                const arrowElement =
+                  e.currentTarget.querySelector(".talk-button-arrow");
+                const textElement =
+                  e.currentTarget.querySelector(".talk-button-text");
+
+                gsap.to(arrowElement, {
+                  rotation: 270,
+                  y: -2,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+
+                gsap.to(textElement, {
+                  text: {
+                    value: "Let's Talk",
+                    delimiter: "",
+                  },
+                  duration: 0.2,
+                  ease: "none",
+                });
+              }}
+              onMouseLeave={(e) => {
+                const arrowElement =
+                  e.currentTarget.querySelector(".talk-button-arrow");
+
+                gsap.to(arrowElement, {
+                  rotation: 0,
+                  y: 0,
+                  duration: 0.3,
+                  ease: "power2.out",
+                });
+              }}
+            >
+              <span className="font-medium tracking-wide text-[1.1rem] transition-colors duration-300">
+                Let's Talk
+              </span>
+              <div className="h-10 w-10 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                <IoMdArrowDown
+                  size={25}
+                  className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
+                />
+              </div>
             </button>
           </Link>
         </div>
@@ -593,7 +505,7 @@ const Navbar = () => {
 
       {/* Mountaineering Dropdown */}
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "mountaineering"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -683,7 +595,7 @@ const Navbar = () => {
 
       {/*heli service Dropdown */}
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "heliService"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -774,7 +686,7 @@ const Navbar = () => {
       {/* Trekking Dropdown */}
 
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "trekking"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -859,7 +771,7 @@ const Navbar = () => {
 
       {/* Company Dropdown */}
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`absolute left-0 top-20 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover ${
           activeDropdown === "about"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -869,7 +781,7 @@ const Navbar = () => {
         <div className="container mx-auto py-8 px-18">
           <div className="flex h-80">
             {/* Left Categories Column */}
-            <div className="w-1/4 border-r border-r-zinc-800 px-8 py-8">
+            <div className="w-1/4 border-r px-8 py-8">
               <h3 className="text-xl font-sora mb-6 text-white">Company</h3>
               <ul className="space-y-4">
                 <li
@@ -924,17 +836,62 @@ const Navbar = () => {
                           exceptional mountaineering and trekking experiences
                           for adventure enthusiasts from around the world.
                         </p>
-                        <Link
-                          href="/fiveabout"
-                          className="text-[#ff4e69d3] hover:text-[#ff4e4e]"
-                        >
-                          <div className="flex items-center gap-2">
-                            {" "}
-                            <p>Learn More </p>
-                            <span>
-                              <ChevronRight strokeWidth={3} size={15} />
-                            </span>
-                          </div>
+                        <Link href="/fiveabout">
+                          <button
+                            className="py-2 px-4 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-lg transition-all duration-300 hover:bg-[#d62a4e]"
+                            onMouseEnter={(e) => {
+                              const arrowElement =
+                                e.currentTarget.querySelector(
+                                  ".talk-button-arrow"
+                                );
+                              const textElement =
+                                e.currentTarget.querySelector(
+                                  ".talk-button-text"
+                                );
+
+                              gsap.to(arrowElement, {
+                                rotation: 270,
+                                y: -2,
+                                duration: 0.3,
+                                ease: "power2.out",
+                              });
+
+                              gsap.to(textElement, {
+                                text: {
+                                  value: "Let's Talk",
+                                  delimiter: "",
+                                },
+                                duration: 0.2,
+                                ease: "none",
+                              });
+                            }}
+                            onMouseLeave={(e) => {
+                              const arrowElement =
+                                e.currentTarget.querySelector(
+                                  ".talk-button-arrow"
+                                );
+
+                              gsap.to(arrowElement, {
+                                rotation: 0,
+                                y: 0,
+                                duration: 0.3,
+                                ease: "power2.out",
+                              });
+                            }}
+                          >
+                            <a
+                              className="font-medium tracking-wide text-[1rem] transition-colors duration-300"
+                              href="/contact"
+                            >
+                              Learn More
+                            </a>
+                            <div className="h-8 w-8 bg-white rounded-lg flex items-center justify-center overflow-hidden">
+                              <IoMdArrowDown
+                                size={20}
+                                className="talk-button-arrow text-[#EA3359] transition-transform duration-300"
+                              />
+                            </div>
+                          </button>
                         </Link>
                       </div>
                       <div className="flex-1">
@@ -956,7 +913,7 @@ const Navbar = () => {
                       <h2 className="text-2xl font-sora text-white">
                         Our Team
                       </h2>
-                      <Link href="/fiveabout">
+                      <Link href="/team">
                         <div className="text-[#FF4E58] flex items-center gap-2 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                           <p>View All Team Members</p>
                           <ChevronRight strokeWidth={3} size={15} />
@@ -1000,21 +957,21 @@ const Navbar = () => {
                       {aboutUsData.values.items.map((value, index) => (
                         <div
                           key={index}
-                          className="border border-zinc-800 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
+                          className="border rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
                         >
                           <div className="flex items-start gap-4">
-                            <div className="h-12 w-12 bg-[#FF4E58] rounded-full items-center justify-center text-white hidden">
+                            <div className="h-12 w-12 bg-[#FF4E58] rounded-full flex items-center justify-center text-white">
                               {index === 0 && <MapPin />}
                               {index === 1 && <Mail />}
                               {index === 2 && <Phone />}
                               {index === 3 && <ChevronRight />}
                             </div>
                             <div>
-                              <h3 className="text-lg font-semibold mb-1 text-[#FF4E58]">
+                              <h3 className="text-lg font-semibold mb-1">
                                 {value.name}
                               </h3>
                               <p className="text-white">{value.description}</p>
-                              <span className="inline-block mt-2 text-xs px-2 py-1 bg-white rounded-md text-black">
+                              <span className="inline-block mt-2 text-xs px-2 py-1 bg-[#FF4E58] rounded-md text-white">
                                 {value.tag}
                               </span>
                             </div>
