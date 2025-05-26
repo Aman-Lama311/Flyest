@@ -37,18 +37,40 @@ const Navbar = () => {
   const [activeSubCategory, setActiveSubCategory] =
     useState<SubCategoryType | null>(null);
   const [packageData, setPackageData] = useState<PackageType[]>([]);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
-  const fetchPackage = async () => {
-    const res = await getPackagebySubCategoryId(
-      activeSubCategory?._id as string
-    );
-    const data = res.data;
-    setPackageData(data);
-  };
+  // const fetchPackage = async () => {
+  //   const res = await getPackagebySubCategoryId(
+  //     activeSubCategory?._id as string
+  //   );
+  //   const data = res.data;
+  //   setPackageData(data);
+  // };
 
   useEffect(() => {
-    fetchPackage();
-  }, [activeSubCategory]);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Detect scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setShowNavbar(false); // Scroll down - hide
+      } else {
+        setShowNavbar(true); // Scroll up - show
+      }
+
+      setScrolled(currentScrollY > 0); // Track if page is scrolled
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  // useEffect(() => {
+  //   fetchPackage();
+  // }, [activeSubCategory]);
 
   useEffect(() => {
     if (activeBackendCategory && !activeSubCategory) {
@@ -56,15 +78,15 @@ const Navbar = () => {
     }
   }, [activeBackendCategory]);
 
-  const fetchCategory = async () => {
-    const res = await getCategories();
-    const data = res.data;
-    setCategory(data);
-  };
+  // const fetchCategory = async () => {
+  //   const res = await getCategories();
+  //   const data = res.data;
+  //   setCategory(data);
+  // };
 
-  useEffect(() => {
-    fetchCategory();
-  }, []);
+  // useEffect(() => {
+  //   fetchCategory();
+  // }, []);
 
   // Categories state for each dropdown
   const [activeCategory, setActiveCategory] = useState({
@@ -138,9 +160,17 @@ const Navbar = () => {
     <div id="" className="relative">
       {/* Main Navbar */}
       <div
-        className={`absolute top-0 z-50 py-4 px-4 md:px-24 w-full flex items-center justify-between font-sans font-medium text-[1rem] text-white ${
-          bgurl ? "bg-[url('/navbg.svg')]" : "bg-transparent"
-        } bg-cover`}
+        className={`${
+          showNavbar ? "translate-y-0" : "-translate-y-full"
+        } fixed top-0 z-50 w-full transition-transform duration-300 ease-in-out
+      ${
+        bgurl
+          ? "bg-[url('/navbg.svg')]"
+          : showNavbar && scrolled
+          ? "bg-black/10 backdrop-blur-2xl"
+          : "bg-transparent"
+      }
+      bg-cover py-4 px-4 md:px-24 flex items-center justify-between font-sans font-medium text-[1rem] text-white`}
       >
         {/* Logo */}
         <div>
@@ -175,7 +205,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mountaineering Button */}
+          {/* Peak Climbing Button */}
           <div className="relative">
             <Link href="/allPeak">
               <button
@@ -184,7 +214,7 @@ const Navbar = () => {
                 className="relative group flex items-center gap-1"
               >
                 <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
-                  Mountaineering
+                  Peak Climbing
                 </span>
                 <ChevronDown className="w-4 h-4" />
               </button>
@@ -605,7 +635,7 @@ const Navbar = () => {
             {/* Left Categories Column */}
             <div className="w-1/4 border-r-2 border-r-zinc-800 px-8 py-8">
               <h3 className="text-xl font-sora mb-6 text-white">
-                Mountaineering
+                Peak Climbing
               </h3>
               <ul className="space-y-4">
                 {Object.keys(mountaineeringData).map((category) => (

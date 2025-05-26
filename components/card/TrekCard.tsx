@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useRef, useEffect, useState } from "react";
 import { Star, MapPin, Clock } from "lucide-react";
 import { trek } from "./TrekCardData";
+import Title from "../../components/title/Title";
 
 const THEME_COLOR = "#FF4E58";
 
@@ -71,18 +74,22 @@ const TrekCard = () => {
 
   return (
     <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 md:pl-8 lg:pl-16">
-      <div className="text-center mb-10 max-w-xl mx-auto">
+      <Title
+        title={"Popular Treks     "}
+        discription={"Discover handpicked adventures loved by our community."}
+      />
+      {/* <div className="text-center mb-10 max-w-xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-sans mb-3">
           Traveler's Favorite Treks
         </h2>
         <p className="text-white text-base sm:text-lg">
           Discover handpicked adventures loved by our community.
         </p>
-      </div>
+      </div> */}
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing"
+        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing mt-18"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

@@ -20,9 +20,9 @@ const item = {
 };
 
 const heightCategories: HeightCategory[] = [
-  { id: "8000m", name: "Above 8000m", minHeight: 8000 },
-  { id: "7000m", name: "Above 7000m", minHeight: 7000 },
+  { id: "6500m", name: "Above 6500m", minHeight: 6500 },
   { id: "6000m", name: "Above 6000m", minHeight: 6000 },
+  { id: "5500m", name: "Above 5500m", minHeight: 5500 },
   { id: "5000m", name: "Above 5000m", minHeight: 5000 },
 ];
 
@@ -48,55 +48,48 @@ const Page = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      window.scrollTo({
-        top: el.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
-    <main className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:py-30 py-20 bg-[url('/navbg.svg')] px-4 md:px-8">
-      {/* Sidebar */}
-      <div className="md:bg-transparent md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-0 md:top-[6rem] left-0 flex justify-start font-medium">
-        <div className="grid grid-cols-5 md:grid-cols-1 mx-auto w-full">
-          {heightCategories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => scrollTo(category.id)}
-              className={`w-full px-6 py-5 text-left hover:bg-zinc-100 ease-in-out duration-200 md:text-sm text-xs font-semibold tracking-wide ${
-                activeSection === category.id
-                  ? "border-l-4 border-[#D62A4E] bg-blue-50"
-                  : "border-l-4 border-transparent"
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
+    <>
+      <div className="relative w-full h-[50vh] px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+        <img
+          src="https://cdn.pixabay.com/photo/2017/03/09/21/09/mountain-climbing-2130878_1280.jpg"
+          alt="dark pink"
+          className="w-full h-full object-cover rounded-b-4xl opacity-60"
+        />
+        <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">
+            Peak Climbing
+          </h2>
+
+          <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
+            Ready to conquer the Himalayas? Reach out to us to plan your next
+            peak climbing expedition—whether you're aiming for Island Peak, Mera
+            Peak, or other thrilling summits.
+          </p>
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="col-span-9 md:mt-0 mt-6">
-        {heightCategories.map((category) => (
-          <Element
-            key={category.id}
-            name={category.id}
-            id={category.id}
-            className={`scroll-mt-24 ${category.id !== "8000m" ? "mt-20" : ""}`}
-          >
-            <h2 className="title font-extrabold uppercase text-2xl mb-4">
-              {category.name}
-            </h2>
-            {/* Cards */}
-            <PackageCard />
-          </Element>
-        ))}
-      </div>
-    </main>
+      <main className="w-full  bg-[url('/navbg.svg')]">
+        {/* Main Content */}
+        <div className="px-4 md:px-8 py-16 space-y-20">
+          {heightCategories.map((category) => (
+            <Element
+              key={category.id}
+              name={category.id}
+              id={category.id}
+              className={`scroll-mt-24 ${
+                category.id !== "8000m" ? "mt-20" : ""
+              }`}
+            >
+              <h2 className="title font-bold uppercase text-white text-5xl mb-4 text-center">
+                {category.name}
+              </h2>
+              {/* Cards */}
+              <PackageCard />
+            </Element>
+          ))}
+        </div>
+      </main>
+    </>
   );
 };
 

@@ -57,43 +57,47 @@ const Page = () => {
   };
 
   return (
-    <main className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:pt-30 py-20 px-4 md:px-8 bg-[url('/navbg.svg')]">
-      {/* Sidebar */}
-      <div className="mx-auto md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-[4rem] md:top-[6rem] left-0 flex justify-start font-medium">
-        <div className="grid grid-cols-3 md:grid-cols-1 mx-auto w-full">
-          {trekkingRegions.map((region) => (
-            <button
-              key={region.id}
-              onClick={() => scrollTo(region.id)}
-              className={`w-full px-6 py-5 text-left hover:bg-zinc-100 ease-in-out duration-200 md:text-sm text-xs font-semibold tracking-wide ${
-                activeSection === region.id
-                  ? "border-l-4 border-[#D62A4E] bg-blue-50"
-                  : "border-l-4 border-transparent"
-              }`}
-            >
-              {region.name}
-            </button>
-          ))}
+    <>
+      <div className="relative w-full h-[50vh] px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+        <img
+          src="https://cdn.pixabay.com/photo/2020/04/19/08/03/adventure-5062314_1280.jpg"
+          alt="dark pink"
+          className="w-full h-full object-cover rounded-b-4xl opacity-60"
+        />
+        <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">
+            Trekking
+          </h2>
+
+          <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
+            Embark on a breathtaking trekking journey through the majestic
+            Himalayas. Contact us to plan your perfect adventure, whether it's
+            Everest Base Camp, Annapurna Circuit, or a hidden gem off the beaten
+            path.
+          </p>
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="col-span-9 md:mt-0 mt-4">
-        {trekkingRegions.map((region) => (
-          <Element
-            key={region.id}
-            name={region.id}
-            id={region.id}
-            className={`scroll-mt-24 ${region.id !== "everest" ? "mt-20" : ""}`}
-          >
-            <h2 className="title font-extrabold uppercase text-2xl mb-4">
-              {region.name}
-            </h2>
-            <PackageCard />
-          </Element>
-        ))}
-      </div>
-    </main>
+      <main className="w-full  bg-[url('/navbg.svg')]">
+        {/* Main Content */}
+        <div className="px-4 md:px-8 py-36 space-y-20">
+          {trekkingRegions.map((region) => (
+            <Element
+              key={region.id}
+              name={region.id}
+              id={region.id}
+              className={`scroll-mt-24 ${
+                region.id !== "everest" ? "mt-20" : ""
+              }`}
+            >
+              <h2 className="title font-bold uppercase text-white text-5xl mb-4 text-center">
+                {region.name}
+              </h2>
+              <PackageCard />
+            </Element>
+          ))}
+        </div>
+      </main>
+    </>
   );
 };
 

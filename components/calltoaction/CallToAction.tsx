@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
+import Title from "../../components/title/Title";
 
 const CallToAction = () => {
   return (
     <div className="w-full py-16 md:py-24 bg-[url('/navbg.svg')] text-white">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-24 items-center px-4 md:px-8">
         {/* Left Content Section */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
+        <div className="w-full md:w-1/2 text-center md:text-left bg-zinc-900/50 p-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-snug md:leading-tight">
             Why Choose Flyeast Nepal For Your Next Adventures?
           </h2>

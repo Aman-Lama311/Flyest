@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { Calendar, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import Title from "../../components/title/Title";
 
 interface Activity {
   title: string;
@@ -93,16 +94,13 @@ const ActivityCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full bg-[url('/navbg.svg')] py-12 px-4 sm:px-8 overflow-hidden no-scrollbar">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4">
-        Choose Your Next Activities
-      </h2>
-      <p className="text-center text-white text-sm sm:text-base md:text-lg mb-10 max-w-3xl mx-auto">
-        Discover a variety of thrilling activities — from scenic hikes to
-        adrenaline-pumping adventures.
-      </p>
+    <div className="relative w-full bg-[url('/navbg.svg')] py-12 px-4 sm:px-8 overflow-hidden no-scrollbar text-white">
+      <Title
+        title="Choose Your Next Activities"
+        discription="Discover a variety of thrilling activities — from scenic hikes to adrenaline-pumping adventures."
+      />
 
-      <div className="relative">
+      <div className="relative mt-18">
         {/* Scrollable Cards */}
         <div
           ref={scrollRef}
@@ -122,22 +120,22 @@ const ActivityCarousel: React.FC = () => {
               </div>
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-bold mb-1">{activity.title}</h3>
-                <div className="flex items-center text-xs text-gray-300 mb-2">
+                <div className="flex items-center text-sm text-gray-300 mb-2">
                   <MapPin size={14} className="mr-1 text-red-400" />
                   {activity.location}
                   <Calendar size={14} className="ml-3 mr-1 text-red-400" />
                   {activity.date}
                 </div>
-                <p className="text-xs text-gray-200 mb-4 flex-grow font-sans">
+                <p className="text-sm text-gray-200 mb-4 flex-grow font-sans line-clamp-3">
                   {activity.description} Experience nature like never before
                   with our trusted guides and curated experiences that promise
                   unforgettable memories.
                 </p>
                 <div className="flex gap-2 mt-auto">
-                  <button className="w-1/2 text-xs font-medium bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded-lg transition duration-200">
+                  <button className="w-1/2 text-sm font-medium bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded-lg transition duration-200">
                     View Itinerary
                   </button>
-                  <button className="w-1/2 text-xs font-medium border border-red-500 text-red-500 hover:bg-red-50 py-2 px-3 rounded-lg transition duration-200">
+                  <button className="w-1/2 text-sm font-medium border border-red-500 text-red-500 hover:bg-red-50 py-2 px-3 rounded-lg transition duration-200">
                     Book Now
                   </button>
                 </div>

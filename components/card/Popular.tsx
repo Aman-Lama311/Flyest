@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useRef, useEffect } from "react";
 import { Star, MapPin, Clock } from "lucide-react";
 import { trek } from "./TrekCardData";
+import Title from "../../components/title/Title";
 
 const THEME_COLOR = "#FF4E58";
 
@@ -68,19 +71,14 @@ const TrekCard = () => {
 
   return (
     <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 sm:pl-6 md:pl-10 lg:pl-16">
-      <div className="text-center mb-10 max-w-3xl mx-auto">
-        <h2 className="text-3xl sm:text-5xl font-bold mb-3">
-          Popular Expeditions
-        </h2>
-        <p className="text-sm sm:text-base">
-          Popular expeditions often take adventurers to the most challenging and
-          awe-inspiring places on Earth.
-        </p>
-      </div>
+      <Title
+        title="Peak Climbing"
+        discription="Discover our most popular trekking destinations"
+      />
 
       <div
         ref={containerRef}
-        className="overflow-x-auto flex gap-6 cursor-grab active:cursor-grabbing"
+        className="overflow-x-auto flex gap-6 cursor-grab active:cursor-grabbing mt-18"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

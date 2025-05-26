@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Shield, Award, Users, Clock } from "lucide-react";
+import Title from "../../components/title/Title";
 
 interface Feature {
   id: number;
@@ -72,25 +73,22 @@ const About: React.FC = () => {
       <section className="relative w-full py-14 md:py-18 bg-[url('/navbg.svg')] text-white rounded-lg font-sans">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Section Title */}
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold leading-tight">
-              Why Choose Us
-            </h2>
-            <p className="mt-3 text-gray-300 text-base sm:text-lg md:text-xl">
-              We’re dedicated to providing exceptional service with our team of
-              professionals.
-            </p>
-          </div>
+          <Title
+            title={"Why Choose Us"}
+            discription={
+              "We're dedicated to providing exceptional service with our team of professionals."
+            }
+          />
 
           {/* CTA Button */}
-          <div className="mt-10  text-center">
+          {/* <div className="mt-10  text-center">
             <button className="px-5 py-2.5 font-semibold text-white transition bg-[#D62A4E] rounded-lg hover:bg-red-700 text-sm sm:text-base">
               Learn More About Our Services
             </button>
-          </div>
+          </div> */}
 
           {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-18">
             {features.map((feature, index) => {
               const Icon = icons[index];
 
@@ -130,12 +128,12 @@ const About: React.FC = () => {
                   {/* Text */}
                   <div className="mt-3 md:mt-0 md:ml-5 text-left flex-1">
                     <h3
-                      className={`text-xl sm:text-2xl font-bold ${feature.titleColor}`}
+                      className={`text-2xl sm:text-4xl font-bold ${feature.titleColor}`}
                     >
                       {feature.title}
                     </h3>
                     <p
-                      className={`mt-1 text-sm sm:text-base ${feature.textColor}`}
+                      className={`mt-1 text-lg sm:text-xl ${feature.textColor}`}
                     >
                       {feature.description}
                     </p>

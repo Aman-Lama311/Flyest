@@ -9,15 +9,6 @@ interface TrekkingRegion {
   name: string;
 }
 
-const item = {
-  slug: "everest-base-camp-trek",
-  banner: "/heroimages/everest.webp",
-  title: "Everest Base Camp Trek",
-  overview:
-    "Embark on a once-in-a-lifetime adventure to the foot of the world's tallest mountain. Experience breathtaking views, Sherpa culture, and challenging trails.",
-  duration: 14,
-};
-
 const trekkingRegions: TrekkingRegion[] = [
   { id: "everest", name: "Round Trip Everest" },
   { id: "annapurna", name: "Round Trip Annapurna Region" },
@@ -35,7 +26,10 @@ const Page = () => {
           setActiveSection(visible.target.id);
         }
       },
-      { threshold: 0.5 }
+      {
+        threshold: 0.5,
+        rootMargin: "-96px 0px 0px 0px", // Adjust for fixed navbar height (~96px)
+      }
     );
 
     trekkingRegions.forEach((region) => {
@@ -46,54 +40,54 @@ const Page = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      window.scrollTo({
-        top: el.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  };
+  // const scrollTo = (id: string) => {
+  //   const el = document.getElementById(id);
+  //   if (el) {
+  //     const topOffset = 96; // Adjust for site navbar + region navbar
+  //     const y = el.getBoundingClientRect().top + window.pageYOffset - topOffset;
+  //     window.scrollTo({ top: y, behavior: "smooth" });
+  //   }
+  // };
 
   return (
-    <main className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:py-30 py-20 px-4 md:px-8 bg-[url('/navbg.svg')]">
-      {/* Sidebar */}
-      <div className="md:col-span-2 col-span-10 h-fit w-full lg:w-40 flex-col gap-8 sticky top-[4rem] md:top-[6rem] left-0 flex justify-start font-medium">
-        <div className="grid grid-cols-3 md:grid-cols-1 w-full">
-          {trekkingRegions.map((region) => (
-            <button
-              key={region.id}
-              onClick={() => scrollTo(region.id)}
-              className={`w-full px-6 py-5 text-left hover:bg-zinc-100 ease-in-out duration-200 md:text-sm text-xs font-semibold tracking-wide ${
-                activeSection === region.id
-                  ? "border-l-4 border-[#D62A4E] bg-blue-50"
-                  : "border-l-4 border-transparent"
-              }`}
-            >
-              {region.name}
-            </button>
-          ))}
+    <>
+      <div className="relative w-full h-[50vh] px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+        <img
+          src="https://cdn.pixabay.com/photo/2013/09/26/16/00/helicopter-186718_1280.jpg"
+          alt="dark pink"
+          className="w-full h-full object-cover rounded-b-4xl opacity-60"
+        />
+        <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">
+            Helicopter Services
+          </h2>
+
+          <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
+            Experience the Himalayas like never before. Contact us to book
+            private helicopter tours, emergency rescues, or scenic mountain
+            flights tailored for comfort and adventure.
+          </p>
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="col-span-9 md:mt-0 mt-4">
-        {trekkingRegions.map((region) => (
-          <Element
-            key={region.id}
-            name={region.id}
-            id={region.id}
-            className={`scroll-mt-24 ${region.id !== "everest" ? "mt-20" : ""}`}
-          >
-            <h2 className="title font-extrabold uppercase text-2xl mb-4">
-              {region.name}
-            </h2>
-            <PackageCard />
-          </Element>
-        ))}
-      </div>
-    </main>
+      <main className="w-full  bg-[url('/navbg.svg')]">
+        {/* === Content Section === */}
+        <div className="px-4 md:px-8 py-36 space-y-20">
+          {trekkingRegions.map((region) => (
+            <Element
+              key={region.id}
+              name={region.id}
+              id={region.id}
+              className="scroll-mt-28" // Adds spacing for smooth scroll positioning
+            >
+              <h2 className="text-5xl font-bold uppercase text-white mb-4 text-center">
+                {region.name}
+              </h2>
+              <PackageCard />
+            </Element>
+          ))}
+        </div>
+      </main>
+    </>
   );
 };
 
