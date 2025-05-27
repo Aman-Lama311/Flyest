@@ -4,37 +4,46 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/navbg.svg')] "></div>
+    <footer className="relative w-full min-h-[75vh] bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
+      {/* Background overlays */}
+      <div className="absolute inset-0 bg-[url('/navbg.svg')] z-10 opacity-70"></div>
+      <div className="absolute top-0 left-0 w-full h-[15vh] bg-gradient-to-b from-gray-900/50 z-10 opacity-70"></div>
+      <div className="absolute inset-0 bg-[url('https://www.relaxgetaways.com/uploads/media/Short%20Treks/intero%20for%20short%20trek.jpg')] bg-cover bg-center"></div>
 
-      {/* Decorative Background Image */}
+      {/* Decorative image */}
       <img
-        className="absolute right-0 bottom-0 opacity-10 w-80 h-80 object-cover"
+        className="absolute right-0 bottom-0 opacity-10 w-72 sm:w-80 h-72 sm:h-80 object-cover"
         src="/heroimages/footer.svg"
-        alt=""
+        alt="Footer Decorative"
       />
 
-      {/* Main Footer Content */}
-      <div className="relative z-10 w-full px-4 md:px-24 pt-16 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Hero Section */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Logo */}
-            <div className="flex items-center">
-              <img src="/logo1.png" alt="Logo" className="h-12 sm:h-16" />
-            </div>
+      {/* Main Content */}
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-24 pt-16 pb-10">
+        {/* Hero Section */}
+        <div className="max-w-7xl mx-auto space-y-8">
+          {/* Logo */}
+          <div className="flex items-center">
+            <img src="/logo1.png" alt="Logo" className="h-12 sm:h-16" />
+          </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Exploring paths unknown, one step at a time.
-            </h1>
-            <p className="text-gray-300 text-lg leading-relaxed max-w-md">
-              Discover breathtaking adventures and create unforgettable memories
-              with our expertly guided expeditions.
-            </p>
+          {/* Headline */}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-[#FF4E58] to-orange-400 bg-clip-text text-transparent">
+            Explore Nepal. Once in a lifetime.
+          </h1>
 
-            {/* Social Links */}
-            <div className="flex space-x-4 pt-4">
+          {/* Description */}
+          <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+            Discover breathtaking adventures and create unforgettable memories
+            with our expertly guided heroes.
+          </p>
+
+          {/* CTA + Social */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+            <button className="bg-[#FB2C36] hover:bg-[#ff4e57] text-white px-6 py-3 rounded-full font-semibold text-sm transition-all">
+              Experience Now
+            </button>
+
+            <div className="flex space-x-4 items-center">
               {[
                 { label: "f", colors: "from-red-500 to-red-600" },
                 { label: "t", colors: "from-blue-500 to-blue-600" },
@@ -44,77 +53,9 @@ const Footer = () => {
                   key={index}
                   className={`w-10 h-10 bg-gradient-to-r ${colors} rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer`}
                 >
-                  <span className="text-sm font-bold">{label}</span>
+                  <span className="text-sm font-bold uppercase">{label}</span>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 lg:gap-12">
-            {/* General Links */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white border-b border-red-500 pb-2 mb-4">
-                GENERAL
-              </h3>
-              <nav className="space-y-3">
-                {["Home", "About", "Insights", "News", "Contact"].map(
-                  (item) => (
-                    <p
-                      key={item}
-                      className="text-gray-300 hover:text-red-400 hover:translate-x-1 transition-all duration-200 cursor-pointer text-base"
-                    >
-                      {item}
-                    </p>
-                  )
-                )}
-              </nav>
-            </div>
-
-            {/* Solutions Links */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white border-b border-red-500 pb-2 mb-4">
-                SOLUTIONS
-              </h3>
-              <nav className="space-y-3">
-                {[
-                  "Trekking",
-                  "Hiking",
-                  "Mountain Climbing",
-                  "Adventure Tours",
-                  "Cultural Tours",
-                ].map((item) => (
-                  <p
-                    key={item}
-                    className="text-gray-300 hover:text-red-400 hover:translate-x-1 transition-all duration-200 cursor-pointer text-base"
-                  >
-                    {item}
-                  </p>
-                ))}
-              </nav>
-            </div>
-
-            {/* Support Links */}
-            <div className="space-y-4 col-span-2 sm:col-span-1">
-              <h3 className="text-xl font-semibold text-white border-b border-red-500 pb-2 mb-4">
-                SUPPORT
-              </h3>
-              <nav className="space-y-3">
-                {[
-                  "Help Center",
-                  "Safety Guidelines",
-                  "Booking Policy",
-                  "Terms & Conditions",
-                  "Privacy Policy",
-                ].map((item) => (
-                  <p
-                    key={item}
-                    className="text-gray-300 hover:text-red-400 hover:translate-x-1 transition-all duration-200 cursor-pointer text-base"
-                  >
-                    {item}
-                  </p>
-                ))}
-              </nav>
             </div>
           </div>
         </div>
@@ -122,25 +63,20 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="relative z-10 border-t border-gray-700/50">
-        <div className="w-full px-4 md:px-24 py-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-            {/* Copyright */}
-            <div>
-              <p className="text-gray-400 text-sm">
-                © 2025 Flyeast Experience Nepal. All Rights Reserved.
-              </p>
-            </div>
-
-            {/* Designed by */}
+        <div className="w-full px-4 sm:px-8 lg:px-24 py-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-center lg:text-left">
+            <p className="text-gray-300 text-sm">
+              © 2025 Flyeast Experience Nepal. All Rights Reserved.
+            </p>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-400 text-sm">
+              <span className="text-gray-300 text-sm">
                 Designed and Developed by
               </span>
-              <Link href={"https://www.webxnep.com/"} target="_blank">
+              <Link href="https://www.webxnep.com/" target="_blank">
                 <img
-                  className="w-12 h-10 opacity-80 hover:opacity-100 transition-opacity"
                   src="https://www.webxnep.com/logo/logo.svg"
                   alt="WebX Nepal"
+                  className="w-12 h-10 opacity-80 hover:opacity-100 transition-opacity object-contain"
                 />
               </Link>
             </div>

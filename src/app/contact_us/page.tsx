@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +40,9 @@ const ContactPage = () => {
   return (
     <>
       <div className="relative w-full h-[50vh] px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+        <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
+          <Phone size={120} color="white" />
+        </div>
         <img
           src="https://static.vecteezy.com/system/resources/previews/026/712/861/non_2x/dark-grainy-gradient-abstract-background-red-orange-purple-glowing-light-texture-free-photo.jpg"
           alt="dark pink"
@@ -50,13 +53,13 @@ const ContactPage = () => {
             Contact Us
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
+          {/* <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
             Ready to begin your mountain adventure? Reach out to us and let's
             plan your next unforgettable journey together.
-          </p>
+          </p> */}
         </div>
       </div>
-      <div className="py-16 lg:py-32 px-4 sm:px-6 lg:px-20 bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white">
+      <div className="py-16  px-4 sm:px-6 lg:px-20 bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white">
         <div className="max-w-screen-xl mx-auto">
           {/* Contact Details */}
           <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md flex flex-wrap justify-between gap-6">

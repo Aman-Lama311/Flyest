@@ -29,7 +29,7 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <div className="relative">
       {/* Hero Full-Width Image */}
       <div className="w-full h-[80vh] relative">
         <img
@@ -37,7 +37,8 @@ const Page = () => {
           alt="Hero"
           className="w-full h-full object-cover"
         />
-        {/* Optional: Overlay content here */}
+        {/* Overlay content here */}
+        <div className="absolute left-0 right-0 w-full h-[20vh] top-0 bg-gradient-to-b from-black/70 z-20" />
       </div>
 
       <Title />

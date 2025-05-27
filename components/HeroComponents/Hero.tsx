@@ -1,6 +1,6 @@
 "use client";
 
-import { FaArrowDown } from "react-icons/fa";
+import { ArrowBigDownDash } from "lucide-react";
 
 // import React, { useState, useEffect, useRef } from "react";
 // import { bgImage } from "./bgimagedata";
@@ -653,16 +653,16 @@ const Hero = () => {
         <div className=" p-6 sm:p-8 md:p-10 lg:p-12 text-center w-full tracking-widest">
           {/* Titles */}
           <div className="w-full flex flex-col items-center">
-            <h1 className="text-6xl lg:text-[10vw] text-[#D62A4E] text-center font-bold  uppercase">
+            <h1 className="text-6xl lg:text-[10vw] text-center font-bold uppercase text-transparent stroke-text">
               Experience Nepal
             </h1>
           </div>
         </div>
       </div>
-      <div className="absolute bottom-10 text-xl text-[#D62A4E] left-1/2 -translate-x-1/2 font-bold uppercase animate-bounce flex flex-col items-center">
-        <p>Scroll Down</p>
+      <div className="absolute bottom-5 text-xl text-white text-shadow-2xs left-1/2 -translate-x-1/2 font-bold uppercase animate-bounce flex flex-col items-center">
+        <p className="text-sm">Scroll Down</p>
         <span>
-          <FaArrowDown />
+          <ArrowBigDownDash size={30} />
         </span>
       </div>
     </div>

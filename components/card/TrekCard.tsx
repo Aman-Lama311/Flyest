@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { Star, MapPin, Clock } from "lucide-react";
+import { Star, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { trek } from "./TrekCardData";
 import Title from "../../components/title/Title";
 
@@ -14,6 +14,9 @@ const TrekCard = () => {
   const startX = useRef(0);
   const scrollStart = useRef(0);
   const [cardWidth, setCardWidth] = useState(0);
+  const isTransitioning = useRef(false);
+
+  const extendedTrek = [...trek, ...trek, ...trek];
 
   useEffect(() => {
     const updateCardWidth = () => {
@@ -26,25 +29,62 @@ const TrekCard = () => {
     return () => window.removeEventListener("resize", updateCardWidth);
   }, []);
 
-  // Auto-slide
+  useEffect(() => {
+    if (scrollRef.current && cardWidth > 0) {
+      const middlePosition = trek.length * cardWidth;
+      scrollRef.current.scrollLeft = middlePosition;
+    }
+  }, [cardWidth]);
+
+  const handleScroll = () => {
+    if (!scrollRef.current || isTransitioning.current || cardWidth === 0)
+      return;
+
+    const container = scrollRef.current;
+    const scrollLeft = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.offsetWidth;
+    const sectionWidth = trek.length * cardWidth;
+
+    if (scrollLeft >= maxScroll - 10) {
+      isTransitioning.current = true;
+      container.scrollLeft = sectionWidth;
+      setTimeout(() => {
+        isTransitioning.current = false;
+      }, 50);
+    } else if (scrollLeft <= 10) {
+      isTransitioning.current = true;
+      container.scrollLeft = sectionWidth;
+      setTimeout(() => {
+        isTransitioning.current = false;
+      }, 50);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!scrollRef.current || isDragging.current || cardWidth === 0) return;
-      const container = scrollRef.current;
       if (
-        container.scrollLeft + container.offsetWidth >=
-        container.scrollWidth
-      ) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollBy({ left: cardWidth, behavior: "smooth" });
-      }
+        !scrollRef.current ||
+        isDragging.current ||
+        cardWidth === 0 ||
+        isTransitioning.current
+      )
+        return;
+
+      const container = scrollRef.current;
+      container.scrollBy({ left: cardWidth, behavior: "smooth" });
     }, 3000);
 
     return () => clearInterval(interval);
   }, [cardWidth]);
 
-  // Drag functionality
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+      return () => container.removeEventListener("scroll", handleScroll);
+    }
+  }, [cardWidth]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
     startX.current = e.pageX;
@@ -62,6 +102,22 @@ const TrekCard = () => {
     isDragging.current = false;
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    isDragging.current = true;
+    startX.current = e.touches[0].pageX;
+    scrollStart.current = scrollRef.current?.scrollLeft || 0;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    const dx = e.touches[0].pageX - startX.current;
+    scrollRef.current.scrollLeft = scrollStart.current - dx;
+  };
+
+  const handleTouchEnd = () => {
+    isDragging.current = false;
+  };
+
   const formatPrice = (price: number) =>
     new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -73,32 +129,51 @@ const TrekCard = () => {
     Math.round(((oldPrice - newPrice) / oldPrice) * 100);
 
   return (
-    <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 md:pl-8 lg:pl-16">
+    <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 md:pl-8 lg:pl-16 relative">
       <Title
-        title={"Popular Treks     "}
+        title={"Popular Treks"}
         discription={"Discover handpicked adventures loved by our community."}
       />
-      {/* <div className="text-center mb-10 max-w-xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-sans mb-3">
-          Traveler's Favorite Treks
-        </h2>
-        <p className="text-white text-base sm:text-lg">
-          Discover handpicked adventures loved by our community.
-        </p>
-      </div> */}
+
+      {/* Slide Arrows */}
+      <button
+        onClick={() =>
+          scrollRef.current?.scrollBy({ left: -cardWidth, behavior: "smooth" })
+        }
+        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 bg-gray-300 hover:bg-gray-200 p-2 rounded-full transition-all"
+      >
+        <ChevronLeft className="w-6 h-6 text-black" />
+      </button>
+
+      <button
+        onClick={() =>
+          scrollRef.current?.scrollBy({ left: cardWidth, behavior: "smooth" })
+        }
+        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 bg-gray-300 hover:bg-gray-200 p-2 rounded-full  transition-all"
+      >
+        <ChevronRight className="w-6 h-6 text-black" />
+      </button>
 
       <div
         ref={scrollRef}
         className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing mt-18"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitScrollbar: "none",
+        }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        {trek.concat(trek).map((item, i) => (
+        {extendedTrek.map((item, i) => (
           <article
             ref={i === 0 ? cardRef : null}
-            key={i + "-" + item.id}
+            key={`${item.id}-${Math.floor(i / trek.length)}-${i}`}
             className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] snap-start bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col relative group"
           >
             <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden">
@@ -178,13 +253,13 @@ const TrekCard = () => {
                 <div className="flex gap-3">
                   <button
                     style={{ backgroundColor: THEME_COLOR }}
-                    className="flex-1 font-medium hover:bg-red-600 text-white py-3 px-4 rounded-lg"
+                    className="flex-1 font-medium hover:bg-red-600 text-white py-3 px-4 rounded-lg transition-colors duration-200"
                   >
                     View itinerary
                   </button>
                   <button
                     style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
-                    className="flex-1 font-medium border hover:bg-red-50 py-3 px-4 rounded-lg"
+                    className="flex-1 font-medium border hover:bg-red-50 hover:bg-opacity-10 py-3 px-4 rounded-lg transition-colors duration-200"
                   >
                     Book Now
                   </button>

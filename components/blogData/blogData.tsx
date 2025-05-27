@@ -141,7 +141,7 @@ These trails reward curiosity and respect. Step off the beaten path and find you
     author: "James",
     comments: 4,
     image:
-      "https://lh4.googleusercontent.com/cePjwNW9vq9jhn_-avYNESH4-f-wx7pskon6qGT-f7T2AO-XkqpYeYBinGBUeJdWKtuD8ZDprTnlkC49jUGFAw5wtjlF2v3Rlet9aIk2q_4Ski5qs--y2clO0PUtpeLLIAOgZY9a",
+      "https://cdn.pixabay.com/photo/2023/11/05/21/04/alps-8368328_1280.jpg",
     content: `
 ### Introduction
 
@@ -184,7 +184,7 @@ The wild is beautiful, but it doesn't play fair. Plan ahead, stay aware, and alw
     author: "Maya",
     comments: 7,
     image:
-      "https://himtemp.s3.ap-south-1.amazonaws.com/safety_tips_for_trekking_1.png",
+      "https://cdn.pixabay.com/photo/2023/01/15/17/58/nature-7720825_1280.jpg",
     content: `
 ### Why Nutrition Matters
 

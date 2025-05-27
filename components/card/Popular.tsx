@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { Star, MapPin, Clock } from "lucide-react";
+import { Star, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { trek } from "./TrekCardData";
 import Title from "../../components/title/Title";
 
@@ -21,21 +21,19 @@ const TrekCard = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Refs for drag state
+  // Drag state
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollStartRef = useRef(0);
 
-  // Auto slide every 3 seconds
+  // Auto-slide every 3s
   useEffect(() => {
     const interval = setInterval(() => {
       const container = containerRef.current;
       const card = cardRef.current;
-
       if (container && card) {
-        const cardWidth = card.offsetWidth + 24; // includes margin (gap-6 = 1.5rem = 24px)
+        const cardWidth = card.offsetWidth + 24;
         const maxScrollLeft = container.scrollWidth - container.clientWidth;
-
         if (container.scrollLeft + cardWidth >= maxScrollLeft) {
           container.scrollTo({ left: 0, behavior: "smooth" });
         } else {
@@ -43,7 +41,6 @@ const TrekCard = () => {
         }
       }
     }, 3000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -69,16 +66,41 @@ const TrekCard = () => {
     isDraggingRef.current = false;
   };
 
+  // Slide manually on button click
+  const scroll = (direction: "left" | "right") => {
+    const container = containerRef.current;
+    const card = cardRef.current;
+    if (container && card) {
+      const cardWidth = card.offsetWidth + 24;
+      const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 sm:pl-6 md:pl-10 lg:pl-16">
+    <div className="w-full bg-[url('/navbg.svg')] text-white py-12 pl-4 sm:pl-6 md:pl-10 lg:pl-16 relative">
       <Title
         title="Peak Climbing"
         discription="Discover our most popular trekking destinations"
       />
 
+      {/* Slide Buttons */}
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-gray-300 hover:bg-gray-200 p-2 rounded-full shadow-md"
+      >
+        <ChevronLeft className="text-black" />
+      </button>
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-gray-300 hover:bg-gray-200 p-2 rounded-full shadow-md"
+      >
+        <ChevronRight className="text-black" />
+      </button>
+
       <div
         ref={containerRef}
-        className="overflow-x-auto flex gap-6 cursor-grab active:cursor-grabbing mt-18"
+        className="overflow-x-auto flex gap-6 cursor-grab active:cursor-grabbing mt-18 scroll-smooth pr-4"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

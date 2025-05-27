@@ -18,13 +18,9 @@ import {
   heliServiceData,
 } from "./NavData";
 import Link from "next/link";
-import gsap from "gsap";
-import { IoMdArrowDown } from "react-icons/io";
 import { MdOutlineArrowRight } from "react-icons/md";
 import { CategoryType } from "../../../Types/CategoryTypes";
-import { getCategories } from "@/services/categoryService";
 import { SubCategoryType } from "../../../Types/SubCategoryTypes";
-import { getPackagebySubCategoryId } from "@/services/packageService";
 import { PackageType } from "../../../Types/PackageType";
 
 const Navbar = () => {
@@ -68,25 +64,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // useEffect(() => {
-  //   fetchPackage();
-  // }, [activeSubCategory]);
-
   useEffect(() => {
     if (activeBackendCategory && !activeSubCategory) {
       setActiveSubCategory(activeBackendCategory.subCategories[0]);
     }
   }, [activeBackendCategory]);
-
-  // const fetchCategory = async () => {
-  //   const res = await getCategories();
-  //   const data = res.data;
-  //   setCategory(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchCategory();
-  // }, []);
 
   // Categories state for each dropdown
   const [activeCategory, setActiveCategory] = useState({
@@ -152,8 +134,13 @@ const Navbar = () => {
   const [bgurl, setBgurl] = useState<boolean>(false);
 
   useEffect(() => {
-    if (activeDropdown) setBgurl(true);
-    else setBgurl(false);
+    if (activeDropdown) {
+      document.body.classList.add("overflow-hidden");
+      setBgurl(true);
+    } else {
+      document.body.classList.remove("overflow-hidden");
+      setBgurl(false);
+    }
   }, [activeDropdown]);
 
   return (
@@ -223,18 +210,18 @@ const Navbar = () => {
 
           {/* Heli Button */}
           <div className="relative ">
-            {/* <Link href="/heliService"> */}
-            <button
-              onClick={() => handleDropdown("heliService")}
-              onMouseEnter={() => setActiveDropdown("heliService")}
-              className="relative group flex items-center gap-1"
-            >
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
-                Heli Service
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            {/* </Link> */}
+            <Link href="/allHeli">
+              <button
+                onClick={() => handleDropdown("heliService")}
+                onMouseEnter={() => setActiveDropdown("heliService")}
+                className="relative group flex items-center gap-1"
+              >
+                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                  Heli Service
+                </span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </Link>
           </div>
           {/* Category Button */}
           {category.map((category) => (
@@ -328,19 +315,21 @@ const Navbar = () => {
 
           {/* Company Button */}
           <div className="relative">
-            <button
-              onClick={() => handleDropdown("about")}
-              onMouseEnter={() => setActiveDropdown("about")}
-              className="relative group flex items-center gap-1"
-            >
-              <span
-                className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer
-              "
+            <Link href="/about">
+              <button
+                onClick={() => handleDropdown("about")}
+                onMouseEnter={() => setActiveDropdown("about")}
+                className="relative group flex items-center gap-1"
               >
-                Company
-              </span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
+                <span
+                  className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer
+              "
+                >
+                  Company
+                </span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </Link>
           </div>
 
           {/* Blogs Button */}
@@ -621,9 +610,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mountaineering Dropdown */}
+      {/* Peak Climbing Dropdown */}
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`fixed left-0 top-[60px] w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "mountaineering"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -678,7 +667,11 @@ const Navbar = () => {
                   {mountaineeringData[
                     activeCategory.mountaineering as keyof typeof mountaineeringData
                   ].items.map((item, index) => (
-                    <Link href={`/itinerary`} key={index}>
+                    <Link
+                      href={`/itinerary`}
+                      key={index}
+                      onClick={() => setActiveDropdown(null)}
+                    >
                       <li>
                         <div className="flex items-center gap-4 hover:text-[#FF4E58]">
                           <MdOutlineArrowRight className="h-6 w-6" />
@@ -689,8 +682,9 @@ const Navbar = () => {
                   ))}
                 </ul>
                 <Link
-                  href="allPeak"
-                  // {`/mountaineering/${activeCategory.mountaineering}`}
+                  href="/allPeak"
+                  // You can use `/mountaineering/${activeCategory.mountaineering}` if needed
+                  onClick={() => setActiveDropdown(null)}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
@@ -713,7 +707,7 @@ const Navbar = () => {
 
       {/*heli service Dropdown */}
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`fixed left-0 top-[60px] w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "heliService"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -768,7 +762,11 @@ const Navbar = () => {
                 </h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {heliServiceData["HeliService"]?.items.map((item, index) => (
-                    <Link href={`/helitour`} key={index}>
+                    <Link
+                      href={`/helitour`}
+                      key={index}
+                      onClick={() => setActiveDropdown(null)}
+                    >
                       <li>
                         <div className="flex items-center gap-4 hover:text-[#FF4E58]">
                           <MdOutlineArrowRight className="h-6 w-6" />
@@ -781,6 +779,7 @@ const Navbar = () => {
                 <Link
                   href="allHeli"
                   // {`/heliService/${activeCategory.heliService}`}
+                  onClick={() => setActiveDropdown(null)}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
@@ -804,7 +803,7 @@ const Navbar = () => {
       {/* Trekking Dropdown */}
 
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`fixed left-0 top-[60px] w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "trekking"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -852,7 +851,11 @@ const Navbar = () => {
                   {trekkingData[
                     activeCategory.trekking as keyof typeof trekkingData
                   ].items.map((item, index) => (
-                    <Link href={`/itinerary`} key={index}>
+                    <Link
+                      href={`/itinerary`}
+                      key={index}
+                      onClick={() => setActiveDropdown(null)}
+                    >
                       <li>
                         <div className="flex items-center gap-4 hover:text-[#FF4E58]">
                           <MdOutlineArrowRight className="h-6 w-6" />
@@ -864,9 +867,7 @@ const Navbar = () => {
                 </ul>
                 <Link
                   href="allTrekking"
-                  // {`/trekking/${activeCategory.trekking
-                  //   .toLowerCase()
-                  //   .replace(/\s+/g, "-")}`}
+                  onClick={() => setActiveDropdown(null)}
                 >
                   <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                     <p>
@@ -889,7 +890,7 @@ const Navbar = () => {
 
       {/* Company Dropdown */}
       <div
-        className={`absolute left-0 top-15 w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
+        className={`fixed left-0 top-[60px] w-full bg-[#1E1E1E] text-white shadow-lg transition-all duration-300 z-40 bg-[url('/navbg.svg')] bg-cover border-b-4 ${
           activeDropdown === "about"
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -955,8 +956,9 @@ const Navbar = () => {
                           for adventure enthusiasts from around the world.
                         </p>
                         <Link
-                          href="/fiveabout"
+                          href="/about"
                           className="text-[#ff4e69d3] hover:text-[#ff4e4e]"
+                          onClick={() => setActiveDropdown(null)}
                         >
                           <div className="flex items-center gap-2">
                             {" "}
@@ -986,7 +988,10 @@ const Navbar = () => {
                       <h2 className="text-2xl font-sora text-white">
                         Our Team
                       </h2>
-                      <Link href="/fiveabout">
+                      <Link
+                        href="/about"
+                        onClick={() => setActiveDropdown(null)}
+                      >
                         <div className="text-[#FF4E58] flex items-center gap-2 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
                           <p>View All Team Members</p>
                           <ChevronRight strokeWidth={3} size={15} />
