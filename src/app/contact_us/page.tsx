@@ -39,7 +39,7 @@ const ContactPage = () => {
 
   return (
     <>
-      <div className="relative w-full h-[50vh] px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+      <div className="relative w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <Phone size={120} color="white" />
         </div>

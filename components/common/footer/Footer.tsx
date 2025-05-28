@@ -45,15 +45,21 @@ const Footer = () => {
 
             <div className="flex space-x-4 items-center">
               {[
-                { label: "f", colors: "from-red-500 to-red-600" },
-                { label: "t", colors: "from-blue-500 to-blue-600" },
-                { label: "i", colors: "from-pink-500 to-purple-600" },
-              ].map(({ label, colors }, index) => (
+                {
+                  img: "https://www.facebook.com/favicon.ico",
+                },
+                {
+                  img: "https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png",
+                },
+                {
+                  img: "https://www.linkedin.com/favicon.ico",
+                },
+              ].map(({ img }, index) => (
                 <div
                   key={index}
-                  className={`w-10 h-10 bg-gradient-to-r ${colors} rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer`}
+                  className="flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                 >
-                  <span className="text-sm font-bold uppercase">{label}</span>
+                  <img src={img} alt="Social Icon" className="w-7 h-7" />
                 </div>
               ))}
             </div>

@@ -29,15 +29,20 @@ const Page = () => {
 
       <Title />
 
-      <div className="w-full relative flex justify-between pb-10 px-4 md:px-16 mt-8 overflow-visible">
-        <LeftBar />
+      <div className="w-full relative flex flex-col md:flex-row justify-between pb-10 px-2 sm:px-4 md:px-16 mt-8 overflow-visible">
+        {/* Left Sidebar */}
+        <div className="w-full md:w-[20%] hidden md:block">
+          <LeftBar />
+        </div>
+
+        {/* Main Content */}
         <div
           id="overview"
-          className="md:w-3/5 w-full shadow-sm rounded-xl mx-5 px-4 py-4"
+          className="w-full md:w-3/5 shadow-sm rounded-xl mx-0 md:mx-5 px-2 sm:px-4 py-4"
         >
-          {/* Trip Sections */}
           <TripGlance />
-          {/* Overview Text */}
+
+          {/* Overview Section */}
           <div className="mt-6">
             <h1 className="text-3xl font-semibold">Overview</h1>
             <p className="text-md text-gray-700 mt-4">
@@ -48,6 +53,7 @@ const Page = () => {
               intellect...
             </p>
           </div>
+
           <MajorHighlight />
           <Places />
           <RouteOverview />
@@ -61,6 +67,7 @@ const Page = () => {
           <RelatedTrips />
         </div>
 
+        {/* Right Sidebar */}
         <div className="md:w-[25%] hidden md:block sticky top-[110px] h-fit self-start">
           <RightBar />
         </div>

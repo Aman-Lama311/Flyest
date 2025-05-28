@@ -274,31 +274,25 @@ const DatesAndPrices = () => {
   };
 
   return (
-    <div id="date-&-prices" className="mt-10">
-      <style>{calendarStyles}</style>
+    <div id="date-&-prices" className="mt-10 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-2">
-        📅Customize Your Trip
+        📅 Customize Your Trip
       </h2>
       <p className="text-gray-600 mt-1 text-base max-w-3xl">
         Select your preferred travel dates from our available options and
         customize your trip.
       </p>
 
-      {/* Date Selection Section */}
+      {/* Date Picker */}
       <div className="bg-white rounded-xl w-full p-6 mt-6 shadow-sm border border-gray-100">
         <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
           <IoMdCalendar className="text-[#EA3359]" /> Select Your Travel Dates
         </h3>
 
-        {/* Interactive Calendar */}
         <div className="mb-6">
           <DatePicker
             selected={departureDate}
-            onChange={(date) => {
-              if (date) {
-                handleDateSelect(date);
-              }
-            }}
+            onChange={(date) => date && handleDateSelect(date)}
             minDate={new Date()}
             inline
             monthsShown={2}
@@ -361,7 +355,6 @@ const DatesAndPrices = () => {
           />
         </div>
 
-        {/* Selected Dates Summary */}
         {departureDate && arrivalDate && (
           <div className="bg-gray-50 p-4 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border border-gray-200">
             <div className="space-y-2">
@@ -401,11 +394,11 @@ const DatesAndPrices = () => {
         )}
       </div>
 
-      {/* Booking Form - Only shown when dates are selected */}
+      {/* Booking Form */}
       {departureDate && arrivalDate && (
         <div className="bg-white rounded-xl w-full p-6 mt-6 shadow-sm border border-gray-100">
           <div className="grid grid-cols-1 gap-8">
-            {/* Traveler Information */}
+            {/* Traveler Info */}
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                 <IoMdPerson className="text-[#EA3359]" /> Traveler Information
@@ -421,11 +414,10 @@ const DatesAndPrices = () => {
                     name="name"
                     value={bookingData.name}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-[#EA3359]/50"
                     required
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <IoMdMail className="text-gray-400" /> Email Address
@@ -435,7 +427,7 @@ const DatesAndPrices = () => {
                     name="email"
                     value={bookingData.email}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-[#EA3359]/50"
                     required
                   />
                 </div>
@@ -450,8 +442,10 @@ const DatesAndPrices = () => {
                     <select
                       name="code"
                       value={bookingData.code}
-                      onChange={(e) => setBookingData({ code: e.target.value })}
-                      className="w-full border border-gray-200 rounded-lg py-2.5 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                      onChange={(e) =>
+                        setBookingData({ ...bookingData, code: e.target.value })
+                      }
+                      className="w-full border border-gray-200 rounded-lg py-2.5 px-3 text-sm focus:ring-[#EA3359]/50"
                     >
                       <option value="">+977</option>
                       {formattedCountries.map((country) => (
@@ -470,7 +464,7 @@ const DatesAndPrices = () => {
                       name="phone"
                       value={bookingData.phone}
                       onChange={handleInputChange}
-                      className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                      className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:ring-[#EA3359]/50"
                       required
                     />
                   </div>
@@ -484,9 +478,12 @@ const DatesAndPrices = () => {
                     name="country"
                     value={bookingData.country}
                     onChange={(e) =>
-                      setBookingData({ country: e.target.value })
+                      setBookingData({
+                        ...bookingData,
+                        country: e.target.value,
+                      })
                     }
-                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 text-sm focus:ring-[#EA3359]/50"
                   >
                     <option value="">Select your country</option>
                     {formattedCountries.map((country) => (
@@ -509,11 +506,10 @@ const DatesAndPrices = () => {
                     min="1"
                     value={bookingData.adults}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:ring-[#EA3359]/50"
                     required
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
                     <IoMdPeople className="text-gray-400" /> Children
@@ -524,7 +520,7 @@ const DatesAndPrices = () => {
                     min="0"
                     value={bookingData.children}
                     onChange={handleInputChange}
-                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                    className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:ring-[#EA3359]/50"
                   />
                 </div>
               </div>
@@ -538,13 +534,13 @@ const DatesAndPrices = () => {
                   value={bookingData.notes}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:outline-none focus:ring-2 focus:ring-[#EA3359]/50 focus:border-[#EA3359]"
+                  className="w-full border border-gray-200 rounded-lg py-2.5 px-4 focus:ring-[#EA3359]/50"
                   placeholder="Special requests, dietary restrictions, etc."
-                ></textarea>
+                />
               </div>
             </div>
 
-            {/* Add-On Services */}
+            {/* Addons */}
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-800">
                 ✨ Add-On Services
@@ -568,16 +564,14 @@ const DatesAndPrices = () => {
                           onChange={(e) =>
                             handleAddonChange(addon.id, e.target.checked)
                           }
-                          className="mt-1 h-4 w-4 text-[#EA3359] focus:ring-[#EA3359] border-gray-300 rounded"
+                          className="mt-1 h-4 w-4 text-[#EA3359] border-gray-300 rounded"
                         />
-                        <div>
-                          <label
-                            htmlFor={addon.id}
-                            className="font-medium text-gray-800"
-                          >
-                            {addon.name}
-                          </label>
-                        </div>
+                        <label
+                          htmlFor={addon.id}
+                          className="font-medium text-gray-800"
+                        >
+                          {addon.name}
+                        </label>
                       </div>
                       <span className="font-medium text-[#EA3359] whitespace-nowrap">
                         +${addon.price}
@@ -590,7 +584,9 @@ const DatesAndPrices = () => {
           </div>
         </div>
       )}
-      <div className="md:hidden">
+
+      {/* Mobile Booking Summary */}
+      <div className="md:hidden mt-6">
         <BookingSummary />
       </div>
     </div>

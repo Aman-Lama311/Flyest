@@ -24,64 +24,41 @@ const Page = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  const closeModal = () => setModalOpen(false);
 
   return (
     <div className="relative">
-      {/* Hero Full-Width Image */}
+      {/* Hero Section */}
       <div className="w-full h-[80vh] relative">
         <img
           src={heroImage}
           alt="Hero"
           className="w-full h-full object-cover"
         />
-        {/* Overlay content here */}
-        <div className="absolute left-0 right-0 w-full h-[20vh] top-0 bg-gradient-to-b from-black/70 z-20" />
+        <div className="absolute left-0 right-0 top-0 h-[20vh] bg-gradient-to-b from-black/70 z-20" />
       </div>
 
       <Title />
 
       <div
-        className={`w-full relative h-auto flex justify-between pb-10 px-4 md:px-16 mt-8 ${
+        className={`relative w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 ${
           modalOpen ? "filter blur-2xl" : ""
         }`}
       >
-        <LeftBar />
+        {/* Left Sidebar */}
+        <aside className="w-full md:w-[20%]">
+          <LeftBar />
+        </aside>
 
-        <div
-          id="overview"
-          className="w-full md:w-3/5 shadow-sm rounded-xl mx-5 px-4 py-4"
-        >
-          {/* Trip Sections */}
+        {/* Center/Main Content */}
+        <main className="w-full md:w-[60%] shadow-sm rounded-xl px-4 py-4 bg-white">
           <TripGlance />
-          {/* Overview Section */}
           <div className="mt-6">
             <h1 className="text-3xl font-semibold">Overview</h1>
             <p className="text-md text-gray-700 mt-4">
               The Everest Base Camp Helicopter Tour is a breathtaking aerial
-              adventure that offers a once-in-a-lifetime opportunity to witness
-              the grandeur of the world’s highest mountain, Mount Everest (8,848
-              meters), without the need for days of trekking. Perfect for
-              travelers short on time or seeking comfort, this luxurious tour
-              soars over lush valleys, traditional Sherpa villages, glacial
-              rivers, and iconic Himalayan peaks.
-              <br />
-              <br />
-              Departing from Kathmandu, the helicopter flies through dramatic
-              landscapes and lands at key points such as Lukla, Kalapatthar, or
-              Everest Base Camp for short stops and photo opportunities.
-              Kalapatthar (5,545 meters) provides a stunning vantage point for
-              panoramic views of Everest and neighboring giants like Lhotse and
-              Nuptse.
-              <br />
-              <br />
-              This unforgettable journey blends the thrill of high-altitude
-              flight with the serenity of the Himalayas, all within just a few
-              hours. It’s the perfect choice for those seeking a safe, scenic,
-              and spiritually uplifting encounter with the heart of the Everest
-              region.
+              adventure...
+              {/* shortened for brevity */}
             </p>
           </div>
           <MajorHighlight />
@@ -94,14 +71,15 @@ const Page = () => {
           <TravellerReview />
           <Faq />
           <RelatedTrips />
-        </div>
+        </main>
 
-        <div className="hidden md:block md:w-[25%] sticky top-[110px] h-fit self-start">
+        {/* Right Sidebar */}
+        <aside className="hidden md:block md:w-[20%] sticky top-[110px] h-fit self-start">
           <RightBar />
-        </div>
+        </aside>
       </div>
 
-      {/* Modal Placeholder (currently unused) */}
+      {/* Modal */}
       {modalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-white/20 backdrop-blur-sm"

@@ -70,7 +70,7 @@ const About: React.FC = () => {
       <div className="absolute top-0 right-0 w-[30px] border-t border-[#00ffd0] pointer-events-none"></div>
       <div className="absolute bottom-0 right-0 w-[30px] border-b border-[#00ffd0] pointer-events-none"></div>
 
-      <section className="relative w-full py-14 md:py-18 bg-[url('/navbg.svg')] text-white rounded-lg font-sans">
+      <section className="relative w-full py-14 md:py-18 bg-[url('/navbg.svg')] text-white font-sans">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Section Title */}
           <Title
