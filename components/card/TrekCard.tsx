@@ -156,11 +156,10 @@ const TrekCard = () => {
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing mt-18"
+        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing mt-18 hide-scrollbar"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
-          WebkitScrollbar: "none",
         }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -274,3 +273,19 @@ const TrekCard = () => {
 };
 
 export default TrekCard;
+
+/* Hide scrollbar utility class */
+// You can move this to your global CSS file if preferred
+const style = document.createElement("style");
+style.innerHTML = `
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+`;
+if (typeof window !== "undefined") {
+  document.head.appendChild(style);
+}
