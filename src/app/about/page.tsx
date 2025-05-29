@@ -104,7 +104,18 @@ const teamsData = [
   },
 ];
 
-const TeamSection = ({ title, members }: { title: string; members: any[] }) => {
+interface TeamMember {
+  name: string;
+  role: string;
+  imgSrc: string;
+}
+
+interface TeamSectionProps {
+  title: string;
+  members: TeamMember[];
+}
+
+const TeamSection = ({ title, members }: TeamSectionProps) => {
   const isLeaderSection = title === "Our Leaders";
 
   return (
@@ -187,17 +198,31 @@ const AboutUsPage = () => {
               {/* Our Story Section */}
               <div className="text-center max-w-4xl mx-auto">
                 <div className="text-3xl">
-                  <p className="mb-4" ref={(el) => (storyRefs.current[0] = el)}>
+                  <p 
+                    className="mb-4" 
+                    ref={(el: HTMLParagraphElement | null) => {
+                      storyRefs.current[0] = el;
+                    }}
+                  >
                     Mountain Adventures began in 2003 when a small group of
                     passionate mountaineers decided to share their love for
                     alpine landscapes with others.
                   </p>
-                  <p className="mb-4" ref={(el) => (storyRefs.current[1] = el)}>
+                  <p 
+                    className="mb-4" 
+                    ref={(el: HTMLParagraphElement | null) => {
+                      storyRefs.current[1] = el;
+                    }}
+                  >
                     Our founders, each with over 30 years of climbing
                     experience, built this company on the principles of respect
                     for nature, safety, and transformative experiences.
                   </p>
-                  <p ref={(el) => (storyRefs.current[2] = el)}>
+                  <p 
+                    ref={(el: HTMLParagraphElement | null) => {
+                      storyRefs.current[2] = el;
+                    }}
+                  >
                     With a team of 50+ certified guides who speak 15 languages
                     collectively.
                   </p>

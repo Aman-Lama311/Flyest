@@ -17,8 +17,17 @@ const trekkingRegions: TrekkingRegion[] = [
 
 const Page = () => {
   const [activeSection, setActiveSection] = useState<string>("everest");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Set isClient to true on mount (client-side only)
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    // Only run on client side
+    if (!isClient) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries.find((entry) => entry.isIntersecting);
@@ -32,13 +41,16 @@ const Page = () => {
       }
     );
 
-    trekkingRegions.forEach((region) => {
-      const el = document.getElementById(region.id);
-      if (el) observer.observe(el);
-    });
+    // Only access document when on client side
+    if (typeof window !== 'undefined') {
+      trekkingRegions.forEach((region) => {
+        const el = document.getElementById(region.id);
+        if (el) observer.observe(el);
+      });
+    }
 
     return () => observer.disconnect();
-  }, []);
+  }, [isClient]);
 
   // const scrollTo = (id: string) => {
   //   const el = document.getElementById(id);

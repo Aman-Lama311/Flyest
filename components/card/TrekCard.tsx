@@ -8,6 +8,7 @@ import Title from "../../components/title/Title";
 const THEME_COLOR = "#FF4E58";
 
 const TrekCard = () => {
+  const [isClient, setIsClient] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -18,7 +19,14 @@ const TrekCard = () => {
 
   const extendedTrek = [...trek, ...trek, ...trek];
 
+  // Set isClient to true on mount (client-side only)
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
     const updateCardWidth = () => {
       if (cardRef.current) {
         setCardWidth(cardRef.current.offsetWidth + 24); // +gap-6
@@ -27,7 +35,7 @@ const TrekCard = () => {
     updateCardWidth();
     window.addEventListener("resize", updateCardWidth);
     return () => window.removeEventListener("resize", updateCardWidth);
-  }, []);
+  }, [isClient]);
 
   useEffect(() => {
     if (scrollRef.current && cardWidth > 0) {

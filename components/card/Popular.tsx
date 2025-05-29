@@ -20,14 +20,22 @@ const calculateDiscount = (oldPrice: number, newPrice: number) =>
 const TrekCard = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isClient, setIsClient] = React.useState(false);
+
+  // Set isClient to true on mount (client-side only)
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Drag state
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollStartRef = useRef(0);
 
-  // Auto-slide every 3s
+  // Auto-slide every 3s - Only run on client side
   useEffect(() => {
+    if (!isClient) return;
+    
     const interval = setInterval(() => {
       const container = containerRef.current;
       const card = cardRef.current;
@@ -42,7 +50,7 @@ const TrekCard = () => {
       }
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isClient]);
 
   // Mouse drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {

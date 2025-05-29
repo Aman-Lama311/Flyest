@@ -36,17 +36,22 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [scrolled, setScrolled] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // const fetchPackage = async () => {
-  //   const res = await getPackagebySubCategoryId(
-  //     activeSubCategory?._id as string
-  //   );
-  //   const data = res.data;
-  //   setPackageData(data);
-  // };
-
+  // Set isClient to true on mount (client-side only) and set up event listeners
   useEffect(() => {
+    setIsClient(true);
+
+    // Only access document on client side
+    const handleClickOutside = (event: MouseEvent) => {
+      const navbarElement = document.getElementById("navbar-container");
+      if (navbarElement && !navbarElement.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+
     const handleScroll = () => {
+      if (!isClient) return;
       const currentScrollY = window.scrollY;
 
       // Detect scroll direction
@@ -133,15 +138,28 @@ const Navbar = () => {
 
   const [bgurl, setBgurl] = useState<boolean>(false);
 
+  // Handle body overflow when dropdown is open
   useEffect(() => {
-    if (activeDropdown) {
-      document.body.classList.add("overflow-hidden");
-      setBgurl(true);
-    } else {
-      document.body.classList.remove("overflow-hidden");
-      setBgurl(false);
+    if (isClient && typeof document !== 'undefined') {
+      if (activeDropdown) {
+        document.body.classList.add("overflow-hidden");
+        setBgurl(true);
+      } else {
+        document.body.classList.remove("overflow-hidden");
+        setBgurl(false);
+      }
+      
+      // Cleanup function to ensure we don't leave the body in a locked state
+      return () => {
+        if (typeof document !== 'undefined') {
+          document.body.classList.remove("overflow-hidden");
+        }
+      };
     }
-  }, [activeDropdown]);
+  }, [activeDropdown, isClient]);
+
+
+
 
   return (
     <div id="" className="relative">

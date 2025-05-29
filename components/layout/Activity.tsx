@@ -70,12 +70,20 @@ const activities: Activity[] = [
 ];
 
 const ActivityCarousel: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [cardWidth, setCardWidth] = useState(300);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Set isClient to true on mount (client-side only)
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
     const handleResize = () => {
       if (window.innerWidth < 640) setCardWidth(280);
       else if (window.innerWidth < 768) setCardWidth(300);
@@ -85,7 +93,7 @@ const ActivityCarousel: React.FC = () => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isClient]);
 
   // Auto-slide functionality
   useEffect(() => {
