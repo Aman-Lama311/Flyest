@@ -8,7 +8,7 @@ const Blogs = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-black/80">
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <MessageSquare size={120} color="white" />
         </div>
@@ -25,7 +25,7 @@ const Blogs = () => {
       </div>
 
       {/* Blog Cards Section */}
-      <div className="py-16 px-4 sm:px-8 md:px-12 lg:px-16 bg-[url('/navbg.svg')]">
+      <div className="relative z-10 py-16 px-4 sm:px-8 md:px-12 lg:px-16 bg-black/80">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
             {blogData.map((blog) => (
@@ -35,7 +35,7 @@ const Blogs = () => {
                 className="bg-zinc-850 rounded-2xl p-4 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="mb-4">
-                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#FA2A55] transition-colors cursor-pointer">
+                  <h3 className="text-xl font-semibold text-white mb-2 hover:text-[#FA2A55] transition-colors cursor-pointer">
                     {blog.title}
                   </h3>
                   <p className="text-white text-sm">{blog.description}</p>

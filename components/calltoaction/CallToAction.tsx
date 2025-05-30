@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
-import Title from "../../components/title/Title";
+import Title from "../../components/title/Title"; // If unused, consider removing
 
 const CallToAction = () => {
   return (
-    <div className="w-full py-16 md:py-24 bg-[url('/navbg.svg')] text-white">
+    <div className="relative z-10 w-full py-16 md:py-24 bg-black/80 text-white">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-24 items-center px-4 md:px-8">
         {/* Left Content Section */}
-        <div className="w-full md:w-1/2 text-center md:text-left bg-zinc-900/50 p-6">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-snug md:leading-tight">
+        <div className="w-full md:w-1/2 text-center md:text-left bg-zinc-900/50 p-6 rounded-lg shadow-lg">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-snug md:leading-tight">
             Why Choose Flyeast Nepal For Your Next Adventures?
           </h2>
-          <p className="text-white text-base sm:text-lg mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg mb-8 leading-relaxed">
             An enhanced safety record provides peace of mind while you explore
             the breathtaking heights of the Himalayas. Experience unparalleled
             service with our team of seasoned professionals dedicated to making
@@ -27,7 +27,7 @@ const CallToAction = () => {
                   className="flex items-center justify-center md:justify-start"
                   key={index}
                 >
-                  <div className="w-7 h-7 rounded-full bg-[#FF4E58] text-white flex items-center justify-center mr-4">
+                  <div className="w-7 h-7 rounded-full bg-[#FF4E58] flex items-center justify-center mr-4">
                     <svg
                       className="w-4 h-4 text-white"
                       fill="currentColor"
@@ -40,7 +40,7 @@ const CallToAction = () => {
                       />
                     </svg>
                   </div>
-                  <span className="text-white text-sm sm:text-base md:text-lg">
+                  <span className="text-sm sm:text-base md:text-lg">
                     {feature}
                   </span>
                 </div>

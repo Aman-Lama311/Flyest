@@ -1,4 +1,5 @@
 "use client";
+
 import Title from "../../../components/intineryBars/Title";
 import LeftBar from "../../../components/intineryBars/LeftBar";
 import TripGlance from "../../../components/tripGlance/TripGlance";
@@ -20,22 +21,24 @@ const Page = () => {
     "https://images.unsplash.com/photo-1691215261305-8e9a8a45c2fa?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   return (
-    <div className="relative">
+    <div className="relative z-10 bg-white">
       {/* Hero Section */}
-      <div className="w-full h-[80vh] relative">
+      <div className="w-full h-[80vh] relative z-0">
         <img
           src={heroImage}
           alt="Hero"
           className="w-full h-full object-cover"
         />
-        <div className="absolute left-0 right-0 top-0 h-[20vh] bg-gradient-to-b from-black/70 z-20" />
+        {/* Top gradient overlay */}
+        <div className="absolute inset-x-0 top-0 h-[20vh] bg-gradient-to-b from-black/70 to-transparent z-10" />
       </div>
 
+      {/* Title Section */}
       <Title />
 
-      <div className="relative w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10">
+      {/* Main Layout */}
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 bg-white">
         {/* Left Sidebar */}
-
         <LeftBar />
 
         {/* Main Content */}

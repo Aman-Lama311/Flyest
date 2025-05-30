@@ -62,7 +62,7 @@ const LeftBar = () => {
   }, []);
 
   return (
-    <div className="w-1/4 hidden lg:block px-4 pb-4 sticky top-[110px] h-2/6">
+    <div className="bg-white w-1/4 hidden lg:block px-4 pb-4 sticky top-[110px] h-2/6">
       <div className="flex items-center mb-2">
         <Map className="w-6 h-6 text-[#EA3359]" />
         <h1 className="text-xl font-semibold">Trip Sections</h1>

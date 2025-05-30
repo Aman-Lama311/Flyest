@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Calendar, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import Title from "../../components/title/Title";
 
+// Activity Type
 interface Activity {
   title: string;
   description: string;
@@ -12,6 +13,7 @@ interface Activity {
   image: string;
 }
 
+// Activity Data
 const activities: Activity[] = [
   {
     title: "Trekking",
@@ -75,72 +77,75 @@ const ActivityCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Debounced Resize Handler
   useEffect(() => {
-    const handleResize = () => {
+    const resizeHandler = () => {
       if (window.innerWidth < 640) setCardWidth(280);
       else if (window.innerWidth < 768) setCardWidth(300);
       else if (window.innerWidth < 1024) setCardWidth(320);
       else setCardWidth(360);
     };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    const debounce = (fn: Function, delay: number) => {
+      let timer: NodeJS.Timeout;
+      return () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(), delay);
+      };
+    };
+
+    const debouncedResize = debounce(resizeHandler, 200);
+    window.addEventListener("resize", debouncedResize);
+    resizeHandler();
+
+    return () => window.removeEventListener("resize", debouncedResize);
   }, []);
 
-  // Auto-slide functionality
+  // Scroll to Index Helper
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      if (scrollRef.current) {
+        const scrollAmount = index * (cardWidth + 24);
+        scrollRef.current.scrollTo({
+          left: scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    },
+    [cardWidth]
+  );
+
+  // Auto Slide
   useEffect(() => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const nextIndex = (prevIndex + 1) % activities.length;
-
-        // Scroll to the next card
-        if (scrollRef.current) {
-          const scrollAmount = nextIndex * (cardWidth + 24);
-          scrollRef.current.scrollTo({
-            left: scrollAmount,
-            behavior: "smooth",
-          });
-        }
-
-        return nextIndex;
+      setCurrentIndex((prev) => {
+        const next = (prev + 1) % activities.length;
+        scrollToIndex(next);
+        return next;
       });
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [cardWidth, isPaused]);
+  }, [scrollToIndex, isPaused]);
 
-  const scrollLeft = () => {
+  const handleScrollLeft = () => {
     const newIndex =
       currentIndex === 0 ? activities.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
-
-    if (scrollRef.current) {
-      const scrollAmount = newIndex * (cardWidth + 24);
-      scrollRef.current.scrollTo({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
+    scrollToIndex(newIndex);
   };
 
-  const scrollRight = () => {
+  const handleScrollRight = () => {
     const newIndex = (currentIndex + 1) % activities.length;
     setCurrentIndex(newIndex);
-
-    if (scrollRef.current) {
-      const scrollAmount = newIndex * (cardWidth + 24);
-      scrollRef.current.scrollTo({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
+    scrollToIndex(newIndex);
   };
 
   return (
     <div
-      className="relative w-full bg-[url('/navbg.svg')] py-12 px-4 sm:px-8 overflow-hidden no-scrollbar text-white"
+      className="relative w-full bg-black/80 py-12 pl-4 sm:pl-8 lg:pl-18 overflow-hidden no-scrollbar text-white z-10"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -154,18 +159,18 @@ const ActivityCarousel: React.FC = () => {
         <div
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {activities.map((activity, index) => (
             <div
               key={index}
-              className="min-w-[280px] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[360px] bg-zinc-800 text-white rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden"
+              className="min-w-[280px] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[360px] bg-zinc-800 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden"
             >
               <div className="relative w-full h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden group">
                 <img
                   src={activity.image}
                   alt={activity.title}
                   className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                  loading="lazy"
                 />
               </div>
               <div className="p-4 flex flex-col flex-grow">
@@ -197,41 +202,35 @@ const ActivityCarousel: React.FC = () => {
         {/* Chevron Buttons */}
         <div className="absolute top-1/2 left-2 -translate-y-1/2 z-10">
           <button
-            className="bg-gray-300 text-black shadow-md p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-            onClick={scrollLeft}
+            className="bg-gray-300 text-black shadow-md p-2 rounded-full hover:bg-gray-200 transition"
+            onClick={handleScrollLeft}
           >
             <ChevronLeft size={20} />
           </button>
         </div>
         <div className="absolute top-1/2 right-2 -translate-y-1/2 z-10">
           <button
-            className="bg-gray-300 text-black shadow-md p-2 rounded-full hover:bg-gray-200 transition-colors duration-200"
-            onClick={scrollRight}
+            className="bg-gray-300 text-black shadow-md p-2 rounded-full hover:bg-gray-200 transition"
+            onClick={handleScrollRight}
           >
             <ChevronRight size={20} />
           </button>
         </div>
 
-        {/* Dot Indicators */}
+        {/* Dots */}
         <div className="flex justify-center mt-6 gap-2">
           {activities.map((_, index) => (
             <button
               key={index}
+              onClick={() => {
+                setCurrentIndex(index);
+                scrollToIndex(index);
+              }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
                   ? "bg-red-500 w-6"
                   : "bg-gray-400 hover:bg-gray-300"
               }`}
-              onClick={() => {
-                setCurrentIndex(index);
-                if (scrollRef.current) {
-                  const scrollAmount = index * (cardWidth + 24);
-                  scrollRef.current.scrollTo({
-                    left: scrollAmount,
-                    behavior: "smooth",
-                  });
-                }
-              }}
             />
           ))}
         </div>

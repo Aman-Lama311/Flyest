@@ -166,7 +166,7 @@ const AboutUsPage = () => {
 
   return (
     <>
-      <div className="relative w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-black/80">
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <MessageSquare size={120} color="white" />
         </div>
@@ -180,7 +180,7 @@ const AboutUsPage = () => {
         </div>
       </div>
 
-      <div className="bg-[url('/navbg.svg')] text-white">
+      <div className="relative z-10 bg-black/80 text-white">
         <div className="py-24 px-4 sm:px-8 md:px-12 lg:px-16">
           <div className="container mx-auto px-6 text-center">
             <div className="flex flex-col gap-16">

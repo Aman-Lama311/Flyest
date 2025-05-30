@@ -638,7 +638,7 @@ import { ArrowBigDownDash } from "lucide-react";
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen z-10">
       <video
         src="/video/trekking.mp4"
         autoPlay

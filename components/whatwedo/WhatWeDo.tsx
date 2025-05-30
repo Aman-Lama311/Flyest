@@ -5,7 +5,7 @@ const StatisticsAndPartners = () => {
   return (
     <div className="w-full flex flex-col">
       {/* Statistics Section */}
-      <div className="w-full bg-[url('/navbg.svg')] py-12 px-4 md:px-24">
+      <div className="w-full z-10 bg-black/80 py-12 px-4 md:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center text-white">
           {/* Total Users */}
           <div className="flex flex-col items-center text-[#00FFA3]">
@@ -38,7 +38,7 @@ const StatisticsAndPartners = () => {
       </div>
 
       {/* Partners Section */}
-      <div className="bg-[url('/navbg.svg')]">
+      <div className="bg-black/80 z-10">
         <div className="w-full bg-red-500/10 text-white px-4 md:px-24 py-10">
           <div className=" mx-auto">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -55,6 +55,7 @@ const StatisticsAndPartners = () => {
                     src={`https://infinityadventurenepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F${img}&w=256&q=75`}
                     alt={`Partner ${idx + 1}`}
                     className="h-14"
+                    loading="lazy"
                   />
                 ))}
               </div>

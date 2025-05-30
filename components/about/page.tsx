@@ -61,16 +61,10 @@ const About: React.FC = () => {
   const icons = [Award, Shield, Users, Clock];
 
   return (
-    <div className="relative w-full">
-      {/* Corner Border Lines */}
-      <div className="absolute top-[-10px] left-0 h-[calc(100%+20px)] border-l border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute top-[-10px] right-0 h-[calc(100%+20px)] border-r border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute top-0 left-0 w-[30px] border-t border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[30px] border-b border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute top-0 right-0 w-[30px] border-t border-[#00ffd0] pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-[30px] border-b border-[#00ffd0] pointer-events-none"></div>
+    <div className="relative w-full bg-black/80 z-10">
+      {/* Removed deep left and right vertical borders */}
 
-      <section className="relative w-full py-14 md:py-18 bg-[url('/navbg.svg')] text-white font-sans">
+      <section className="relative w-full py-14 md:py-18 text-white font-sans">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Section Title */}
           <Title
@@ -79,13 +73,6 @@ const About: React.FC = () => {
               "We're dedicated to providing exceptional service with our team of professionals."
             }
           />
-
-          {/* CTA Button */}
-          {/* <div className="mt-10  text-center">
-            <button className="px-5 py-2.5 font-semibold text-white transition bg-[#D62A4E] rounded-lg hover:bg-red-700 text-sm sm:text-base">
-              Learn More About Our Services
-            </button>
-          </div> */}
 
           {/* Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-18">

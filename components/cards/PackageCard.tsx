@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Star, MapPin, Clock } from "lucide-react";
 import Link from "next/link";
@@ -91,104 +93,53 @@ const PackageCard = () => {
   };
 
   return (
-    <div className="w-full max-w-[1400px] mx-auto py-12 px-4 md:px-8">
+    <div className="relative z-10 w-full max-w-[1400px] mx-auto py-12 px-4 md:px-8 ">
       <div className="flex flex-wrap gap-8">
         {trek.map((item) => (
           <div
             key={item.id}
-            className="w-full sm:w-[48%] lg:w-[31%] bg-zinc-800 rounded-2xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col"
+            className="w-full sm:w-[48%] lg:w-[31%] transition duration-300 overflow-hidden flex flex-col"
           >
             {/* Image */}
-            <div className="relative w-full h-[250px] bg-zinc-700 group overflow-hidden">
+            <div className="relative w-full h-[250px] group overflow-hidden">
               <img
                 src={item.imgSrc}
                 alt={item.title}
-                className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition duration-300 group-hover:scale-110"
+                loading="lazy"
               />
               {item.oldPrice > item.newPrice && (
-                <div
-                  style={{ backgroundColor: THEME_COLOR }}
-                  className="absolute top-4 left-4 text-white text-sm font-bold px-2 py-1 rounded"
-                >
-                  {calculateDiscount(item.oldPrice, item.newPrice)}% OFF
+                <div className="absolute top-4 left-4 text-[#FF4E58] text-lg font-bold px-2 py-1 rounded bg-white">
+                  Starting from {formatPrice(item.newPrice)}
                 </div>
               )}
             </div>
 
             {/* Content */}
-            <div className="p-5 flex flex-col flex-grow text-white">
+            <div className="pr-4 flex flex-col flex-grow text-white">
               {/* Title & Rating */}
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-bold text-lg">{item.title}</h3>
-                <div
-                  style={{ backgroundColor: `${THEME_COLOR}15` }}
-                  className="flex items-center px-2 py-1 rounded text-sm font-medium"
-                >
-                  <Star
-                    size={14}
-                    style={{ color: THEME_COLOR }}
-                    className="fill-current mr-1"
-                  />
-                  <span style={{ color: THEME_COLOR }}>{item.rating}</span>
-                </div>
+              <div className="flex justify-between items-start mb-3 mt-4">
+                <h3 className="text-2xl">{item.title}</h3>
               </div>
-
-              {/* Location & Duration */}
-              <div className="flex items-center text-sm mb-3 text-zinc-300">
-                <MapPin
-                  size={16}
-                  style={{ color: THEME_COLOR }}
-                  className="mr-1"
-                />
-                <span>{item.location}</span>
-                <Clock
-                  size={16}
-                  style={{ color: THEME_COLOR }}
-                  className="ml-4 mr-1"
-                />
-                <span>{item.duration}</span>
-              </div>
-
-              {/* Description */}
-              <p className="text-sm text-zinc-300 flex-grow mb-4">
-                {item.description}
-              </p>
 
               {/* Pricing & Reviews */}
               <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="text-sm text-zinc-400">Starting from</p>
-                  <div className="flex items-center">
-                    {item.oldPrice > item.newPrice && (
-                      <span className="line-through mr-2 text-zinc-400">
-                        {formatPrice(item.oldPrice)}
-                      </span>
-                    )}
-                    <span className="text-xl font-bold text-white">
-                      {formatPrice(item.newPrice)}
-                    </span>
-                  </div>
+                {/* Location & Duration */}
+                <div className="flex items-center text-sm  text-zinc-300">
+                  <MapPin size={16} className="mr-1 text-green-400" />
+                  <span>{item.location}</span>
+                  <Clock size={16} className="ml-4 mr-1 text-sky-500" />
+                  <span>{item.duration}</span>
                 </div>
-                <div className="text-sm text-zinc-400">
-                  <span>{item.reviews} reviews</span>
+                {/* Buttons */}
+                <div className="flex gap-3">
+                  <Link
+                    href={`/itinerary`}
+                    className="w-fit font-medium  text-[#FA2A55] text-lg hover:scale-108 text-center transition duration-100"
+                  >
+                    View itinerary
+                  </Link>
                 </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex gap-3">
-                <Link
-                  href={`/itinerary`}
-                  style={{ backgroundColor: THEME_COLOR }}
-                  className="w-1/2 text-sm font-medium hover:bg-red-600 active:bg-red-700 text-white text-center py-3 px-4 rounded-lg transition duration-200"
-                >
-                  View itinerary
-                </Link>
-                <button
-                  style={{ borderColor: THEME_COLOR, color: THEME_COLOR }}
-                  className="w-1/2 text-sm font-medium border hover:bg-red-50 active:bg-red-100 py-3 px-4 rounded-lg transition duration-200"
-                >
-                  Book Now
-                </button>
               </div>
             </div>
           </div>
