@@ -16,30 +16,30 @@ import DatesAndPrices from "../../../components/intineryBars/DatesAndPrices";
 import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 
 const Page = () => {
+  const heroImage =
+    "https://images.unsplash.com/photo-1691215261305-8e9a8a45c2fa?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
   return (
-    <>
-      {/* Hero Full-Width Image */}
+    <div className="relative">
+      {/* Hero Section */}
       <div className="w-full h-[80vh] relative">
         <img
-          src="https://images.unsplash.com/photo-1691215261305-8e9a8a45c2fa?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={heroImage}
           alt="Hero"
           className="w-full h-full object-cover"
         />
+        <div className="absolute left-0 right-0 top-0 h-[20vh] bg-gradient-to-b from-black/70 z-20" />
       </div>
 
       <Title />
 
-      <div className="w-full relative flex flex-col md:flex-row justify-between pb-10 px-2 sm:px-4 md:px-16 mt-8 overflow-visible">
+      <div className="relative w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10">
         {/* Left Sidebar */}
-        <div className="w-full md:w-[20%] hidden md:block">
-          <LeftBar />
-        </div>
+
+        <LeftBar />
 
         {/* Main Content */}
-        <div
-          id="overview"
-          className="w-full md:w-3/5 shadow-sm rounded-xl mx-0 md:mx-5 px-2 sm:px-4 py-4"
-        >
+        <main className="w-full md:w-[60%] shadow-sm rounded-xl px-4 py-4 bg-white">
           <TripGlance />
 
           {/* Overview Section */}
@@ -65,14 +65,14 @@ const Page = () => {
           <TravellerReview />
           <Faq />
           <RelatedTrips />
-        </div>
+        </main>
 
         {/* Right Sidebar */}
-        <div className="md:w-[25%] hidden md:block sticky top-[110px] h-fit self-start">
+        <aside className="hidden xl:block md:w-[20%] sticky top-[110px] h-fit self-start">
           <RightBar />
-        </div>
+        </aside>
       </div>
-    </>
+    </div>
   );
 };
 

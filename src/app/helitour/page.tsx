@@ -46,9 +46,8 @@ const Page = () => {
         }`}
       >
         {/* Left Sidebar */}
-        <aside className="w-full md:w-[20%]">
-          <LeftBar />
-        </aside>
+
+        <LeftBar />
 
         {/* Center/Main Content */}
         <main className="w-full md:w-[60%] shadow-sm rounded-xl px-4 py-4 bg-white">
@@ -74,7 +73,7 @@ const Page = () => {
         </main>
 
         {/* Right Sidebar */}
-        <aside className="hidden md:block md:w-[20%] sticky top-[110px] h-fit self-start">
+        <aside className="hidden xl:block md:w-[20%] sticky top-[110px] h-fit self-start">
           <RightBar />
         </aside>
       </div>
