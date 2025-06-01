@@ -197,7 +197,7 @@ const Navbar = () => {
         {/* Logo */}
         <div>
           <Link href="/" className="cursor-pointer">
-            <Image height={500} width={500} src="/logo1.png" alt="Flyeast Adventures" className="h-10 w-auto  " />
+            <Image priority height={100} width={300} src="/logo1.png" alt="Flyeast Adventures" className="h-10 w-auto  " />
           </Link>
         </div>
 
@@ -418,7 +418,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center mb-8">
-            <Image height={500} width={500} src="/logo1.png" alt="HighFive Adventures" className="h-8 w-8" />
+            <Image priority height={100} width={100} src="/logo1.png" alt="HighFive Adventures" className="h-8 w-8" />
             <button
               onClick={toggleNav}
               className="text-white hover:text-[#FF4E58]"
