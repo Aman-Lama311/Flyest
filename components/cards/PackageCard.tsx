@@ -7,8 +7,7 @@ import Link from "next/link";
 export const trek = [
   {
     id: 1,
-    imgSrc:
-      "https://cdn.britannica.com/17/83817-050-67C814CD/Mount-Everest.jpg",
+    imgSrc: "/flyimg/Mount-Everest_8_11zon.webp",
     title: "Mount Everest Base Camp Trek",
     oldPrice: 2200,
     newPrice: 1850,
@@ -21,8 +20,7 @@ export const trek = [
   },
   {
     id: 2,
-    imgSrc:
-      "https://www.thomsontreks.com/wp-content/uploads/2019/05/kilimanjaro-kibo-view-pjh.jpg",
+    imgSrc: "/flyimg/kilimanjaro-kibo-view-pjh_9_11zon.webp",
     title: "Kilimanjaro Summit Adventure",
     oldPrice: 2100,
     newPrice: 1700,
@@ -35,8 +33,7 @@ export const trek = [
   },
   {
     id: 3,
-    imgSrc:
-      "https://hsj.com.np/uploads/0000/386/2020/04/24/everest-region-banner1-1024.jpg",
+    imgSrc: "/flyimg/everest-region-banner1-1024_8_11zon.webp",
     title: "Annapurna Circuit Expedition",
     oldPrice: 1900,
     newPrice: 1600,

@@ -53,7 +53,7 @@ const Page = () => {
     <>
       <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16  border-b-rounded-xl bg-black/80 ">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
-          <img className=" h-30" src="/heroimages/favicon.ico" alt="" />
+          <img className=" h-30" src="/heroimages/favicon.ico" alt="icon" />
         </div>
         <img
           src="https://cdn.pixabay.com/photo/2013/09/26/16/00/helicopter-186718_1280.jpg"

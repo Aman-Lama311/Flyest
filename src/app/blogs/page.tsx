@@ -16,6 +16,7 @@ const Blogs = () => {
           src="https://static.vecteezy.com/system/resources/previews/026/712/861/non_2x/dark-grainy-gradient-abstract-background-red-orange-purple-glowing-light-texture-free-photo.jpg"
           alt="dark pink"
           className="w-full h-full object-cover rounded-b-4xl opacity-60"
+          loading="lazy"
         />
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-white">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">

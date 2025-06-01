@@ -60,7 +60,7 @@ const Page = () => {
           />
         </div>
         <img
-          src="https://cdn.pixabay.com/photo/2017/03/09/21/09/mountain-climbing-2130878_1280.jpg"
+          src="/flyimg/mountain-climbing-2130878_1280_13_11zon.webp"
           alt="dark pink"
           className="w-full h-full object-cover rounded-b-4xl opacity-60"
           loading="lazy"
