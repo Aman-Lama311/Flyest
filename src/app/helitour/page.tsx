@@ -91,8 +91,8 @@ const Page = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              height={500}
-              width={500}
+              height={1500}
+              width={1500}
               src={heroImage}
               alt="Preview"
               className="w-full h-auto object-contain"

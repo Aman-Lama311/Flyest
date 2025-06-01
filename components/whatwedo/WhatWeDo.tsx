@@ -57,7 +57,7 @@ const StatisticsAndPartners = () => {
                     key={idx}
                     src={`https://infinityadventurenepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F${img}&w=256&q=75`}
                     alt={`Partner ${idx + 1}`}
-                    className="h-14"
+                    className="h-14 w-auto"
                   />
                 ))}
               </div>

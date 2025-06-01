@@ -64,7 +64,7 @@ const Page = () => {
           <Image
             height={500}
             width={500}
-            className=" h-30"
+            className=" h-30 w-auto"
             src="/heroimages/favicon.ico"
             alt="icon"
           />
