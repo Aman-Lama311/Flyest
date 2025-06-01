@@ -5,7 +5,6 @@ import { MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { trek } from "./TrekCardData";
 import Title from "../../components/title/Title";
 
-// Utility: Debounce function
 const debounce = (fn: () => void, delay: number) => {
   let timer: NodeJS.Timeout;
   return () => {
@@ -21,18 +20,18 @@ const TrekCard = () => {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollStart = useRef(0);
-  const isAutoScrolling = useRef(false);
   const [cardWidth, setCardWidth] = useState(0);
+  const autoScrollTimer = useRef<NodeJS.Timeout | null>(null);
 
-  const extendedTrek = [...trek, ...trek, ...trek];
-
-  // Measure card width and update on resize (debounced)
+  // Initialize client state and measure card width
   useEffect(() => {
-    if (!isClient) return;
+    setIsClient(true);
     
     const updateCardWidth = () => {
       if (cardRef.current) {
-        setCardWidth(cardRef.current.offsetWidth + 24); // 24px = gap-6
+        const computedStyle = window.getComputedStyle(cardRef.current);
+        const margin = parseFloat(computedStyle.marginRight) || 0;
+        setCardWidth(cardRef.current.offsetWidth + margin);
       }
     };
 
@@ -41,26 +40,30 @@ const TrekCard = () => {
     updateCardWidth();
     window.addEventListener("resize", debouncedResize);
 
-    return () => window.removeEventListener("resize", debouncedResize);
+    return () => {
+      window.removeEventListener("resize", debouncedResize);
+      if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+    };
   }, []);
 
-  // Initial scroll to middle section
+  // Initialize scroll position
   useEffect(() => {
-    if (scrollRef.current && cardWidth > 0) {
+    if (isClient && scrollRef.current && cardWidth > 0 && trek.length > 0) {
       scrollRef.current.scrollLeft = trek.length * cardWidth;
     }
-  }, [cardWidth]);
+  }, [isClient, cardWidth]);
 
-  // Infinite scroll logic
+  // Infinite scroll handler
   const handleScroll = () => {
     const container = scrollRef.current;
-    const sectionWidth = trek.length * cardWidth;
-
     if (!container || cardWidth === 0) return;
 
-    if (container.scrollLeft <= cardWidth) {
+    const sectionWidth = trek.length * cardWidth;
+    const scrollPos = container.scrollLeft;
+
+    if (scrollPos <= cardWidth) {
       container.scrollLeft += sectionWidth;
-    } else if (container.scrollLeft >= sectionWidth * 2 + cardWidth) {
+    } else if (scrollPos >= 2 * sectionWidth - cardWidth) {
       container.scrollLeft -= sectionWidth;
     }
   };
@@ -73,30 +76,60 @@ const TrekCard = () => {
     }
   }, [cardWidth]);
 
-  // Auto-scroll every few seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (
-        !scrollRef.current ||
-        isDragging.current ||
-        isAutoScrolling.current ||
-        cardWidth === 0
-      )
-        return;
+  // Navigation function
+  const navigate = React.useCallback((direction: 'prev' | 'next') => {
+    if (!scrollRef.current || !cardWidth || isDragging.current) return;
+    
+    // Clear any pending auto-scroll
+    if (autoScrollTimer.current) {
+      clearInterval(autoScrollTimer.current);
+      autoScrollTimer.current = null;
+    }
 
-      isAutoScrolling.current = true;
-      scrollRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
+    const container = scrollRef.current;
+    const currentScroll = container.scrollLeft;
+    const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
+    
+    container.scrollTo({
+      left: currentScroll + scrollAmount,
+      behavior: 'smooth'
+    });
 
-      // Release lock after scroll animation
-      setTimeout(() => {
-        isAutoScrolling.current = false;
-      }, 500);
-    }, 3000);
-
-    return () => clearInterval(interval);
+    // Restart auto-scroll after manual navigation
+    startAutoScroll();
   }, [cardWidth]);
 
-  // Drag to scroll (mouse)
+  // Auto-scroll function
+  const startAutoScroll = React.useCallback(() => {
+    if (autoScrollTimer.current) {
+      clearInterval(autoScrollTimer.current);
+    }
+
+    autoScrollTimer.current = setInterval(() => {
+      if (isDragging.current || !scrollRef.current || !cardWidth) return;
+
+      const container = scrollRef.current;
+      const currentScroll = container.scrollLeft;
+      const nextScroll = currentScroll + cardWidth;
+      
+      container.scrollTo({
+        left: nextScroll,
+        behavior: 'smooth'
+      });
+    }, 3000);
+  }, [cardWidth]);
+
+  // Start auto-scroll when component mounts
+  useEffect(() => {
+    if (isClient && cardWidth > 0) {
+      startAutoScroll();
+    }
+    return () => {
+      if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+    };
+  }, [isClient, cardWidth, startAutoScroll]);
+
+  // Drag handlers (unchanged from your original)
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
     startX.current = e.pageX;
@@ -113,7 +146,6 @@ const TrekCard = () => {
     isDragging.current = false;
   };
 
-  // Drag to scroll (touch)
   const handleTouchStart = (e: React.TouchEvent) => {
     isDragging.current = true;
     startX.current = e.touches[0].pageX;
@@ -144,29 +176,26 @@ const TrekCard = () => {
         discription="Discover handpicked adventures loved by our community."
       />
 
-      {/* Navigation Arrows */}
       <button
-        onClick={() =>
-          scrollRef.current?.scrollBy({ left: -cardWidth, behavior: "smooth" })
-        }
-        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 bg-gray-300 hover:bg-gray-200 p-2 rounded-full"
+        onClick={() => navigate('prev')}
+        className="absolute left-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Previous slide"
       >
-        <ChevronLeft className="text-black" />
+        <ChevronLeft className="text-black w-6 h-6" />
       </button>
 
       <button
-        onClick={() =>
-          scrollRef.current?.scrollBy({ left: cardWidth, behavior: "smooth" })
-        }
-        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 bg-gray-300 hover:bg-gray-200 p-2 rounded-full"
+        onClick={() => navigate('next')}
+        className="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Next slide"
       >
-        <ChevronRight className="text-black" />
+        <ChevronRight className="text-black w-6 h-6" />
       </button>
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab select-none active:cursor-grabbing mt-18"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab select-none active:cursor-grabbing mt-18 hide-scrollbar"
+        style={{ scrollSnapType: 'x mandatory' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -175,11 +204,11 @@ const TrekCard = () => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {extendedTrek.map((item, index) => (
+        {[...trek, ...trek, ...trek].map((item, index) => (
           <article
             ref={index === 0 ? cardRef : null}
             key={`${item.id}-${index}`}
-            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-white transition-all duration-100 overflow-hidden flex flex-col relative group"
+            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-white transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
           >
             <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden">
               <img
@@ -221,19 +250,3 @@ const TrekCard = () => {
 };
 
 export default TrekCard;
-
-/* Hide scrollbar utility class */
-// You can move this to your global CSS file if preferred
-const style = document.createElement("style");
-style.innerHTML = `
-.hide-scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-.hide-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-`;
-if (typeof window !== "undefined") {
-  document.head.appendChild(style);
-}
