@@ -43,7 +43,7 @@ const Page = () => {
         <LeftBar />
 
         {/* Main Content */}
-        <main className="w-full md:w-[60%] shadow-sm rounded-xl px-4 py-4 bg-white">
+        <div className="w-full md:w-[60%] shadow-sm rounded-xl px-4 py-4 bg-white">
           <TripGlance />
 
           {/* Overview Section */}
@@ -69,7 +69,7 @@ const Page = () => {
           <TravellerReview />
           <Faq />
           <RelatedTrips />
-        </main>
+        </div>
 
         {/* Right Sidebar */}
         <aside className="hidden xl:block md:w-[20%] sticky top-[110px] h-fit self-start">

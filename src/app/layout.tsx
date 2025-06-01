@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NavBar />
-        <div className="grain"></div>
+        <main className="grain"></main>
         {children}
         <Footer />
         <ToastContainer />

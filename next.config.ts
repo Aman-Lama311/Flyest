@@ -1,10 +1,78 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    domains: ["www.facebook.com", "www.instagram.com", "www.linkedin.com","www.grisport.co.uk", "admin.ntb.gov.np", "www.altitudehimalaya.com", "www.relaxgetaways.com", "media.istockphoto.com","infinityadventurenepal.com","encrypted-tbn0.gstatic.com","www.researchgate.net","unsplash.it","cdn.pixabay.com","static.vecteezy.com","images.pexels.com","media.worldnomads.com","alpineecotrek.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.facebook.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.instagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.linkedin.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.grisport.co.uk",
+      },
+      {
+        protocol: "https",
+        hostname: "admin.ntb.gov.np",
+      },
+      {
+        protocol: "https",
+        hostname: "www.altitudehimalaya.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.relaxgetaways.com",
+      },
+      {
+        protocol: "https",
+        hostname: "media.istockphoto.com",
+      },
+      {
+        protocol: "https",
+        hostname: "infinityadventurenepal.com",
+      },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.researchgate.net",
+      },
+      {
+        protocol: "https",
+        hostname: "unsplash.it",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+      },
+      {
+        protocol: "https",
+        hostname: "static.vecteezy.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
+        hostname: "media.worldnomads.com",
+      },
+      {
+        protocol: "https",
+        hostname: "alpineecotrek.com",
+      },
+    ],
   },
 };
 
-export default nextConfig; 
+export default nextConfig;

@@ -24,7 +24,7 @@ const BlogPage: React.FC = () => {
   }
 
   return (
-    <main className="relative z-10 bg-black/80 text-gray-800 py-36 lg:py-40 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+    <div className="relative z-10 bg-black/80 text-gray-800 py-36 lg:py-40 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       <div className=" mx-auto relative max-w-[900px]">
         {/* Back Button */}
         <button
@@ -145,7 +145,7 @@ const BlogPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

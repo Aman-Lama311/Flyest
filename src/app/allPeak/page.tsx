@@ -80,7 +80,7 @@ const Page = () => {
           </p>
         </div>
       </div>
-      <main className="w-full relative z-10  bg-black/80">
+      <div className="w-full relative z-10  bg-black/80">
         {/* Main Content */}
         <div className="px-4 md:px-8 py-16 space-y-20">
           {heightCategories.map((category) => (
@@ -100,7 +100,7 @@ const Page = () => {
             </Element>
           ))}
         </div>
-      </main>
+      </div>
     </>
   );
 };

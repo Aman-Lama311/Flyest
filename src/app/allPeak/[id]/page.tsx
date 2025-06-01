@@ -62,7 +62,7 @@ const Page = () => {
   };
 
   return (
-    <main className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:py-30 py-20 bg-[url('/navbg.svg')] px-4 md:px-8">
+    <div className="grid w-full h-full md:grid-cols-11 grid-cols-1 lg:gap-0 gap-4 lg:py-30 py-20 bg-[url('/navbg.svg')] px-4 md:px-8">
       {JSON.stringify(id)}
 
       {/* Sidebar */}
@@ -101,7 +101,7 @@ const Page = () => {
           </Element>
         ))}
       </div>
-    </main>
+    </div>
   );
 };
 

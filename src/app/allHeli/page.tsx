@@ -92,7 +92,7 @@ const Page = () => {
           </p>
         </div>
       </div>
-      <main className="w-full relative z-10 bg-black/80">
+      <div className="w-full relative z-10 bg-black/80">
         {/* === Content Section === */}
         <div className="px-4 md:px-8 py-36 space-y-20">
           {trekkingRegions.map((region) => (
@@ -109,7 +109,7 @@ const Page = () => {
             </Element>
           ))}
         </div>
-      </main>
+      </div>
     </>
   );
 };
