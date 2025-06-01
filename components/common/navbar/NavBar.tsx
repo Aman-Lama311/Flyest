@@ -96,7 +96,14 @@ const Navbar = () => {
 
   // Toggle mobile navigation
   const toggleNav = () => {
-    setNavOpen(!navOpen);
+    const isOpening = !navOpen;
+    setNavOpen(isOpening);
+
+    if (isOpening) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
   };
 
   // Toggle mobile dropdowns
@@ -172,7 +179,7 @@ const Navbar = () => {
         bgurl
           ? "bg-[url('/navbg.svg')]"
           : showNavbar && scrolled
-          ? "bg-black/10 backdrop-blur-2xl"
+          ? "bg-black/60 backdrop-blur-2xl"
           : "bg-transparent"
       }
       bg-cover py-4 px-4 md:px-24 flex items-center justify-between font-sans font-medium text-[1rem] text-white`}

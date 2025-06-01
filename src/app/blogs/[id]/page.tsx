@@ -23,7 +23,7 @@ const BlogPage: React.FC = () => {
   }
 
   return (
-    <main className="bg-[url('/navbg.svg')] text-gray-800 py-16 lg:py-40 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+    <main className="relative z-10 bg-black/80 text-gray-800 py-36 lg:py-40 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       <div className=" mx-auto relative max-w-[900px]">
         {/* Back Button */}
         <button
@@ -95,7 +95,7 @@ const BlogPage: React.FC = () => {
 
                     {/* Card Content */}
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-[#FA2A55] transition-colors duration-300">
+                      <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 hover:text-[#FA2A55] transition-colors duration-300">
                         {relatedBlog.title}
                       </h3>
 

@@ -20,7 +20,7 @@ const RightBar = () => {
   };
 
   return (
-    <div>
+    <div className="bg-white">
       {bookingData.selectedDate ? (
         <BookingSummary />
       ) : (

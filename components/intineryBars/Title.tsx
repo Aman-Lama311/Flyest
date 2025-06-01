@@ -7,7 +7,7 @@ const Title = () => {
   const [liked, setLiked] = useState(false);
 
   return (
-    <div className="px-4 md:px-20 sticky top-0 bg-white z-20">
+    <div className="px-4 md:px-20 sticky top-0 bg-white z-30">
       <div className="border-b py-4 border-gray-300 flex flex-col md:flex-row justify-between gap-4">
         {/* Title Section */}
         <div className="flex flex-col md:flex-row md:items-baseline gap-2">

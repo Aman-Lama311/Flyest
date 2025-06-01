@@ -27,9 +27,9 @@ const Page = () => {
   const closeModal = () => setModalOpen(false);
 
   return (
-    <div className="relative">
+    <div className="relative  z-10 bg-white">
       {/* Hero Section */}
-      <div className="w-full h-[80vh] relative">
+      <div className="w-full h-[80vh] relative z-0">
         <img
           src={heroImage}
           alt="Hero"
@@ -41,14 +41,13 @@ const Page = () => {
       <Title />
 
       <div
-        className={`relative w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 ${
+        className={`relative z-20 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 ${
           modalOpen ? "filter blur-2xl" : ""
         }`}
       >
         {/* Left Sidebar */}
-        <aside className="w-full md:w-[20%]">
-          <LeftBar />
-        </aside>
+
+        <LeftBar />
 
         {/* Center/Main Content */}
         <main className="w-full md:w-[60%] shadow-sm rounded-xl px-4 py-4 bg-white">
@@ -74,7 +73,7 @@ const Page = () => {
         </main>
 
         {/* Right Sidebar */}
-        <aside className="hidden md:block md:w-[20%] sticky top-[110px] h-fit self-start">
+        <aside className="hidden xl:block md:w-[20%] sticky top-[110px] h-fit self-start">
           <RightBar />
         </aside>
       </div>

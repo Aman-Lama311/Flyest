@@ -20,7 +20,7 @@ const Footer = () => {
       {/* Main Content */}
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-24 pt-16 pb-10">
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto space-y-8">
+        <div className=" mx-auto space-y-8">
           {/* Logo */}
           <div className="flex items-center">
             <img src="/logo1.png" alt="Logo" className="h-12 sm:h-16" />
@@ -39,7 +39,7 @@ const Footer = () => {
 
           {/* CTA + Social */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-            <button className="bg-[#FB2C36] hover:bg-[#ff4e57] text-white px-6 py-3 rounded-full font-semibold text-sm transition-all">
+            <button className="bg-[#FB2C36] hover:bg-[#ff4e57] text-white px-6 py-3 rounded-full font-semibold text-sm transition-all cursor-pointer">
               Experience Now
             </button>
 

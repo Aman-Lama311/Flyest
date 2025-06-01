@@ -39,7 +39,7 @@ const ContactPage = () => {
 
   return (
     <>
-      <div className="relative w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-[url('/navbg.svg')]">
+      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-black/80">
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <Phone size={120} color="white" />
         </div>
@@ -59,13 +59,13 @@ const ContactPage = () => {
           </p> */}
         </div>
       </div>
-      <div className="py-16  px-4 sm:px-6 lg:px-20 bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white">
+      <div className="relative z-10 py-16  px-4 sm:px-6 lg:px-20 bg-black/80  bg-cover bg-center text-white">
         <div className="max-w-screen-xl mx-auto">
           {/* Contact Details */}
-          <div className="bg-[url('/navbg.svg')] p-6 sm:p-8 rounded-lg shadow-md flex flex-wrap justify-between gap-6">
+          <div className="relative  p-6 sm:p-8 rounded-lg shadow-md border border-gray-700 flex flex-wrap justify-between gap-6">
             {/* Address */}
             <div className="flex items-start gap-4 min-w-[200px]">
-              <div className="bg-zinc-800 p-3 rounded-full">
+              <div className=" p-3 rounded-full">
                 <MapPin className="w-6 h-6 text-[#EA3359]" />
               </div>
               <div>
@@ -76,7 +76,7 @@ const ContactPage = () => {
 
             {/* Phone */}
             <div className="flex items-start gap-4 min-w-[200px]">
-              <div className="bg-zinc-800 p-3 rounded-full">
+              <div className=" p-3 rounded-full">
                 <Phone className="w-6 h-6 text-[#EA3359]" />
               </div>
               <div>
@@ -87,7 +87,7 @@ const ContactPage = () => {
 
             {/* Email */}
             <div className="flex items-start gap-4 min-w-[200px]">
-              <div className="bg-zinc-800 p-3 rounded-full">
+              <div className=" p-3 rounded-full">
                 <Mail className="w-6 h-6 text-[#EA3359]" />
               </div>
               <div>
@@ -98,7 +98,7 @@ const ContactPage = () => {
           </div>
         </div>
         {/* last message form section */}
-        <div className="bg-[url('/navbg.svg')] bg-green-900 bg-cover bg-center text-white py-16 px-4 sm:px-6 lg:px-20">
+        <div className="relative  bg-cover bg-center text-white py-16 px-4 sm:px-6 lg:px-20">
           <div className="w-full mx-auto">
             <form onSubmit={handleSubmit} className="w-full mx-auto space-y-6">
               <h1 className="text-4xl font-bold">
@@ -223,7 +223,7 @@ const ContactPage = () => {
               <div>
                 <button
                   type="submit"
-                  className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-black font-semibold transition"
+                  className="mt-4 px-6 py-3 rounded-full bg-[#EA3359] text-white hover:bg-[#ea3333] font-semibold transition cursor-pointer"
                 >
                   Send →
                 </button>
