@@ -18,7 +18,6 @@ import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 import Image from "next/image";
 
 const Page = () => {
-  const heroImage = "/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp";
 
   return (
     <div className="relative z-10 bg-white">
@@ -27,7 +26,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src={heroImage}
+          src= "/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp"
           alt="Hero"
           className="w-full h-full object-cover"
         />

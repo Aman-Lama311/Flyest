@@ -20,7 +20,6 @@ import ItineraryPreview from "./reusableNewCopms/Ititnerary";
 import Image from "next/image";
 
 const Page = () => {
-  const heroImage = "/flyimg/photo-1722463926354-aa706b4db1c2_15_11zon.webp";
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -33,7 +32,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src={heroImage}
+          src="/flyimg/photo-1722463926354-aa706b4db1c2_15_11zon.webp"
           alt="Hero"
           className="w-full h-full object-cover"
         />
@@ -93,7 +92,7 @@ const Page = () => {
             <Image
               height={1500}
               width={1500}
-              src={heroImage}
+              src="/flyimg/photo-1722463926354-aa706b4db1c2_15_11zon.webp"
               alt="Preview"
               className="w-full h-auto object-contain"
             />
