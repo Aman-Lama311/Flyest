@@ -12,13 +12,15 @@ const Footer = () => {
       <div className="absolute inset-0 bg-[url('https://www.relaxgetaways.com/uploads/media/Short%20Treks/intero%20for%20short%20trek.jpg')] bg-cover bg-center"></div>
 
       {/* Decorative image */}
-      <Image
-      height={500}
-      width={500}
-        className="absolute right-0 bottom-0 opacity-10 w-72 sm:w-80 h-72 sm:h-80 object-cover"
-        src="/heroimages/footer.svg"
-        alt="Footer Decorative"
-      />
+      <div className="absolute right-0 bottom-0 w-72 sm:w-80 h-72 sm:h-80">
+        <Image
+          fill
+          className="opacity-10 object-cover"
+          src="/heroimages/footer.svg"
+          alt="Footer Decorative"
+          sizes="(max-width: 640px) 288px, 320px"
+        />
+      </div>
 
       {/* Main Content */}
       <div className="relative z-10 w-full px-4 sm:px-8 lg:px-24 pt-16 pb-10">
@@ -26,7 +28,15 @@ const Footer = () => {
         <div className=" mx-auto space-y-8">
           {/* Logo */}
           <div className="flex items-center">
-            <Image height={500} width={500} src="/logo1.png" alt="Logo" className="h-12 sm:h-16" />
+            <div className="relative h-12 sm:h-16 w-auto">
+              <Image 
+                src="/logo1.png" 
+                alt="Logo" 
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 3rem, 4rem"
+              />
+            </div>
           </div>
 
           {/* Headline */}
