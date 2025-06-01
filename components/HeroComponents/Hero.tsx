@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { ArrowBigDownDash } from 'lucide-react';
 
 // This component will only be rendered on the client side
 const HeroContent = dynamic(() => import('./HeroContent'), { 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import { Star, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { trek } from "./TrekCardData";
 import Title from "../../components/title/Title";
@@ -20,9 +20,11 @@ const TrekCard = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
+
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
   const scrollStartRef = useRef(0);
+  const [isClient, setIsClient] = useState(false);
 
   // --- Debounce utility ---
   const debounce = (fn: (...args: any[]) => void, delay: number) => {
@@ -50,7 +52,7 @@ const TrekCard = () => {
 
   // --- Auto slide ---
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) return;  
     
     const interval = setInterval(() => {
       const container = containerRef.current;
