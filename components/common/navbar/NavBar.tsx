@@ -997,7 +997,7 @@ const Navbar = () => {
                       <div className="flex-1">
                         <div className="h-48 overflow-hidden rounded-lg">
                           <img
-                            src="https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            src="/flyimg/pexels-photo-1766838_10_11zon.webp"
                             alt="HighFive Adventures"
                             className="object-cover h-full w-full"
                           />

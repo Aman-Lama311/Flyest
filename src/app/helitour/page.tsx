@@ -19,8 +19,7 @@ import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 import ItineraryPreview from "./reusableNewCopms/Ititnerary";
 
 const Page = () => {
-  const heroImage =
-    "https://images.unsplash.com/photo-1722463926354-aa706b4db1c2?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  const heroImage = "/flyimg/photo-1722463926354-aa706b4db1c2_15_11zon.webp";
 
   const [modalOpen, setModalOpen] = useState(false);
 

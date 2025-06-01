@@ -13,17 +13,17 @@ const teamsData = [
       {
         name: "Alice Williams",
         role: "Team Leader",
-        imgSrc: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f",
+        imgSrc: "/flyimg/photo-1564564321837-a57b7070ac4f_13_11zon.webp",
       },
       {
         name: "David Lee",
         role: "Team Leader",
-        imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19",
+        imgSrc: "/flyimg/photo-1557862921-37829c790f19_12_11zon.webp",
       },
       {
         name: "Maria Gonzalez",
         role: "Team Leader",
-        imgSrc: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+        imgSrc: "/flyimg/photo-1551836022-deb4988cc6c0_11_11zon.webp",
       },
     ],
   },
@@ -33,17 +33,17 @@ const teamsData = [
       {
         name: "Tenzing Sherpa",
         role: "Mountain Guide",
-        imgSrc: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f",
+        imgSrc: "/flyimg/photo-1564564321837-a57b7070ac4f_13_11zon.webp",
       },
       {
         name: "Lakpa Tamang",
         role: "Mountain Guide",
-        imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19",
+        imgSrc: "/flyimg/photo-1557862921-37829c790f19_12_11zon.webp",
       },
       {
         name: "Sonam Bhote",
         role: "Mountain Guide",
-        imgSrc: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+        imgSrc: "/flyimg/photo-1551836022-deb4988cc6c0_11_11zon.webp",
       },
     ],
   },
@@ -53,17 +53,17 @@ const teamsData = [
       {
         name: "Nima Gurung",
         role: "Trekking Guide",
-        imgSrc: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f",
+        imgSrc: "/flyimg/photo-1564564321837-a57b7070ac4f_13_11zon.webp",
       },
       {
         name: "Pemba Lama",
         role: "Trekking Guide",
-        imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19",
+        imgSrc: "/flyimg/photo-1557862921-37829c790f19_12_11zon.webp",
       },
       {
         name: "Karma Tamang",
         role: "Trekking Guide",
-        imgSrc: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+        imgSrc: "/flyimg/photo-1551836022-deb4988cc6c0_11_11zon.webp",
       },
     ],
   },
@@ -73,12 +73,12 @@ const teamsData = [
       {
         name: "Pema Lama",
         role: "Cook",
-        imgSrc: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f",
+        imgSrc: "/flyimg/photo-1564564321837-a57b7070ac4f_13_11zon.webp",
       },
       {
         name: "Dorje Sherpa",
         role: "Cook",
-        imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19",
+        imgSrc: "/flyimg/photo-1557862921-37829c790f19_12_11zon.webp",
       },
     ],
   },
@@ -88,17 +88,17 @@ const teamsData = [
       {
         name: "Dawa Sherpa",
         role: "Porter",
-        imgSrc: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0",
+        imgSrc: "/flyimg/photo-1564564321837-a57b7070ac4f_13_11zon.webp",
       },
       {
         name: "Tashi Gurung",
         role: "Porter",
-        imgSrc: "https://images.unsplash.com/photo-1557862921-37829c790f19",
+        imgSrc: "/flyimg/photo-1557862921-37829c790f19_12_11zon.webp",
       },
       {
         name: "Pasang Tamang",
         role: "Porter",
-        imgSrc: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f",
+        imgSrc: "/flyimg/photo-1551836022-deb4988cc6c0_11_11zon.webp",
       },
     ],
   },

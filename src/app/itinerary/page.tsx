@@ -17,8 +17,7 @@ import DatesAndPrices from "../../../components/intineryBars/DatesAndPrices";
 import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 
 const Page = () => {
-  const heroImage =
-    "https://images.unsplash.com/photo-1691215261305-8e9a8a45c2fa?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  const heroImage = "/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp";
 
   return (
     <div className="relative z-10 bg-white">

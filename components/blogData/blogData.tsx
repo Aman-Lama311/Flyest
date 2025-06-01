@@ -92,7 +92,7 @@ Pack light, but don’t skip essentials. Every item in your backpack should serv
     author: "Elena",
     comments: 12,
     image:
-      "https://www.acethehimalaya.com/wp-content/uploads/2024/10/trekkers-return-to-dingboche-after-hiking-to-nangkartsang-peak.jpg.webp",
+      "/flyimg/trekkers-return-to-dingboche-after-hiking-to-nangkartsang-peak.jpg_16_11zon.webp",
     content: `
 ### Nepal Beyond the Mainstream
 
@@ -140,8 +140,7 @@ These trails reward curiosity and respect. Step off the beaten path and find you
     date: "February 25, 2025",
     author: "James",
     comments: 4,
-    image:
-      "https://cdn.pixabay.com/photo/2023/11/05/21/04/alps-8368328_1280.jpg",
+    image: "/flyimg/alps-8368328_1280_4_11zon.webp",
     content: `
 ### Introduction
 
@@ -183,8 +182,7 @@ The wild is beautiful, but it doesn't play fair. Plan ahead, stay aware, and alw
     date: "January 30, 2025",
     author: "Maya",
     comments: 7,
-    image:
-      "https://cdn.pixabay.com/photo/2023/01/15/17/58/nature-7720825_1280.jpg",
+    image: "/flyimg/nature-7720825_1280_16_11zon.webp",
     content: `
 ### Why Nutrition Matters
 
@@ -221,8 +219,7 @@ Your body is your engine. Feed it well, and it will carry you through the most r
     date: "January 12, 2025",
     author: "Alex",
     comments: 10,
-    image:
-      "https://d1nymbkeomeoqg.cloudfront.net/photos/26/6/382128_20894_XL.jpg",
+    image: "/flyimg/382128_20894_XL_2_11zon.webp",
     content: `
 ### Introduction
 

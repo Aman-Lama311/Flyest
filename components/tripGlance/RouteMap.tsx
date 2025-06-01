@@ -36,7 +36,7 @@ const RouteMap = () => {
         <img
           onClick={openModal}
           className="w-full h-[60vh] object-cover cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
-          src="https://www.thirdrockadventures.com/assets-back/images/map/manaslu-Trek-Route-Map.jpgwpF.jpg"
+          src="/flyimg/manaslu-Trek-Route-Map.jpgwpF_11_11zon.webp"
           alt="Manaslu Trek Route Map"
         />
         {showHoverText && (
@@ -64,7 +64,7 @@ const RouteMap = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src="https://www.thirdrockadventures.com/assets-back/images/map/manaslu-Trek-Route-Map.jpgwpF.jpg"
+              src="/flyimg/manaslu-Trek-Route-Map.jpgwpF_11_11zon.webp"
               alt="Manaslu Trek Route Map"
               className="w-full h-auto object-contain"
             />

@@ -13,7 +13,7 @@ const Places = () => {
 
   const images = [
     {
-      src: "https://www.thirdrockadventures.com/assets-back/images/blog/mount-manaslu.jpgVSu.jpg",
+      src: "/flyimg/mount-manaslu.jpgVSu_15_11zon.webp",
       alt: "Manaslu",
     },
     {
