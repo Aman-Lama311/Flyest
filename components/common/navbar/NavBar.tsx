@@ -38,36 +38,45 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  // Set isClient to true on mount (client-side only) and set up event listeners
+  // Set isClient to true on mount (client-side only)
   useEffect(() => {
     setIsClient(true);
+    // Set initial scroll position
+    setLastScrollY(window.scrollY);
+    setScrolled(window.scrollY > 0);
+  }, []);
 
-    // Only access document on client side
-    const handleClickOutside = (event: MouseEvent) => {
-      const navbarElement = document.getElementById("navbar-container");
-      if (navbarElement && !navbarElement.contains(event.target as Node)) {
-        setActiveDropdown(null);
-      }
-    };
+  // Handle scroll event for navbar hide/show
+  useEffect(() => {
+    if (!isClient) return;
 
     const handleScroll = () => {
-      if (!isClient) return;
       const currentScrollY = window.scrollY;
-
-      // Detect scroll direction
+      
+      // Only update state if scroll position changes significantly (performance optimization)
+      if (Math.abs(currentScrollY - lastScrollY) < 50) return;
+      
+      // Scroll down and past threshold -> hide navbar
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setShowNavbar(false); // Scroll down - hide
-      } else {
-        setShowNavbar(true); // Scroll up - show
+        setShowNavbar(false);
+      } 
+      // Scroll up or at top -> show navbar
+      else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setShowNavbar(true);
       }
 
-      setScrolled(currentScrollY > 0); // Track if page is scrolled
+      setScrolled(currentScrollY > 0);
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    // Add passive: true for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Cleanup function
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isClient, lastScrollY]);
 
   useEffect(() => {
     if (activeBackendCategory && !activeSubCategory) {
