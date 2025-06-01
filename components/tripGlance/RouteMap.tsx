@@ -1,6 +1,7 @@
 "use client";
 
 import { MapPinned, X } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 
 const RouteMap = () => {
@@ -33,7 +34,9 @@ const RouteMap = () => {
         onMouseEnter={() => setShowHoverText(true)}
         onMouseLeave={() => setShowHoverText(false)}
       >
-        <img
+        <Image  
+        height={500}
+        width={500}
           onClick={openModal}
           className="w-full h-[60vh] object-cover cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
           src="/flyimg/manaslu-Trek-Route-Map.jpgwpF_11_11zon.webp"
@@ -63,7 +66,9 @@ const RouteMap = () => {
             className="relative max-w-3xl max-h-[90vh] rounded-lg overflow-hidden shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <Image
+              height={500}
+              width={500}
               src="/flyimg/manaslu-Trek-Route-Map.jpgwpF_11_11zon.webp"
               alt="Manaslu Trek Route Map"
               className="w-full h-auto object-contain"

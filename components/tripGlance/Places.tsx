@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Image from "next/image";
 
 const Places = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -96,7 +97,9 @@ const Places = () => {
         >
           {clonedImages.map((image, index) => (
             <div key={index} className="flex-shrink-0 w-1/3 p-2">
-              <img
+              <Image
+                height={500}
+                width={500}
                 className="w-full h-[150px] object-cover rounded-md cursor-pointer"
                 src={image.src}
                 alt={image.alt}
@@ -144,7 +147,9 @@ const Places = () => {
             className="relative max-w-3xl max-h-[90vh] rounded-lg overflow-hidden shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <Image
+              height={500}
+              width={500}
               src={selectedImg}
               alt="Preview"
               className="w-full h-auto object-contain"

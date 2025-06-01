@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useCallback, useState } from "react";
 import { Star, MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { trek } from "./TrekCardData";
 import Title from "../../components/title/Title";
+import Image from "next/image";
 
 const THEME_COLOR = "#FF4E58";
 const GAP = 24;
@@ -189,11 +190,13 @@ const TrekCard = () => {
             className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-white hover:shadow-lg transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
           >
             <div className="relative h-72 sm:h-80 overflow-hidden group">
-              <img
+              <Image
                 src={item.imgSrc}
+                
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
+                height={500}
+                width={500}
               />
               {item.oldPrice > item.newPrice && (
                 <div className="absolute top-4 left-4 px-2 py-1 font-bold rounded bg-white text-[#FF4E58] text-lg">

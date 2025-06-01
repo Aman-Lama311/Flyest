@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { trek } from "../layout/TipsData";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import Image from "next/image";
 
 const TrekTipsCarousel: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -63,7 +64,9 @@ const TrekTipsCarousel: React.FC = () => {
             className="bg-white rounded-xl shadow hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full"
           >
             <div className="relative w-full h-40 bg-gray-200 overflow-hidden group">
-              <img
+              <Image
+                height={500}
+                width={500}
                 src={item.imgSrc}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,9 @@ const ContactPage = () => {
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <Phone size={120} color="white" />
         </div>
-        <img
+        <Image 
+          height={500}
+          width={500}
           src="https://static.vecteezy.com/system/resources/previews/026/712/861/non_2x/dark-grainy-gradient-abstract-background-red-orange-purple-glowing-light-texture-free-photo.jpg"
           alt="dark pink"
           className="w-full h-full object-cover rounded-b-4xl opacity-60"

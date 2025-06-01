@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -11,7 +12,9 @@ const Footer = () => {
       <div className="absolute inset-0 bg-[url('https://www.relaxgetaways.com/uploads/media/Short%20Treks/intero%20for%20short%20trek.jpg')] bg-cover bg-center"></div>
 
       {/* Decorative image */}
-      <img
+      <Image
+      height={500}
+      width={500}
         className="absolute right-0 bottom-0 opacity-10 w-72 sm:w-80 h-72 sm:h-80 object-cover"
         src="/heroimages/footer.svg"
         alt="Footer Decorative"
@@ -23,7 +26,7 @@ const Footer = () => {
         <div className=" mx-auto space-y-8">
           {/* Logo */}
           <div className="flex items-center">
-            <img src="/logo1.png" alt="Logo" className="h-12 sm:h-16" />
+            <Image height={500} width={500} src="/logo1.png" alt="Logo" className="h-12 sm:h-16" />
           </div>
 
           {/* Headline */}
@@ -59,7 +62,7 @@ const Footer = () => {
                   key={index}
                   className="flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                 >
-                  <img src={img} alt="Social Icon" className="w-7 h-7" />
+                  <Image height={500} width={500} src={img} alt="Social Icon" className="w-7 h-7" />
                 </div>
               ))}
             </div>
@@ -79,7 +82,9 @@ const Footer = () => {
                 Designed and Developed by
               </span>
               <Link href="https://www.webxnep.com/" target="_blank">
-                <img
+                <Image
+                  height={500}
+                  width={500}
                   src="https://www.webxnep.com/logo/logo.svg"
                   alt="WebX Nepal"
                   className="w-12 h-10 opacity-80 hover:opacity-100 transition-opacity object-contain"

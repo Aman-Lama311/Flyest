@@ -17,6 +17,7 @@ import Itinerary from "../../../components/intineryBars/Itinery";
 import DatesAndPrices from "../../../components/intineryBars/DatesAndPrices";
 import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 import ItineraryPreview from "./reusableNewCopms/Ititnerary";
+import Image from "next/image";
 
 const Page = () => {
   const heroImage = "/flyimg/photo-1722463926354-aa706b4db1c2_15_11zon.webp";
@@ -29,7 +30,9 @@ const Page = () => {
     <div className="relative  z-10 bg-white">
       {/* Hero Section */}
       <div className="w-full h-[80vh] relative z-0">
-        <img
+        <Image
+          height={500}
+          width={500}
           src={heroImage}
           alt="Hero"
           className="w-full h-full object-cover"
@@ -87,7 +90,9 @@ const Page = () => {
             className="relative max-w-3xl max-h-[90vh] rounded-lg overflow-hidden shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <Image
+              height={500}
+              width={500}
               src={heroImage}
               alt="Preview"
               className="w-full h-auto object-contain"

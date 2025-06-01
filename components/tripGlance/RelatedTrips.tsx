@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const RelatedTrips = () => {
   const relatedTrips = [
@@ -40,7 +41,9 @@ const RelatedTrips = () => {
             className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-300 overflow-hidden"
           >
             <div className="h-32 sm:h-40 md:h-48 bg-gray-100">
-              <img
+              <Image
+                height={500}
+                width={500}
                 className="object-cover h-full w-full"
                 src={`https://unsplash.it/400/300?random=${index + 1}`}
                 alt={trip.title}

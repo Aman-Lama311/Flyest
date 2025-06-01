@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MessageSquare } from "lucide-react";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,7 +130,9 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
         {members.map((member, index) => (
           <div key={index}>
             <div className="mb-4">
-              <img
+              <Image
+                height={500}
+                width={500}
                 src={member.imgSrc}
                 alt={member.name}
                 className={`w-full ${
@@ -181,7 +184,9 @@ const AboutUsPage = () => {
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <MessageSquare size={120} color="white" />
         </div>
-        <img
+        <Image
+          height={500}
+          width={500}
           src="https://static.vecteezy.com/system/resources/previews/026/712/861/non_2x/dark-grainy-gradient-abstract-background-red-orange-purple-glowing-light-texture-free-photo.jpg"
           alt="dark pink"
           className="w-full h-full object-cover rounded-b-4xl opacity-60"

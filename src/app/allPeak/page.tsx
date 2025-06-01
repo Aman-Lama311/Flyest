@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PackageCard from "../../../components/cards/PackageCard";
 import { Element } from "react-scroll";
+import Image from "next/image";
 
 interface HeightCategory {
   id: string;
@@ -52,18 +53,21 @@ const Page = () => {
     <>
       <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-black/80">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
-          <img
+          <Image
+            height={500}
+            width={500}
             className=" h-30"
             src="/heroimages/favicon.ico"
             alt="icon"
-            loading="lazy"
+            
           />
         </div>
-        <img
+        < Image
+        height={500}
+        width={500}
           src="/flyimg/mountain-climbing-2130878_1280_13_11zon.webp"
           alt="dark pink"
           className="w-full h-full object-cover rounded-b-4xl opacity-60"
-          loading="lazy"
         />
         <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white z-3">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">

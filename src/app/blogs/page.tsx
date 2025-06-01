@@ -3,6 +3,7 @@
 import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { blogData } from "../../../components/blogData/blogData";
+import Image from "next/image";
 
 const Blogs = () => {
   return (
@@ -12,11 +13,12 @@ const Blogs = () => {
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <MessageSquare size={120} color="white" />
         </div>
-        <img
+        <Image
+          height={500}
+          width={500}
           src="https://static.vecteezy.com/system/resources/previews/026/712/861/non_2x/dark-grainy-gradient-abstract-background-red-orange-purple-glowing-light-texture-free-photo.jpg"
           alt="dark pink"
           className="w-full h-full object-cover rounded-b-4xl opacity-60"
-          loading="lazy"
         />
         <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-white">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white">
@@ -41,7 +43,9 @@ const Blogs = () => {
                   </h3>
                   <p className="text-white text-sm">{blog.description}</p>
                 </div>
-                <img
+                <Image
+                  height={500}
+                  width={500}
                   src={blog.image}
                   alt={blog.title}
                   className="w-full h-52 object-cover rounded-xl mt-4"

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Title from "../../components/title/Title"; // If unused, consider removing
+import Image from "next/image";
 
 const CallToAction = () => {
   return (
@@ -56,7 +57,9 @@ const CallToAction = () => {
         {/* Right Image Section */}
         <div className="w-full md:w-1/2 relative max-h-[400px] sm:max-h-[500px] rounded-lg overflow-hidden">
           <div className="w-full h-[300px] sm:h-[400px] md:h-[500px]">
-            <img
+            <Image
+            height={500}
+            width={500}
               src="https://admin.ntb.gov.np/image-cache/ebc_tk_adventure_2-1624450765.jpeg?p=main&s=1f72965258be9625bee4886c373424ad"
               alt="Adventure Image"
               className="w-full h-full object-cover rounded-lg shadow-lg"

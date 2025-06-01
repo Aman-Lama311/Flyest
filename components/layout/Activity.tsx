@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Calendar, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import Title from "../../components/title/Title";
+import Image from "next/image";
 
 // Activity Type
 interface Activity {
@@ -164,11 +165,12 @@ const ActivityCarousel: React.FC = () => {
               className="min-w-[280px] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[360px] bg-zinc-800 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden"
             >
               <div className="relative w-full h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden group">
-                <img
+                <Image
+                  height={500}
+                  width={500}
                   src={activity.image}
                   alt={activity.title}
                   className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
-                  loading="lazy"
                 />
               </div>
               <div className="p-4 flex flex-col flex-grow">

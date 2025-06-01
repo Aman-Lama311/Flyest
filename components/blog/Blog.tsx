@@ -1,5 +1,6 @@
 import React from 'react'
 import {blog} from './Blogdata'
+import Image from 'next/image'
 
 const Blog = () => {
   return (
@@ -11,7 +12,7 @@ const Blog = () => {
     {
       blog.map((blog)=>(
         <div key={blog.id} className="relative h-[80vh] w-[30%] overflow-hidden">
-        <img
+        <Image
            src={blog.imgSrc}
            alt={blog.title}
             className="absolute inset-0 w-full h-full object-cover"

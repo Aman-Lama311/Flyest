@@ -3,6 +3,7 @@
 import React from "react";
 import { Star, MapPin, Clock } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const trek = [
   {
@@ -99,11 +100,13 @@ const PackageCard = () => {
           >
             {/* Image */}
             <div className="relative w-full h-[250px] group overflow-hidden">
-              <img
+              <Image
+              height={500}
+              width={500}
                 src={item.imgSrc}
                 alt={item.title}
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-110"
-                loading="lazy"
+                
               />
               {item.oldPrice > item.newPrice && (
                 <div className="absolute top-4 left-4 text-[#FF4E58] text-lg font-bold px-2 py-1 rounded bg-white">

@@ -4,6 +4,7 @@ import { useRouter, useParams } from "next/navigation";
 import { blogData } from "../../../../components/blogData/blogData";
 import ReactMarkdown from "react-markdown";
 import { MessageSquare, ArrowLeft, Calendar, User } from "lucide-react";
+import Image from "next/image";
 
 const BlogPage: React.FC = () => {
   const router = useRouter();
@@ -58,7 +59,9 @@ const BlogPage: React.FC = () => {
           <div className="w-full max-w-[900px]">
             {/* Image */}
             <div className="rounded-2xl overflow-hidden border border-gray-200 mb-6">
-              <img
+              <Image
+                height={500}
+                width={500}
                 src={blog.image}
                 alt={blog.title}
                 className="w-full h-auto block"
@@ -85,7 +88,9 @@ const BlogPage: React.FC = () => {
                   >
                     {/* Card Image */}
                     <div className="relative overflow-hidden">
-                      <img
+                      <Image
+                        height={500}
+                        width={500}
                         src={relatedBlog.image}
                         alt={relatedBlog.title}
                         className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"

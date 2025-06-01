@@ -17,6 +17,7 @@ import Itinerary from "../../../components/intineryBars/Itinery";
 import DatesAndPrices from "../../../components/intineryBars/DatesAndPrices";
 import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 import ItineraryPreview from "./reusableNewCopms/Ititnerary";
+import Image from "next/image";
 
 const Page = () => {
   const imageList = [
@@ -57,7 +58,9 @@ const Page = () => {
           <div className="flex gap-4">
             {/* Main Image */}
             <div>
-              <img
+              <Image
+                height={500}
+                width={500}
                 className="rounded-md cursor-pointer w-[600px] h-[350px] object-cover"
                 src={selectedImg}
                 alt="Main"
@@ -68,7 +71,9 @@ const Page = () => {
             {/* Side Images */}
             <div className="flex flex-col gap-2">
               {imageList.map((src, index) => (
-                <img
+                <Image
+                  height={500}
+                  width={500}
                   key={index}
                   className={`h-28 w-auto object-cover rounded-md cursor-pointer border transition ${
                     selectedImg === src ? "border" : "border-transparent"
@@ -122,7 +127,9 @@ const Page = () => {
             className="relative max-w-3xl max-h-[90vh] rounded-lg overflow-hidden shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <Image
+            height={500}
+            width={500}
               src={selectedImg}
               alt="Preview"
               className="w-full h-auto object-contain"

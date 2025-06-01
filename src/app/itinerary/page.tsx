@@ -15,6 +15,7 @@ import TravellerReview from "../../../components/tripGlance/Review";
 import Itinerary from "../../../components/intineryBars/Itinery";
 import DatesAndPrices from "../../../components/intineryBars/DatesAndPrices";
 import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
+import Image from "next/image";
 
 const Page = () => {
   const heroImage = "/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp";
@@ -23,7 +24,9 @@ const Page = () => {
     <div className="relative z-10 bg-white">
       {/* Hero Section */}
       <div className="w-full h-[80vh] relative z-0">
-        <img
+        <Image
+          height={500}
+          width={500}
           src={heroImage}
           alt="Hero"
           className="w-full h-full object-cover"

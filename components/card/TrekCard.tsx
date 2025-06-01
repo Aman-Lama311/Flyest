@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { MapPin, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { trek } from "./TrekCardData";
 import Title from "../../components/title/Title";
+import Image from "next/image";
 
 const debounce = (fn: () => void, delay: number) => {
   let timer: NodeJS.Timeout;
@@ -211,11 +212,12 @@ const TrekCard = () => {
             className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-white transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
           >
             <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden">
-              <img
+              <Image
+              height={500}
+              width={500}
                 src={item.imgSrc}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                loading="lazy"
               />
               {item.oldPrice > item.newPrice && (
                 <div className="absolute top-4 left-4 text-[#FF4E58] text-lg bg-white font-bold px-2 py-1 rounded">

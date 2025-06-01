@@ -1,5 +1,6 @@
 import React from "react";
 import { Users, MapPin, Globe, Star } from "lucide-react";
+import Image from "next/image";
 
 const StatisticsAndPartners = () => {
   return (
@@ -50,12 +51,13 @@ const StatisticsAndPartners = () => {
                   "associated2.ab7d60cb.png",
                   "certified.fd697c23.png",
                 ].map((img, idx) => (
-                  <img
+                  <Image
+                    height={500}
+                    width={500}
                     key={idx}
                     src={`https://infinityadventurenepal.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2F${img}&w=256&q=75`}
                     alt={`Partner ${idx + 1}`}
                     className="h-14"
-                    loading="lazy"
                   />
                 ))}
               </div>

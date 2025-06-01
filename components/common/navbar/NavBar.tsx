@@ -22,6 +22,7 @@ import { MdOutlineArrowRight } from "react-icons/md";
 import { CategoryType } from "../../../Types/CategoryTypes";
 import { SubCategoryType } from "../../../Types/SubCategoryTypes";
 import { PackageType } from "../../../Types/PackageType";
+import Image from "next/image";
 
 const Navbar = () => {
   // Main dropdown state
@@ -196,7 +197,7 @@ const Navbar = () => {
         {/* Logo */}
         <div>
           <Link href="/" className="cursor-pointer">
-            <img src="/logo1.png" alt="Flyeast Adventures" className="h-10" />
+            <Image height={500} width={500} src="/logo1.png" alt="Flyeast Adventures" className="h-10" />
           </Link>
         </div>
 
@@ -417,7 +418,7 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center mb-8">
-            <img src="./logo1.png" alt="HighFive Adventures" className="h-8" />
+            <Image height={500} width={500} src="/logo1.png" alt="HighFive Adventures" className="h-8" />
             <button
               onClick={toggleNav}
               className="text-white hover:text-[#FF4E58]"
@@ -1005,7 +1006,9 @@ const Navbar = () => {
                       </div>
                       <div className="flex-1">
                         <div className="h-48 overflow-hidden rounded-lg">
-                          <img
+                          <Image
+                            height={500}
+                            width={500}
                             src="/flyimg/pexels-photo-1766838_10_11zon.webp"
                             alt="HighFive Adventures"
                             className="object-cover h-full w-full"
@@ -1036,7 +1039,9 @@ const Navbar = () => {
                       {teamData.slice(0, 3).map((member) => (
                         <Link href={`/team/${member.id}`} key={member.id}>
                           <div className="relative h-56 w-full rounded-lg overflow-hidden group cursor-pointer">
-                            <img
+                            <Image
+                              height={500}
+                              width={500}
                               src={member.image}
                               alt={member.name}
                               className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500"
