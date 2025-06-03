@@ -1,7 +1,7 @@
 export const trek = [
   {
     id: 1,
-    imgSrc: "/flyimg/0724b7e62b342d120500c43090219125_1_11zon.webp",
+    imgSrc: "/flyimg/0724b7e62b342d120500c43090219125-1-11zon.webp",
     title: "Scenic Trails to Annapurna Sanctuary",
     oldPrice: 1800,
     newPrice: 1500,
@@ -28,7 +28,7 @@ export const trek = [
   },
   {
     id: 3,
-    imgSrc: "/flyimg/massif-Mount-Everest-Himalayas-Nepal_7_11zon.webp",
+    imgSrc: "/flyimg/massif-mount-everest-himalayas-nepal-7-11zon.webp",
     title: "Annapurna Circuit Expedition",
     oldPrice: 1800,
     newPrice: 1500,
@@ -41,7 +41,7 @@ export const trek = [
   },
   {
     id: 4,
-    imgSrc: "/flyimg/massif-Mount-Everest-Himalayas-Nepal_7_11zon.webp",
+    imgSrc: "/flyimg/massif-mount-everest-himalayas-nepal-7-11zon.webp",
     title: "Langtang Alpine Exploration",
     oldPrice: 1800,
     newPrice: 1500,
@@ -54,7 +54,7 @@ export const trek = [
   },
   {
     id: 5,
-    imgSrc: "/flyimg/annapurnabasecamp-_5_11zon.webp",
+    imgSrc: "/flyimg/annapurnabasecamp-5-11zon.webp",
     title: "Adventure to Annapurna Base Camp",
     oldPrice: 2000,
     newPrice: 1650,
@@ -67,7 +67,7 @@ export const trek = [
   },
   {
     id: 6,
-    imgSrc: "/flyimg/lobuche-peak-climbing-banner_10_11zon.webp",
+    imgSrc: "/flyimg/lobuche-peak-climbing-banner-10-11zon.webp",
     title: "Lobuche Peak Ascent Expedition",
     oldPrice: 2500,
     newPrice: 2100,
@@ -80,7 +80,7 @@ export const trek = [
   },
   {
     id: 7,
-    imgSrc: "/flyimg/everest-base-camp-trek-2025_6_11zon.webp",
+    imgSrc: "/flyimg/everest-base-camp-trek-2025-6-11zon.webp",
     title: "Everest Base Camp Adventure Trek",
     oldPrice: 2200,
     newPrice: 1899,
