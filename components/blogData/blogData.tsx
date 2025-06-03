@@ -183,7 +183,8 @@ The wild is beautiful, but it doesn't play fair. Plan ahead, stay aware, and alw
     date: "January 30, 2025",
     author: "Maya",
     comments: 7,
-    image: "/flyimg/nature-7720825_1280_16_11zon.webp",
+    image:
+      "https://cdn.pixabay.com/photo/2018/10/01/19/46/oats-3717095_1280.jpg",
     content: `
 ### Why Nutrition Matters
 
