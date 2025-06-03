@@ -64,7 +64,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src="/flyimg/adventure-5062314_1280_3_11zon.webp"
+          src="https://cdn.pixabay.com/photo/2020/04/19/08/03/adventure-5062314_1280.jpg"
           alt="adventure"
           className="w-full h-full object-cover rounded-b-4xl opacity-80"
         />

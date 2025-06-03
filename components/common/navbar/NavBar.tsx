@@ -1020,7 +1020,7 @@ const Navbar = () => {
                           <Image
                             height={500}
                             width={500}
-                            src="/flyimg/pexels-photo-1766838_10_11zon.webp"
+                            src="https://cdn.pixabay.com/photo/2025/03/19/15/04/lotus-9480927_1280.jpg"
                             alt="HighFive Adventures"
                             className="object-cover h-full w-full"
                           />

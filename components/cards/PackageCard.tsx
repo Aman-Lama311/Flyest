@@ -1,14 +1,15 @@
 "use client";
 
 import React from "react";
-import { Star, MapPin, Clock } from "lucide-react";
+import { MapPin, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 export const trek = [
   {
     id: 1,
-    imgSrc: "/flyimg/Mount-Everest_8_11zon.webp",
+    imgSrc:
+      "https://cdn.pixabay.com/photo/2020/04/19/08/03/adventure-5062314_1280.jpg",
     title: "Mount Everest Base Camp Trek",
     oldPrice: 2200,
     newPrice: 1850,
@@ -21,7 +22,8 @@ export const trek = [
   },
   {
     id: 2,
-    imgSrc: "/flyimg/kilimanjaro-kibo-view-pjh_9_11zon.webp",
+    imgSrc:
+      "https://cdn.pixabay.com/photo/2020/10/11/09/04/peak-5645235_1280.jpg",
     title: "Kilimanjaro Summit Adventure",
     oldPrice: 2100,
     newPrice: 1700,
@@ -34,7 +36,7 @@ export const trek = [
   },
   {
     id: 3,
-    imgSrc: "/flyimg/everest-region-banner1-1024_8_11zon.webp",
+    imgSrc: "https://cdn.pixabay.com/photo/2010/12/01/snow-738_1280.jpg",
     title: "Annapurna Circuit Expedition",
     oldPrice: 1900,
     newPrice: 1600,

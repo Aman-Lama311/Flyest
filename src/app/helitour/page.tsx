@@ -31,7 +31,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src="/flyimg/photo-1722463926354-aa706b4db1c2_15_11zon.webp"
+          src="https://cdn.pixabay.com/photo/2020/06/11/17/41/rescue-helicopter-5287627_1280.jpg"
           alt="Hero"
           className="w-full h-full object-cover"
         />

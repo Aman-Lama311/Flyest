@@ -22,7 +22,8 @@ const activities: Activity[] = [
       "Explore stunning trails, high-altitude passes, and breathtaking landscapes on foot with our experienced guides.",
     date: "2025-06-15",
     location: "Annapurna Region",
-    image: "/flyimg/annapurna_circuit_DnUY2uo448_4_11zon.webp",
+    image:
+      "https://cdn.pixabay.com/photo/2024/02/12/16/05/siguniang-mountain-8568913_1280.jpg",
   },
   {
     title: "Hiking",
@@ -39,7 +40,8 @@ const activities: Activity[] = [
       "Navigate whitewater rapids with our thrilling rafting adventures in Nepal's top rivers.",
     date: "2025-07-05",
     location: "Trishuli River",
-    image: "/flyimg/rafting-293542_1280_24_11zon.webp",
+    image:
+      "https://cdn.pixabay.com/photo/2014/03/23/19/57/rafting-293542_1280.jpg",
   },
   {
     title: "Camping",
@@ -56,7 +58,8 @@ const activities: Activity[] = [
       "Soar above the Himalayas with a paragliding experience that blends adrenaline and awe.",
     date: "2025-08-01",
     location: "Pokhara",
-    image: "/flyimg/Paragrading-in-Nepal-scaled_11zon.webp",
+    image:
+      "https://cdn.pixabay.com/photo/2013/11/16/02/43/nepal-211403_1280.jpg",
   },
   {
     title: "Cycling",

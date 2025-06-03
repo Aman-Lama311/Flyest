@@ -25,7 +25,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src="/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp"
+          src="https://cdn.pixabay.com/photo/2024/11/03/17/49/mountain-9172053_1280.jpg"
           alt="Hero"
           className="w-full h-full object-cover"
         />
