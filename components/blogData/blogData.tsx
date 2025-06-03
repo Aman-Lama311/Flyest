@@ -92,7 +92,7 @@ Pack light, but don’t skip essentials. Every item in your backpack should serv
     author: "Elena",
     comments: 12,
     image:
-      "/flyimg/trekkers-return-to-dingboche-after-hiking-to-nangkartsang-peak.jpg_16_11zon.webp",
+      "https://cdn.pixabay.com/photo/2015/06/19/21/24/avenue-815297_1280.jpg",
     content: `
 ### Nepal Beyond the Mainstream
 
@@ -140,7 +140,8 @@ These trails reward curiosity and respect. Step off the beaten path and find you
     date: "February 25, 2025",
     author: "James",
     comments: 4,
-    image: "/flyimg/alps-8368328_1280_4_11zon.webp",
+    image:
+      "https://cdn.pixabay.com/photo/2022/11/12/15/43/reed-7587271_1280.jpg",
     content: `
 ### Introduction
 
@@ -219,7 +220,8 @@ Your body is your engine. Feed it well, and it will carry you through the most r
     date: "January 12, 2025",
     author: "Alex",
     comments: 10,
-    image: "/flyimg/382128_20894_XL_2_11zon.webp",
+    image:
+      "https://cdn.pixabay.com/photo/2016/11/22/19/25/man-1850181_1280.jpg",
     content: `
 ### Introduction
 
