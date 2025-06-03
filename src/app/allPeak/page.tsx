@@ -56,7 +56,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src="/flyimg/mountain-climbing-2130878_1280_13_11zon.webp"
+          src="https://cdn.pixabay.com/photo/2018/07/05/17/13/travel-3518769_1280.jpg"
           alt="peak"
           className="w-full h-full object-cover rounded-b-4xl opacity-80"
         />
