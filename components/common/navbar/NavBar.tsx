@@ -425,10 +425,9 @@ const Navbar = () => {
             <Image
               priority
               height={100}
-              width={100}
+              width={150}
               src="/logo1.png"
               alt="HighFive Adventures"
-              className="h-8 w-8"
             />
             <button
               onClick={toggleNav}
