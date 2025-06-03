@@ -93,7 +93,7 @@ export default function TravellerReview() {
               </div>
               <a
                 href="#"
-                className="text-sm text-gray-600 hover:text-[#EA3359] transition-colors"
+                className="text-sm text-gray-600 hover:text-[#b415b4] transition-colors"
               >
                 {platform.reviewCount} reviews
               </a>
@@ -116,7 +116,7 @@ export default function TravellerReview() {
             key={review.id}
             className={`bg-white p-6 rounded-xl shadow-sm border hover:shadow-md transition-shadow cursor-pointer ${
               expandedReview === review.id
-                ? "border-[#EA3359]"
+                ? "border-[#b415b4]"
                 : "border-gray-100"
             }`}
             onClick={() =>
@@ -140,7 +140,7 @@ export default function TravellerReview() {
                 ? review.reviewText
                 : `${review.reviewText.substring(0, 100)}...`}
               <button
-                className="text-[#EA3359] text-xs ml-1 hover:underline focus:outline-none"
+                className="text-[#b415b4] text-xs ml-1 hover:underline focus:outline-none"
                 onClick={(e) => {
                   e.stopPropagation();
                   setExpandedReview(

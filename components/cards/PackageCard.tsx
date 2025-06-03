@@ -75,7 +75,8 @@ export const trek = [
   },
 ];
 
-const THEME_COLOR = "#FF4E58";
+// 🎨 Theme color set to your chosen value
+const THEME_COLOR = "#B516B5";
 
 const PackageCard = () => {
   const formatPrice = (price: number) => {
@@ -101,22 +102,24 @@ const PackageCard = () => {
             {/* Image */}
             <div className="relative w-full h-[250px] group overflow-hidden">
               <Image
-              height={500}
-              width={500}
+                height={500}
+                width={500}
                 src={item.imgSrc}
                 alt={item.title}
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-110"
-                
               />
               {item.oldPrice > item.newPrice && (
-                <div className="absolute top-4 left-4 text-[#FF4E58] text-lg font-bold px-2 py-1 rounded bg-white">
+                <div
+                  className="absolute top-4 left-4 text-lg font-bold px-2 py-1 rounded bg-white"
+                  style={{ color: THEME_COLOR }}
+                >
                   Starting from {formatPrice(item.newPrice)}
                 </div>
               )}
             </div>
 
             {/* Content */}
-            <div className="pr-4 flex flex-col flex-grow text-white">
+            <div className="pr-4 flex flex-col flex-grow text-gray-800">
               {/* Title & Rating */}
               <div className="flex justify-between items-start mb-3 mt-4">
                 <h3 className="text-2xl">{item.title}</h3>
@@ -125,7 +128,7 @@ const PackageCard = () => {
               {/* Pricing & Reviews */}
               <div className="flex items-center justify-between mb-4">
                 {/* Location & Duration */}
-                <div className="flex items-center text-sm  text-zinc-300">
+                <div className="flex items-center text-sm  text-zinc-700">
                   <MapPin size={16} className="mr-1 text-green-400" />
                   <span>{item.location}</span>
                   <Clock size={16} className="ml-4 mr-1 text-sky-500" />
@@ -135,7 +138,8 @@ const PackageCard = () => {
                 <div className="flex gap-3">
                   <Link
                     href={`/itinerary`}
-                    className="w-fit font-medium  text-[#FA2A55] text-lg hover:scale-108 text-center transition duration-100"
+                    className="w-fit font-medium text-lg hover:scale-108 text-center transition duration-100"
+                    style={{ color: THEME_COLOR }}
                   >
                     View itinerary
                   </Link>

@@ -20,7 +20,6 @@ import ItineraryPreview from "./reusableNewCopms/Ititnerary";
 import Image from "next/image";
 
 const Page = () => {
-
   const [modalOpen, setModalOpen] = useState(false);
 
   const closeModal = () => setModalOpen(false);
@@ -42,7 +41,7 @@ const Page = () => {
       <Title />
 
       <div
-        className={`relative z-20 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 ${
+        className={`relative z-20 w-full mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 ${
           modalOpen ? "filter blur-2xl" : ""
         }`}
       >

@@ -53,14 +53,14 @@ const Navbar = () => {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Only update state if scroll position changes significantly (performance optimization)
       if (Math.abs(currentScrollY - lastScrollY) < 50) return;
-      
+
       // Scroll down and past threshold -> hide navbar
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setShowNavbar(false);
-      } 
+      }
       // Scroll up or at top -> show navbar
       else if (currentScrollY < lastScrollY || currentScrollY < 10) {
         setShowNavbar(true);
@@ -71,11 +71,11 @@ const Navbar = () => {
     };
 
     // Add passive: true for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     // Cleanup function
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isClient, lastScrollY]);
 
@@ -157,7 +157,7 @@ const Navbar = () => {
 
   // Handle body overflow when dropdown is open
   useEffect(() => {
-    if (isClient && typeof document !== 'undefined') {
+    if (isClient && typeof document !== "undefined") {
       if (activeDropdown) {
         document.body.classList.add("overflow-hidden");
         setBgurl(true);
@@ -165,18 +165,15 @@ const Navbar = () => {
         document.body.classList.remove("overflow-hidden");
         setBgurl(false);
       }
-      
+
       // Cleanup function to ensure we don't leave the body in a locked state
       return () => {
-        if (typeof document !== 'undefined') {
+        if (typeof document !== "undefined") {
           document.body.classList.remove("overflow-hidden");
         }
       };
     }
   }, [activeDropdown, isClient]);
-
-
-
 
   return (
     <div id="" className="relative">
@@ -189,7 +186,7 @@ const Navbar = () => {
         bgurl
           ? "bg-[url('/navbg.svg')]"
           : showNavbar && scrolled
-          ? "bg-black/60 backdrop-blur-2xl"
+          ? "bg-black/15 backdrop-blur-3xl"
           : "bg-transparent"
       }
       bg-cover py-4 px-4 md:px-24 flex items-center justify-between font-sans font-medium text-[1rem] text-white`}
@@ -197,7 +194,14 @@ const Navbar = () => {
         {/* Logo */}
         <div>
           <Link href="/" className="cursor-pointer">
-            <Image priority height={100} width={300} src="/logo1.png" alt="Flyeast Adventures" className="h-10 w-auto  " />
+            <Image
+              priority
+              height={100}
+              width={300}
+              src="/logo1.png"
+              alt="Flyeast Adventures"
+              className="h-10 w-auto  "
+            />
           </Link>
         </div>
 
@@ -205,7 +209,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center justify-center gap-8">
           <Link href="/">
             <button className="relative group">
-              <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+              <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer">
                 Home
               </span>
             </button>
@@ -219,7 +223,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("trekking")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer">
                   Trekking
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -235,7 +239,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("mountaineering")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer">
                   Peak Climbing
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -251,7 +255,7 @@ const Navbar = () => {
                 onMouseEnter={() => setActiveDropdown("heliService")}
                 className="relative group flex items-center gap-1"
               >
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer">
                   Heli Service
                 </span>
                 <ChevronDown className="w-4 h-4" />
@@ -271,7 +275,7 @@ const Navbar = () => {
                   }}
                   className="relative group flex items-center gap-1"
                 >
-                  <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300">
+                  <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300">
                     {category.name}
                   </span>
                   <ChevronDown className="w-4 h-4" />
@@ -305,7 +309,7 @@ const Navbar = () => {
                         className={`cursor-pointer transition-all duration-300 ${
                           activeBackendCategory === category
                             ? "text-[#FF4E58] font-semibold translate-x-2"
-                            : "text-white hover:text-[#FF4E58]"
+                            : "text-white hover:text-[#B516B5]"
                         }`}
                         onClick={() => setActiveSubCategory(category)}
                       >
@@ -328,7 +332,7 @@ const Navbar = () => {
                       {packageData.map((item, index) => (
                         <Link href={`/itinerary`} key={index}>
                           <li>
-                            <div className="flex items-center gap-4 hover:text-[#FF4E58]">
+                            <div className="flex items-center gap-4 hover:text-[#B516B5]">
                               <MdOutlineArrowRight className="h-6 w-6" />
                               <h1>{item.name}</h1>
                             </div>
@@ -337,7 +341,7 @@ const Navbar = () => {
                       ))}
                     </ul>
                     <Link href="allPeak">
-                      <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
+                      <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#B516B5] transition-colors duration-300">
                         <p>View All {activeBackendCategory?.name}</p>
                         <ChevronRight strokeWidth={3} size={15} />
                       </div>
@@ -357,7 +361,7 @@ const Navbar = () => {
                 className="relative group flex items-center gap-1"
               >
                 <span
-                  className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer
+                  className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer
               "
                 >
                   Company
@@ -371,7 +375,7 @@ const Navbar = () => {
           <Link href="/blogs">
             <div className="relative">
               <button className="relative group flex items-center gap-1">
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer">
                   Blogs
                 </span>
               </button>
@@ -382,7 +386,7 @@ const Navbar = () => {
           <div className="relative">
             <Link href="/contact_us">
               <button className="relative group flex items-center gap-1">
-                <span className="relative inline-block hover:text-[#FF4E58] transition-colors duration-300 cursor-pointer">
+                <span className="relative inline-block hover:text-[#B516B5] transition-colors duration-300 cursor-pointer">
                   Contact Us
                 </span>
               </button>
@@ -393,7 +397,7 @@ const Navbar = () => {
         {/* Let's Talk Button */}
         <div className="hidden md:block">
           <Link href="https://wa.me/+9779801086542" target="_blank">
-            <button className="py-2 px-8 bg-[#EA3359] text-white flex items-center justify-center gap-4 rounded-full transition-all duration-300 hover:bg-[#d62a33] cursor-pointer">
+            <button className="py-2 px-8 bg-[#B516B5] text-white flex items-center justify-center gap-4 rounded-full transition-all duration-300 hover:bg-[#b516b5d4] cursor-pointer">
               Let's Talk
             </button>
           </Link>
@@ -418,10 +422,17 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center mb-8">
-            <Image priority height={100} width={100} src="/logo1.png" alt="HighFive Adventures" className="h-8 w-8" />
+            <Image
+              priority
+              height={100}
+              width={100}
+              src="/logo1.png"
+              alt="HighFive Adventures"
+              className="h-8 w-8"
+            />
             <button
               onClick={toggleNav}
-              className="text-white hover:text-[#FF4E58]"
+              className="text-white hover:text-[#B516B5]"
             >
               <CircleX size={28} />
             </button>
@@ -431,7 +442,7 @@ const Navbar = () => {
             <ul className="space-y-0">
               <li>
                 <Link href="/" onClick={toggleNav}>
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                  <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                     Home
                   </span>
                 </Link>
@@ -448,7 +459,7 @@ const Navbar = () => {
                   }}
                 >
                   <div className="flex justify-between items-center py-4">
-                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                       Mountaineering
                     </span>
                     <ChevronDown
@@ -466,7 +477,7 @@ const Navbar = () => {
                         key={category}
                         onClick={toggleNav}
                       >
-                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <div className="flex items-center text-gray-300 hover:text-[#B516B5]">
                           <ChevronRight className="w-4 h-4 mr-2" />
                           <span>
                             {
@@ -493,7 +504,7 @@ const Navbar = () => {
                   }}
                 >
                   <div className="flex justify-between items-center py-4">
-                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                       Heli Service
                     </span>
                     <ChevronDown
@@ -511,7 +522,7 @@ const Navbar = () => {
                         key={category}
                         onClick={toggleNav}
                       >
-                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <div className="flex items-center text-gray-300 hover:text-[#B516B5]">
                           <ChevronRight className="w-4 h-4 mr-2" />
                           <span>
                             {
@@ -538,7 +549,7 @@ const Navbar = () => {
                   }}
                 >
                   <div className="flex justify-between items-center py-4">
-                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                       Trekking
                     </span>
                     <ChevronDown
@@ -556,7 +567,7 @@ const Navbar = () => {
                         key={region}
                         onClick={toggleNav}
                       >
-                        <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                        <div className="flex items-center text-gray-300 hover:text-[#B516B5]">
                           <ChevronRight className="w-4 h-4 mr-2" />
                           <span>{region}</span>
                         </div>
@@ -573,7 +584,7 @@ const Navbar = () => {
                   onClick={() => toggleMobileDropdown("about")}
                 >
                   <div className="flex justify-between items-center py-4">
-                    <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                    <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                       Company
                     </span>
                     <ChevronDown
@@ -586,19 +597,19 @@ const Navbar = () => {
                 {mobileDropdowns.about && (
                   <div className="mt-4 ml-4 space-y-3">
                     <Link href="/about" onClick={toggleNav}>
-                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                      <div className="flex items-center text-gray-300 hover:text-[#B516B5]">
                         <ChevronRight className="w-4 h-4 mr-2" />
                         <span>About Us</span>
                       </div>
                     </Link>
                     <Link href="/team" onClick={toggleNav}>
-                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                      <div className="flex items-center text-gray-300 hover:text-[#B516B5]">
                         <ChevronRight className="w-4 h-4 mr-2" />
                         <span>Our Team</span>
                       </div>
                     </Link>
                     <Link href="/values" onClick={toggleNav}>
-                      <div className="flex items-center text-gray-300 hover:text-[#FF4E58]">
+                      <div className="flex items-center text-gray-300 hover:text-[#B516B5]">
                         <ChevronRight className="w-4 h-4 mr-2" />
                         <span>Core Values</span>
                       </div>
@@ -613,7 +624,7 @@ const Navbar = () => {
                   onClick={toggleNav}
                   className="block w-full py-4"
                 >
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                  <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                     Blogs
                   </span>
                 </Link>
@@ -625,7 +636,7 @@ const Navbar = () => {
                   onClick={toggleNav}
                   className="block w-full py-4"
                 >
-                  <span className="text-xl hover:text-[#FF4E58] transition-colors duration-300">
+                  <span className="text-xl hover:text-[#B516B5] transition-colors duration-300">
                     Contact Us
                   </span>
                 </Link>
@@ -636,7 +647,7 @@ const Navbar = () => {
           {/* Mobile Let's Talk Button */}
           <div className="mt-8">
             <Link href="/contact" onClick={toggleNav}>
-              <button className="w-full py-4 bg-[#EA3359] text-white rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 hover:bg-[#d62a4e]">
+              <button className="w-full py-4 bg-[#B516B5] text-white rounded-xl flex items-center justify-center gap-2 transition-colors duration-300 hover:bg-[#B516B5]">
                 <span>Let's Talk</span>
                 <ArrowUpRight size={20} />
               </button>
@@ -667,8 +678,8 @@ const Navbar = () => {
                     key={category}
                     className={`cursor-pointer transition-all duration-300 ${
                       activeCategory.mountaineering === category
-                        ? "text-[#FF4E58] font-semibold translate-x-2"
-                        : "text-white hover:text-[#FF4E58]"
+                        ? "text-[#B516B5] font-semibold translate-x-2"
+                        : "text-white hover:text-[#B516B5]"
                     }`}
                     onClick={() =>
                       handleCategorySelect("mountaineering", category)
@@ -708,7 +719,7 @@ const Navbar = () => {
                       onClick={() => setActiveDropdown(null)}
                     >
                       <li>
-                        <div className="flex items-center gap-4 hover:text-[#FF4E58]">
+                        <div className="flex items-center gap-4 hover:text-[#B516B5]">
                           <MdOutlineArrowRight className="h-6 w-6" />
                           <h1>{item.name}</h1>
                         </div>
@@ -721,7 +732,7 @@ const Navbar = () => {
                   // You can use `/mountaineering/${activeCategory.mountaineering}` if needed
                   onClick={() => setActiveDropdown(null)}
                 >
-                  <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
+                  <div className="text-[#B516B5] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#B516B5] transition-colors duration-300">
                     <p>
                       View All{" "}
                       {
@@ -765,8 +776,8 @@ const Navbar = () => {
                     key={category}
                     className={`cursor-pointer transition-all duration-300 ${
                       activeCategory.heliService === category
-                        ? "text-[#FF4E58] font-semibold translate-x-2"
-                        : "text-white hover:text-[#FF4E58]"
+                        ? "text-[#B516B5] font-semibold translate-x-2"
+                        : "text-white hover:text-[#B516B5]"
                     }`}
                     onClick={() =>
                       handleCategorySelect("heliService", category)
@@ -803,7 +814,7 @@ const Navbar = () => {
                       onClick={() => setActiveDropdown(null)}
                     >
                       <li>
-                        <div className="flex items-center gap-4 hover:text-[#FF4E58]">
+                        <div className="flex items-center gap-4 hover:text-#B516B5]">
                           <MdOutlineArrowRight className="h-6 w-6" />
                           <h1>{item.name}</h1>
                         </div>
@@ -816,7 +827,7 @@ const Navbar = () => {
                   // {`/heliService/${activeCategory.heliService}`}
                   onClick={() => setActiveDropdown(null)}
                 >
-                  <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
+                  <div className="text-[#B516B5] flex items-center gap-2 mt-18 cursor-pointer hover:text-#B516B5] transition-colors duration-300">
                     <p>
                       View All{" "}
                       {
@@ -858,8 +869,8 @@ const Navbar = () => {
                     key={region}
                     className={`cursor-pointer transition-all duration-300 ${
                       activeCategory.trekking === region
-                        ? "text-[#FF4E58] font-semibold translate-x-2"
-                        : "text-white hover:text-[#FF4E58]"
+                        ? "text-[#B516B5] font-semibold translate-x-2"
+                        : "text-white hover:text-[#B516B5]"
                     }`}
                     onClick={() => handleCategorySelect("trekking", region)}
                   >
@@ -892,7 +903,7 @@ const Navbar = () => {
                       onClick={() => setActiveDropdown(null)}
                     >
                       <li>
-                        <div className="flex items-center gap-4 hover:text-[#FF4E58]">
+                        <div className="flex items-center gap-4 hover:text-[#B516B5]">
                           <MdOutlineArrowRight className="h-6 w-6" />
                           <h1>{item.name}</h1>
                         </div>
@@ -904,7 +915,7 @@ const Navbar = () => {
                   href="allTrekking"
                   onClick={() => setActiveDropdown(null)}
                 >
-                  <div className="text-[#FF4E58] flex items-center gap-2 mt-18 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
+                  <div className="text-[#B516B5] flex items-center gap-2 mt-18 cursor-pointer hover:text-#B516B5] transition-colors duration-300">
                     <p>
                       View All{" "}
                       {
@@ -941,8 +952,8 @@ const Navbar = () => {
                 <li
                   className={`cursor-pointer transition-all duration-300 ${
                     activeCategory.about === "company"
-                      ? "text-[#FF4E58] font-semibold translate-x-2"
-                      : "text-white hover:text-[#FF4E58]"
+                      ? "text-[#B516B5] font-semibold translate-x-2"
+                      : "text-white hover:text-[#B516B5]"
                   }`}
                   onClick={() => handleCategorySelect("about", "company")}
                 >
@@ -951,8 +962,8 @@ const Navbar = () => {
                 <li
                   className={`cursor-pointer transition-all duration-300 ${
                     activeCategory.about === "team"
-                      ? "text-[#FF4E58] font-semibold translate-x-2"
-                      : "text-white hover:text-[#FF4E58]"
+                      ? "text-[#B516B5] font-semibold translate-x-2"
+                      : "text-white hover:text-[#B516B5]"
                   }`}
                   onClick={() => handleCategorySelect("about", "team")}
                 >
@@ -961,8 +972,8 @@ const Navbar = () => {
                 <li
                   className={`cursor-pointer transition-all duration-300 ${
                     activeCategory.about === "values"
-                      ? "text-[#FF4E58] font-semibold translate-x-2"
-                      : "text-white hover:text-[#FF4E58]"
+                      ? "text-[#B516B5] font-semibold translate-x-2"
+                      : "text-white hover:text-[#B516B5]"
                   }`}
                   onClick={() => handleCategorySelect("about", "values")}
                 >
@@ -992,7 +1003,7 @@ const Navbar = () => {
                         </p>
                         <Link
                           href="/about"
-                          className="text-[#ff4e69d3] hover:text-[#ff4e4e]"
+                          className="text-[#B516B5] hover:text-[#B516B5]"
                           onClick={() => setActiveDropdown(null)}
                         >
                           <div className="flex items-center gap-2">
@@ -1029,7 +1040,7 @@ const Navbar = () => {
                         href="/about"
                         onClick={() => setActiveDropdown(null)}
                       >
-                        <div className="text-[#FF4E58] flex items-center gap-2 cursor-pointer hover:text-[#d62a4e] transition-colors duration-300">
+                        <div className="text-[#B516B5] flex items-center gap-2 cursor-pointer hover:text-[#B516B5] transition-colors duration-300">
                           <p>View All Team Members</p>
                           <ChevronRight strokeWidth={3} size={15} />
                         </div>{" "}
@@ -1047,7 +1058,7 @@ const Navbar = () => {
                               className="object-cover h-full w-full group-hover:scale-110 transition-transform duration-500"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div className="absolute right-3 top-3 bg-[#FF4E58] p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="absolute right-3 top-3 bg-[#B516B5] p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               <ArrowUpRight className="text-white" size={18} />
                             </div>
                             <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -1077,14 +1088,14 @@ const Navbar = () => {
                           className="border border-zinc-800 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
                         >
                           <div className="flex items-start gap-4">
-                            <div className="h-12 w-12 bg-[#FF4E58] rounded-full items-center justify-center text-white hidden">
+                            <div className="h-12 w-12 bg-[#B516B5] rounded-full items-center justify-center text-white hidden">
                               {index === 0 && <MapPin />}
                               {index === 1 && <Mail />}
                               {index === 2 && <Phone />}
                               {index === 3 && <ChevronRight />}
                             </div>
                             <div>
-                              <h3 className="text-lg font-semibold mb-1 text-[#FF4E58]">
+                              <h3 className="text-lg font-semibold mb-1 text-[#B516B5]">
                                 {value.name}
                               </h3>
                               <p className="text-white">{value.description}</p>

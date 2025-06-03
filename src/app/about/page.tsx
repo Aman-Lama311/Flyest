@@ -121,7 +121,7 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
 
   return (
     <div className="mt-16">
-      <h3 className="text-3xl font-semibold mb-6 text-white">{title}</h3>
+      <h3 className="text-3xl font-semibold mb-6 text-black">{title}</h3>
       <div
         className={`grid grid-cols-1 ${
           isLeaderSection ? "md:grid-cols-2" : "md:grid-cols-3"
@@ -141,10 +141,10 @@ const TeamSection = ({ title, members }: TeamSectionProps) => {
               />
             </div>
             <div className="flex justify-between items-center">
-              <h4 className="text-xl font-semibold text-white">
+              <h4 className="text-xl font-semibold text-black">
                 {member.name}
               </h4>
-              <p className="text-gray-300 italic">{member.role}</p>
+              <p className="text-gray-800 italic">{member.role}</p>
             </div>
           </div>
         ))}
@@ -178,33 +178,37 @@ const AboutUsPage = () => {
     });
   }, []);
 
+  // ...existing code...
   return (
     <>
-      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-black/80">
-        <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
-          <MessageSquare size={120} color="white" />
+      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-white">
+        {/* Background Overlay */}
+        <div className="absolute top-0 left-0 w-full h-[20vh] bg-gradient-to-b from-black/40 to-transparent"></div>
+
+        <div className="absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-40 z-1">
+          <MessageSquare size={120} color="#B516B5" />
         </div>
         <Image
           height={500}
           width={500}
           src="https://static.vecteezy.com/system/resources/previews/026/712/861/non_2x/dark-grainy-gradient-abstract-background-red-orange-purple-glowing-light-texture-free-photo.jpg"
           alt="dark pink"
-          className="w-full h-full object-cover rounded-b-4xl opacity-60"
+          className="w-full h-full object-cover rounded-b-4xl opacity-30"
         />
-        <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
+        <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#B516B5] text-center">
           <h2 className="text-6xl font-bold mb-12">Our Story</h2>
         </div>
       </div>
 
-      <div className="relative z-10 bg-black/80 text-white">
+      <div className="relative z-10 bg-white text-[#222]">
         <div className="py-24 px-4 sm:px-8 md:px-12 lg:px-16">
           <div className="container mx-auto px-6 text-center">
             <div className="flex flex-col gap-16">
               {/* Our Story Section */}
               <div className="text-center max-w-4xl mx-auto">
                 <div className="text-3xl">
-                  <p 
-                    className="mb-4" 
+                  <p
+                    className="mb-4"
                     ref={(el: HTMLParagraphElement | null) => {
                       storyRefs.current[0] = el;
                     }}
@@ -213,8 +217,8 @@ const AboutUsPage = () => {
                     passionate mountaineers decided to share their love for
                     alpine landscapes with others.
                   </p>
-                  <p 
-                    className="mb-4" 
+                  <p
+                    className="mb-4"
                     ref={(el: HTMLParagraphElement | null) => {
                       storyRefs.current[1] = el;
                     }}
@@ -223,7 +227,7 @@ const AboutUsPage = () => {
                     experience, built this company on the principles of respect
                     for nature, safety, and transformative experiences.
                   </p>
-                  <p 
+                  <p
                     ref={(el: HTMLParagraphElement | null) => {
                       storyRefs.current[2] = el;
                     }}
@@ -244,52 +248,52 @@ const AboutUsPage = () => {
               ))}
 
               {/* Our Core Values */}
-              <section className="text-white py-12 px-6 md:px-20">
-                <h2 className="text-3xl font-semibold mb-10">
+              <section className="py-12 px-6 md:px-20">
+                <h2 className="text-3xl font-semibold mb-10 text-[#B516B5]">
                   Our Core Values
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="border border-gray-700 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold text-red-500 mb-2">
+                  <div className="border border-[#B516B5] p-6 rounded-lg bg-white">
+                    <h3 className="text-xl font-semibold text-[#B516B5] mb-2">
                       Safety First
                     </h3>
-                    <p className="mb-4">
+                    <p className="mb-4 text-[#222]">
                       Certified equipment and strict safety protocols.
                     </p>
-                    <span className="inline-block bg-white text-black text-sm px-3 py-1 rounded-full">
+                    <span className="inline-block bg-[#B516B5] text-white text-sm px-3 py-1 rounded-full">
                       Priority
                     </span>
                   </div>
-                  <div className="border border-gray-700 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold text-red-500 mb-2">
+                  <div className="border border-[#B516B5] p-6 rounded-lg bg-white">
+                    <h3 className="text-xl font-semibold text-[#B516B5] mb-2">
                       Sustainable Tourism
                     </h3>
-                    <p className="mb-4">
+                    <p className="mb-4 text-[#222]">
                       Leave No Trace principles in all our treks.
                     </p>
-                    <span className="inline-block bg-white text-black text-sm px-3 py-1 rounded-full">
+                    <span className="inline-block bg-[#B516B5] text-white text-sm px-3 py-1 rounded-full">
                       Eco-Friendly
                     </span>
                   </div>
-                  <div className="border border-gray-700 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold text-red-500 mb-2">
+                  <div className="border border-[#B516B5] p-6 rounded-lg bg-white">
+                    <h3 className="text-xl font-semibold text-[#B516B5] mb-2">
                       Local Empowerment
                     </h3>
-                    <p className="mb-4">
+                    <p className="mb-4 text-[#222]">
                       Supporting local communities and economies.
                     </p>
-                    <span className="inline-block bg-white text-black text-sm px-3 py-1 rounded-full">
+                    <span className="inline-block bg-[#B516B5] text-white text-sm px-3 py-1 rounded-full">
                       Community
                     </span>
                   </div>
-                  <div className="border border-gray-700 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold text-red-500 mb-2">
+                  <div className="border border-[#B516B5] p-6 rounded-lg bg-white">
+                    <h3 className="text-xl font-semibold text-[#B516B5] mb-2">
                       Authentic Experiences
                     </h3>
-                    <p className="mb-4">
+                    <p className="mb-4 text-[#222]">
                       Genuine cultural immersion in every journey.
                     </p>
-                    <span className="inline-block bg-white text-black text-sm px-3 py-1 rounded-full">
+                    <span className="inline-block bg-[#B516B5] text-white text-sm px-3 py-1 rounded-full">
                       Cultural
                     </span>
                   </div>
@@ -302,5 +306,6 @@ const AboutUsPage = () => {
     </>
   );
 };
+// ...existing code...
 
 export default AboutUsPage;

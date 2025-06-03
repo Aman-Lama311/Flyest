@@ -5,9 +5,9 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full min-h-[75vh] bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-hidden">
+    <footer className="relative w-full min-h-[75vh] bg-gradient-to-br from-[#B516B5] via-[#e0b3e6] to-white text-[#222] overflow-hidden">
       {/* Background overlays */}
-      <div className="absolute inset-0 bg-[url('/navbg.svg')] z-10 opacity-70"></div>
+      <div className="absolute inset-0 bg-[url('/navbg.svg')] z-10 opacity-50"></div>
       <div className="absolute top-0 left-0 w-full h-[15vh] bg-gradient-to-b from-gray-900/50 z-10 opacity-70"></div>
       <div className="absolute inset-0 bg-[url('https://www.relaxgetaways.com/uploads/media/Short%20Treks/intero%20for%20short%20trek.jpg')] bg-cover bg-center"></div>
 
@@ -23,16 +23,17 @@ const Footer = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-24 pt-16 pb-10">
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-24 pt-16 pb-3">
         {/* Hero Section */}
-        <div className=" mx-auto space-y-8">
+        <div className="mx-auto space-y-8">
           {/* Logo */}
           <div className="flex items-center">
             <div className="relative h-12 sm:h-16 w-auto">
-              <Image 
-                src="/logo1.png" 
-                alt="Logo" 
-                fill
+              <Image
+                src="/logo1.png"
+                alt="Logo"
+                height={300}
+                width={300}
                 className="object-contain"
                 sizes="(max-width: 640px) 3rem, 4rem"
               />
@@ -40,7 +41,7 @@ const Footer = () => {
           </div>
 
           {/* Headline */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-[#FF4E58] to-orange-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight bg-gradient-to-r from-[#B516B5] to-[#e0b3e6] bg-clip-text text-transparent">
             Explore Nepal. Once in a lifetime.
           </h1>
 
@@ -52,7 +53,7 @@ const Footer = () => {
 
           {/* CTA + Social */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-            <button className="bg-[#FB2C36] hover:bg-[#ff4e57] text-white px-6 py-3 rounded-full font-semibold text-sm transition-all cursor-pointer">
+            <button className="bg-[#B516B5] hover:bg-[#a010a0] text-white px-6 py-3 rounded-full font-semibold text-sm transition-all cursor-pointer">
               Experience Now
             </button>
 
@@ -72,23 +73,25 @@ const Footer = () => {
                   key={index}
                   className="flex items-center justify-center hover:scale-110 transition-transform cursor-pointer"
                 >
-                  <Image height={500} width={500} src={img} alt="Social Icon" className="w-7 h-7" />
+                  <Image
+                    height={500}
+                    width={500}
+                    src={img}
+                    alt="Social Icon"
+                    className="w-7 h-7"
+                  />
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="relative z-10 border-t border-gray-700/50">
-        <div className="w-full px-4 sm:px-8 lg:px-24 py-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-center lg:text-left">
-            <p className="text-gray-300 text-sm">
+          {/* Footer Bottom Content moved here */}
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4 text-center lg:text-left pt-5 border-t border-white/20 mt-8">
+            <p className="text-white text-sm">
               © 2025 Flyeast Experience Nepal. All Rights Reserved.
             </p>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-300 text-sm">
+              <span className="text-white text-sm">
                 Designed and Developed by
               </span>
               <Link href="https://www.webxnep.com/" target="_blank">

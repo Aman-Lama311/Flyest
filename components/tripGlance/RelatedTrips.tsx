@@ -59,15 +59,15 @@ const RelatedTrips = () => {
               </p>
 
               <div className="flex justify-between items-center text-sm mb-4">
-                <span className="text-[#EA3359] font-medium">{trip.price}</span>
+                <span className="text-[#b415b4] font-medium">{trip.price}</span>
                 <span className="text-gray-600">{trip.duration}</span>
               </div>
 
               <div className="flex space-x-2">
-                <button className="flex-1 bg-[#EA3359] hover:bg-[#d02f4f] text-white py-2 px-3 rounded-md text-sm font-medium transition-colors">
+                <button className="flex-1 bg-[#b415b4] hover:bg-[#b415b4ce] text-white py-2 px-3 rounded-md text-sm font-medium transition-colors">
                   Book now
                 </button>
-                <button className="flex items-center text-gray-600 hover:text-[#EA3359] text-sm font-medium transition-colors whitespace-nowrap">
+                <button className="flex items-center text-gray-600 hover:text-[#b415b4] text-sm font-medium transition-colors whitespace-nowrap">
                   View details <ArrowRight className="ml-1 w-4 h-4" />
                 </button>
               </div>
@@ -77,7 +77,7 @@ const RelatedTrips = () => {
       </div>
 
       <div className="mt-8 text-center">
-        <button className="inline-flex items-center text-gray-600 hover:text-[#EA3359] font-medium transition-colors">
+        <button className="inline-flex items-center text-gray-600 hover:text-[#b415b4] font-medium transition-colors">
           View all related trips <ArrowRight className="ml-1 w-4 h-4" />
         </button>
       </div>

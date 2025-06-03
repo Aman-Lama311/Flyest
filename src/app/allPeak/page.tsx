@@ -11,15 +11,6 @@ interface HeightCategory {
   minHeight: number;
 }
 
-const item = {
-  slug: "everest-base-camp-trek",
-  banner: "/heroimages/everest.webp",
-  title: "Everest Base Camp Trek",
-  overview:
-    "Embark on a once-in-a-lifetime adventure to the foot of the world's tallest mountain. Experience breathtaking views, Sherpa culture, and challenging trails.",
-  duration: 14,
-};
-
 const heightCategories: HeightCategory[] = [
   { id: "6500m", name: "Above 6500m", minHeight: 6500 },
   { id: "6000m", name: "Above 6000m", minHeight: 6000 },
@@ -51,37 +42,37 @@ const Page = () => {
 
   return (
     <>
-      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-black/80">
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
+      {/* Hero Section */}
+      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16 border-b-rounded-xl bg-white">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-30 z-1">
           <Image
             height={500}
             width={500}
-            className=" h-30 w-auto"
+            className="h-30 w-auto"
             src="/heroimages/favicon.ico"
             alt="icon"
-            
           />
         </div>
-        < Image
-        height={500}
-        width={500}
+        <Image
+          height={500}
+          width={500}
           src="/flyimg/mountain-climbing-2130878_1280_13_11zon.webp"
-          alt="dark pink"
-          className="w-full h-full object-cover rounded-b-4xl opacity-60"
+          alt="peak"
+          className="w-full h-full object-cover rounded-b-4xl opacity-80"
         />
         <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white z-3">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">
             Peak Climbing
           </h2>
-
           <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
             Ready to conquer the Himalayas? Reach out to us to plan your next
             peak climbing expedition—whether you're aiming for Island Peak.
           </p>
         </div>
       </div>
-      <div className="w-full relative z-10  bg-black/80">
-        {/* Main Content */}
+
+      {/* Main Section */}
+      <div className="w-full relative z-10 bg-white text-black">
         <div className="px-4 md:px-8 py-16 space-y-20">
           {heightCategories.map((category) => (
             <Element
@@ -92,10 +83,14 @@ const Page = () => {
                 category.id !== "8000m" ? "mt-20" : ""
               }`}
             >
-              <h2 className="title font-bold uppercase text-white text-5xl mb-4 text-center">
+              <h2
+                className="font-bold uppercase text-4xl sm:text-5xl mb-10 text-center"
+                style={{ color: "#B516B5" }} // Accent color
+              >
                 {category.name}
               </h2>
-              {/* Cards */}
+
+              {/* Cards Section */}
               <PackageCard />
             </Element>
           ))}

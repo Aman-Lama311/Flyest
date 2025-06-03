@@ -58,37 +58,40 @@ const TrekCard = () => {
   };
 
   // Manual scroll with boundary checks
-  const scroll = useCallback((direction: "left" | "right") => {
-    const container = containerRef.current;
-    if (!container || isDraggingRef.current) return;
+  const scroll = useCallback(
+    (direction: "left" | "right") => {
+      const container = containerRef.current;
+      if (!container || isDraggingRef.current) return;
 
-    stopAutoScroll();
-    
-    const currentScroll = container.scrollLeft;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
-    let targetScroll = currentScroll + scrollAmount;
+      stopAutoScroll();
 
-    // Boundary checks
-    if (targetScroll < 0) {
-      targetScroll = 0;
-    } else if (targetScroll > maxScroll) {
-      targetScroll = maxScroll;
-    }
+      const currentScroll = container.scrollLeft;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+      let targetScroll = currentScroll + scrollAmount;
 
-    container.scrollTo({
-      left: targetScroll,
-      behavior: "smooth"
-    });
+      // Boundary checks
+      if (targetScroll < 0) {
+        targetScroll = 0;
+      } else if (targetScroll > maxScroll) {
+        targetScroll = maxScroll;
+      }
 
-    // Restart auto-scroll after manual navigation
-    startAutoScroll();
-  }, [cardWidth]);
+      container.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+
+      // Restart auto-scroll after manual navigation
+      startAutoScroll();
+    },
+    [cardWidth]
+  );
 
   // Auto-scroll functionality
   const startAutoScroll = useCallback(() => {
     stopAutoScroll();
-    
+
     autoScrollRef.current = setInterval(() => {
       const container = containerRef.current;
       if (!container || isDraggingRef.current) return;
@@ -103,13 +106,13 @@ const TrekCard = () => {
         // Smooth scroll back to start
         container.scrollTo({
           left: 0,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       } else {
         // Scroll to next card
         container.scrollBy({
           left: cardWidth,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     }, AUTO_SCROLL_INTERVAL);
@@ -152,7 +155,7 @@ const TrekCard = () => {
   };
 
   return (
-    <div className="w-full bg-black/80 text-white py-12 pl-4 sm:pl-6 md:pl-10 lg:pl-16 relative z-10">
+    <div className="w-full  py-12 pl-4 sm:pl-6 md:pl-10 lg:pl-16 relative z-10">
       <Title
         title="Peak Climbing"
         discription="Discover our most popular trekking destinations"
@@ -187,19 +190,18 @@ const TrekCard = () => {
           <div
             ref={index === 0 ? cardRef : null}
             key={item.id}
-            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-white hover:shadow-lg transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
+            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-black hover:shadow-lg transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
           >
             <div className="relative h-72 sm:h-80 overflow-hidden group">
               <Image
                 src={item.imgSrc}
-                
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 height={500}
                 width={500}
               />
               {item.oldPrice > item.newPrice && (
-                <div className="absolute top-4 left-4 px-2 py-1 font-bold rounded bg-white text-[#FF4E58] text-lg">
+                <div className="absolute top-4 left-4 px-2 py-1 font-bold rounded bg-white text-[#B415B4] text-lg">
                   Starting from {formatPrice(item.newPrice)}
                 </div>
               )}
@@ -214,7 +216,7 @@ const TrekCard = () => {
                   <Clock size={14} className="ml-4 mr-1 text-sky-500" />
                   <span>{item.duration}</span>
                 </div>
-                <button className="text-[#FF4E58] text-lg font-medium hover:scale-105 transition-transform">
+                <button className="text-[#B415B4] text-lg font-medium hover:scale-105 transition-transform">
                   View itinerary
                 </button>
               </div>

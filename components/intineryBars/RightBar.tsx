@@ -31,7 +31,7 @@ const RightBar = () => {
           <hr className="text-gray-200" />
           <div className="mt-4 space-y-4">
             <div className="flex flex-wrap items-baseline gap-2">
-              <h1 className="text-2xl sm:text-3xl font-bold text-[#EA3359]">
+              <h1 className="text-2xl sm:text-3xl font-bold text-[#B415B4]">
                 $1000 USD
               </h1>
               <span className="text-sm sm:text-base text-gray-600">
@@ -40,19 +40,19 @@ const RightBar = () => {
             </div>
             <ul className="space-y-2 sm:space-y-3 text-sm text-gray-700">
               <li className="flex items-center gap-2">
-                <ChevronRightCircle size={18} className="text-[#EA3359]" />
+                <ChevronRightCircle size={18} className="text-[#B415B4]" />
                 Book Instantly Directly with Provider
               </li>
               <li className="flex items-center gap-2">
-                <ChevronRightCircle size={18} className="text-[#EA3359]" />
+                <ChevronRightCircle size={18} className="text-[#B415B4]" />
                 Best Price Guarantee
               </li>
               <li className="flex items-center gap-2">
-                <ChevronRightCircle size={18} className="text-[#EA3359]" />
+                <ChevronRightCircle size={18} className="text-[#B415B4]" />
                 Full Customizable Trip
               </li>
               <li className="flex items-center gap-2">
-                <ChevronRightCircle size={18} className="text-[#EA3359]" />
+                <ChevronRightCircle size={18} className="text-[#B415B4]" />
                 Extend Trip Without Any Charges
               </li>
             </ul>
@@ -65,8 +65,8 @@ const RightBar = () => {
               onMouseLeave={() => setHovered(null)}
               className={`px-4 md:px-6 py-2 md:py-3 rounded-full border-2 transition-all duration-300 cursor-pointer text-sm md:text-base ${
                 isDateActive
-                  ? "bg-[#EA3359] text-white border-[#EA3359]"
-                  : "bg-transparent text-[#EA3359] border-[#EA3359]"
+                  ? "bg-[#b415b4] text-white border-[#b415b4]"
+                  : "bg-transparent text-[#b415b4] border-[#b415b4]"
               }`}
             >
               Choose Your Date
@@ -77,8 +77,8 @@ const RightBar = () => {
               onMouseLeave={() => setHovered(null)}
               className={`px-4 md:px-6 py-2 md:py-3 rounded-full border-2 transition-all duration-300 cursor-pointer text-sm md:text-base ${
                 isEnquiryActive
-                  ? "bg-[#EA3359] text-white border-[#EA3359]"
-                  : "bg-transparent text-[#EA3359] border-[#EA3359]"
+                  ? "bg-[#b415b4] text-white border-[#b415b4]"
+                  : "bg-transparent text-[#b415b4] border-[#b415b4]"
               }`}
             >
               Enquiry Now

@@ -129,7 +129,7 @@ function BookingSummary() {
 
       <button
         onClick={handleConfirm}
-        className="w-full bg-[#EA3359] hover:bg-[#d92f50] text-white py-2.5 rounded-lg font-medium text-sm sm:text-base transition duration-200"
+        className="w-full bg-[#b415b4] hover:bg-[#b415b4ce] text-white py-2.5 rounded-lg font-medium text-sm sm:text-base transition duration-200"
       >
         Confirm Booking
       </button>

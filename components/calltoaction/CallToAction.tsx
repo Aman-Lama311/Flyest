@@ -6,10 +6,10 @@ import Image from "next/image";
 
 const CallToAction = () => {
   return (
-    <div className="relative z-10 w-full py-16 md:py-24 bg-black/80 text-white">
+    <div className="relative z-10 w-full py-16 md:py-24 text-black">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-24 items-center px-4 md:px-8">
         {/* Left Content Section */}
-        <div className="w-full md:w-1/2 text-center md:text-left bg-zinc-900/50 p-6 rounded-lg shadow-lg">
+        <div className="w-full md:w-1/2 text-center md:text-left bg-zinc-200/10 p-6 rounded-lg shadow-lg">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-snug md:leading-tight">
             Why Choose Flyeast Nepal For Your Next Adventures?
           </h2>
@@ -28,7 +28,7 @@ const CallToAction = () => {
                   className="flex items-center justify-center md:justify-start"
                   key={index}
                 >
-                  <div className="w-7 h-7 rounded-full bg-[#FF4E58] flex items-center justify-center mr-4">
+                  <div className="w-7 h-7 rounded-full bg-[#B415B4] flex items-center justify-center mr-4">
                     <svg
                       className="w-4 h-4 text-white"
                       fill="currentColor"
@@ -49,7 +49,7 @@ const CallToAction = () => {
             )}
           </div>
 
-          <button className="bg-[#FF4E58] text-white text-sm sm:text-base md:text-lg font-semibold py-3 px-6 sm:px-8 rounded-md hover:bg-red-600 transition duration-300">
+          <button className="bg-[#B415B4] text-white text-sm sm:text-base md:text-lg font-semibold py-3 px-6 sm:px-8 rounded-md hover:bg-purple-600 transition duration-300">
             Read more
           </button>
         </div>
@@ -58,8 +58,8 @@ const CallToAction = () => {
         <div className="w-full md:w-1/2 relative max-h-[400px] sm:max-h-[500px] rounded-lg overflow-hidden">
           <div className="w-full h-[300px] sm:h-[400px] md:h-[500px]">
             <Image
-            height={500}
-            width={500}
+              height={500}
+              width={500}
               src="https://admin.ntb.gov.np/image-cache/ebc_tk_adventure_2-1624450765.jpeg?p=main&s=1f72965258be9625bee4886c373424ad"
               alt="Adventure Image"
               className="w-full h-full object-cover rounded-lg shadow-lg"

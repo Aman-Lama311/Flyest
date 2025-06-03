@@ -5,7 +5,7 @@ import Title from "../../components/title/Title";
 
 const TrekBookingSection: React.FC = () => {
   return (
-    <section className="relative z-10 w-full py-16 flex flex-col items-center bg-black/80 text-white">
+    <section className="relative z-10 w-full py-16 flex flex-col items-center  text-white">
       {/* Heading */}
       <Title
         title="Book Your Trek & Just Go"

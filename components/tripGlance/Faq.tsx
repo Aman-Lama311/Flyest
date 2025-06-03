@@ -63,14 +63,14 @@ export default function Faq() {
               >
                 <div className="flex items-center">
                   {item.icon}
-                  <span className="font-medium text-gray-800 group-hover:text-[#EA3359] transition-colors">
+                  <span className="font-medium text-gray-800 group-hover:text-[#b415b4] transition-colors">
                     {item.question}
                   </span>
                 </div>
                 <ChevronDown
                   className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
                     openIndex === index
-                      ? "transform rotate-180 text-[#EA3359]"
+                      ? "transform rotate-180 text-[#b415b4]"
                       : ""
                   }`}
                 />

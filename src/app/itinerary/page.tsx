@@ -18,7 +18,6 @@ import RelatedTrips from "../../../components/tripGlance/RelatedTrips";
 import Image from "next/image";
 
 const Page = () => {
-
   return (
     <div className="relative z-10 bg-white">
       {/* Hero Section */}
@@ -26,7 +25,7 @@ const Page = () => {
         <Image
           height={500}
           width={500}
-          src= "/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp"
+          src="/flyimg/photo-1691215261305-8e9a8a45c2fa_14_11zon.webp"
           alt="Hero"
           className="w-full h-full object-cover"
         />
@@ -38,7 +37,7 @@ const Page = () => {
       <Title />
 
       {/* Main Layout */}
-      <div className="relative z-20 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 bg-white">
+      <div className="relative z-20 w-full mx-auto flex flex-col md:flex-row gap-6 px-4 md:px-8 lg:px-16 mt-8 pb-10 bg-white">
         {/* Left Sidebar */}
         <LeftBar />
 

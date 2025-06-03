@@ -61,10 +61,10 @@ const About: React.FC = () => {
   const icons = [Award, Shield, Users, Clock];
 
   return (
-    <div className="relative w-full bg-black/80 z-10">
+    <div className="relative w-full z-10">
       {/* Removed deep left and right vertical borders */}
 
-      <section className="relative w-full py-14 md:py-18 text-white font-sans">
+      <section className="relative w-full py-14 md:py-18  font-sans">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           {/* Section Title */}
           <Title

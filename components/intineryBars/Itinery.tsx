@@ -36,13 +36,13 @@ const ItineraryDay = ({
         onClick={() => setExpanded(!expanded)}
       >
         <div className="flex items-center gap-4">
-          <div className="bg-[#FDECEF] text-[#EA3359] rounded-lg px-3 py-2 text-sm font-medium">
+          <div className="bg-[#FDECEF] text-[#b415b4] rounded-lg px-3 py-2 text-sm font-medium">
             Day {day.toString().padStart(2, "0")}
           </div>
           <h3 className="font-medium text-gray-800">{title}</h3>
         </div>
         <div
-          className={`text-[#EA3359] transition-transform ${
+          className={`text-[#b415b4] transition-transform ${
             expanded ? "rotate-90" : ""
           }`}
         >
@@ -169,7 +169,7 @@ const ItineraryPreview = () => {
 
       <div className="bg-[#FDECEF] p-4 mt-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center text-[#EA3359]">
+          <div className="flex items-center text-[#b415b4]">
             <Info size={18} className="mr-2" />
             <p className="text-sm font-medium">
               Would you like to talk to this route expert?
@@ -178,12 +178,12 @@ const ItineraryPreview = () => {
 
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1">
-              <div className="w-6 h-6 rounded-full bg-[#FFCCD5] border-2 border-white"></div>
-              <div className="w-6 h-6 rounded-full bg-[#FCA5B6] border-2 border-white"></div>
-              <div className="w-6 h-6 rounded-full bg-[#EA3359] border-2 border-white"></div>
+              <div className="w-6 h-6 rounded-full bg-purple-200 border-2 border-white"></div>
+              <div className="w-6 h-6 rounded-full bg-purple-300 border-2 border-white"></div>
+              <div className="w-6 h-6 rounded-full bg-[#b415b4] border-2 border-white"></div>
             </div>
 
-            <button className="ml-4 bg-[#EA3359] hover:bg-[#cc2d4e] text-white rounded-full w-8 h-8 flex items-center justify-center">
+            <button className="ml-4 bg-[#b415b4] hover:bg-[#b415b4d6] text-white rounded-full w-8 h-8 flex items-center justify-center">
               <PhoneCall size={16} />
             </button>
           </div>

@@ -43,7 +43,7 @@ const Page = () => {
     );
 
     // Only access document when on client side
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       trekkingRegions.forEach((region) => {
         const el = document.getElementById(region.id);
         if (el) observer.observe(el);
@@ -64,12 +64,14 @@ const Page = () => {
 
   return (
     <>
-      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16  border-b-rounded-xl bg-black/80 ">
+      <div className="relative z-10 w-full h-[50vh] px-6 sm:px-16  border-b-rounded-xl ">
+        {/* Background Overlay */}
+        <div className="absolute top-0 left-0 w-full h-[20vh] bg-gradient-to-b from-black/40 to-transparent"></div>
+
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-1">
           <Image
-            height={500}
-            width={500}
-            className=" h-30"
+            height={100}
+            width={100}
             src="/heroimages/favicon.ico"
             alt="icon"
           />
@@ -79,20 +81,20 @@ const Page = () => {
           width={500}
           src="https://cdn.pixabay.com/photo/2013/09/26/16/00/helicopter-186718_1280.jpg"
           alt="dark pink"
-          className="w-full h-full object-cover rounded-b-4xl opacity-60"
+          className="w-full h-full object-cover rounded-b-4xl opacity-80"
         />
         <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white z-3">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-8">
             Heli Tour
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-center mb-12 max-w-2xl mx-auto text-gray-100">
             Experience the Himalayas like never before. private helicopter
             tours, emergency rescues, and more.
           </p>
         </div>
       </div>
-      <div className="w-full relative z-10 bg-black/80">
+      <div className="w-full relative z-10 ">
         {/* === Content Section === */}
         <div className="px-4 md:px-8 py-36 space-y-20">
           {trekkingRegions.map((region) => (
@@ -102,7 +104,10 @@ const Page = () => {
               id={region.id}
               className="scroll-mt-28" // Adds spacing for smooth scroll positioning
             >
-              <h2 className="text-5xl font-bold uppercase text-white mb-4 text-center">
+              <h2
+                className="font-bold uppercase text-4xl sm:text-5xl mb-10 text-center"
+                style={{ color: "#B516B5" }} // Accent color
+              >
                 {region.name}
               </h2>
               <PackageCard />

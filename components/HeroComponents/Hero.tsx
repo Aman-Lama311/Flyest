@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-import { ArrowBigDownDash } from 'lucide-react';
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { ArrowBigDownDash } from "lucide-react";
 
 // This component will only be rendered on the client side
-const HeroContent = dynamic(() => import('./HeroContent'), { 
+const HeroContent = dynamic(() => import("./HeroContent"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-screen bg-gray-100 flex items-center justify-center">
       <div className="animate-pulse text-gray-400">Loading...</div>
     </div>
-  )
+  ),
 });
 
 const Hero = () => {

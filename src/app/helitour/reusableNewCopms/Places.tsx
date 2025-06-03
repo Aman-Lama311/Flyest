@@ -114,13 +114,13 @@ const Places = () => {
           onClick={handlePrev}
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-[#FDECEF] p-3 rounded-full hover:bg-[#fbd3da]"
         >
-          <ChevronLeft className="h-6 w-6 text-[#EA3359]" />
+          <ChevronLeft className="h-6 w-6 text-[#b415b4]" />
         </button>
         <button
           onClick={handleNext}
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#FDECEF] p-3 rounded-full hover:bg-[#fbd3da]"
         >
-          <ChevronRight className="h-6 w-6 text-[#EA3359]" />
+          <ChevronRight className="h-6 w-6 text-[#b415b4]" />
         </button>
       </div>
 
@@ -131,7 +131,7 @@ const Places = () => {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index ? "bg-[#EA3359] scale-105" : "bg-gray-300"
+              currentIndex === index ? "bg-[#b415b4] scale-105" : "bg-gray-300"
             }`}
           />
         ))}

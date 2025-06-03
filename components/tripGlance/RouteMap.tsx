@@ -23,7 +23,7 @@ const RouteMap = () => {
   return (
     <div id="route-map" className="mt-10">
       <div className="flex items-center gap-2 mb-6">
-        <MapPinned className="text-[#EA3359] w-8 h-8" />
+        <MapPinned className="text-[#b415b4] w-8 h-8" />
         <h1 className="text-3xl font-semibold text-gray-800">Route Map</h1>
       </div>
 
@@ -34,9 +34,9 @@ const RouteMap = () => {
         onMouseEnter={() => setShowHoverText(true)}
         onMouseLeave={() => setShowHoverText(false)}
       >
-        <Image  
-        height={500}
-        width={500}
+        <Image
+          height={500}
+          width={500}
           onClick={openModal}
           className="w-full h-[60vh] object-cover cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
           src="/flyimg/manaslu-Trek-Route-Map.jpgwpF_11_11zon.webp"

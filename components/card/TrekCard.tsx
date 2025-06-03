@@ -27,7 +27,7 @@ const TrekCard = () => {
   // Initialize client state and measure card width
   useEffect(() => {
     setIsClient(true);
-    
+
     const updateCardWidth = () => {
       if (cardRef.current) {
         const computedStyle = window.getComputedStyle(cardRef.current);
@@ -78,27 +78,30 @@ const TrekCard = () => {
   }, [cardWidth]);
 
   // Navigation function
-  const navigate = React.useCallback((direction: 'prev' | 'next') => {
-    if (!scrollRef.current || !cardWidth || isDragging.current) return;
-    
-    // Clear any pending auto-scroll
-    if (autoScrollTimer.current) {
-      clearInterval(autoScrollTimer.current);
-      autoScrollTimer.current = null;
-    }
+  const navigate = React.useCallback(
+    (direction: "prev" | "next") => {
+      if (!scrollRef.current || !cardWidth || isDragging.current) return;
 
-    const container = scrollRef.current;
-    const currentScroll = container.scrollLeft;
-    const scrollAmount = direction === 'next' ? cardWidth : -cardWidth;
-    
-    container.scrollTo({
-      left: currentScroll + scrollAmount,
-      behavior: 'smooth'
-    });
+      // Clear any pending auto-scroll
+      if (autoScrollTimer.current) {
+        clearInterval(autoScrollTimer.current);
+        autoScrollTimer.current = null;
+      }
 
-    // Restart auto-scroll after manual navigation
-    startAutoScroll();
-  }, [cardWidth]);
+      const container = scrollRef.current;
+      const currentScroll = container.scrollLeft;
+      const scrollAmount = direction === "next" ? cardWidth : -cardWidth;
+
+      container.scrollTo({
+        left: currentScroll + scrollAmount,
+        behavior: "smooth",
+      });
+
+      // Restart auto-scroll after manual navigation
+      startAutoScroll();
+    },
+    [cardWidth]
+  );
 
   // Auto-scroll function
   const startAutoScroll = React.useCallback(() => {
@@ -112,10 +115,10 @@ const TrekCard = () => {
       const container = scrollRef.current;
       const currentScroll = container.scrollLeft;
       const nextScroll = currentScroll + cardWidth;
-      
+
       container.scrollTo({
         left: nextScroll,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }, 3000);
   }, [cardWidth]);
@@ -171,14 +174,14 @@ const TrekCard = () => {
     }).format(price);
 
   return (
-    <div className="w-full bg-black/80 text-white py-12 pl-4 md:pl-8 lg:pl-16 overflow-hidden relative z-10">
+    <div className="w-full  py-12 pl-4 md:pl-8 lg:pl-16 overflow-hidden relative z-10">
       <Title
         title="Popular Treks"
         discription="Discover handpicked adventures loved by our community."
       />
 
       <button
-        onClick={() => navigate('prev')}
+        onClick={() => navigate("prev")}
         className="absolute left-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
         aria-label="Previous slide"
       >
@@ -186,7 +189,7 @@ const TrekCard = () => {
       </button>
 
       <button
-        onClick={() => navigate('next')}
+        onClick={() => navigate("next")}
         className="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
         aria-label="Next slide"
       >
@@ -196,7 +199,7 @@ const TrekCard = () => {
       <div
         ref={scrollRef}
         className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory cursor-grab select-none active:cursor-grabbing mt-18 hide-scrollbar"
-        style={{ scrollSnapType: 'x mandatory' }}
+        style={{ scrollSnapType: "x mandatory" }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -209,18 +212,18 @@ const TrekCard = () => {
           <article
             ref={index === 0 ? cardRef : null}
             key={`${item.id}-${index}`}
-            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-white transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
+            className="min-w-[90%] sm:min-w-[45%] lg:min-w-[30%] text-black transition-all duration-100 overflow-hidden flex flex-col relative group snap-start"
           >
             <div className="relative w-full h-64 sm:h-72 md:h-80 overflow-hidden">
               <Image
-              height={500}
-              width={500}
+                height={500}
+                width={500}
                 src={item.imgSrc}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
               {item.oldPrice > item.newPrice && (
-                <div className="absolute top-4 left-4 text-[#FF4E58] text-lg bg-white font-bold px-2 py-1 rounded">
+                <div className="absolute top-4 left-4 text-[#B415B4] text-lg bg-white font-bold px-2 py-1 rounded">
                   Starting from {formatPrice(item.newPrice)}
                 </div>
               )}
@@ -239,7 +242,7 @@ const TrekCard = () => {
                     <span>{item.duration}</span>
                   </div>
                 </div>
-                <button className="text-[#FF4E58] text-lg font-medium hover:scale-105 transition-transform">
+                <button className="text-[#B415B4] text-lg font-medium hover:scale-105 transition-transform">
                   View Itinerary
                 </button>
               </div>

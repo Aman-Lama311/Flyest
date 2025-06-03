@@ -144,7 +144,7 @@ const ActivityCarousel: React.FC = () => {
 
   return (
     <div
-      className="relative w-full bg-black/80 py-12 pl-4 sm:pl-8 lg:pl-18 overflow-hidden no-scrollbar text-white z-10"
+      className="relative w-full py-12 pl-4 sm:pl-8 lg:pl-18 overflow-hidden no-scrollbar text-white z-10"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -162,7 +162,7 @@ const ActivityCarousel: React.FC = () => {
           {activities.map((activity, index) => (
             <div
               key={index}
-              className="min-w-[280px] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[360px] bg-zinc-800 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden"
+              className="min-w-[280px] sm:min-w-[300px] md:min-w-[320px] lg:min-w-[360px] bg-zinc-700 rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden"
             >
               <div className="relative w-full h-48 sm:h-56 md:h-60 lg:h-64 overflow-hidden group">
                 <Image
@@ -176,9 +176,9 @@ const ActivityCarousel: React.FC = () => {
               <div className="p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-bold mb-1">{activity.title}</h3>
                 <div className="flex items-center text-sm text-gray-300 mb-2">
-                  <MapPin size={14} className="mr-1 text-red-400" />
+                  <MapPin size={14} className="mr-1 text-purple-400" />
                   {activity.location}
-                  <Calendar size={14} className="ml-3 mr-1 text-red-400" />
+                  <Calendar size={14} className="ml-3 mr-1 text-purple-400" />
                   {activity.date}
                 </div>
                 <p className="text-sm text-gray-200 mb-4 flex-grow font-sans line-clamp-3">
@@ -187,10 +187,10 @@ const ActivityCarousel: React.FC = () => {
                   unforgettable memories.
                 </p>
                 <div className="flex gap-2 mt-auto">
-                  <button className="w-1/2 text-sm font-medium bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded-lg transition duration-200">
+                  <button className="w-1/2 text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white py-2 px-3 rounded-lg transition duration-200">
                     View Itinerary
                   </button>
-                  <button className="w-1/2 text-sm font-medium border border-red-500 text-red-500 hover:bg-red-50 hover:bg-opacity-10 py-2 px-3 rounded-lg transition duration-200">
+                  <button className="w-1/2 text-sm font-medium border border-purple-500 text-purple-500 hover:bg-red-50 hover:bg-opacity-10 py-2 px-3 rounded-lg transition duration-200">
                     Book Now
                   </button>
                 </div>
@@ -228,7 +228,7 @@ const ActivityCarousel: React.FC = () => {
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? "bg-red-500 w-6"
+                  ? "bg-purple-500 w-6"
                   : "bg-gray-400 hover:bg-gray-300"
               }`}
             />

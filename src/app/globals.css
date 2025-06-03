@@ -14,8 +14,8 @@ body {
 }
 
 .stroke-text {
-  -webkit-text-stroke: 3px #D62A4E;
-  text-stroke: 3px #D62A4E; /* for non-webkit fallback */
+  -webkit-text-stroke: 3px #B516B5;
+  text-stroke: 3px #B516B5; /* for non-webkit fallback */
 }
 
 

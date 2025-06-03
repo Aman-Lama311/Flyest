@@ -73,6 +73,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  domains: ['www.researchgate.net'],
 };
 
 export default nextConfig;

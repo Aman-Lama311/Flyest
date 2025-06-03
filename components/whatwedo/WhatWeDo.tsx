@@ -6,7 +6,7 @@ const StatisticsAndPartners = () => {
   return (
     <div className="w-full flex flex-col">
       {/* Statistics Section */}
-      <div className="w-full z-10 bg-black/80 py-12 px-4 md:px-24">
+      <div className="w-full z-10 py-12 px-4 md:px-24">
         <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center text-white">
           {/* Total Users */}
           <div className="flex flex-col items-center text-[#00FFA3]">
@@ -39,8 +39,8 @@ const StatisticsAndPartners = () => {
       </div>
 
       {/* Partners Section */}
-      <div className="bg-black/80 z-10">
-        <div className="w-full bg-red-500/10 text-white px-4 md:px-24 py-10">
+      <div className=" z-10">
+        <div className="w-full bg-purple-500/10 text-[#B516B5] px-4 md:px-24 py-10">
           <div className=" mx-auto">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <h1 className="font-bold text-5xl uppercase">Associated With</h1>
